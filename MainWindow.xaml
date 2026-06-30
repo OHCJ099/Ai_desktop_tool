@@ -23,10 +23,10 @@
             </Grid.RowDefinitions>
             
             <!-- 工具栏：包含隐形输入框和文本按钮 -->
-            <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,8,10,6">
+            <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="8,8,8,6">
                 <!-- 隐形输入框 -->
                 <TextBox Name="QueryTextBox" 
-                         Width="140" 
+                         Width="118" 
                          Height="22"
                          BorderThickness="0" 
                          Background="Transparent" 
@@ -34,19 +34,23 @@
                          CaretBrush="Black"
                          FontSize="14"
                          VerticalContentAlignment="Center"
-                         Margin="0,0,12,0"
+                         Margin="0,0,8,0"
                          KeyDown="QueryTextBox_KeyDown"/>
                 
                 <!-- 发送 (S) 按钮 -->
-                <TextBlock Name="SendButton" Text="S" FontSize="14" FontWeight="Bold" Foreground="Black" Cursor="Hand" Margin="0,0,12,0"
+                <TextBlock Name="SendButton" Text="S" FontSize="14" FontWeight="Bold" Foreground="Black" Cursor="Hand" Margin="0,0,10,0"
                            MouseDown="SendButton_MouseDown" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
                 
                 <!-- 模拟输入 (P) 按钮 -->
-                <TextBlock Name="TypeButton" Text="P" FontSize="14" FontWeight="Bold" Foreground="Black" Cursor="Hand" Margin="0,0,12,0"
+                <TextBlock Name="TypeButton" Text="P" FontSize="14" FontWeight="Bold" Foreground="Black" Cursor="Hand" Margin="0,0,10,0"
                            MouseDown="TypeButton_MouseDown" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
+
+                <!-- CEF/CDP 抽题 (C) 按钮：绕过截图/UIA，直接读 CEF 页面文本 -->
+                <TextBlock Name="CefCaptureButton" Text="C" FontSize="14" FontWeight="Bold" Foreground="Black" Cursor="Hand" Margin="0,0,10,0"
+                           MouseDown="CefCaptureButton_MouseDown" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
                 
                 <!-- 设置按钮 -->
-                <TextBlock Name="SettingsButton" Text="." FontSize="14" FontWeight="Bold" Foreground="Black" Cursor="Hand" Margin="0,0,12,0"
+                <TextBlock Name="SettingsButton" Text="." FontSize="14" FontWeight="Bold" Foreground="Black" Cursor="Hand" Margin="0,0,10,0"
                            MouseDown="SettingsButton_MouseDown" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
                 
                 <!-- 退出按钮 -->

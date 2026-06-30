@@ -16,6 +16,9 @@ namespace AI_desktop_tool
         private bool _isRequesting = false;
         private bool _isSettingsMode = false;
         private System.Windows.Threading.DispatcherTimer _topmostTimer;
+        private System.Windows.Threading.DispatcherTimer _foregroundTrackerTimer;
+        private IntPtr _lastExternalForeground = IntPtr.Zero;
+        private IntPtr _lastExternalFocus = IntPtr.Zero;
 
         public MainWindow()
         {
@@ -24,6 +27,10 @@ namespace AI_desktop_tool
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // Maintain a separate CDP-enabled exam client shortcut.
+            // This does not start the exam client; it only creates/repairs the shortcut if needed.
+            ExamShortcutHelper.EnsureDesktopShortcut();
+
             // Load saved config
             _config = ConfigHelper.LoadConfig();
             ApplyConfig();
@@ -39,6 +46,11 @@ namespace AI_desktop_tool
             _topmostTimer.Interval = TimeSpan.FromMilliseconds(500);
             _topmostTimer.Tick += (s, ev) => ForceWindowTopmost();
             _topmostTimer.Start();
+
+            _foregroundTrackerTimer = new System.Windows.Threading.DispatcherTimer();
+            _foregroundTrackerTimer.Interval = TimeSpan.FromMilliseconds(120);
+            _foregroundTrackerTimer.Tick += (s, ev) => TrackExternalForegroundWindow();
+            _foregroundTrackerTimer.Start();
         }
 
         private void ApplyDisplayAffinity()
@@ -72,6 +84,7 @@ namespace AI_desktop_tool
             QueryTextBox.FontWeight = weight;
             SendButton.FontWeight = weight;
             TypeButton.FontWeight = weight;
+            CefCaptureButton.FontWeight = weight;
             SettingsButton.FontWeight = weight;
             ExitButton.FontWeight = weight;
             AnswerTextBlock.FontWeight = weight;
@@ -105,6 +118,34 @@ namespace AI_desktop_tool
                 {
                     // Ignore DragMove exception if the mouse button was already released
                 }
+            }
+        }
+
+        private void TrackExternalForegroundWindow()
+        {
+            try
+            {
+                var self = new System.Windows.Interop.WindowInteropHelper(this).Handle;
+                IntPtr fg = Win32Helper.GetForegroundWindow();
+                if (fg == IntPtr.Zero || fg == self) return;
+
+                _lastExternalForeground = fg;
+                uint threadId = Win32Helper.GetWindowThreadProcessId(fg, out _);
+                if (threadId != 0)
+                {
+                    var info = new Win32Helper.GUITHREADINFO
+                    {
+                        cbSize = System.Runtime.InteropServices.Marshal.SizeOf<Win32Helper.GUITHREADINFO>()
+                    };
+                    if (Win32Helper.GetGUIThreadInfo(threadId, ref info))
+                    {
+                        _lastExternalFocus = info.hwndFocus;
+                    }
+                }
+            }
+            catch
+            {
+                // Keep last known values.
             }
         }
 
@@ -231,15 +272,81 @@ namespace AI_desktop_tool
                 // Hide floating window to restore focus to the previously active application
                 this.Hide();
 
-                // Allow 300ms for system foreground transition
-                await Task.Delay(300);
+                // Prefer direct CEF DOM injection. It does not depend on Windows focus,
+                // IME, clipboard, or the caret surviving after clicking the overlay.
+                bool injected = false;
+                try
+                {
+                    injected = await CefDomExtractor.TryInjectAnswerAsync(answerText, 9222);
+                }
+                catch
+                {
+                    injected = false;
+                }
 
-                // Simulate keyboard input
-                await KeyboardSimulator.SendStringAsync(answerText, _config.TypeDelayMs);
+                if (injected)
+                {
+                    this.Show();
+                    this.Topmost = true;
+                    return;
+                }
 
-                // Restore floating window
+                try
+                {
+                    string diagPath = await CefDomExtractor.DumpInjectionDiagnosticsAsync(9222);
+                    AnswerTextBlock.Text = answerText + $"\n\n[注入失败，已导出诊断]\n{diagPath}";
+                }
+                catch (Exception diagEx)
+                {
+                    AnswerTextBlock.Text = answerText + $"\n\n[注入失败，诊断导出也失败]\n{diagEx.Message}";
+                }
+
+                // For CEF exam clients, the fallback keyboard simulation is unreliable and can
+                // hide the real failure signal. Stop here so the user always sees either the
+                // diagnostic file path or the diagnostic error.
                 this.Show();
                 this.Topmost = true;
+                return;
+            }
+        }
+
+        // Action: C (CEF/CDP DOM text extraction)
+        private async void CefCaptureButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton != MouseButton.Left) return;
+            e.Handled = true;
+
+            if (_isRequesting) return;
+            _isRequesting = true;
+            CefCaptureButton.Text = "...";
+            AnswerTextBlock.Text = "正在从 CEF/CDP 读取题面...";
+
+            try
+            {
+                string extracted = await CefDomExtractor.ExtractBestTextAsync(9222);
+                QueryTextBox.Text = extracted;
+                QueryTextBox.CaretIndex = QueryTextBox.Text.Length;
+
+                if (!string.IsNullOrWhiteSpace(extracted) &&
+                    !extracted.StartsWith("未发现可读取", StringComparison.Ordinal) &&
+                    !extracted.StartsWith("已连接 CEF", StringComparison.Ordinal))
+                {
+                    string answer = await SendApiRequestAsync(extracted);
+                    AnswerTextBlock.Text = answer;
+                }
+                else
+                {
+                    AnswerTextBlock.Text = extracted;
+                }
+            }
+            catch (Exception ex)
+            {
+                AnswerTextBlock.Text = $"CEF 抽题失败: {ex.Message}";
+            }
+            finally
+            {
+                CefCaptureButton.Text = "C";
+                _isRequesting = false;
             }
         }
 

@@ -27,10 +27,9 @@ namespace AI_desktop_tool
                 // Fail silently and return defaults
             }
             
-            // If file does not exist or fails to load, create it with default values
-            AppConfig defaultConfig = new AppConfig();
-            SaveConfig(defaultConfig);
-            return defaultConfig;
+            // Green/portable default: no config.json is required for first run.
+            // A config file is only written when the user explicitly saves settings.
+            return new AppConfig();
         }
 
         public static void SaveConfig(AppConfig config)
