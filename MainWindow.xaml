@@ -1,0 +1,119 @@
+<Window x:Class="AI_desktop_tool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AI Helper Window" 
+        Height="160" 
+        Width="300"
+        WindowStyle="None" 
+        AllowsTransparency="True" 
+        Background="#01000000" 
+        Topmost="True"
+        Loaded="Window_Loaded"
+        MouseEnter="Window_MouseEnter"
+        MouseLeave="Window_MouseLeave"
+        MouseDown="Window_MouseDown"
+        ShowInTaskbar="False"
+        Deactivated="Window_Deactivated">
+    <Grid>
+        <!-- 承载所有的可见悬浮元素，其不透明度由鼠标移入/移出事件控制 -->
+        <Grid Name="MainContentGrid" Opacity="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- 工具栏：包含隐形输入框和文本按钮 -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,8,10,6">
+                <!-- 隐形输入框 -->
+                <TextBox Name="QueryTextBox" 
+                         Width="140" 
+                         Height="22"
+                         BorderThickness="0" 
+                         Background="Transparent" 
+                         Foreground="Black" 
+                         CaretBrush="Black"
+                         FontSize="14"
+                         VerticalContentAlignment="Center"
+                         Margin="0,0,12,0"
+                         KeyDown="QueryTextBox_KeyDown"/>
+                
+                <!-- 发送 (S) 按钮 -->
+                <TextBlock Name="SendButton" Text="S" FontSize="14" FontWeight="Bold" Foreground="Black" Cursor="Hand" Margin="0,0,12,0"
+                           MouseDown="SendButton_MouseDown" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
+                
+                <!-- 模拟输入 (P) 按钮 -->
+                <TextBlock Name="TypeButton" Text="P" FontSize="14" FontWeight="Bold" Foreground="Black" Cursor="Hand" Margin="0,0,12,0"
+                           MouseDown="TypeButton_MouseDown" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
+                
+                <!-- 设置按钮 -->
+                <TextBlock Name="SettingsButton" Text="." FontSize="14" FontWeight="Bold" Foreground="Black" Cursor="Hand" Margin="0,0,12,0"
+                           MouseDown="SettingsButton_MouseDown" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
+                
+                <!-- 退出按钮 -->
+                <TextBlock Name="ExitButton" Text="x" FontSize="14" FontWeight="Bold" Foreground="Black" Cursor="Hand"
+                           MouseDown="ExitButton_MouseDown" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
+            </StackPanel>
+            
+            <!-- AI 回答展示区，外层包裹 ScrollViewer 允许滚动 -->
+            <ScrollViewer x:Name="AnswerScrollViewer" Grid.Row="1" Margin="10,0,10,10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <TextBlock Name="AnswerTextBlock" 
+                           Text="" 
+                           TextWrapping="Wrap" 
+                           FontSize="13" 
+                           Foreground="Black"
+                           LineHeight="18"/>
+            </ScrollViewer>
+
+            <!-- 悬浮内嵌设置区 -->
+            <ScrollViewer x:Name="SettingsScrollViewer" Grid.Row="1" Margin="10,0,10,10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Visibility="Collapsed">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="--- 系统配置 (点击 √ 保存) ---" FontSize="11" FontWeight="Bold" Foreground="Black" Margin="0,0,0,8"/>
+                    
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="API地址: " FontSize="12" Foreground="Black" Width="70" VerticalAlignment="Center"/>
+                        <TextBox Name="SetApiUrlTextBox" Width="200" Height="18" FontSize="12" Background="Transparent" BorderBrush="Black" BorderThickness="0,0,0,1" Foreground="Black" CaretBrush="Black" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="API密钥: " FontSize="12" Foreground="Black" Width="70" VerticalAlignment="Center"/>
+                        <TextBox Name="SetApiKeyTextBox" Width="200" Height="18" FontSize="12" Background="Transparent" BorderBrush="Black" BorderThickness="0,0,0,1" Foreground="Black" CaretBrush="Black" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="对话模型: " FontSize="12" Foreground="Black" Width="70" VerticalAlignment="Center"/>
+                        <TextBox Name="SetModelTextBox" Width="200" Height="18" FontSize="12" Background="Transparent" BorderBrush="Black" BorderThickness="0,0,0,1" Foreground="Black" CaretBrush="Black" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="提示词: " FontSize="12" Foreground="Black" Width="70" VerticalAlignment="Center"/>
+                        <TextBox Name="SetPromptTextBox" Width="200" Height="18" FontSize="12" Background="Transparent" BorderBrush="Black" BorderThickness="0,0,0,1" Foreground="Black" CaretBrush="Black" VerticalContentAlignment="Center"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="透明度: " FontSize="12" Foreground="Black" Width="60" VerticalAlignment="Center"/>
+                        <Slider Name="OpacitySlider" Width="160" Minimum="10" Maximum="100" Value="100" IsSnapToTickEnabled="True" TickFrequency="5" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding ElementName=OpacitySlider, Path=Value, StringFormat={}{0:0}%}" Width="45" Margin="5,0,0,0" FontSize="12" Foreground="Black" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="打字延迟: " FontSize="12" Foreground="Black" Width="60" VerticalAlignment="Center"/>
+                        <Slider Name="DelaySlider" Width="160" Minimum="0" Maximum="200" Value="50" IsSnapToTickEnabled="True" TickFrequency="10" VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding ElementName=DelaySlider, Path=Value, StringFormat={}{0:0}ms}" Width="45" Margin="5,0,0,0" FontSize="12" Foreground="Black" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="字体粗细: " FontSize="12" Foreground="Black" Width="70" VerticalAlignment="Center"/>
+                        <ComboBox Name="FontWeightComboBox" Width="200" Height="22" FontSize="12" Background="Transparent">
+                            <ComboBoxItem Content="Normal"/>
+                            <ComboBoxItem Content="Bold"/>
+                            <ComboBoxItem Content="SemiBold"/>
+                            <ComboBoxItem Content="Thin"/>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <CheckBox Name="AntiCaptureCheckBox" Content="软件隐藏保护 (防录屏/防截图/防分享)" FontSize="12" Foreground="Black" Margin="0,5,0,5" VerticalAlignment="Center"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>
