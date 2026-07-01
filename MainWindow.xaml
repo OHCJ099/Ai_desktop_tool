@@ -41,7 +41,7 @@
                 <TextBlock Name="SendButton" Text="S" FontSize="14" FontWeight="Bold" Foreground="Black" Cursor="Hand" Margin="0,0,10,0"
                            MouseDown="SendButton_MouseDown" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
                 
-                <!-- 模拟输入 (P) 按钮 -->
+                <!-- 粘贴 (P) 按钮 -->
                 <TextBlock Name="TypeButton" Text="P" FontSize="14" FontWeight="Bold" Foreground="Black" Cursor="Hand" Margin="0,0,10,0"
                            MouseDown="TypeButton_MouseDown" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
 
@@ -58,14 +58,22 @@
                            MouseDown="ExitButton_MouseDown" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
             </StackPanel>
             
-            <!-- AI 回答展示区，外层包裹 ScrollViewer 允许滚动 -->
+            <!-- AI 回答展示区：只读 TextBox，保持透明显示，同时允许选中/复制文本 -->
             <ScrollViewer x:Name="AnswerScrollViewer" Grid.Row="1" Margin="10,0,10,10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                <TextBlock Name="AnswerTextBlock" 
-                           Text="" 
-                           TextWrapping="Wrap" 
-                           FontSize="13" 
-                           Foreground="Black"
-                           LineHeight="18"/>
+                <TextBox Name="AnswerTextBlock"
+                         Text=""
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         IsReadOnly="True"
+                         BorderThickness="0"
+                         Background="Transparent"
+                         Foreground="Black"
+                         CaretBrush="Black"
+                         FontSize="13"
+                         Padding="0"
+                         IsTabStop="False"
+                         VerticalScrollBarVisibility="Disabled"
+                         HorizontalScrollBarVisibility="Disabled"/>
             </ScrollViewer>
 
             <!-- 悬浮内嵌设置区 -->

@@ -19,6 +19,8 @@ namespace AI_desktop_tool
         private System.Windows.Threading.DispatcherTimer _foregroundTrackerTimer;
         private IntPtr _lastExternalForeground = IntPtr.Zero;
         private IntPtr _lastExternalFocus = IntPtr.Zero;
+        private GlobalKeyboardHook? _ctrlVHook;
+        private bool _isHandlingSuppressedCtrlV = false;
 
         public MainWindow()
         {
@@ -51,6 +53,17 @@ namespace AI_desktop_tool
             _foregroundTrackerTimer.Interval = TimeSpan.FromMilliseconds(120);
             _foregroundTrackerTimer.Tick += (s, ev) => TrackExternalForegroundWindow();
             _foregroundTrackerTimer.Start();
+
+            _ctrlVHook = new GlobalKeyboardHook(() =>
+                Dispatcher.InvokeAsync(HandleSuppressedCtrlVAsync).Task.Unwrap());
+            _ctrlVHook.Start();
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            _ctrlVHook?.Dispose();
+            _ctrlVHook = null;
+            base.OnClosed(e);
         }
 
         private void ApplyDisplayAffinity()
@@ -260,7 +273,7 @@ namespace AI_desktop_tool
 
 
 
-        // Action: P (Keyboard Simulation Typing Output)
+        // Action: P (Paste Output)
         private async void TypeButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -269,45 +282,141 @@ namespace AI_desktop_tool
                 string answerText = AnswerTextBlock.Text;
                 if (string.IsNullOrEmpty(answerText)) return;
 
-                // Hide floating window to restore focus to the previously active application
-                this.Hide();
-
-                // Prefer direct CEF DOM injection. It does not depend on Windows focus,
-                // IME, clipboard, or the caret surviving after clicking the overlay.
-                bool injected = false;
+                IntPtr targetWindow = _lastExternalForeground;
+                IntPtr targetFocus = _lastExternalFocus;
+                bool hidden = false;
                 try
                 {
-                    injected = await CefDomExtractor.TryInjectAnswerAsync(answerText, 9222);
+                    bool copied = await SetClipboardTextWithRetryAsync(answerText);
+                    if (!copied)
+                    {
+                        AnswerTextBlock.Text = answerText + "\n\n[粘贴失败：无法写入剪贴板]";
+                        return;
+                    }
+
+                    // Some exam pages block Ctrl+V with JS paste/keydown handlers.
+                    // If CEF DevTools is available, neutralize those handlers before sending Ctrl+V.
+                    try
+                    {
+                        await CefDomExtractor.EnablePasteAsync(9222);
+                    }
+                    catch
+                    {
+                        // CDP is optional for paste; keep the normal Ctrl+V path.
+                    }
+
+                    // Hide floating window, restore the previous app/focus, then issue Ctrl+V.
+                    this.Hide();
+                    hidden = true;
+                    await Task.Delay(120);
+
+                    Win32Helper.RestoreExternalFocus(targetWindow, targetFocus);
+                    await Task.Delay(120);
+
+                    KeyboardSimulator.SendPasteShortcut();
+                    await Task.Delay(80);
+                }
+                catch (Exception ex)
+                {
+                    AnswerTextBlock.Text = answerText + $"\n\n[粘贴失败]\n{ex.Message}";
+                }
+                finally
+                {
+                    if (hidden)
+                    {
+                        this.Show();
+                        this.Topmost = true;
+                        ForceWindowTopmost();
+                    }
+                }
+            }
+        }
+
+        private static async Task<bool> SetClipboardTextWithRetryAsync(string text)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                try
+                {
+                    Clipboard.SetText(text, TextDataFormat.UnicodeText);
+                    return true;
                 }
                 catch
                 {
-                    injected = false;
+                    await Task.Delay(50);
                 }
+            }
 
-                if (injected)
-                {
-                    this.Show();
-                    this.Topmost = true;
-                    return;
-                }
+            return false;
+        }
 
+        private async Task HandleSuppressedCtrlVAsync()
+        {
+            if (_isHandlingSuppressedCtrlV) return;
+            _isHandlingSuppressedCtrlV = true;
+
+            try
+            {
+                string text = "";
                 try
                 {
-                    string diagPath = await CefDomExtractor.DumpInjectionDiagnosticsAsync(9222);
-                    AnswerTextBlock.Text = answerText + $"\n\n[注入失败，已导出诊断]\n{diagPath}";
+                    if (Clipboard.ContainsText())
+                    {
+                        text = Clipboard.GetText(TextDataFormat.UnicodeText);
+                    }
                 }
-                catch (Exception diagEx)
+                catch
                 {
-                    AnswerTextBlock.Text = answerText + $"\n\n[注入失败，诊断导出也失败]\n{diagEx.Message}";
+                    // Clipboard can be temporarily locked; fall back to current answer text.
                 }
 
-                // For CEF exam clients, the fallback keyboard simulation is unreliable and can
-                // hide the real failure signal. Stop here so the user always sees either the
-                // diagnostic file path or the diagnostic error.
-                this.Show();
-                this.Topmost = true;
-                return;
+                if (string.IsNullOrWhiteSpace(text))
+                {
+                    text = AnswerTextBlock.Text;
+                }
+                if (string.IsNullOrWhiteSpace(text)) return;
+
+                // The low-level hook has already swallowed the real Ctrl+V, so the exam page
+                // cannot run its "只能录入不能粘贴" branch. Deliver the content as DOM/typed
+                // input instead of a paste shortcut.
+                for (int i = 0; i < 20 && IsCtrlKeyDown(); i++)
+                {
+                    await Task.Delay(25);
+                }
+
+                bool delivered = false;
+                try
+                {
+                    if (await CefDomExtractor.IsCdpAvailableAsync(9222))
+                    {
+                        try { await CefDomExtractor.EnablePasteAsync(9222); } catch { }
+                        delivered = await CefDomExtractor.TryInjectAnswerAsync(text, 9222);
+                    }
+                }
+                catch
+                {
+                    delivered = false;
+                }
+
+                if (!delivered)
+                {
+                    await KeyboardSimulator.SendStringAsync(text, 1);
+                }
             }
+            finally
+            {
+                _isHandlingSuppressedCtrlV = false;
+            }
+        }
+
+        private static bool IsCtrlKeyDown()
+        {
+            const int VK_CONTROL = 0x11;
+            const int VK_LCONTROL = 0xA2;
+            const int VK_RCONTROL = 0xA3;
+            return (Win32Helper.GetAsyncKeyState(VK_CONTROL) & 0x8000) != 0
+                   || (Win32Helper.GetAsyncKeyState(VK_LCONTROL) & 0x8000) != 0
+                   || (Win32Helper.GetAsyncKeyState(VK_RCONTROL) & 0x8000) != 0;
         }
 
         // Action: C (CEF/CDP DOM text extraction)

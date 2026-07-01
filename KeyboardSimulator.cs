@@ -53,6 +53,8 @@ namespace AI_desktop_tool
         private const uint INPUT_KEYBOARD = 1;
         private const uint KEYEVENTF_KEYUP = 0x0002;
         private const uint KEYEVENTF_UNICODE = 0x0004;
+        private const ushort VK_CONTROL = 0x11;
+        private const ushort VK_V = 0x56;
 
         [DllImport("user32.dll", SetLastError = true)]
         private static extern uint SendInput(uint nInputs, INPUT[] pInputs, int cbSize);
@@ -87,6 +89,21 @@ namespace AI_desktop_tool
                     await Task.Delay(delayMs);
                 }
             }
+        }
+
+        /// <summary>
+        /// Sends the standard paste shortcut (Ctrl+V) to the currently active foreground window.
+        /// </summary>
+        public static void SendPasteShortcut()
+        {
+            INPUT[] inputs = new INPUT[4];
+
+            inputs[0] = CreateVirtualKeyInput(VK_CONTROL, keyUp: false);
+            inputs[1] = CreateVirtualKeyInput(VK_V, keyUp: false);
+            inputs[2] = CreateVirtualKeyInput(VK_V, keyUp: true);
+            inputs[3] = CreateVirtualKeyInput(VK_CONTROL, keyUp: true);
+
+            SendInput((uint)inputs.Length, inputs, Marshal.SizeOf(typeof(INPUT)));
         }
 
         private static void SendChar(char c)
@@ -135,24 +152,17 @@ namespace AI_desktop_tool
             INPUT[] inputs = new INPUT[2];
 
             // Key Down
-            inputs[0] = new INPUT
-            {
-                type = INPUT_KEYBOARD,
-                u = new InputUnion
-                {
-                    ki = new KEYBDINPUT
-                    {
-                        wVk = vk,
-                        wScan = 0,
-                        dwFlags = 0,
-                        time = 0,
-                        dwExtraInfo = IntPtr.Zero
-                    }
-                }
-            };
+            inputs[0] = CreateVirtualKeyInput(vk, keyUp: false);
 
             // Key Up
-            inputs[1] = new INPUT
+            inputs[1] = CreateVirtualKeyInput(vk, keyUp: true);
+
+            SendInput(2, inputs, Marshal.SizeOf(typeof(INPUT)));
+        }
+
+        private static INPUT CreateVirtualKeyInput(ushort vk, bool keyUp)
+        {
+            return new INPUT
             {
                 type = INPUT_KEYBOARD,
                 u = new InputUnion
@@ -161,14 +171,12 @@ namespace AI_desktop_tool
                     {
                         wVk = vk,
                         wScan = 0,
-                        dwFlags = KEYEVENTF_KEYUP,
+                        dwFlags = keyUp ? KEYEVENTF_KEYUP : 0,
                         time = 0,
                         dwExtraInfo = IntPtr.Zero
                     }
                 }
             };
-
-            SendInput(2, inputs, Marshal.SizeOf(typeof(INPUT)));
         }
     }
 }

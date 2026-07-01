@@ -25,6 +25,11 @@ namespace AI_desktop_tool
         private static readonly HttpClient Http = new HttpClient { Timeout = TimeSpan.FromSeconds(2) };
         private static int _seq;
 
+        public static Task<bool> IsCdpAvailableAsync(int port = 9222, CancellationToken ct = default)
+        {
+            return IsCdpAliveAsync(port, ct);
+        }
+
         public static async Task<string> ExtractBestTextAsync(int port = 9222, CancellationToken ct = default)
         {
             await EnsureCdpAvailableAsync(port, ct);
@@ -109,6 +114,36 @@ namespace AI_desktop_tool
             return false;
         }
 
+        public static async Task<bool> EnablePasteAsync(int port = 9222, CancellationToken ct = default)
+        {
+            await EnsureCdpAvailableAsync(port, ct);
+
+            var targets = await GetTargetsAsync(port, ct);
+            if (targets.Count == 0) targets = await GetTargetsViaBrowserAsync(port, ct);
+
+            var candidates = targets
+                .Where(t => !string.IsNullOrWhiteSpace(t.WebSocketDebuggerUrl) &&
+                            (t.Type.Equals("page", StringComparison.OrdinalIgnoreCase) ||
+                             t.Type.Equals("webview", StringComparison.OrdinalIgnoreCase) ||
+                             t.Type.Equals("iframe", StringComparison.OrdinalIgnoreCase)))
+                .ToList();
+
+            bool ok = false;
+            foreach (var t in candidates)
+            {
+                try
+                {
+                    ok |= await EnablePasteInPageWebSocketAsync(t.WebSocketDebuggerUrl!, ct);
+                }
+                catch
+                {
+                    // Try next target.
+                }
+            }
+
+            return ok;
+        }
+
         public static async Task<string> DumpInjectionDiagnosticsAsync(int port = 9222, CancellationToken ct = default)
         {
             await EnsureCdpAvailableAsync(port, ct);
@@ -177,7 +212,8 @@ namespace AI_desktop_tool
 
             string[] candidates =
             {
-                ExamShortcutHelper.ExamExePath
+                ExamShortcutHelper.ExamExePath,
+                ExamShortcutHelper.DesktopExamExePath
             };
 
             string? exe = candidates.FirstOrDefault(File.Exists);
@@ -801,6 +837,126 @@ namespace AI_desktop_tool
             }
 
             return false;
+        }
+
+        private static async Task<bool> EnablePasteInPageWebSocketAsync(string wsUrl, CancellationToken ct)
+        {
+            using var ws = new ClientWebSocket();
+            await ws.ConnectAsync(new Uri(wsUrl), ct);
+            using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct);
+            timeout.CancelAfter(TimeSpan.FromSeconds(4));
+
+            await SendCdpAsync(ws, "Runtime.enable", null, timeout.Token);
+            try { await SendCdpAsync(ws, "Page.enable", null, timeout.Token); } catch { }
+
+            const string pasteUnlockScript = """
+(() => {
+  const MARK = '__ai_desktop_tool_paste_unlock_20260701__';
+
+  function isPasteLikeEvent(e) {
+    try {
+      const t = String(e && e.type || '').toLowerCase();
+      if (t === 'paste') return true;
+      if ((t === 'keydown' || t === 'keypress' || t === 'keyup') &&
+          (e.ctrlKey || e.metaKey) && String(e.key || '').toLowerCase() === 'v') return true;
+      if (t === 'beforeinput' && /paste/i.test(String(e.inputType || ''))) return true;
+    } catch {}
+    return false;
+  }
+
+  function unlockWindow(win) {
+    try {
+      if (!win || win[MARK]) return true;
+      win[MARK] = true;
+
+      const E = win.Event && win.Event.prototype;
+      if (E && !E.__aiPasteUnlockPreventDefault) {
+        const originalPreventDefault = E.preventDefault;
+        Object.defineProperty(E, '__aiPasteUnlockPreventDefault', { value: originalPreventDefault });
+        E.preventDefault = function() {
+          if (isPasteLikeEvent(this)) return;
+          return originalPreventDefault.apply(this, arguments);
+        };
+      }
+
+      const targets = [win, win.document, win.document && win.document.documentElement, win.document && win.document.body].filter(Boolean);
+      const swallow = function(e) {
+        if (!isPasteLikeEvent(e)) return;
+        try { e.stopImmediatePropagation(); } catch {}
+        try { e.stopPropagation(); } catch {}
+        // Intentionally do not call preventDefault(): Chromium should still perform native paste.
+      };
+
+      for (const target of targets) {
+        for (const name of ['keydown', 'keypress', 'keyup', 'paste', 'beforeinput']) {
+          try { target.addEventListener(name, swallow, true); } catch {}
+        }
+      }
+
+      try {
+        for (const el of win.document.querySelectorAll('[onpaste],[onkeydown],[onkeypress],[onkeyup]')) {
+          try { el.onpaste = null; } catch {}
+          try { el.onkeydown = null; } catch {}
+          try { el.onkeypress = null; } catch {}
+          try { el.onkeyup = null; } catch {}
+          try { el.removeAttribute('onpaste'); } catch {}
+        }
+      } catch {}
+    } catch {}
+    return true;
+  }
+
+  function walk(win, seen) {
+    if (!win || seen.has(win)) return;
+    seen.add(win);
+    unlockWindow(win);
+    let frames = [];
+    try { frames = Array.from(win.frames || []); } catch {}
+    for (const f of frames) {
+      try { walk(f, seen); } catch {}
+    }
+  }
+
+  walk(window, new Set());
+  try {
+    const mo = new MutationObserver(() => walk(window, new Set()));
+    mo.observe(document.documentElement || document, { childList: true, subtree: true });
+  } catch {}
+  return true;
+})()
+""";
+
+            try
+            {
+                await SendCdpAsync(ws, "Page.addScriptToEvaluateOnNewDocument", new Dictionary<string, object?>
+                {
+                    ["source"] = pasteUnlockScript
+                }, timeout.Token);
+            }
+            catch
+            {
+            }
+
+            var eval = await SendCdpAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
+            {
+                ["expression"] = pasteUnlockScript,
+                ["returnByValue"] = true,
+                ["awaitPromise"] = true,
+                ["userGesture"] = true
+            }, timeout.Token);
+
+            try
+            {
+                return eval.RootElement
+                    .GetProperty("result")
+                    .GetProperty("result")
+                    .GetProperty("value")
+                    .GetBoolean();
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private static async Task<bool> VerifyAnswerPresentAsync(ClientWebSocket ws, string answer, CancellationToken ct)
