@@ -17,6 +17,7 @@ namespace AI_desktop_tool
         private bool _isSettingsMode = false;
         private System.Windows.Threading.DispatcherTimer _topmostTimer;
         private System.Windows.Threading.DispatcherTimer _foregroundTrackerTimer;
+        private System.Windows.Threading.DispatcherTimer _keyboardHookWatchdogTimer;
         private IntPtr _lastExternalForeground = IntPtr.Zero;
         private IntPtr _lastExternalFocus = IntPtr.Zero;
         private GlobalKeyboardHook? _ctrlVHook;
@@ -57,10 +58,19 @@ namespace AI_desktop_tool
             _ctrlVHook = new GlobalKeyboardHook(() =>
                 Dispatcher.InvokeAsync(HandleSuppressedCtrlVAsync).Task.Unwrap());
             _ctrlVHook.Start();
+
+            _keyboardHookWatchdogTimer = new System.Windows.Threading.DispatcherTimer();
+            _keyboardHookWatchdogTimer.Interval = TimeSpan.FromSeconds(5);
+            _keyboardHookWatchdogTimer.Tick += (s, ev) =>
+            {
+                try { _ctrlVHook?.Restart(); } catch { }
+            };
+            _keyboardHookWatchdogTimer.Start();
         }
 
         protected override void OnClosed(EventArgs e)
         {
+            _keyboardHookWatchdogTimer?.Stop();
             _ctrlVHook?.Dispose();
             _ctrlVHook = null;
             base.OnClosed(e);

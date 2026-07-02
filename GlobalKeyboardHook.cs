@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace AI_desktop_tool
 {
@@ -17,6 +18,7 @@ namespace AI_desktop_tool
         private readonly LowLevelKeyboardProc _proc;
         private readonly Func<Task> _onCtrlV;
         private IntPtr _hook = IntPtr.Zero;
+        private static DateTime _lastExamForegroundSeen = DateTime.MinValue;
 
         public GlobalKeyboardHook(Func<Task> onCtrlV)
         {
@@ -31,6 +33,12 @@ namespace AI_desktop_tool
             using ProcessModule? curModule = curProcess.MainModule;
             IntPtr moduleHandle = curModule == null ? IntPtr.Zero : GetModuleHandle(curModule.ModuleName);
             _hook = SetWindowsHookEx(WH_KEYBOARD_LL, _proc, moduleHandle, 0);
+        }
+
+        public void Restart()
+        {
+            Dispose();
+            Start();
         }
 
         public void Dispose()
@@ -68,6 +76,9 @@ namespace AI_desktop_tool
             {
                 IntPtr hwnd = Win32Helper.GetForegroundWindow();
                 if (hwnd == IntPtr.Zero) return false;
+                IntPtr root = GetAncestor(hwnd, GA_ROOT);
+                if (root != IntPtr.Zero) hwnd = root;
+
                 Win32Helper.GetWindowThreadProcessId(hwnd, out uint pid);
                 if (pid == 0 || pid == Environment.ProcessId) return false;
 
@@ -75,15 +86,93 @@ namespace AI_desktop_tool
                 string name = p.ProcessName ?? "";
                 string path = "";
                 try { path = p.MainModule?.FileName ?? ""; } catch { }
+                string title = GetWindowTextSafe(hwnd);
+                string cls = GetClassNameSafe(hwnd);
 
-                return name.Equals("CXExam", StringComparison.OrdinalIgnoreCase)
-                       || path.EndsWith(@"\CXExam.exe", StringComparison.OrdinalIgnoreCase)
-                       || path.Contains("考试端", StringComparison.OrdinalIgnoreCase)
-                       || path.Contains("CTF考试", StringComparison.OrdinalIgnoreCase);
+                bool directExam =
+                    name.Equals("CXExam", StringComparison.OrdinalIgnoreCase)
+                    || path.EndsWith(@"\CXExam.exe", StringComparison.OrdinalIgnoreCase)
+                    || path.Contains("考试端", StringComparison.OrdinalIgnoreCase)
+                    || path.Contains("CTF考试", StringComparison.OrdinalIgnoreCase)
+                    || title.Contains("考试", StringComparison.OrdinalIgnoreCase)
+                    || title.Contains("学习通", StringComparison.OrdinalIgnoreCase)
+                    || title.Contains("CTF", StringComparison.OrdinalIgnoreCase);
+
+                if (directExam)
+                {
+                    _lastExamForegroundSeen = DateTime.Now;
+                    return true;
+                }
+
+                // Some CEF builds can move focus through Chromium host windows where the
+                // executable/title evidence is temporarily weak. If we have just seen the
+                // exam client and a CEF/Chromium window still owns focus, keep swallowing
+                // Ctrl+V so the page cannot regain its paste shortcut handler.
+                bool recentExam = (DateTime.Now - _lastExamForegroundSeen) < TimeSpan.FromMinutes(10);
+                bool chromiumHost =
+                    cls.Contains("Chrome_WidgetWin", StringComparison.OrdinalIgnoreCase)
+                    || cls.Contains("CefBrowserWindow", StringComparison.OrdinalIgnoreCase)
+                    || cls.Contains("Cef", StringComparison.OrdinalIgnoreCase);
+
+                return recentExam && chromiumHost && AnyExamClientProcessExists();
             }
             catch
             {
                 return false;
+            }
+        }
+
+        private static bool AnyExamClientProcessExists()
+        {
+            try
+            {
+                return Process.GetProcesses().Any(p =>
+                {
+                    try
+                    {
+                        if (p.ProcessName.Equals("CXExam", StringComparison.OrdinalIgnoreCase)) return true;
+                        string path = p.MainModule?.FileName ?? "";
+                        return path.EndsWith(@"\CXExam.exe", StringComparison.OrdinalIgnoreCase)
+                               || path.Contains("考试端", StringComparison.OrdinalIgnoreCase)
+                               || path.Contains("CTF考试", StringComparison.OrdinalIgnoreCase);
+                    }
+                    catch
+                    {
+                        return false;
+                    }
+                });
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private static string GetWindowTextSafe(IntPtr hwnd)
+        {
+            try
+            {
+                var sb = new StringBuilder(512);
+                GetWindowText(hwnd, sb, sb.Capacity);
+                return sb.ToString();
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+        private static string GetClassNameSafe(IntPtr hwnd)
+        {
+            try
+            {
+                var sb = new StringBuilder(256);
+                GetClassName(hwnd, sb, sb.Capacity);
+                return sb.ToString();
+            }
+            catch
+            {
+                return "";
             }
         }
 
@@ -114,5 +203,16 @@ namespace AI_desktop_tool
 
         [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern IntPtr GetModuleHandle(string? lpModuleName);
+
+        private const uint GA_ROOT = 2;
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetAncestor(IntPtr hwnd, uint gaFlags);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
     }
 }
