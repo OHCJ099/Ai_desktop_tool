@@ -53,8 +53,6 @@ namespace AI_desktop_tool
         private const uint INPUT_KEYBOARD = 1;
         private const uint KEYEVENTF_KEYUP = 0x0002;
         private const uint KEYEVENTF_UNICODE = 0x0004;
-        private const ushort VK_CONTROL = 0x11;
-        private const ushort VK_V = 0x56;
 
         [DllImport("user32.dll", SetLastError = true)]
         private static extern uint SendInput(uint nInputs, INPUT[] pInputs, int cbSize);
@@ -89,21 +87,6 @@ namespace AI_desktop_tool
                     await Task.Delay(delayMs);
                 }
             }
-        }
-
-        /// <summary>
-        /// Sends the standard paste shortcut (Ctrl+V) to the currently active foreground window.
-        /// </summary>
-        public static void SendPasteShortcut()
-        {
-            INPUT[] inputs = new INPUT[4];
-
-            inputs[0] = CreateVirtualKeyInput(VK_CONTROL, keyUp: false);
-            inputs[1] = CreateVirtualKeyInput(VK_V, keyUp: false);
-            inputs[2] = CreateVirtualKeyInput(VK_V, keyUp: true);
-            inputs[3] = CreateVirtualKeyInput(VK_CONTROL, keyUp: true);
-
-            SendInput((uint)inputs.Length, inputs, Marshal.SizeOf(typeof(INPUT)));
         }
 
         private static void SendChar(char c)

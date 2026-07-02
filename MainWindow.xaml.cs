@@ -58,12 +58,20 @@ namespace AI_desktop_tool
             _ctrlVHook = new GlobalKeyboardHook(() =>
                 Dispatcher.InvokeAsync(HandleSuppressedCtrlVAsync).Task.Unwrap());
             _ctrlVHook.Start();
+            GlobalKeyboardHook.RefreshSuppressionState();
 
             _keyboardHookWatchdogTimer = new System.Windows.Threading.DispatcherTimer();
             _keyboardHookWatchdogTimer.Interval = TimeSpan.FromSeconds(5);
             _keyboardHookWatchdogTimer.Tick += (s, ev) =>
             {
-                try { _ctrlVHook?.Restart(); } catch { }
+                try
+                {
+                    if (_ctrlVHook != null && !_ctrlVHook.IsInstalled)
+                    {
+                        _ctrlVHook.Start();
+                    }
+                }
+                catch { }
             };
             _keyboardHookWatchdogTimer.Start();
         }
@@ -106,7 +114,6 @@ namespace AI_desktop_tool
             // Apply style to elements
             QueryTextBox.FontWeight = weight;
             SendButton.FontWeight = weight;
-            TypeButton.FontWeight = weight;
             CefCaptureButton.FontWeight = weight;
             SettingsButton.FontWeight = weight;
             ExitButton.FontWeight = weight;
@@ -150,6 +157,7 @@ namespace AI_desktop_tool
             {
                 var self = new System.Windows.Interop.WindowInteropHelper(this).Handle;
                 IntPtr fg = Win32Helper.GetForegroundWindow();
+                GlobalKeyboardHook.RefreshSuppressionState();
                 if (fg == IntPtr.Zero || fg == self) return;
 
                 _lastExternalForeground = fg;
@@ -280,86 +288,6 @@ namespace AI_desktop_tool
                 }
             }
         }
-
-
-
-        // Action: P (Paste Output)
-        private async void TypeButton_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                e.Handled = true;
-                string answerText = AnswerTextBlock.Text;
-                if (string.IsNullOrEmpty(answerText)) return;
-
-                IntPtr targetWindow = _lastExternalForeground;
-                IntPtr targetFocus = _lastExternalFocus;
-                bool hidden = false;
-                try
-                {
-                    bool copied = await SetClipboardTextWithRetryAsync(answerText);
-                    if (!copied)
-                    {
-                        AnswerTextBlock.Text = answerText + "\n\n[粘贴失败：无法写入剪贴板]";
-                        return;
-                    }
-
-                    // Some exam pages block Ctrl+V with JS paste/keydown handlers.
-                    // If CEF DevTools is available, neutralize those handlers before sending Ctrl+V.
-                    try
-                    {
-                        await CefDomExtractor.EnablePasteAsync(9222);
-                    }
-                    catch
-                    {
-                        // CDP is optional for paste; keep the normal Ctrl+V path.
-                    }
-
-                    // Hide floating window, restore the previous app/focus, then issue Ctrl+V.
-                    this.Hide();
-                    hidden = true;
-                    await Task.Delay(120);
-
-                    Win32Helper.RestoreExternalFocus(targetWindow, targetFocus);
-                    await Task.Delay(120);
-
-                    KeyboardSimulator.SendPasteShortcut();
-                    await Task.Delay(80);
-                }
-                catch (Exception ex)
-                {
-                    AnswerTextBlock.Text = answerText + $"\n\n[粘贴失败]\n{ex.Message}";
-                }
-                finally
-                {
-                    if (hidden)
-                    {
-                        this.Show();
-                        this.Topmost = true;
-                        ForceWindowTopmost();
-                    }
-                }
-            }
-        }
-
-        private static async Task<bool> SetClipboardTextWithRetryAsync(string text)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                try
-                {
-                    Clipboard.SetText(text, TextDataFormat.UnicodeText);
-                    return true;
-                }
-                catch
-                {
-                    await Task.Delay(50);
-                }
-            }
-
-            return false;
-        }
-
         private async Task HandleSuppressedCtrlVAsync()
         {
             if (_isHandlingSuppressedCtrlV) return;
@@ -394,24 +322,10 @@ namespace AI_desktop_tool
                     await Task.Delay(25);
                 }
 
-                bool delivered = false;
-                try
-                {
-                    if (await CefDomExtractor.IsCdpAvailableAsync(9222))
-                    {
-                        try { await CefDomExtractor.EnablePasteAsync(9222); } catch { }
-                        delivered = await CefDomExtractor.TryInjectAnswerAsync(text, 9222);
-                    }
-                }
-                catch
-                {
-                    delivered = false;
-                }
-
-                if (!delivered)
-                {
-                    await KeyboardSimulator.SendStringAsync(text, 1);
-                }
+                // For real Ctrl+V, prefer immediate simulated typing. It is treated as
+                // normal input by the exam editor and avoids a slow CDP path that can make
+                // the first few attempts look like "no response".
+                await KeyboardSimulator.SendStringAsync(text, 0);
             }
             finally
             {

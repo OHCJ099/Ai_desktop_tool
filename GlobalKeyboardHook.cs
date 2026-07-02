@@ -9,7 +9,9 @@ namespace AI_desktop_tool
     {
         private const int WH_KEYBOARD_LL = 13;
         private const int WM_KEYDOWN = 0x0100;
+        private const int WM_KEYUP = 0x0101;
         private const int WM_SYSKEYDOWN = 0x0104;
+        private const int WM_SYSKEYUP = 0x0105;
         private const int VK_CONTROL = 0x11;
         private const int VK_LCONTROL = 0xA2;
         private const int VK_RCONTROL = 0xA3;
@@ -19,6 +21,8 @@ namespace AI_desktop_tool
         private readonly Func<Task> _onCtrlV;
         private IntPtr _hook = IntPtr.Zero;
         private static DateTime _lastExamForegroundSeen = DateTime.MinValue;
+        private static volatile bool _suppressCtrlV;
+        private static DateTime _swallowVUntil = DateTime.MinValue;
 
         public GlobalKeyboardHook(Func<Task> onCtrlV)
         {
@@ -34,6 +38,8 @@ namespace AI_desktop_tool
             IntPtr moduleHandle = curModule == null ? IntPtr.Zero : GetModuleHandle(curModule.ModuleName);
             _hook = SetWindowsHookEx(WH_KEYBOARD_LL, _proc, moduleHandle, 0);
         }
+
+        public bool IsInstalled => _hook != IntPtr.Zero;
 
         public void Restart()
         {
@@ -52,16 +58,29 @@ namespace AI_desktop_tool
 
         private IntPtr HookCallback(int nCode, IntPtr wParam, IntPtr lParam)
         {
-            if (nCode >= 0 && (wParam == (IntPtr)WM_KEYDOWN || wParam == (IntPtr)WM_SYSKEYDOWN))
+            if (nCode >= 0)
             {
                 var info = Marshal.PtrToStructure<KBDLLHOOKSTRUCT>(lParam);
                 bool isV = info.vkCode == VK_V;
                 bool ctrlDown = IsKeyDown(VK_CONTROL) || IsKeyDown(VK_LCONTROL) || IsKeyDown(VK_RCONTROL);
+                bool keyDown = wParam == (IntPtr)WM_KEYDOWN || wParam == (IntPtr)WM_SYSKEYDOWN;
+                bool keyUp = wParam == (IntPtr)WM_KEYUP || wParam == (IntPtr)WM_SYSKEYUP;
 
-                if (isV && ctrlDown && ForegroundLooksLikeExamClient())
+                // Keep the low-level hook callback extremely fast. Windows silently removes
+                // slow low-level hooks; all foreground/process detection is done by the
+                // WPF timer via RefreshSuppressionState().
+                if (isV && _suppressCtrlV && (ctrlDown || DateTime.Now < _swallowVUntil))
                 {
-                    _ = _onCtrlV();
-                    return (IntPtr)1; // Eat Ctrl+V so the exam page cannot show "不能粘贴".
+                    if (keyDown && ctrlDown)
+                    {
+                        _swallowVUntil = DateTime.Now.AddMilliseconds(1200);
+                        _ = _onCtrlV();
+                    }
+
+                    if (keyDown || keyUp)
+                    {
+                        return (IntPtr)1; // Eat the full V down/up sequence so the page cannot show "不能粘贴".
+                    }
                 }
             }
 
@@ -69,6 +88,13 @@ namespace AI_desktop_tool
         }
 
         private static bool IsKeyDown(int vk) => (GetAsyncKeyState(vk) & 0x8000) != 0;
+
+        public static bool RefreshSuppressionState()
+        {
+            bool shouldSuppress = ForegroundLooksLikeExamClient();
+            _suppressCtrlV = shouldSuppress;
+            return shouldSuppress;
+        }
 
         private static bool ForegroundLooksLikeExamClient()
         {
@@ -92,6 +118,10 @@ namespace AI_desktop_tool
                 bool directExam =
                     name.Equals("CXExam", StringComparison.OrdinalIgnoreCase)
                     || path.EndsWith(@"\CXExam.exe", StringComparison.OrdinalIgnoreCase)
+                    || name.Contains("exam", StringComparison.OrdinalIgnoreCase)
+                    || name.Contains("ctf", StringComparison.OrdinalIgnoreCase)
+                    || path.Contains("exam", StringComparison.OrdinalIgnoreCase)
+                    || path.Contains("ctf", StringComparison.OrdinalIgnoreCase)
                     || path.Contains("考试端", StringComparison.OrdinalIgnoreCase)
                     || path.Contains("CTF考试", StringComparison.OrdinalIgnoreCase)
                     || title.Contains("考试", StringComparison.OrdinalIgnoreCase)
@@ -133,6 +163,10 @@ namespace AI_desktop_tool
                         if (p.ProcessName.Equals("CXExam", StringComparison.OrdinalIgnoreCase)) return true;
                         string path = p.MainModule?.FileName ?? "";
                         return path.EndsWith(@"\CXExam.exe", StringComparison.OrdinalIgnoreCase)
+                               || p.ProcessName.Contains("exam", StringComparison.OrdinalIgnoreCase)
+                               || p.ProcessName.Contains("ctf", StringComparison.OrdinalIgnoreCase)
+                               || path.Contains("exam", StringComparison.OrdinalIgnoreCase)
+                               || path.Contains("ctf", StringComparison.OrdinalIgnoreCase)
                                || path.Contains("考试端", StringComparison.OrdinalIgnoreCase)
                                || path.Contains("CTF考试", StringComparison.OrdinalIgnoreCase);
                     }

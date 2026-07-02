@@ -41,10 +41,6 @@
                 <TextBlock Name="SendButton" Text="S" FontSize="14" FontWeight="Bold" Foreground="Black" Cursor="Hand" Margin="0,0,10,0"
                            MouseDown="SendButton_MouseDown" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
                 
-                <!-- 粘贴 (P) 按钮 -->
-                <TextBlock Name="TypeButton" Text="P" FontSize="14" FontWeight="Bold" Foreground="Black" Cursor="Hand" Margin="0,0,10,0"
-                           MouseDown="TypeButton_MouseDown" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
-
                 <!-- CEF/CDP 抽题 (C) 按钮：绕过截图/UIA，直接读 CEF 页面文本 -->
                 <TextBlock Name="CefCaptureButton" Text="C" FontSize="14" FontWeight="Bold" Foreground="Black" Cursor="Hand" Margin="0,0,10,0"
                            MouseDown="CefCaptureButton_MouseDown" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
