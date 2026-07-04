@@ -144,6 +144,130 @@ namespace AI_desktop_tool
             return ok;
         }
 
+        public static async Task<AutomationPageSnapshot> GetAutomationSnapshotAsync(int port = 9222, CancellationToken ct = default)
+        {
+            await EnsureCdpAvailableAsync(port, ct);
+
+            var targets = await GetTargetsAsync(port, ct);
+            if (targets.Count == 0) targets = await GetTargetsViaBrowserAsync(port, ct);
+
+            var candidates = targets
+                .Where(t => !string.IsNullOrWhiteSpace(t.WebSocketDebuggerUrl) &&
+                            (t.Type.Equals("page", StringComparison.OrdinalIgnoreCase) ||
+                             t.Type.Equals("webview", StringComparison.OrdinalIgnoreCase) ||
+                             t.Type.Equals("iframe", StringComparison.OrdinalIgnoreCase)))
+                .ToList();
+
+            if (candidates.Count == 0)
+            {
+                throw new InvalidOperationException("CDP 已连接，但未发现 page/webview target。");
+            }
+
+            Exception? lastError = null;
+            foreach (var t in candidates)
+            {
+                try
+                {
+                    var snapshot = await GetAutomationSnapshotFromPageAsync(t.WebSocketDebuggerUrl!, ct);
+                    if (!string.IsNullOrWhiteSpace(snapshot.QuestionText))
+                    {
+                        snapshot.TargetTitle = t.Title;
+                        snapshot.TargetUrl = t.Url;
+                        return snapshot;
+                    }
+                    if (!string.IsNullOrWhiteSpace(snapshot.Diagnostic))
+                    {
+                        lastError = new InvalidOperationException(snapshot.Diagnostic);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lastError = ex;
+                }
+            }
+
+            throw new InvalidOperationException(lastError?.Message ?? "未能定位当前题面。");
+        }
+
+        public static async Task<AutomationActionResult> ApplyAutomationAnswerAsync(string answer, int port = 9222, CancellationToken ct = default)
+        {
+            if (string.IsNullOrWhiteSpace(answer))
+            {
+                return new AutomationActionResult(false, "AI 答案为空。");
+            }
+
+            await EnsureCdpAvailableAsync(port, ct);
+
+            var targets = await GetTargetsAsync(port, ct);
+            if (targets.Count == 0) targets = await GetTargetsViaBrowserAsync(port, ct);
+
+            var candidates = targets
+                .Where(t => !string.IsNullOrWhiteSpace(t.WebSocketDebuggerUrl) &&
+                            (t.Type.Equals("page", StringComparison.OrdinalIgnoreCase) ||
+                             t.Type.Equals("webview", StringComparison.OrdinalIgnoreCase) ||
+                             t.Type.Equals("iframe", StringComparison.OrdinalIgnoreCase)))
+                .ToList();
+
+            if (candidates.Count == 0)
+            {
+                return new AutomationActionResult(false, "CDP 页面 target 不存在。");
+            }
+
+            string last = "页面操作失败。";
+            foreach (var t in candidates)
+            {
+                try
+                {
+                    var result = await ApplyAutomationAnswerInPageAsync(t.WebSocketDebuggerUrl!, answer, ct);
+                    if (result.Success) return result;
+                    last = result.Message;
+                }
+                catch (Exception ex)
+                {
+                    last = ex.Message;
+                }
+            }
+
+            return new AutomationActionResult(false, last);
+        }
+
+        public static async Task<AutomationActionResult> ClickAutomationNextAsync(int port = 9222, CancellationToken ct = default)
+        {
+            await EnsureCdpAvailableAsync(port, ct);
+
+            var targets = await GetTargetsAsync(port, ct);
+            if (targets.Count == 0) targets = await GetTargetsViaBrowserAsync(port, ct);
+
+            var candidates = targets
+                .Where(t => !string.IsNullOrWhiteSpace(t.WebSocketDebuggerUrl) &&
+                            (t.Type.Equals("page", StringComparison.OrdinalIgnoreCase) ||
+                             t.Type.Equals("webview", StringComparison.OrdinalIgnoreCase) ||
+                             t.Type.Equals("iframe", StringComparison.OrdinalIgnoreCase)))
+                .ToList();
+
+            if (candidates.Count == 0)
+            {
+                return new AutomationActionResult(false, "CDP 页面 target 不存在。");
+            }
+
+            string last = "找不到下一题按钮。";
+            foreach (var t in candidates)
+            {
+                try
+                {
+                    var result = await ClickAutomationNextInPageAsync(t.WebSocketDebuggerUrl!, ct);
+                    if (result.Success) return result;
+                    last = result.Message;
+                }
+                catch (Exception ex)
+                {
+                    last = ex.Message;
+                }
+            }
+
+            return new AutomationActionResult(false, last);
+        }
+
         public static async Task<string> DumpInjectionDiagnosticsAsync(int port = 9222, CancellationToken ct = default)
         {
             await EnsureCdpAvailableAsync(port, ct);
@@ -291,7 +415,7 @@ namespace AI_desktop_tool
                     {
                         list.Add(new CdpTarget
                         {
-                            Id = GetString(info, "targetId"),
+                            Id = GetString(info, "targetId") ?? "",
                             Type = GetString(info, "type") ?? "",
                             Title = GetString(info, "title") ?? "",
                             Url = GetString(info, "url") ?? ""
@@ -1119,6 +1243,578 @@ namespace AI_desktop_tool
             return ExtractRuntimeString(eval);
         }
 
+        private static async Task<AutomationPageSnapshot> GetAutomationSnapshotFromPageAsync(string wsUrl, CancellationToken ct)
+        {
+            using var ws = new ClientWebSocket();
+            await ws.ConnectAsync(new Uri(wsUrl), ct);
+            using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct);
+            timeout.CancelAfter(TimeSpan.FromSeconds(6));
+
+            await SendCdpAsync(ws, "Runtime.enable", null, timeout.Token);
+            const string expression = """
+(() => {
+  const MAX = 4200;
+  const badRe = /(\u4e0a\u4e00\u9898|\u4e0b\u4e00\u9898|\u4ea4\u5377|\u63d0\u4ea4|\u8fd4\u56de|\u9000\u51fa|\u5012\u8ba1\u65f6|\u8003\u8bd5\u987b\u77e5|\u4fdd\u5b58|\u6807\u8bb0|\u672a\u7b54|\u5df2\u7b54|\u7b54\u9898\u5361|\u9898\u53f7|\u767b\u5f55|\u5237\u65b0|\u5173\u95ed|\u5168\u5c4f|\u6536\u8d77|\u5c55\u5f00|\u5f53\u524d\u9898\u76ee|\u5df2\u4f5c\u7b54|\u672a\u4f5c\u7b54|remainTime|monitorStatus)/;
+  const hardNavRe = /(\u5f53\u524d\u9898\u76ee\s*\u5df2\u4f5c\u7b54\s*\u672a\u4f5c\u7b54|\u7b54\u9898\u5361|\u672a\u4f5c\u7b54|\u5df2\u4f5c\u7b54|\u9898\u53f7\u5217\u8868|\u5f53\u524d\u9898\u76ee)/;
+  const sectionTitleRe = /^[\u4e00\u4e8c\u4e09\u56db\u4e94\u516d\u4e03\u516b\u4e5d\u5341]+、\s*(\u5355\u9009\u9898|\u591a\u9009\u9898|\u586b\u7a7a\u9898|\u5224\u65ad\u9898|\u7b80\u7b54\u9898|\u8bba\u8ff0\u9898)\s*[\uff08(]?\d+(?:\.\d+)?\u5206?[\uff09)]?$/;
+  const toolbarRe = /^(\u6bb5\u843d|arial|sans-serif|serif|\u5fae\u8f6f\u96c5\u9ed1|\u5b8b\u4f53|\u9ed1\u4f53|(?:1[0-9]|2[0-9]|[8-9])px)$/i;
+  const qRe = /(\u5355\u9009|\u591a\u9009|\u5224\u65ad|\u586b\u7a7a|\u7b80\u7b54|\u8bba\u8ff0|\u6750\u6599|\u9605\u8bfb|\u9898|\u95ee\u9898|\u8bf7\u9009\u62e9|\u6b63\u786e\u7684\u662f|\u9519\u8bef\u7684\u662f|\u4e0b\u5217|\u7b54\u6848|A[\.．、]|B[\.．、]|C[\.．、]|D[\.．、]|\u2460|\u2461|\u2462|\u2463)/i;
+  function norm(s) {
+    return String(s || '').replace(/\r/g, '\n')
+      .split('\n').map(x => x.replace(/[ \t\f\v]+/g, ' ').trim())
+      .filter(x => x && !toolbarRe.test(x))
+      .join('\n').replace(/\n{3,}/g, '\n\n').trim();
+  }
+  function lines(s) { return norm(s).split('\n').map(x => x.trim()).filter(Boolean); }
+  function lineCount(s) { return lines(s).length; }
+  function standaloneNumberCount(s) { return (norm(s).match(/^\d{1,3}$/gm) || []).length; }
+  function navLike(s) {
+    s = norm(s);
+    const lc = Math.max(1, lineCount(s));
+    const nums = standaloneNumberCount(s);
+    if (hardNavRe.test(s)) return true;
+    if (nums >= 8 && nums >= lc * 0.35) return true;
+    if (nums >= 20) return true;
+    return false;
+  }
+  function visible(el) {
+    if (!el || el.nodeType !== 1) return false;
+    const st = getComputedStyle(el);
+    if (st.display === 'none' || st.visibility === 'hidden' || Number(st.opacity) === 0) return false;
+    const r = el.getBoundingClientRect();
+    return r.width > 2 && r.height > 2 && r.bottom > 0 && r.right > 0 && r.top < innerHeight && r.left < innerWidth;
+  }
+  function cssPath(el) {
+    if (!el || !el.tagName) return '';
+    if (el.id) return '#' + CSS.escape(el.id);
+    const parts = [];
+    while (el && el.nodeType === 1 && el !== document.body && parts.length < 6) {
+      let p = el.tagName.toLowerCase();
+      if (el.className && typeof el.className === 'string') {
+        const cls = el.className.trim().split(/\s+/).filter(Boolean).slice(0, 2);
+        if (cls.length) p += '.' + cls.map(CSS.escape).join('.');
+      }
+      const parent = el.parentElement;
+      if (parent) {
+        const sib = Array.from(parent.children).filter(x => x.tagName === el.tagName);
+        if (sib.length > 1) p += `:nth-of-type(${sib.indexOf(el) + 1})`;
+      }
+      parts.unshift(p);
+      el = parent;
+    }
+    return parts.join(' > ');
+  }
+  function textOf(el) {
+    if (!el) return '';
+    return norm(el.innerText || el.textContent || el.value || el.getAttribute('aria-label') || el.getAttribute('title') || '');
+  }
+  function currentQuestionNumber() {
+    try {
+      const u = new URL(location.href);
+      const start = u.searchParams.get('start');
+      if (start && /^\d+$/.test(start)) return String(Number(start) + 1);
+    } catch {}
+    return null;
+  }
+  function cleanQuestionText(s, qn) {
+    s = norm(s);
+    if (!s) return '';
+    if (qn) {
+      const re = new RegExp('(?:^|\\n)\\s*' + qn.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*[\\.\\uFF0E\\u3001]?\\s*(?:\\n|\\(|\\uFF08|$)');
+      const m = re.exec(s);
+      if (m && m.index > 0) s = s.slice(m.index).trim();
+    }
+    const raw = lines(s);
+    const kept = [];
+    for (let i = 0; i < raw.length; i++) {
+      let ln = raw[i];
+      if (toolbarRe.test(ln) || /^\d{1,3}$/.test(ln) || sectionTitleRe.test(ln) || badRe.test(ln)) continue;
+      if (/^[A-H]$/i.test(ln) && i + 1 < raw.length) {
+        const next = raw[i + 1];
+        if (next && !/^[A-H]$/i.test(next) && !badRe.test(next)) {
+          kept.push(ln.toUpperCase() + '. ' + next);
+          i++;
+          continue;
+        }
+      }
+      kept.push(ln);
+    }
+    return kept.join('\n').slice(0, MAX).trim();
+  }
+  function optionCountInText(s) { return (norm(s).match(/[A-H][\\.\\uFF0E\\u3001]/gi) || []).length; }
+  function optionElements(root) {
+    return Array.from(root.querySelectorAll('[onclick*="addChoice"], .answerBg, .singleoption, .multioption, .addChoice, label, li, .option, [class*="option"], [class*="xuan"], input[type=radio], input[type=checkbox]')).filter(visible);
+  }
+  function inputElements(root) {
+    return Array.from(root.querySelectorAll('textarea, input:not([type]), input[type=text], input[type=search], iframe[id^="ueditor"], iframe, [contenteditable=true], [role=textbox]'))
+      .filter(el => visible(el) || (el.tagName === 'TEXTAREA' && /^answer\d+/.test(el.id || el.name || '')));
+  }
+  function scoreElement(el, qn) {
+    const raw = textOf(el);
+    const cleaned = cleanQuestionText(raw, qn);
+    if (cleaned.length < 8) return { score: -9999, raw, cleaned, reason: 'too-short' };
+    if (navLike(raw) || navLike(cleaned)) return { score: -9999, raw, cleaned, reason: 'nav-like' };
+    const opts = optionCountInText(cleaned);
+    const optEls = optionElements(el).length;
+    const inputs = inputElements(el).length;
+    let score = 0;
+    if (qRe.test(cleaned)) score += 35;
+    score += Math.min(cleaned.length / 25, 30);
+    score += Math.min(opts, 6) * 15;
+    score += Math.min(optEls, 6) * 10;
+    score += Math.min(inputs, 3) * 25;
+    if (/(\u5355\u9009\u9898|\u591a\u9009\u9898|\u5224\u65ad\u9898|\u586b\u7a7a\u9898|\u7b80\u7b54\u9898|\u8bf7\u9009\u62e9|\u6b63\u786e\u7684\u662f|\u9519\u8bef\u7684\u662f|\u4e0b\u5217)/.test(cleaned)) score += 20;
+    if (badRe.test(raw)) score -= 80;
+    const r = el.getBoundingClientRect();
+    const centerX = (r.left + r.right) / 2;
+    if (centerX > innerWidth * 0.35) score += 18; else score -= 25;
+    const area = Math.max(1, r.width * r.height);
+    if (area > innerWidth * innerHeight * 0.75) score -= 35;
+    if (cleaned.length > 3000 && opts < 2 && inputs === 0) score -= 25;
+    return { score, raw, cleaned, reason: '' };
+  }
+  function inferType(text, optionTexts, inputs) {
+    const s = norm(text + '\n' + optionTexts.join('\n'));
+    if (/(\u591a\u9009|\u591a\u9879|\u4e0d\u5b9a\u9879|\u81f3\u5c11.*\u9879)/.test(s)) return 'multiple';
+    if (/(\u5224\u65ad)/.test(s) || (optionTexts.length >= 2 && optionTexts.length <= 3 && /(\u6b63\u786e|\u9519\u8bef|\u5bf9|\u9519|\u662f|\u5426)/.test(optionTexts.join('\n')))) return 'judge';
+    if (optionTexts.length >= 2 || optionCountInText(s) >= 2) return 'single';
+    if (/(\u586b\u7a7a|\u586b\u5165|\u7a7a\u683c|____|\uFF3F|\uFF08\uFF09|\(\))/.test(s) || inputs.some(x => x.kind === 'input')) return 'blank';
+    if (/(\u7b80\u7b54|\u8bba\u8ff0|\u95ee\u7b54|\u5206\u6790|\u8bf4\u660e|\u9610\u8ff0)/.test(s) || inputs.some(x => x.kind === 'textarea' || x.kind === 'contenteditable' || x.kind === 'iframe')) return 'essay';
+    return 'unknown';
+  }
+  const qn = currentQuestionNumber();
+  const selector = 'article, section, main, form, table, tbody, tr, td, li, [class*="question"], [class*="ques"], [class*="TiMu"], [class*="timu"], [class*="stem"], [class*="subject"], [id*="question"], [id*="ques"], div';
+  const candidates = Array.from(document.querySelectorAll(selector)).filter(visible).map(el => {
+    const scored = scoreElement(el, qn);
+    return { el, ...scored, selector: cssPath(el) };
+  }).filter(x => x.score > 10).sort((a, b) => b.score - a.score || a.cleaned.length - b.cleaned.length);
+  if (!candidates.length) {
+    return JSON.stringify({ questionText: '', questionType: 'unknown', options: [], inputCount: 0, href: location.href, title: document.title, diagnostic: '\u672a\u80fd\u5b9a\u4f4d\u5f53\u524d\u9898\u9762\uff1a\u5019\u9009\u5bb9\u5668\u4e3a\u7a7a\u6216\u5747\u4e3a\u5bfc\u822a/\u7b54\u9898\u5361\u3002' });
+  }
+  const picked = candidates[0];
+  const root = picked.el;
+  const options = [];
+  const seen = new Set();
+  for (const el of optionElements(root)) {
+    let clickEl = el;
+    let label = el.closest('label') || el.closest('li') || el.parentElement || el;
+    if (el.matches && el.matches('input[type=radio],input[type=checkbox]')) {
+      clickEl = el;
+      const id = el.id;
+      if (id) label = root.querySelector(`label[for="${CSS.escape(id)}"]`) || label;
+    }
+    let text = textOf(label);
+    if (!text || text.length > 500 || navLike(text) || badRe.test(text)) text = textOf(el);
+    if (!text || text.length > 500 || navLike(text) || badRe.test(text)) continue;
+    const m = /^([A-H])[\s\.\uFF0E\u3001:\uFF1A)]*/i.exec(text);
+    const key = m ? m[1].toUpperCase() : String.fromCharCode(65 + options.length);
+    const sig = key + '|' + text;
+    if (seen.has(sig)) continue;
+    seen.add(sig);
+    options.push({ key, text, selector: cssPath(clickEl), index: options.length });
+    if (options.length >= 10) break;
+  }
+  const inputs = inputElements(root).map((el, i) => ({ selector: cssPath(el), index: i, kind: el.tagName === 'TEXTAREA' ? 'textarea' : (el.tagName === 'IFRAME' ? 'iframe' : (el.isContentEditable ? 'contenteditable' : 'input')) }));
+  let questionText = picked.cleaned;
+  if (!questionText || navLike(questionText)) questionText = '';
+  const type = inferType(questionText, options.map(o => o.text), inputs);
+  return JSON.stringify({
+    questionText,
+    questionType: type,
+    options,
+    inputCount: inputs.length,
+    href: location.href,
+    title: document.title,
+    containerSelector: picked.selector,
+    diagnostic: `score=${picked.score.toFixed(1)} reason=${picked.reason || 'picked'} raw=${picked.raw.slice(0, 300).replace(/\n/g, ' / ')}`
+  });
+})()
+
+""";
+
+            var eval = await SendCdpAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
+            {
+                ["expression"] = expression,
+                ["returnByValue"] = true,
+                ["awaitPromise"] = true
+            }, timeout.Token);
+
+            string json = ExtractRuntimeString(eval);
+            if (string.IsNullOrWhiteSpace(json)) throw new InvalidOperationException("题面识别失败。");
+            return JsonSerializer.Deserialize<AutomationPageSnapshot>(json, JsonOpts())
+                   ?? throw new InvalidOperationException("题面识别结果解析失败。");
+        }
+
+        private static async Task<AutomationActionResult> ApplyAutomationAnswerInPageAsync(string wsUrl, string answer, CancellationToken ct)
+        {
+            using var ws = new ClientWebSocket();
+            await ws.ConnectAsync(new Uri(wsUrl), ct);
+            using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct);
+            timeout.CancelAfter(TimeSpan.FromSeconds(6));
+
+            await SendCdpAsync(ws, "Runtime.enable", null, timeout.Token);
+            string answerJson = JsonSerializer.Serialize(answer);
+            string expression = $$"""
+(() => {
+  const ANSWER = {{answerJson}};
+  function result(ok, reason, action, extra) {
+    return JSON.stringify(Object.assign({
+      ok,
+      success: ok,
+      reason: reason || '',
+      message: reason || '',
+      action: action || '',
+      answer: String(ANSWER || '')
+    }, extra || {}));
+  }
+  try {
+    function norm(s) { return String(s || '').replace(/\r/g, '\n').replace(/[ \t\f\v]+/g, ' ').trim(); }
+    function visible(el) {
+      if (!el || el.nodeType !== 1) return false;
+      const st = getComputedStyle(el);
+      if (st.display === 'none' || st.visibility === 'hidden' || Number(st.opacity) === 0) return false;
+      const r = el.getBoundingClientRect();
+      return r.width > 2 && r.height > 2 && r.bottom > 0 && r.right > 0 && r.top < innerHeight && r.left < innerWidth;
+    }
+    function cssPath(el) {
+      if (!el || !el.tagName) return '';
+      if (el.id) return '#' + CSS.escape(el.id);
+      const parts = [];
+      while (el && el.nodeType === 1 && el !== document.body && parts.length < 6) {
+        let p = el.tagName.toLowerCase();
+        if (el.className && typeof el.className === 'string') {
+          const cls = el.className.trim().split(/\s+/).filter(Boolean).slice(0, 2);
+          if (cls.length) p += '.' + cls.map(CSS.escape).join('.');
+        }
+        const parent = el.parentElement;
+        if (parent) {
+          const sib = Array.from(parent.children).filter(x => x.tagName === el.tagName);
+          if (sib.length > 1) p += `:nth-of-type(${sib.indexOf(el) + 1})`;
+        }
+        parts.unshift(p);
+        el = parent;
+      }
+      return parts.join(' > ');
+    }
+    function fire(el) { for (const t of ['input', 'change', 'blur']) el.dispatchEvent(new Event(t, { bubbles: true })); }
+    function click(el) {
+      if (!el) return false;
+      el.scrollIntoView({ block: 'center', inline: 'center' });
+      el.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, cancelable: true, view: window }));
+      el.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, cancelable: true, view: window }));
+      el.click();
+      el.dispatchEvent(new Event('change', { bubbles: true }));
+      try {
+        const qid = (el.querySelector && el.querySelector('[qid]') && el.querySelector('[qid]').getAttribute('qid'))
+          || (el.getAttribute && el.getAttribute('qid'))
+          || '';
+        const hidden = qid ? document.getElementById('answer' + qid) : null;
+        if (typeof window.addChoice === 'function' && el.matches && el.matches('[onclick*="addChoice"], .answerBg, .singleoption, .multioption') && hidden && !hidden.value) {
+          window.addChoice(el);
+        }
+      } catch {}
+      return true;
+    }
+    function textOf(el) { return norm(el && (el.innerText || el.textContent || el.value || el.getAttribute('aria-label') || el.getAttribute('title') || '')); }
+    const badRe = /(\u4e0a\u4e00\u9898|\u4e0b\u4e00\u9898|\u4ea4\u5377|\u63d0\u4ea4|\u7b54\u9898\u5361|\u5f53\u524d\u9898\u76ee|\u5df2\u4f5c\u7b54|\u672a\u4f5c\u7b54|\u9898\u53f7|\u5012\u8ba1\u65f6)/;
+    function navLike(s) {
+      s = norm(s);
+      if (badRe.test(s)) return true;
+      const lines = s.split('\n').map(x => x.trim()).filter(Boolean);
+      const nums = (s.match(/^\d{1,3}$/gm) || []).length;
+      return nums >= 8 && nums >= Math.max(1, lines.length) * 0.35;
+    }
+    function optionCountInText(s) { return (norm(s).match(/[A-H][\.\uFF0E\u3001]/gi) || []).length; }
+    function pickRoot() {
+      const selector = 'article, section, main, form, table, tbody, tr, td, li, [class*="question"], [class*="ques"], [class*="TiMu"], [class*="timu"], [class*="stem"], [class*="subject"], [id*="question"], [id*="ques"], div';
+      const candidates = Array.from(document.querySelectorAll(selector)).filter(visible).map(el => {
+        const text = textOf(el);
+        if (!text || navLike(text)) return { el, score: -9999, text };
+        let score = Math.min(text.length / 25, 25) + Math.min(optionCountInText(text), 6) * 15;
+        score += Array.from(el.querySelectorAll('[onclick*="addChoice"], .answerBg, .singleoption, .multioption, .addChoice, label, li, .option, [class*="option"], [class*="xuan"], input[type=radio], input[type=checkbox]')).filter(visible).length * 8;
+        score += Array.from(el.querySelectorAll('textarea, input:not([type]), input[type=text], input[type=search], [contenteditable=true], [role=textbox]')).filter(visible).length * 20;
+        const r = el.getBoundingClientRect();
+        if ((r.left + r.right) / 2 > innerWidth * 0.35) score += 18; else score -= 25;
+        if (badRe.test(text)) score -= 80;
+        return { el, score, text };
+      }).filter(x => x.score > 10).sort((a, b) => b.score - a.score);
+      return candidates.length ? { root: candidates[0].el, diagnostic: `root=${cssPath(candidates[0].el)} score=${candidates[0].score.toFixed(1)}` } : { root: document.body, diagnostic: 'root=document.body fallback' };
+    }
+    const pickedRoot = pickRoot();
+    const root = pickedRoot.root;
+    const answer = norm(ANSWER);
+    if (!answer) return result(false, '\u0041\u0049 \u7b54\u6848\u4e3a\u7a7a\u3002', 'no-answer', { diagnostic: pickedRoot.diagnostic });
+
+    const qidForInput = (document.querySelector('[name=questionId]') && document.querySelector('[name=questionId]').value)
+      || (document.querySelector('[id^=jiandaId]') && document.querySelector('[id^=jiandaId]').value)
+      || '';
+    const visibleInput = Array.from(root.querySelectorAll('textarea, input:not([type]), input[type=text], input[type=search], iframe[id^="ueditor"], iframe, [contenteditable=true], [role=textbox]')).filter(visible)[0];
+    const hiddenAnswerInput = qidForInput ? document.getElementById('answer' + qidForInput) : null;
+    const input = visibleInput || hiddenAnswerInput;
+    const optionEls = Array.from(root.querySelectorAll('[onclick*="addChoice"], .answerBg, .singleoption, .multioption, .addChoice, label, li, .option, [class*="option"], [class*="select"], [class*="xuan"], input[type=radio], input[type=checkbox]')).filter(visible);
+    const options = [];
+    const seen = new Set();
+    for (const el of optionEls) {
+      let clickEl = el;
+      let label = el.closest('label') || el.closest('li') || el.parentElement || el;
+      if (el.matches && el.matches('input[type=radio],input[type=checkbox]')) {
+        clickEl = el;
+        const id = el.id;
+        if (id) label = root.querySelector(`label[for="${CSS.escape(id)}"]`) || label;
+      } else {
+        const choiceBox = el.closest('[onclick*="addChoice"], .answerBg, .singleoption, .multioption');
+        if (choiceBox) clickEl = choiceBox;
+      }
+      const text = textOf(label) || textOf(el);
+      if (!text || text.length > 500 || navLike(text)) continue;
+      const m = /^([A-H])[\s\.\uFF0E\u3001:\uFF1A)]*/i.exec(text);
+      const key = m ? m[1].toUpperCase() : String.fromCharCode(65 + options.length);
+      const sig = key + '|' + text;
+      if (seen.has(sig)) continue;
+      seen.add(sig);
+      options.push({ key, text, selector: cssPath(clickEl), clickEl });
+      if (options.length >= 10) break;
+    }
+
+    const isChoice = options.length >= 2;
+    const optionSummary = options.map(o => `${o.key}:${o.text.slice(0, 60)}`).join(' | ');
+    if (isChoice) {
+      let keys = [];
+      const cleaned = answer.replace(/\u7b54\u6848[:\uFF1A]/g, ' ').replace(/\u9009\u9879/g, ' ');
+      const letterMatches = cleaned.match(/[A-H]/gi) || [];
+      if (letterMatches.length && !/[A-Ha-h]{8,}/.test(cleaned)) keys = Array.from(new Set(letterMatches.map(x => x.toUpperCase())));
+      if (!keys.length) {
+        const judgeTrue = /(\u6b63\u786e|\u5bf9|\u662f|true|\u221A|\u5c0d)/i.test(answer);
+        const judgeFalse = /(\u9519\u8bef|\u9519|\u5426|false|\u00D7|\u932f)/i.test(answer);
+        for (const opt of options) {
+          const t = opt.text;
+          if ((judgeTrue && /(\u6b63\u786e|\u5bf9|\u662f|true|\u221A|\u5c0d)/i.test(t)) || (judgeFalse && /(\u9519\u8bef|\u9519|\u5426|false|\u00D7|\u932f)/i.test(t))) keys.push(opt.key);
+        }
+      }
+      if (!keys.length) {
+        for (const opt of options) {
+          const body = opt.text.replace(/^[A-H][\s\.\uFF0E\u3001:\uFF1A)]*/i, '').trim();
+          if (body && answer.includes(body.slice(0, Math.min(body.length, 20)))) keys.push(opt.key);
+        }
+      }
+      keys = Array.from(new Set(keys));
+      const missing = keys.filter(k => !options.some(o => o.key === k));
+      if (missing.length) return result(false, `\u672a\u627e\u5230\u9009\u9879 ${missing.join(',')}`, 'no-match', { candidates: optionSummary, diagnostic: pickedRoot.diagnostic });
+      if (!keys.length) return result(false, '\u0041\u0049 \u7b54\u6848\u65e0\u6cd5\u660e\u786e\u6620\u5c04\u5230\u9009\u9879\u3002', 'no-match', { candidates: optionSummary, diagnostic: pickedRoot.diagnostic });
+      const clicked = [];
+      for (const key of keys) {
+        const opt = options.find(o => o.key === key);
+        if (!opt) continue;
+        click(opt.clickEl);
+        clicked.push(opt);
+      }
+      if (!clicked.length) return result(false, '\u672a\u627e\u5230\u53ef\u70b9\u51fb\u7684\u5339\u914d\u9009\u9879\u3002', 'no-match', { candidates: optionSummary, diagnostic: pickedRoot.diagnostic });
+      const qid = (clicked[0].clickEl.querySelector && clicked[0].clickEl.querySelector('[qid]') && clicked[0].clickEl.querySelector('[qid]').getAttribute('qid'))
+        || (clicked[0].clickEl.getAttribute && clicked[0].clickEl.getAttribute('qid'))
+        || (document.querySelector('[name=questionId]') && document.querySelector('[name=questionId]').value)
+        || '';
+      const hiddenAnswer = qid ? document.getElementById('answer' + qid) : null;
+      return result(true, '\u5df2\u9009\u62e9: ' + clicked.map(o => o.key).join(','), 'click-option', {
+        matchedOption: clicked.map(o => `${o.key}:${o.text}`).join(' | '),
+        selector: clicked.map(o => o.selector).join(' | '),
+        candidates: optionSummary,
+        diagnostic: pickedRoot.diagnostic + '; qid=' + qid + '; hiddenAnswer=' + (hiddenAnswer ? hiddenAnswer.value : '<none>')
+      });
+    }
+
+    if (!input) return result(false, '\u627e\u4e0d\u5230\u8f93\u5165\u6846\u3002', 'no-input', { candidates: optionSummary, diagnostic: pickedRoot.diagnostic + '; qid=' + qidForInput });
+    const html = '<p>' + answer.replace(/[&<>]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[ch])).replace(/\n/g, '<br/>') + '<br/></p>';
+    let wrote = [];
+    try {
+      const frame = input.tagName === 'IFRAME' ? input : root.querySelector('iframe[id^="ueditor"], iframe');
+      if (frame && frame.contentDocument && frame.contentDocument.body) {
+        frame.scrollIntoView({ block: 'center', inline: 'center' });
+        frame.contentDocument.body.innerHTML = html;
+        frame.contentDocument.body.dispatchEvent(new Event('input', { bubbles: true }));
+        frame.contentDocument.body.dispatchEvent(new Event('change', { bubbles: true }));
+        wrote.push('iframe=' + cssPath(frame));
+      }
+    } catch (e) {
+      wrote.push('iframe-error=' + (e && e.message ? e.message : String(e)));
+    }
+    const answerField = hiddenAnswerInput || (input.tagName === 'TEXTAREA' ? input : null) || root.querySelector('textarea[id^="answer"], textarea[name^="answer"]');
+    if (answerField) {
+      answerField.value = html;
+      fire(answerField);
+      wrote.push('textarea=' + cssPath(answerField));
+    } else if (input.isContentEditable) {
+      input.scrollIntoView({ block: 'center', inline: 'center' });
+      input.focus();
+      input.innerHTML = html;
+      fire(input);
+      wrote.push('contenteditable=' + cssPath(input));
+    } else if ('value' in input && input.tagName !== 'IFRAME') {
+      input.scrollIntoView({ block: 'center', inline: 'center' });
+      input.focus();
+      input.value = answer;
+      fire(input);
+      wrote.push('input=' + cssPath(input));
+    }
+    if (!wrote.length) return result(false, '\u627e\u5230\u8f93\u5165\u5bb9\u5668\u4f46\u5199\u5165\u5931\u8d25\u3002', 'fill-input-failed', { selector: cssPath(input), diagnostic: pickedRoot.diagnostic + '; qid=' + qidForInput });
+    return result(true, '\u5df2\u586b\u5199\u7b54\u6848\u3002', 'fill-input', { selector: wrote.join(' | '), diagnostic: pickedRoot.diagnostic + '; qid=' + qidForInput });
+  } catch (e) {
+    return result(false, 'exception: ' + (e && e.message ? e.message : String(e)), 'exception', { stack: e && e.stack ? String(e.stack).slice(0, 800) : '' });
+  }
+})()
+
+""";
+
+            var eval = await SendCdpAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
+            {
+                ["expression"] = expression,
+                ["returnByValue"] = true,
+                ["awaitPromise"] = true
+            }, timeout.Token);
+
+            return ParseActionResultFromCdp(eval);
+        }
+
+        private static async Task<AutomationActionResult> ClickAutomationNextInPageAsync(string wsUrl, CancellationToken ct)
+        {
+            using var ws = new ClientWebSocket();
+            await ws.ConnectAsync(new Uri(wsUrl), ct);
+            using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct);
+            timeout.CancelAfter(TimeSpan.FromSeconds(5));
+
+            await SendCdpAsync(ws, "Runtime.enable", null, timeout.Token);
+            const string expression = """
+(() => {
+  function result(ok, reason, action, extra) {
+    return JSON.stringify(Object.assign({ ok, success: ok, reason, message: reason, action }, extra || {}));
+  }
+  try {
+    const nextKeywords = ['\u4e0b\u4e00\u9898', '\u4e0b\u4e00\u9875', '\u4e0b\u4e00\u6b65', 'Next', 'NEXT', 'next', '>'];
+    const prevKeywords = ['\u4e0a\u4e00\u9898', '\u4e0a\u4e00\u9875', '\u4e0a\u4e00\u6b65', 'Prev', 'PREV', 'prev', 'Previous', 'previous', 'Back', 'back'];
+    function hasAny(text, keywords) {
+      text = String(text || '');
+      return keywords.some(k => text.indexOf(k) >= 0);
+    }
+    function visible(el) {
+      if (!el || el.nodeType !== 1) return false;
+      const st = getComputedStyle(el);
+      if (st.display === 'none' || st.visibility === 'hidden' || Number(st.opacity) === 0) return false;
+      const r = el.getBoundingClientRect();
+      return r.width > 2 && r.height > 2 && r.bottom > 0 && r.right > 0 && r.top < innerHeight && r.left < innerWidth;
+    }
+    function cssPath(el) {
+      if (!el || !el.tagName) return '';
+      if (el.id) return '#' + CSS.escape(String(el.id));
+      const parts = [];
+      while (el && el.nodeType === 1 && el !== document.body && parts.length < 5) {
+        let p = String(el.tagName || '').toLowerCase();
+        const clsText = typeof el.className === 'string' ? el.className : '';
+        const cls = clsText.trim().split(' ').filter(Boolean).slice(0, 2);
+        if (cls.length) p += '.' + cls.map(CSS.escape).join('.');
+        const parent = el.parentElement;
+        if (parent) {
+          const sib = Array.from(parent.children).filter(x => x.tagName === el.tagName);
+          if (sib.length > 1) p += ':nth-of-type(' + (sib.indexOf(el) + 1) + ')';
+        }
+        parts.unshift(p);
+        el = parent;
+      }
+      return parts.join(' > ');
+    }
+    function ownText(el) {
+      return String(el.innerText || el.textContent || el.value || el.title || el.getAttribute('aria-label') || '').replace(/\s+/g, ' ').trim();
+    }
+    function hintText(el) {
+      return [
+        ownText(el),
+        String(el.id || ''),
+        String(typeof el.className === 'string' ? el.className : ''),
+        String(el.title || ''),
+        String(el.getAttribute('aria-label') || '')
+      ].join(' ').trim();
+    }
+    function disabled(el) {
+      const cls = String(typeof el.className === 'string' ? el.className : '').toLowerCase();
+      return !!(el.disabled || el.getAttribute('disabled') !== null || el.getAttribute('aria-disabled') === 'true' || cls.indexOf('disabled') >= 0 || cls.indexOf('disable') >= 0);
+    }
+    function isNextCandidate(el) {
+      const hint = hintText(el);
+      if (!hint) return false;
+      if (hasAny(hint, prevKeywords)) return false;
+      if (disabled(el)) return false;
+      const lower = hint.toLowerCase();
+      return hasAny(hint, nextKeywords) || lower.indexOf('next') >= 0;
+    }
+    function actionable(el) {
+      if (!el) return el;
+      const tag = String(el.tagName || '').toLowerCase();
+      if ((tag === 'a' || tag === 'button' || tag === 'input') && isNextCandidate(el)) return el;
+      const child = Array.from(el.querySelectorAll('a, button, input[type=button], input[type=submit], [role=button]')).find(x => visible(x) && isNextCandidate(x));
+      return child || el;
+    }
+    function click(el) {
+      el.scrollIntoView({ block: 'center', inline: 'center' });
+      if (el.focus) el.focus();
+      const events = ['pointerdown', 'mousedown', 'pointerup', 'mouseup', 'click'];
+      for (const type of events) {
+        if (type.indexOf('pointer') === 0 && !window.PointerEvent) continue;
+        const ev = type.indexOf('pointer') === 0
+          ? new PointerEvent(type, { bubbles: true, cancelable: true, view: window })
+          : new MouseEvent(type, { bubbles: true, cancelable: true, view: window });
+        el.dispatchEvent(ev);
+      }
+    }
+    const selectors = 'button, a, input[type=button], input[type=submit], [role=button], .btn, [class*=btn], [class*=next], [class*=Next], span, div';
+    const candidates = Array.from(document.querySelectorAll(selectors)).filter(visible).filter(isNextCandidate).map(el => {
+      const text = ownText(el);
+      const hint = hintText(el);
+      const r = el.getBoundingClientRect();
+      let score = 50;
+      if (nextKeywords.includes(text)) score += 60;
+      if (hasAny(hint, ['\u4e0b\u4e00\u9898', '\u4e0b\u4e00\u9875', '\u4e0b\u4e00\u6b65'])) score += 30;
+      if (String(hint).toLowerCase().indexOf('next') >= 0) score += 20;
+      if (r.left > innerWidth * 0.4) score += 15;
+      if (r.top > innerHeight * 0.45) score += 10;
+      if (text.length > 30) score -= 20;
+      return { el, text, hint, score, selector: cssPath(el) };
+    }).sort((a, b) => b.score - a.score);
+    if (!candidates.length) {
+      const visibleButtons = Array.from(document.querySelectorAll('button, a, input[type=button], input[type=submit], [role=button], .btn, [class*=btn]'))
+        .filter(visible).slice(0, 20).map(el => ownText(el) || cssPath(el)).join(' | ');
+      return result(false, '\u627e\u4e0d\u5230\u4e0b\u4e00\u9898\u6309\u94ae\u3002', 'no-next', { candidates: visibleButtons });
+    }
+    const item = candidates[0];
+    const target = actionable(item.el);
+    const beforeUrl = location.href;
+    click(target);
+    return result(true, '\u5df2\u70b9\u51fb\u4e0b\u4e00\u9898\u3002', 'click-next', {
+      selector: cssPath(target),
+      matchedOption: ownText(target),
+      diagnostic: 'score=' + item.score + '; container=' + item.selector + '; target=' + cssPath(target) + '; onclick=' + String(target.getAttribute && target.getAttribute('onclick') || '') + '; beforeUrl=' + beforeUrl + '; afterUrl=' + location.href,
+      candidates: candidates.slice(0, 10).map(x => x.score + ':' + x.text + ':' + x.selector).join(' | ')
+    });
+  } catch (e) {
+    return result(false, 'exception: ' + (e && e.message ? e.message : String(e)), 'exception', { stack: e && e.stack ? String(e.stack).slice(0, 800) : '' });
+  }
+})()
+
+""";
+
+            var eval = await SendCdpAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
+            {
+                ["expression"] = expression,
+                ["returnByValue"] = true,
+                ["awaitPromise"] = true
+            }, timeout.Token);
+
+
+            if (IsExecutionContextDestroyed(eval))
+            {
+                return new AutomationActionResult(true, "\u5df2\u70b9\u51fb\u4e0b\u4e00\u9898\uff0c\u9875\u9762\u6b63\u5728\u8df3\u8f6c\u3002");
+            }
+
+            return ParseActionResultFromCdp(eval);
+        }
+
         private static async Task<JsonDocument> SendCdpAsync(ClientWebSocket ws, string method, object? parameters, CancellationToken ct)
         {
             int id = Interlocked.Increment(ref _seq);
@@ -1192,6 +1888,105 @@ namespace AI_desktop_tool
             return string.Join("\n", parts.Distinct());
         }
 
+        private static AutomationActionResult ParseActionResult(string json)
+        {
+            if (string.IsNullOrWhiteSpace(json)) return new AutomationActionResult(false, "页面脚本无返回。");
+            try
+            {
+                using var doc = JsonDocument.Parse(json);
+                bool success =
+                    (doc.RootElement.TryGetProperty("success", out var successEl) && successEl.ValueKind == JsonValueKind.True) ||
+                    (doc.RootElement.TryGetProperty("ok", out var okEl) && okEl.ValueKind == JsonValueKind.True);
+                string message = doc.RootElement.TryGetProperty("message", out var msg) ? (msg.GetString() ?? "") : "";
+                string reason = doc.RootElement.TryGetProperty("reason", out var reasonEl) ? (reasonEl.GetString() ?? "") : "";
+                string action = doc.RootElement.TryGetProperty("action", out var actionEl) ? (actionEl.GetString() ?? "") : "";
+                string selector = doc.RootElement.TryGetProperty("selector", out var selectorEl) ? (selectorEl.GetString() ?? "") : "";
+                string matched = doc.RootElement.TryGetProperty("matchedOption", out var matchedEl) ? (matchedEl.GetString() ?? "") : "";
+                string diagnostic = doc.RootElement.TryGetProperty("diagnostic", out var diagEl) ? (diagEl.GetString() ?? "") : "";
+
+                var parts = new List<string>();
+                parts.Add(!string.IsNullOrWhiteSpace(message) ? message : (!string.IsNullOrWhiteSpace(reason) ? reason : (success ? "成功。" : "失败。")));
+                if (!string.IsNullOrWhiteSpace(action)) parts.Add("action=" + action);
+                if (!string.IsNullOrWhiteSpace(matched)) parts.Add("matched=" + matched);
+                if (!string.IsNullOrWhiteSpace(selector)) parts.Add("selector=" + selector);
+                if (!string.IsNullOrWhiteSpace(diagnostic)) parts.Add("diag=" + diagnostic);
+                return new AutomationActionResult(success, string.Join("；", parts));
+            }
+            catch
+            {
+                return new AutomationActionResult(false, json);
+            }
+        }
+
+        private static AutomationActionResult ParseActionResultFromCdp(JsonDocument doc)
+        {
+            string summary = "";
+            try
+            {
+                summary = doc.RootElement.GetRawText();
+                if (summary.Length > 1200) summary = summary[..1200];
+
+                if (doc.RootElement.TryGetProperty("exceptionDetails", out var exceptionDetails))
+                {
+                    string text = exceptionDetails.TryGetProperty("text", out var t) ? (t.GetString() ?? "") : "";
+                    string description = "";
+                    if (exceptionDetails.TryGetProperty("exception", out var ex) &&
+                        ex.TryGetProperty("description", out var desc))
+                    {
+                        description = desc.GetString() ?? "";
+                    }
+                    return new AutomationActionResult(false, "页面脚本异常：" + (string.IsNullOrWhiteSpace(description) ? text : description));
+                }
+
+                if (!doc.RootElement.TryGetProperty("result", out var result) ||
+                    !result.TryGetProperty("result", out var runtimeResult))
+                {
+                    return new AutomationActionResult(false, "CDP 返回结构异常：" + summary);
+                }
+
+                string json = "";
+                if (runtimeResult.TryGetProperty("value", out var value))
+                {
+                    if (value.ValueKind == JsonValueKind.String)
+                    {
+                        json = value.GetString() ?? "";
+                    }
+                    else if (value.ValueKind != JsonValueKind.Null && value.ValueKind != JsonValueKind.Undefined)
+                    {
+                        json = value.GetRawText();
+                    }
+                }
+
+                if (string.IsNullOrWhiteSpace(json))
+                {
+                    string type = runtimeResult.TryGetProperty("type", out var typeEl) ? (typeEl.GetString() ?? "") : "";
+                    string subtype = runtimeResult.TryGetProperty("subtype", out var subtypeEl) ? (subtypeEl.GetString() ?? "") : "";
+                    string description = runtimeResult.TryGetProperty("description", out var descEl) ? (descEl.GetString() ?? "") : "";
+                    return new AutomationActionResult(false, $"页面脚本无返回。CDP type={type} subtype={subtype} desc={description} raw={summary}");
+                }
+
+                return ParseActionResult(json);
+            }
+            catch (Exception ex)
+            {
+                return new AutomationActionResult(false, "作答结果解析异常：" + ex.Message + (string.IsNullOrWhiteSpace(summary) ? "" : " raw=" + summary));
+            }
+        }
+
+        private static bool IsExecutionContextDestroyed(JsonDocument doc)
+        {
+            try
+            {
+                string raw = doc.RootElement.GetRawText();
+                return raw.Contains("Execution context was destroyed", StringComparison.OrdinalIgnoreCase)
+                       || raw.Contains("Cannot find context", StringComparison.OrdinalIgnoreCase);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         private static string Normalize(string s)
         {
             if (string.IsNullOrWhiteSpace(s)) return "";
@@ -1215,4 +2010,28 @@ namespace AI_desktop_tool
             public string? WebSocketDebuggerUrl { get; set; }
         }
     }
+
+    public sealed class AutomationPageSnapshot
+    {
+        public string QuestionText { get; set; } = "";
+        public string QuestionType { get; set; } = "";
+        public List<AutomationOption> Options { get; set; } = new();
+        public int InputCount { get; set; }
+        public string Href { get; set; } = "";
+        public string Title { get; set; } = "";
+        public string TargetTitle { get; set; } = "";
+        public string TargetUrl { get; set; } = "";
+        public string ContainerSelector { get; set; } = "";
+        public string Diagnostic { get; set; } = "";
+    }
+
+    public sealed class AutomationOption
+    {
+        public string Key { get; set; } = "";
+        public string Text { get; set; } = "";
+        public string Selector { get; set; } = "";
+        public int Index { get; set; }
+    }
+
+    public sealed record AutomationActionResult(bool Success, string Message);
 }

@@ -28,6 +28,9 @@ namespace AI_desktop_tool
         public int TypeDelayMs { get; set; }
 
         [DataMember]
+        public double AutoDelaySeconds { get; set; }
+
+        [DataMember]
         public bool EnableAntiCapture { get; set; }
 
         [DataMember]
@@ -45,6 +48,7 @@ namespace AI_desktop_tool
             TextOpacity = 100.0;
             FontWeight = "Normal";
             TypeDelayMs = 10;
+            AutoDelaySeconds = 2.0;
             EnableAntiCapture = false; // Disabled by default
             UseOnlineOcr = false;
             OnlineOcrModel = "PaddlePaddle/PaddleOCR-VL-1.5";

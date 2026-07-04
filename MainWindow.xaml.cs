@@ -1,7 +1,9 @@
 using System;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,13 +17,17 @@ namespace AI_desktop_tool
         private AppConfig _config = new AppConfig();
         private bool _isRequesting = false;
         private bool _isSettingsMode = false;
-        private System.Windows.Threading.DispatcherTimer _topmostTimer;
-        private System.Windows.Threading.DispatcherTimer _foregroundTrackerTimer;
-        private System.Windows.Threading.DispatcherTimer _keyboardHookWatchdogTimer;
+        private System.Windows.Threading.DispatcherTimer? _topmostTimer;
+        private System.Windows.Threading.DispatcherTimer? _foregroundTrackerTimer;
+        private System.Windows.Threading.DispatcherTimer? _keyboardHookWatchdogTimer;
         private IntPtr _lastExternalForeground = IntPtr.Zero;
         private IntPtr _lastExternalFocus = IntPtr.Zero;
         private GlobalKeyboardHook? _ctrlVHook;
         private bool _isHandlingSuppressedCtrlV = false;
+        private CancellationTokenSource? _automationCts;
+        private bool _automationPaused = false;
+        private bool _automationRunning = false;
+        private string _lastAutomationStatus = "";
 
         public MainWindow()
         {
@@ -46,12 +52,12 @@ namespace AI_desktop_tool
 
             // Initialize topmost timer to force overlay priority
             _topmostTimer = new System.Windows.Threading.DispatcherTimer();
-            _topmostTimer.Interval = TimeSpan.FromMilliseconds(500);
+            _topmostTimer.Interval = TimeSpan.FromMilliseconds(300);
             _topmostTimer.Tick += (s, ev) => ForceWindowTopmost();
             _topmostTimer.Start();
 
             _foregroundTrackerTimer = new System.Windows.Threading.DispatcherTimer();
-            _foregroundTrackerTimer.Interval = TimeSpan.FromMilliseconds(120);
+            _foregroundTrackerTimer.Interval = TimeSpan.FromMilliseconds(100);
             _foregroundTrackerTimer.Tick += (s, ev) => TrackExternalForegroundWindow();
             _foregroundTrackerTimer.Start();
 
@@ -78,6 +84,7 @@ namespace AI_desktop_tool
 
         protected override void OnClosed(EventArgs e)
         {
+            _automationCts?.Cancel();
             _keyboardHookWatchdogTimer?.Stop();
             _ctrlVHook?.Dispose();
             _ctrlVHook = null;
@@ -115,6 +122,7 @@ namespace AI_desktop_tool
             QueryTextBox.FontWeight = weight;
             SendButton.FontWeight = weight;
             CefCaptureButton.FontWeight = weight;
+            AutoToggleButton.FontWeight = weight;
             SettingsButton.FontWeight = weight;
             ExitButton.FontWeight = weight;
             AnswerTextBlock.FontWeight = weight;
@@ -383,6 +391,344 @@ namespace AI_desktop_tool
             }
         }
 
+        private async void AutoToggleButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton != MouseButton.Left) return;
+            e.Handled = true;
+
+            if (_automationRunning && !_automationPaused)
+            {
+                _automationPaused = true;
+                SetAutomationStatus("已暂停");
+                return;
+            }
+
+            if (_automationRunning && _automationPaused)
+            {
+                _automationPaused = false;
+                SetAutomationStatus("自动化中");
+                return;
+            }
+
+            await StartAutomationAsync();
+        }
+
+        private async Task StartAutomationAsync()
+        {
+            if (_automationRunning) return;
+
+            _automationCts?.Cancel();
+            _automationCts = new CancellationTokenSource();
+            _automationPaused = false;
+            _automationRunning = true;
+            SetAutomationStatus("自动化中");
+
+            try
+            {
+                await RunAutomationLoopAsync(_automationCts.Token);
+            }
+            catch (OperationCanceledException)
+            {
+                SetAutomationStatus("已停止");
+            }
+            catch (Exception ex)
+            {
+                PauseAutomationWithReason("出错：" + ex.Message);
+            }
+            finally
+            {
+                _automationRunning = false;
+                AutoToggleButton.Text = "K";
+            }
+        }
+
+        private async Task RunAutomationLoopAsync(CancellationToken ct)
+        {
+            int questionNo = 0;
+            while (!ct.IsCancellationRequested)
+            {
+                await WaitIfPausedAsync(ct);
+                questionNo++;
+                SetAutomationStatus("自动化中");
+
+                AutomationPageSnapshot snapshot;
+                try
+                {
+                    snapshot = await GetAutomationSnapshotWithRetryAsync(ct);
+                }
+                catch (Exception ex)
+                {
+                    PauseAutomationWithReason("题面识别失败/CDP 连接失败：" + ex.Message);
+                    await WaitIfPausedAsync(ct);
+                    continue;
+                }
+
+                if (string.IsNullOrWhiteSpace(snapshot.QuestionText))
+                {
+                    PauseAutomationWithReason("未能定位当前题面：" + (string.IsNullOrWhiteSpace(snapshot.Diagnostic) ? "当前页面没有可用题面。" : snapshot.Diagnostic));
+                    await WaitIfPausedAsync(ct);
+                    continue;
+                }
+                if (!string.IsNullOrWhiteSpace(snapshot.Diagnostic))
+                {
+                    LogDebug("Automation snapshot: selector=" + snapshot.ContainerSelector + "; " + snapshot.Diagnostic);
+                }
+
+                if (string.IsNullOrWhiteSpace(snapshot.QuestionType) || snapshot.QuestionType.Equals("unknown", StringComparison.OrdinalIgnoreCase))
+                {
+                    PauseAutomationWithReason("题型识别失败。");
+                    await WaitIfPausedAsync(ct);
+                    continue;
+                }
+
+                if ((snapshot.QuestionType == "single" || snapshot.QuestionType == "multiple" || snapshot.QuestionType == "judge") &&
+                    snapshot.Options.Count == 0)
+                {
+                    PauseAutomationWithReason("找不到选项。");
+                    await WaitIfPausedAsync(ct);
+                    continue;
+                }
+
+                if ((snapshot.QuestionType == "blank" || snapshot.QuestionType == "essay") && snapshot.InputCount == 0)
+                {
+                    PauseAutomationWithReason("找不到输入框。");
+                    await WaitIfPausedAsync(ct);
+                    continue;
+                }
+
+                string prompt = BuildAutomationPrompt(snapshot);
+                QueryTextBox.Text = snapshot.QuestionText;
+                AnswerTextBlock.Text = $"第 {questionNo} 题：正在生成答案...\n题型：{snapshot.QuestionType}";
+
+                string answer = await SendApiRequestAsync(prompt);
+                AnswerTextBlock.Text = answer;
+                if (IsUncertainAnswer(answer))
+                {
+                    PauseAutomationWithReason("AI 答案为空或不确定。");
+                    await WaitIfPausedAsync(ct);
+                    continue;
+                }
+
+                await WaitIfPausedAsync(ct);
+                SetAutomationStatus("自动化中");
+                LogDebug("Automation answer: type=" + snapshot.QuestionType
+                         + "; answer=" + answer.Trim()
+                         + "; options=" + string.Join(" | ", snapshot.Options.Select(o => $"{o.Key}:{o.Text}")));
+                var apply = await CefDomExtractor.ApplyAutomationAnswerAsync(answer, 9222, ct);
+                if (!apply.Success)
+                {
+                    PauseAutomationWithReason(ToShortAutomationMessage(apply.Message));
+                    await WaitIfPausedAsync(ct);
+                    continue;
+                }
+
+                await WaitIfPausedAsync(ct);
+                int delayMs = GetAutomationDelayMs();
+                SetAutomationStatus("自动化中");
+                await DelayWithPauseAsync(delayMs, ct);
+
+                await WaitIfPausedAsync(ct);
+                SetAutomationStatus("自动化中");
+                var next = await CefDomExtractor.ClickAutomationNextAsync(9222, ct);
+                LogDebug("Automation next: " + next.Message);
+                if (!next.Success)
+                {
+                    PauseAutomationWithReason(ToShortAutomationMessage(next.Message));
+                    await WaitIfPausedAsync(ct);
+                    continue;
+                }
+
+                bool changed = false;
+                string afterSummary = "";
+                for (int poll = 0; poll < 10; poll++)
+                {
+                    await Task.Delay(500, ct);
+                    AutomationPageSnapshot afterNext;
+                    try
+                    {
+                        afterNext = await GetAutomationSnapshotWithRetryAsync(ct);
+                        afterSummary = SummarizeQuestion(afterNext.QuestionText);
+                        if (!IsSameQuestion(snapshot.QuestionText, afterNext.QuestionText))
+                        {
+                            changed = true;
+                            break;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        afterSummary = "读取失败：" + ex.Message;
+                    }
+                }
+
+                if (!changed)
+                {
+                    LogDebug("Automation no-progress: next=" + next.Message
+                             + "; before=" + SummarizeQuestion(snapshot.QuestionText)
+                             + "; after=" + afterSummary);
+                    PauseAutomationWithReason("下一题后题面未变化");
+                    await WaitIfPausedAsync(ct);
+                    continue;
+                }
+            }
+        }
+
+        private static string SummarizeQuestion(string text)
+        {
+            string s = (text ?? "").Replace("\r", " ").Replace("\n", " ").Trim();
+            return s.Length > 120 ? s[..120] : s;
+        }
+
+        private static async Task<AutomationPageSnapshot> GetAutomationSnapshotWithRetryAsync(CancellationToken ct)
+        {
+            Exception? last = null;
+            for (int i = 0; i < 8; i++)
+            {
+                ct.ThrowIfCancellationRequested();
+                try
+                {
+                    return await CefDomExtractor.GetAutomationSnapshotAsync(9222, ct);
+                }
+                catch (Exception ex) when (IsTransientNavigationError(ex))
+                {
+                    last = ex;
+                    await Task.Delay(350, ct);
+                }
+            }
+
+            throw last ?? new InvalidOperationException("读取题面失败。");
+        }
+
+        private static bool IsTransientNavigationError(Exception ex)
+        {
+            string msg = ex.ToString();
+            return msg.Contains("Execution context was destroyed", StringComparison.OrdinalIgnoreCase)
+                   || msg.Contains("Cannot find context", StringComparison.OrdinalIgnoreCase)
+                   || msg.Contains("Inspected target navigated", StringComparison.OrdinalIgnoreCase)
+                   || msg.Contains("Target closed", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static bool IsSameQuestion(string a, string b)
+        {
+            string NormalizeQuestion(string s)
+            {
+                s = new string((s ?? "").Where(c => !char.IsWhiteSpace(c)).ToArray());
+                return s.Length > 300 ? s[..300] : s;
+            }
+
+            string x = NormalizeQuestion(a);
+            string y = NormalizeQuestion(b);
+            return x.Length >= 20 && string.Equals(x, y, StringComparison.Ordinal);
+        }
+
+        private string BuildAutomationPrompt(AutomationPageSnapshot snapshot)
+        {
+            var options = snapshot.Options.Count == 0
+                ? ""
+                : "\n选项：\n" + string.Join("\n", snapshot.Options.Select(o => $"{o.Key}. {o.Text}"));
+            return $"""
+请回答考试题。必须只输出最终答案，不要解释。
+题型：{snapshot.QuestionType}
+规则：
+- 单选/判断：只输出一个选项字母，如 A；判断题也优先输出页面选项字母。
+- 多选：只输出多个选项字母，用逗号分隔，如 A,C。
+- 填空/简答：只输出要填写到输入框中的答案正文。
+- 如果无法确定，输出“不确定”。
+
+题面：
+{snapshot.QuestionText}
+{options}
+""";
+        }
+
+        private bool IsUncertainAnswer(string answer)
+        {
+            if (string.IsNullOrWhiteSpace(answer)) return true;
+            string s = answer.Trim();
+            return s.Contains("不确定", StringComparison.OrdinalIgnoreCase)
+                   || s.Contains("无法确定", StringComparison.OrdinalIgnoreCase)
+                   || s.Contains("不能确定", StringComparison.OrdinalIgnoreCase)
+                   || s.Equals("unknown", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private int GetAutomationDelayMs()
+        {
+            double seconds = _config.AutoDelaySeconds;
+            seconds = Math.Clamp(seconds, 0, 60);
+            return (int)(seconds * 1000);
+        }
+
+        private async Task DelayWithPauseAsync(int delayMs, CancellationToken ct)
+        {
+            int elapsed = 0;
+            while (elapsed < delayMs)
+            {
+                ct.ThrowIfCancellationRequested();
+                await WaitIfPausedAsync(ct);
+                int step = Math.Min(100, delayMs - elapsed);
+                await Task.Delay(step, ct);
+                elapsed += step;
+            }
+        }
+
+        private async Task WaitIfPausedAsync(CancellationToken ct)
+        {
+            while (_automationPaused)
+            {
+                ct.ThrowIfCancellationRequested();
+                await Task.Delay(150, ct);
+            }
+        }
+
+        private void PauseAutomationWithReason(string reason)
+        {
+            _automationPaused = true;
+            SetAutomationStatus("已暂停");
+            AnswerTextBlock.Text = "已暂停：" + ToShortAutomationMessage(reason);
+            LogDebug("Automation paused: " + reason);
+        }
+
+        private void StopAutomation(string status)
+        {
+            _automationCts?.Cancel();
+            _automationPaused = false;
+            _automationRunning = false;
+            SetAutomationStatus(status);
+        }
+
+        private void SetAutomationStatus(string status)
+        {
+            AutoToggleButton.Text = _automationRunning && !_automationPaused ? "G" : "K";
+            AutoToggleButton.ToolTip = status;
+            if (string.Equals(_lastAutomationStatus, status, StringComparison.Ordinal)) return;
+            _lastAutomationStatus = status;
+            if (status.StartsWith("已暂停", StringComparison.Ordinal) ||
+                status.StartsWith("已停止", StringComparison.Ordinal) ||
+                status.StartsWith("出错", StringComparison.Ordinal))
+            {
+                LogDebug("Automation: " + status);
+            }
+        }
+
+        private static string ToShortAutomationMessage(string message)
+        {
+            if (string.IsNullOrWhiteSpace(message)) return "需要人工处理";
+            string s = message.Replace("\r", " ").Replace("\n", " ").Trim();
+            int cut = s.IndexOf('；');
+            if (cut > 0) s = s[..cut];
+            cut = s.IndexOf("; ", StringComparison.Ordinal);
+            if (cut > 0) s = s[..cut];
+            string[] noisy =
+            {
+                "selector=", "diag=", "diagnostic=", "candidates=", "raw=", "onclick=", "beforeUrl=", "afterUrl="
+            };
+            foreach (var marker in noisy)
+            {
+                cut = s.IndexOf(marker, StringComparison.OrdinalIgnoreCase);
+                if (cut > 0) s = s[..cut].Trim();
+            }
+            return s.Length > 60 ? s[..60] + "..." : s;
+        }
+
         // Action: 设置 (Open Settings Panel)
         private void SettingsButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -423,7 +769,7 @@ namespace AI_desktop_tool
                 AnswerScrollViewer.Visibility = Visibility.Collapsed;
                 SettingsScrollViewer.Visibility = Visibility.Visible;
                 
-                this.Height = 320;
+                this.Height = 380;
             }
             else
             {
@@ -440,7 +786,7 @@ namespace AI_desktop_tool
                 SettingsScrollViewer.Visibility = Visibility.Collapsed;
                 AnswerScrollViewer.Visibility = Visibility.Visible;
                 
-                this.Height = 160;
+                this.Height = 170;
             }
         }
 
@@ -458,7 +804,7 @@ namespace AI_desktop_tool
             SettingsScrollViewer.Visibility = Visibility.Collapsed;
             AnswerScrollViewer.Visibility = Visibility.Visible;
             
-            this.Height = 160;
+            this.Height = 170;
         }
 
         private void LoadConfigToInlineUI()
@@ -470,13 +816,14 @@ namespace AI_desktop_tool
             
             OpacitySlider.Value = _config.TextOpacity;
             DelaySlider.Value = _config.TypeDelayMs;
+            AutoDelaySlider.Value = _config.AutoDelaySeconds <= 0 ? 2.0 : _config.AutoDelaySeconds;
             AntiCaptureCheckBox.IsChecked = _config.EnableAntiCapture;
 
             string currentWeight = _config.FontWeight ?? "Normal";
             bool foundWeight = false;
             foreach (ComboBoxItem item in FontWeightComboBox.Items)
             {
-                if (item.Content.ToString().Equals(currentWeight, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(item.Content?.ToString(), currentWeight, StringComparison.OrdinalIgnoreCase))
                 {
                     FontWeightComboBox.SelectedItem = item;
                     foundWeight = true;
@@ -498,11 +845,12 @@ namespace AI_desktop_tool
             
             _config.TextOpacity = OpacitySlider.Value;
             _config.TypeDelayMs = (int)DelaySlider.Value;
+            _config.AutoDelaySeconds = AutoDelaySlider.Value;
             _config.EnableAntiCapture = AntiCaptureCheckBox.IsChecked == true;
 
             if (FontWeightComboBox.SelectedItem is ComboBoxItem selectedWeightItem)
             {
-                _config.FontWeight = selectedWeightItem.Content.ToString();
+                _config.FontWeight = selectedWeightItem.Content?.ToString() ?? "Normal";
             }
             else
             {

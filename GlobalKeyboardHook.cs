@@ -22,7 +22,12 @@ namespace AI_desktop_tool
         private IntPtr _hook = IntPtr.Zero;
         private static DateTime _lastExamForegroundSeen = DateTime.MinValue;
         private static volatile bool _suppressCtrlV;
-        private static DateTime _swallowVUntil = DateTime.MinValue;
+        private static DateTime _swallowVKeyUpUntil = DateTime.MinValue;
+        private static IntPtr _cachedForegroundHwnd = IntPtr.Zero;
+        private static DateTime _cachedForegroundUntil = DateTime.MinValue;
+        private static bool _cachedForegroundResult;
+        private static DateTime _cachedAnyExamUntil = DateTime.MinValue;
+        private static bool _cachedAnyExamResult;
 
         public GlobalKeyboardHook(Func<Task> onCtrlV)
         {
@@ -69,17 +74,19 @@ namespace AI_desktop_tool
                 // Keep the low-level hook callback extremely fast. Windows silently removes
                 // slow low-level hooks; all foreground/process detection is done by the
                 // WPF timer via RefreshSuppressionState().
-                if (isV && _suppressCtrlV && (ctrlDown || DateTime.Now < _swallowVUntil))
+                if (isV && _suppressCtrlV)
                 {
                     if (keyDown && ctrlDown)
                     {
-                        _swallowVUntil = DateTime.Now.AddMilliseconds(1200);
+                        _swallowVKeyUpUntil = DateTime.Now.AddMilliseconds(1200);
                         _ = _onCtrlV();
+                        return (IntPtr)1; // Eat Ctrl+V keydown only.
                     }
 
-                    if (keyDown || keyUp)
+                    if (keyUp && DateTime.Now < _swallowVKeyUpUntil)
                     {
-                        return (IntPtr)1; // Eat the full V down/up sequence so the page cannot show "不能粘贴".
+                        _swallowVKeyUpUntil = DateTime.MinValue;
+                        return (IntPtr)1; // Eat the matching V keyup so the page cannot see Ctrl+V.
                     }
                 }
             }
@@ -105,32 +112,36 @@ namespace AI_desktop_tool
                 IntPtr root = GetAncestor(hwnd, GA_ROOT);
                 if (root != IntPtr.Zero) hwnd = root;
 
+                DateTime now = DateTime.Now;
+                if (hwnd == _cachedForegroundHwnd && now < _cachedForegroundUntil)
+                {
+                    return _cachedForegroundResult;
+                }
+
                 Win32Helper.GetWindowThreadProcessId(hwnd, out uint pid);
-                if (pid == 0 || pid == Environment.ProcessId) return false;
+                if (pid == 0 || pid == Environment.ProcessId)
+                {
+                    CacheForeground(hwnd, false, now);
+                    return false;
+                }
 
                 using Process p = Process.GetProcessById((int)pid);
                 string name = p.ProcessName ?? "";
-                string path = "";
-                try { path = p.MainModule?.FileName ?? ""; } catch { }
                 string title = GetWindowTextSafe(hwnd);
                 string cls = GetClassNameSafe(hwnd);
 
                 bool directExam =
                     name.Equals("CXExam", StringComparison.OrdinalIgnoreCase)
-                    || path.EndsWith(@"\CXExam.exe", StringComparison.OrdinalIgnoreCase)
                     || name.Contains("exam", StringComparison.OrdinalIgnoreCase)
                     || name.Contains("ctf", StringComparison.OrdinalIgnoreCase)
-                    || path.Contains("exam", StringComparison.OrdinalIgnoreCase)
-                    || path.Contains("ctf", StringComparison.OrdinalIgnoreCase)
-                    || path.Contains("考试端", StringComparison.OrdinalIgnoreCase)
-                    || path.Contains("CTF考试", StringComparison.OrdinalIgnoreCase)
                     || title.Contains("考试", StringComparison.OrdinalIgnoreCase)
                     || title.Contains("学习通", StringComparison.OrdinalIgnoreCase)
                     || title.Contains("CTF", StringComparison.OrdinalIgnoreCase);
 
                 if (directExam)
                 {
-                    _lastExamForegroundSeen = DateTime.Now;
+                    _lastExamForegroundSeen = now;
+                    CacheForeground(hwnd, true, now);
                     return true;
                 }
 
@@ -138,13 +149,15 @@ namespace AI_desktop_tool
                 // executable/title evidence is temporarily weak. If we have just seen the
                 // exam client and a CEF/Chromium window still owns focus, keep swallowing
                 // Ctrl+V so the page cannot regain its paste shortcut handler.
-                bool recentExam = (DateTime.Now - _lastExamForegroundSeen) < TimeSpan.FromMinutes(10);
+                bool recentExam = (now - _lastExamForegroundSeen) < TimeSpan.FromMinutes(10);
                 bool chromiumHost =
                     cls.Contains("Chrome_WidgetWin", StringComparison.OrdinalIgnoreCase)
                     || cls.Contains("CefBrowserWindow", StringComparison.OrdinalIgnoreCase)
                     || cls.Contains("Cef", StringComparison.OrdinalIgnoreCase);
 
-                return recentExam && chromiumHost && AnyExamClientProcessExists();
+                bool result = recentExam && chromiumHost && AnyExamClientProcessExists();
+                CacheForeground(hwnd, result, now);
+                return result;
             }
             catch
             {
@@ -152,29 +165,42 @@ namespace AI_desktop_tool
             }
         }
 
+        private static void CacheForeground(IntPtr hwnd, bool result, DateTime now)
+        {
+            _cachedForegroundHwnd = hwnd;
+            _cachedForegroundResult = result;
+            _cachedForegroundUntil = now.AddMilliseconds(750);
+        }
+
         private static bool AnyExamClientProcessExists()
         {
             try
             {
-                return Process.GetProcesses().Any(p =>
+                DateTime now = DateTime.Now;
+                if (now < _cachedAnyExamUntil) return _cachedAnyExamResult;
+
+                bool result = Process.GetProcesses().Any(p =>
                 {
                     try
                     {
-                        if (p.ProcessName.Equals("CXExam", StringComparison.OrdinalIgnoreCase)) return true;
-                        string path = p.MainModule?.FileName ?? "";
-                        return path.EndsWith(@"\CXExam.exe", StringComparison.OrdinalIgnoreCase)
-                               || p.ProcessName.Contains("exam", StringComparison.OrdinalIgnoreCase)
-                               || p.ProcessName.Contains("ctf", StringComparison.OrdinalIgnoreCase)
-                               || path.Contains("exam", StringComparison.OrdinalIgnoreCase)
-                               || path.Contains("ctf", StringComparison.OrdinalIgnoreCase)
-                               || path.Contains("考试端", StringComparison.OrdinalIgnoreCase)
-                               || path.Contains("CTF考试", StringComparison.OrdinalIgnoreCase);
+                        string processName = p.ProcessName ?? "";
+                        if (processName.Equals("CXExam", StringComparison.OrdinalIgnoreCase)) return true;
+                        if (processName.Contains("exam", StringComparison.OrdinalIgnoreCase)
+                            || processName.Contains("ctf", StringComparison.OrdinalIgnoreCase))
+                        {
+                            return true;
+                        }
+
+                        return false;
                     }
                     catch
                     {
                         return false;
                     }
                 });
+                _cachedAnyExamUntil = now.AddSeconds(5);
+                _cachedAnyExamResult = result;
+                return result;
             }
             catch
             {
