@@ -1,0 +1,4946 @@
+[
+  {
+    "id": "q-modern-history-7cef455dfd",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "中共一大确定，党成立以后的中心任务是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "组织工人阶级，领导工人运动"
+      },
+      {
+        "key": "B",
+        "text": "发动农民进行土地革命"
+      },
+      {
+        "key": "C",
+        "text": "开展武装斗争夺取政权"
+      },
+      {
+        "key": "D",
+        "text": "同国民党合作推动国民革命"
+      }
+    ],
+    "answerText": "A. 组织工人阶级，领导工人运动",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-041b9cdd5f",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "1915年9月，陈独秀在上海创办《青年杂志》。他在该刊发刊词中宣称，“盖改造青年之思想，辅导青年之修养，为本志之天职。批评时政，非其旨也。”此时陈独秀把主要注意力倾注于思想变革的原因是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "他认为批评时政不利于改造青年思想"
+      },
+      {
+        "key": "B",
+        "text": "他对资产阶级民主主义产生了怀疑"
+      },
+      {
+        "key": "C",
+        "text": "他对政治问题不感兴趣"
+      },
+      {
+        "key": "D",
+        "text": "他认定改造国民性是政治变革的前提"
+      }
+    ],
+    "answerText": "D. 他认定改造国民性是政治变革的前提",
+    "answerKeys": [
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-57cdd60ee8",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "早期新文化运动的性质是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "资产阶级民主主义思想文化运动"
+      },
+      {
+        "key": "B",
+        "text": "新民主主义思想文化运动"
+      },
+      {
+        "key": "C",
+        "text": "无产阶级思想文化运动"
+      },
+      {
+        "key": "D",
+        "text": "马克思主义思想文化运动"
+      }
+    ],
+    "answerText": "A. 资产阶级民主主义思想文化运动",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-ea51a0caf1",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "中国工人阶级开始以独立的姿态登上历史舞台是在(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "辛亥革命"
+      },
+      {
+        "key": "B",
+        "text": "新文化运动"
+      },
+      {
+        "key": "C",
+        "text": "五四运动"
+      },
+      {
+        "key": "D",
+        "text": "中国共产党成立"
+      }
+    ],
+    "answerText": "C. 五四运动",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-8739bcedee",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "陈独秀在1919年5月4日出版的《每周评论》上的一篇文章中又写道:“什么公理，什么永久和平，什么威尔逊总统十四条宣言，都成了一文不值的空话。”导致陈独秀认识发生变化的直接原因是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "日本对德宣战，出兵山东"
+      },
+      {
+        "key": "B",
+        "text": "中国在巴黎和会上外交失败"
+      },
+      {
+        "key": "C",
+        "text": "苏俄宣布废除从前同中国签订的一切不平等条约"
+      },
+      {
+        "key": "D",
+        "text": "美国不愿放弃在华种种特权"
+      }
+    ],
+    "answerText": "B. 中国在巴黎和会上外交失败",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-36f3a7bafd",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "第一次国共合作实现的标志是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "1921年底，孙中山会见共产国际代表马林"
+      },
+      {
+        "key": "B",
+        "text": "1922年，陈独秀等共产党人参加改组国民党会议"
+      },
+      {
+        "key": "C",
+        "text": "1923年，中共三大决定共产党员以个人身份加入国民党"
+      },
+      {
+        "key": "D",
+        "text": "1924年，中国国民党一大召开"
+      }
+    ],
+    "answerText": "D. 1924年，中国国民党一大召开",
+    "answerKeys": [
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-1bc11b383b",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "1924年1月，中国国民党第一次全国代表大会在广州召开，大会通过的宣言对三民主义作出了新的解释。新三民主义成为第一次国共合作的政治基础，究其原因，是由于新三民主义的政纲(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "同中国共产党在民主革命阶段的纲领基本一致"
+      },
+      {
+        "key": "B",
+        "text": "把斗争的矛头直接指向北洋军阀"
+      },
+      {
+        "key": "C",
+        "text": "体现了联俄、联共、扶助农工三大革命政策"
+      },
+      {
+        "key": "D",
+        "text": "把民主主义概括为“平均地权”"
+      }
+    ],
+    "answerText": "A. 同中国共产党在民主革命阶段的纲领基本一致",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-8747ac055b",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "大革命给中国共产党的最深刻的经验教训是必须(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "警惕统一战线内部的野心家"
+      },
+      {
+        "key": "B",
+        "text": "和农民结成巩固的工农联盟"
+      },
+      {
+        "key": "C",
+        "text": "提出能团结多数的革命口号"
+      },
+      {
+        "key": "D",
+        "text": "掌握革命领导权和革命武装"
+      }
+    ],
+    "answerText": "D. 掌握革命领导权和革命武装",
+    "answerKeys": [
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-fb6ec51e3c",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "1927年大革命失败后，党的工作重心开始转向农村，在农村建立革命根据地。农村革命根据地能够在中国长期存在和发展的根本原因是(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "中国是一个政治、经济、文化发展极不平衡的半殖民地半封建的大国"
+      },
+      {
+        "key": "B",
+        "text": "良好的群众基础和革命形势的继续向前发展"
+      },
+      {
+        "key": "C",
+        "text": "相当力量正式红军的存在"
+      },
+      {
+        "key": "D",
+        "text": "党的领导及其正确的政策"
+      }
+    ],
+    "answerText": "A. 中国是一个政治、经济、文化发展极不平衡的半殖民地半封建的大国",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-c3db4a02d8",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "结束陈独秀右倾机会主义错误的会议是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "八七会议"
+      },
+      {
+        "key": "B",
+        "text": "中共六大"
+      },
+      {
+        "key": "C",
+        "text": "文家市会议"
+      },
+      {
+        "key": "D",
+        "text": "古田会议"
+      }
+    ],
+    "answerText": "A. 八七会议",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-07288062fc",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "农村包围城市、武装夺取政权这条革命新道路的开辟，是中国共产党集体智慧的结晶，而其中杰出的代表是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "毛泽东"
+      },
+      {
+        "key": "B",
+        "text": "王明"
+      },
+      {
+        "key": "C",
+        "text": "陈独秀"
+      },
+      {
+        "key": "D",
+        "text": "博古"
+      }
+    ],
+    "answerText": "A. 毛泽东",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-0d956d141c",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "中国共产党在领导人民革命的过程中，积累了丰富的经验，锻造出了有效的克敌制胜的武器，武装斗争就是中国共产党在中国革命中战胜敌人的重要法宝之一，其实质是(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "无产阶级领导的反帝国主义战争"
+      },
+      {
+        "key": "B",
+        "text": "资产阶级领导的反封建战争"
+      },
+      {
+        "key": "C",
+        "text": "工农联合的反军阀战争"
+      },
+      {
+        "key": "D",
+        "text": "工人阶级领导的农民战争"
+      }
+    ],
+    "answerText": "D. 工人阶级领导的农民战争",
+    "answerKeys": [
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-2696d8814e",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "蒋介石、汪精卫先后叛变革命，实行清党分共政策后，国民党是(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "代表资产阶级与小资产阶级利益的政党"
+      },
+      {
+        "key": "B",
+        "text": "工人、农民、城市小资产阶级和民族资产阶级的革命联盟"
+      },
+      {
+        "key": "C",
+        "text": "由代表地主阶级、买办性的大资产阶级利益的反动集团控制的政党"
+      },
+      {
+        "key": "D",
+        "text": "民族资产阶级的政党"
+      }
+    ],
+    "answerText": "C. 由代表地主阶级、买办性的大资产阶级利益的反动集团控制的政党",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-b39a6e86f1",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "1929年4月制定的《兴国土地法》对《井冈山土地法》的一个原则性纠正是(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "改土地归工农民主政府所有为归农民自己所有"
+      },
+      {
+        "key": "B",
+        "text": "改没收一切土地为没收一切公共土地及地主阶级的土地"
+      },
+      {
+        "key": "C",
+        "text": "改按人口平分土地为按劳动力分配土地"
+      },
+      {
+        "key": "D",
+        "text": "改“抽多补少”为“抽肥补瘦”"
+      }
+    ],
+    "answerText": "B. 改没收一切土地为没收一切公共土地及地主阶级的土地",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-837c75792d",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "毛泽东提出“没有调查，没有发言权“的重要思想的文章是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "《实践论》"
+      },
+      {
+        "key": "B",
+        "text": "《井冈山的斗争》"
+      },
+      {
+        "key": "C",
+        "text": "《反对本本主义》"
+      },
+      {
+        "key": "D",
+        "text": "《新民主主义论》"
+      }
+    ],
+    "answerText": "C. 《反对本本主义》",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-e43e7f0355",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "在红军长征途中，中共中央同分裂中央、分裂红军的严重错误进行了坚决斗争的红四方面军领导人是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "王明"
+      },
+      {
+        "key": "B",
+        "text": "李德"
+      },
+      {
+        "key": "C",
+        "text": "张国焘"
+      },
+      {
+        "key": "D",
+        "text": "博古"
+      }
+    ],
+    "answerText": "C. 张国焘",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-d1fc84f35f",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "面对日本的大举侵略，国民党政府一再退让，在1931年7月就已经提出“攘外必先安内”方针的人是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "汪精卫"
+      },
+      {
+        "key": "B",
+        "text": "蒋介石"
+      },
+      {
+        "key": "C",
+        "text": "张治中"
+      },
+      {
+        "key": "D",
+        "text": "李宗仁"
+      }
+    ],
+    "answerText": "B. 蒋介石",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-8d9daa29d7",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "1932年，日本军国主义侵略势力和中国封建复辟残余势力相结合而催生的一个怪胎是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "伪“满洲国”"
+      },
+      {
+        "key": "B",
+        "text": "“中华民国国民政府”"
+      },
+      {
+        "key": "C",
+        "text": "南京国民党政府"
+      },
+      {
+        "key": "D",
+        "text": "重庆国民党政府"
+      }
+    ],
+    "answerText": "A. 伪“满洲国”",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-ea50ea61aa",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "1932年4月15 日，宣布对日作战的政府是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "中华苏维埃共和国临时中央政府"
+      },
+      {
+        "key": "B",
+        "text": "国民党蒋介石政府"
+      },
+      {
+        "key": "C",
+        "text": "国民党汪精卫政府"
+      },
+      {
+        "key": "D",
+        "text": "北洋军阀政府"
+      }
+    ],
+    "answerText": "A. 中华苏维埃共和国临时中央政府",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-dd6214087f",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "1935年12月，中国共产党确定抗日民族统一战线政策的会议是(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "遵义会议"
+      },
+      {
+        "key": "B",
+        "text": "瓦窑堡会议"
+      },
+      {
+        "key": "C",
+        "text": "洛川会议"
+      },
+      {
+        "key": "D",
+        "text": "晋绥干部会议"
+      }
+    ],
+    "answerText": "B. 瓦窑堡会议",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-03cf71c7ea",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "1937年8月，中国共产党在陕北洛川召开的政治局扩大会议上制定了(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "抗日救国十大纲领"
+      },
+      {
+        "key": "B",
+        "text": "抗日民族统一战线的策略总方针"
+      },
+      {
+        "key": "C",
+        "text": "中国人民对日作战的基本纲领"
+      },
+      {
+        "key": "D",
+        "text": "持久抗战的总方针"
+      }
+    ],
+    "answerText": "A. 抗日救国十大纲领",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-787bae3761",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "中国共产党在抗日战争时期实行的土地政策是(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "没收地主土地为农民所有"
+      },
+      {
+        "key": "B",
+        "text": "没收一切土地归国有"
+      },
+      {
+        "key": "C",
+        "text": "减租减息"
+      },
+      {
+        "key": "D",
+        "text": "没收一切公共土地与地主土地"
+      }
+    ],
+    "answerText": "C. 减租减息",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-7f15216f00",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "毛泽东思想是马克思主义中国化的第一大理论成果，是在中国革命和建设的实践中逐步形成和发展起来的。在土地革命战争后期和抗日战争时期，毛泽东思想得到多方面展开而达到成熟，其标志是(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "新民主主义理论的系统阐明"
+      },
+      {
+        "key": "B",
+        "text": "农村包围城市，武装夺取政权理论的科学概括"
+      },
+      {
+        "key": "C",
+        "text": "人民民主专政理论的完整论述"
+      },
+      {
+        "key": "D",
+        "text": "思想政治工作和文化工作理论的系统提出"
+      }
+    ],
+    "answerText": "A. 新民主主义理论的系统阐明",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-67ed9aadac",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "“墙头芦苇，头重脚轻跟递签;山间竹笋，嘴尖皮薄腹中空。”毛泽东在延安整风运动期间用这副对联形象地讽刺了(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "主观主义的学风"
+      },
+      {
+        "key": "B",
+        "text": "宗派主义的党风"
+      },
+      {
+        "key": "C",
+        "text": "党八股的文风"
+      },
+      {
+        "key": "D",
+        "text": "官僚主义的作风"
+      }
+    ],
+    "answerText": "A. 主观主义的学风",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-ecfebc1c3b",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "单选题 1、经过重庆谈判中，国共双方签署了(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "停战协定"
+      },
+      {
+        "key": "B",
+        "text": "五项协议"
+      },
+      {
+        "key": "C",
+        "text": "双十协定"
+      },
+      {
+        "key": "D",
+        "text": "宪法草案"
+      }
+    ],
+    "answerText": "C. 双十协定",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-7c3478e810",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "1946年6月-1947年6 月，战争主要在解放区进行，人民军队处于战略(        )阶段。",
+    "options": [
+      {
+        "key": "A",
+        "text": "进攻"
+      },
+      {
+        "key": "B",
+        "text": "防御"
+      },
+      {
+        "key": "C",
+        "text": "防御加进攻"
+      },
+      {
+        "key": "D",
+        "text": "退却 答案:"
+      }
+    ],
+    "answerText": "B. 防御",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-47df8624fb",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "为应对抗战结束后的局势变化，中共中央在1949年9月19日正式确定的战略方针是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "向北发展，向南防御"
+      },
+      {
+        "key": "B",
+        "text": "向南发展，向北防御"
+      },
+      {
+        "key": "C",
+        "text": "向西发展，向东防御"
+      },
+      {
+        "key": "D",
+        "text": "向东发展，向西防御"
+      }
+    ],
+    "answerText": "A. 向北发展，向南防御",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-9626a77f22",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "在1947年10月10日，中国人民解放军总部发表宣言，提出(        )口号，极大鼓舞了解放军全体指战员和全国人民的斗志。",
+    "options": [
+      {
+        "key": "A",
+        "text": "打倒蒋介石，解放全中国"
+      },
+      {
+        "key": "B",
+        "text": "打过长江去，活捉蒋介石"
+      },
+      {
+        "key": "C",
+        "text": "打过黄河去，解放全中国"
+      },
+      {
+        "key": "D",
+        "text": "打下大东北，活捉卫立煌"
+      }
+    ],
+    "answerText": "A. 打倒蒋介石，解放全中国",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-14930dd614",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "1946年全面内战爆发后，毛泽东提出的著名论断是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "须知政权是从枪杆子中取得的"
+      },
+      {
+        "key": "B",
+        "text": "星星之火可以燎原"
+      },
+      {
+        "key": "C",
+        "text": "兵民是胜利之本"
+      },
+      {
+        "key": "D",
+        "text": "一切反动派都是纸老虎"
+      }
+    ],
+    "answerText": "D. 一切反动派都是纸老虎",
+    "answerKeys": [
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-5645c4ae03",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "第二次世界大战结束后，美国的对华政策是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "保持中立"
+      },
+      {
+        "key": "B",
+        "text": "扶蒋反共"
+      },
+      {
+        "key": "C",
+        "text": "武力干涉"
+      },
+      {
+        "key": "D",
+        "text": "遏制中国"
+      }
+    ],
+    "answerText": "B. 扶蒋反共",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-6921ba85d4",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "标志着第三条道路幻灭的事件是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "五二O惨案"
+      },
+      {
+        "key": "B",
+        "text": "国民党发动全面内战"
+      },
+      {
+        "key": "C",
+        "text": "国民党当局宣布民盟“为非法团体”"
+      },
+      {
+        "key": "D",
+        "text": "下关惨案"
+      }
+    ],
+    "answerText": "C. 国民党当局宣布民盟“为非法团体”",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-66113ee24e",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "全面内战爆发的标志是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "进攻中原解放区"
+      },
+      {
+        "key": "B",
+        "text": "“关内小打关外大打”"
+      },
+      {
+        "key": "C",
+        "text": "进攻延安"
+      },
+      {
+        "key": "D",
+        "text": "进攻张家口"
+      }
+    ],
+    "answerText": "A. 进攻中原解放区",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-76ecb394c1",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "中国进入社会主义社会的最主要的标志是:(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "社会主义改造的基本完成"
+      },
+      {
+        "key": "B",
+        "text": "新中国的成立"
+      },
+      {
+        "key": "C",
+        "text": "第一部宪法的颁布"
+      },
+      {
+        "key": "D",
+        "text": "全国人民第一次代表大会的召开"
+      }
+    ],
+    "answerText": "A. 社会主义改造的基本完成",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-d6d5dcbe70",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "党在过渡时期总路线最显著的特点是:(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "实现工业和农业、手工业和资本主义工商业的社会主义改造"
+      },
+      {
+        "key": "B",
+        "text": "实现生产关系的社会主义改造"
+      },
+      {
+        "key": "C",
+        "text": "实现工业化"
+      },
+      {
+        "key": "D",
+        "text": "社会主义建设与改造同时并举"
+      }
+    ],
+    "answerText": "D. 社会主义建设与改造同时并举",
+    "answerKeys": [
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-c0db14a80a",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "对农业进行社会主义改造的途径是:(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "公私合营"
+      },
+      {
+        "key": "B",
+        "text": "合作化"
+      },
+      {
+        "key": "C",
+        "text": "国家资本主义"
+      },
+      {
+        "key": "D",
+        "text": "和平赎买"
+      }
+    ],
+    "answerText": "B. 合作化",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-7a2a3a57d8",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "中国民族资产阶级在社会主义改造时期仍然具有两面性，其表现为:(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "革命性和妥协性"
+      },
+      {
+        "key": "B",
+        "text": "主动性和被动性"
+      },
+      {
+        "key": "C",
+        "text": "剥削工人的一面和接受改造的一面"
+      },
+      {
+        "key": "D",
+        "text": "进步性和顽固性"
+      }
+    ],
+    "answerText": "C. 剥削工人的一面和接受改造的一面",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-4b29fd7e40",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "1956年底社会主义制度在我国基本建立，这一结论的主要依据是:(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "第一届全国人民代表大会召开"
+      },
+      {
+        "key": "B",
+        "text": "社会主义政治制度确立"
+      },
+      {
+        "key": "C",
+        "text": "第一个五年计划基本完成"
+      },
+      {
+        "key": "D",
+        "text": "公有制经济占主导地位"
+      }
+    ],
+    "answerText": "D. 公有制经济占主导地位",
+    "answerKeys": [
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-69a8afa816",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "毛泽东在《论十大关系》中提出的中国社会主义建设的基本方针是:(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "不要四面出击"
+      },
+      {
+        "key": "B",
+        "text": "调整、巩固、充实、提高"
+      },
+      {
+        "key": "C",
+        "text": "积极引导，稳步前进"
+      },
+      {
+        "key": "D",
+        "text": "调动一切积极因素为社会主义事业服务"
+      }
+    ],
+    "answerText": "D. 调动一切积极因素为社会主义事业服务",
+    "answerKeys": [
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-41cd0a9a7b",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "标志着中国共产党在实践中开始探索本国建设社会主义道路的文献是:(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "毛泽东在七届二中全会上的报告"
+      },
+      {
+        "key": "B",
+        "text": "中共八大《关于政治报告的决议》"
+      },
+      {
+        "key": "C",
+        "text": "《论十大关系》"
+      },
+      {
+        "key": "D",
+        "text": "《关于正确处理人民内部矛盾的问题》"
+      }
+    ],
+    "answerText": "C. 《论十大关系》",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-052382f628",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "客观上宣告了“文化大革命”的理论和实践失败的是:(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "中共九届二中全会的召开"
+      },
+      {
+        "key": "B",
+        "text": "各省市自治区革命委员会的成立"
+      },
+      {
+        "key": "C",
+        "text": "林彪反革命集团阴谋夺取最高权力、策动反革命武装政变事件的发生"
+      },
+      {
+        "key": "D",
+        "text": "江青反革命集团加紧进行阴谋夺取最高权力的活动"
+      }
+    ],
+    "answerText": "C. 林彪反革命集团阴谋夺取最高权力、策动反革命武装政变事件的发生",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-e715d0c849",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "1978年5月11日，《光明日报》发表特约评论员文章《实践是检验真理的唯一标准》，引发了关于真理标准问题的大讨论。这篇文章最初发表在(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "《人民日报》"
+      },
+      {
+        "key": "B",
+        "text": "《红旗》杂志"
+      },
+      {
+        "key": "C",
+        "text": "中央党校内部刊物《理论动态》"
+      },
+      {
+        "key": "D",
+        "text": "《解放军报》"
+      }
+    ],
+    "answerText": "C. 中央党校内部刊物《理论动态》",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-5e306f011c",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "1979年1月，邓小平访问美国，这是中华人民共和国成立后中国领导人第一次访问美国。这次访问(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "标志着中美正式建立外交关系"
+      },
+      {
+        "key": "B",
+        "text": "促成了中美签署《上海公报》"
+      },
+      {
+        "key": "C",
+        "text": "推动了中美关系正常化进程"
+      },
+      {
+        "key": "D",
+        "text": "实现了中美两国领导人首次互访"
+      }
+    ],
+    "answerText": "A. 标志着中美正式建立外交关系",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-76bd620615",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "1980年8月，五届全国人大常委会第十五次会议批准在深圳、珠海、汕头、(        )设置经济特区。",
+    "options": [
+      {
+        "key": "A",
+        "text": "厦门"
+      },
+      {
+        "key": "B",
+        "text": "福州"
+      },
+      {
+        "key": "C",
+        "text": "广州"
+      },
+      {
+        "key": "D",
+        "text": "汕尾"
+      }
+    ],
+    "answerText": "A. 厦门",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-d0bacb4163",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "1982年9月，中国共产党第十二次全国代表大会提出，从1981年到20世纪末我国经济建设总的奋斗目标是，在不断提高经济效益的前提下，使全国工农业年总产值(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "翻一番"
+      },
+      {
+        "key": "B",
+        "text": "翻两番"
+      },
+      {
+        "key": "C",
+        "text": "增长百分之百"
+      },
+      {
+        "key": "D",
+        "text": "增长百分之二百"
+      }
+    ],
+    "answerText": "B. 翻两番",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-5578767bbf",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "党的十二大明确提出，我国社会主义现代化建设要把(        )作为首要任务。",
+    "options": [
+      {
+        "key": "A",
+        "text": "经济建设"
+      },
+      {
+        "key": "B",
+        "text": "政治建设"
+      },
+      {
+        "key": "C",
+        "text": "文化建设"
+      },
+      {
+        "key": "D",
+        "text": "社会建设"
+      }
+    ],
+    "answerText": "A. 经济建设",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-59ec7104f3",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "1984年10月，党的十二届三中全会通过的《中共中央关于经济体制改革的决定》，明确提出我国社会主义经济是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "有计划的商品经济"
+      },
+      {
+        "key": "B",
+        "text": "计划经济"
+      },
+      {
+        "key": "C",
+        "text": "完全的市场经济"
+      },
+      {
+        "key": "D",
+        "text": "计划与市场相结合的经济"
+      }
+    ],
+    "answerText": "A. 有计划的商品经济",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-112edd5c7f",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "1987年10月，中国共产党第十三次全国代表大会比较系统地阐述了(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "社会主义市场经济理论"
+      },
+      {
+        "key": "B",
+        "text": "社会主义初级阶段理论"
+      },
+      {
+        "key": "C",
+        "text": "社会主义本质理论"
+      },
+      {
+        "key": "D",
+        "text": "社会主义民主法治理论"
+      }
+    ],
+    "answerText": "B. 社会主义初级阶段理论",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-bc50c6d51f",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "党的十二届三中全会通过《中共中央关于经济体制改革的决定》，明确指出改革的基本任务是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "建立社会主义市场经济体制"
+      },
+      {
+        "key": "B",
+        "text": "发展社会主义商品经济"
+      },
+      {
+        "key": "C",
+        "text": "建立充满生机活力的社会主义经济体制"
+      },
+      {
+        "key": "D",
+        "text": "实现社会主义现代化"
+      }
+    ],
+    "answerText": "C. 建立充满生机活力的社会主义经济体制",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-46419cb571",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "中国特色社会主义进入新时代的标志是(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "党的十八大召开"
+      },
+      {
+        "key": "B",
+        "text": "党的十九大召开"
+      },
+      {
+        "key": "C",
+        "text": "新中国成立70周年"
+      },
+      {
+        "key": "D",
+        "text": "党的二十大召开"
+      }
+    ],
+    "answerText": "A. 党的十八大召开",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-6474693b95",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "新时代我国社会主要矛盾是(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "人民日益增长的物质文化需要同落后的社会生产之间的矛盾"
+      },
+      {
+        "key": "B",
+        "text": "人民日益增长的美好生活需要和不平衡不充分的发展之间的矛盾"
+      },
+      {
+        "key": "C",
+        "text": "无产阶级与资产阶级的矛盾"
+      },
+      {
+        "key": "D",
+        "text": "发展与安全的矛盾"
+      }
+    ],
+    "answerText": "B. 人民日益增长的美好生活需要和不平衡不充分的发展之间的矛盾",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-27058b2329",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "党的十九大把(        )确立为党必须长期坚持的指导思想并写入党章。",
+    "options": [
+      {
+        "key": "A",
+        "text": "科学发展观"
+      },
+      {
+        "key": "B",
+        "text": "习近平新时代中国特色社会主义思想"
+      },
+      {
+        "key": "C",
+        "text": "三个代表重要思想"
+      },
+      {
+        "key": "D",
+        "text": "邓小平理论"
+      }
+    ],
+    "answerText": "B. 习近平新时代中国特色社会主义思想",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-afc7a582b4",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "党的十八大以来，我们坚持把(        )作为第一要务。",
+    "options": [
+      {
+        "key": "A",
+        "text": "安全"
+      },
+      {
+        "key": "B",
+        "text": "改革"
+      },
+      {
+        "key": "C",
+        "text": "发展"
+      },
+      {
+        "key": "D",
+        "text": "稳定"
+      }
+    ],
+    "answerText": "C. 发展",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-d407f8b50c",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "我国脱贫攻坚战取得全面胜利是在(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "2020年"
+      },
+      {
+        "key": "B",
+        "text": "2021年"
+      },
+      {
+        "key": "C",
+        "text": "2022年"
+      },
+      {
+        "key": "D",
+        "text": "2019年"
+      }
+    ],
+    "answerText": "B. 2021年",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-0d8e80ef6d",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "中国特色社会主义最本质的特征是(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "人民当家作主"
+      },
+      {
+        "key": "B",
+        "text": "依法治国"
+      },
+      {
+        "key": "C",
+        "text": "中国共产党领导"
+      },
+      {
+        "key": "D",
+        "text": "共同富裕"
+      }
+    ],
+    "answerText": "C. 中国共产党领导",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-13cf655c9f",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "新发展理念是指(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "改革、稳定、协调、绿色、共享"
+      },
+      {
+        "key": "B",
+        "text": "创新、协调、绿色、开放、共享"
+      },
+      {
+        "key": "C",
+        "text": "创新、改革、开放、公平、正义"
+      },
+      {
+        "key": "D",
+        "text": "高质量、高效率、可持续、惠民生"
+      }
+    ],
+    "answerText": "B. 创新、协调、绿色、开放、共享",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-26717a61ae",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "党的二十大明确提出，以(        )全面推进中华民族伟大复兴。",
+    "options": [
+      {
+        "key": "A",
+        "text": "全面深化改革"
+      },
+      {
+        "key": "B",
+        "text": "中国式现代化"
+      },
+      {
+        "key": "C",
+        "text": "高质量发展"
+      },
+      {
+        "key": "D",
+        "text": "新发展格局"
+      }
+    ],
+    "answerText": "B. 中国式现代化",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-dc64c8a6a6",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "中国特色社会主义事业总体布局是(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "四个全面"
+      },
+      {
+        "key": "B",
+        "text": "五位一体"
+      },
+      {
+        "key": "C",
+        "text": "四个自信"
+      },
+      {
+        "key": "D",
+        "text": "两个维护"
+      }
+    ],
+    "answerText": "B. 五位一体",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-da92c0d599",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "中国特色社会主义事业战略布局是(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "五位一体"
+      },
+      {
+        "key": "B",
+        "text": "四个全面"
+      },
+      {
+        "key": "C",
+        "text": "新发展理念"
+      },
+      {
+        "key": "D",
+        "text": "构建人类命运共同体"
+      }
+    ],
+    "answerText": "B. 四个全面",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-d68bb812df",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "1915年9月，陈独秀在上海创办《青年杂志》(后改名《新青年》)，吹响了新文化运动的号角。新文化运动高举民主和科学两面大旗，向封建主义思想文化发起了前所未有的猛烈冲击。新文化运动的历史意义表现在它(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "是中国历史上一次前所未有的启蒙运动"
+      },
+      {
+        "key": "B",
+        "text": "在社会上掀起了一股思想解放的潮流"
+      },
+      {
+        "key": "C",
+        "text": "为马克思主义在中国的传播创造了有利条件"
+      },
+      {
+        "key": "D",
+        "text": "彻底否定了孔学的历史作用"
+      }
+    ],
+    "answerText": "A. 是中国历史上一次前所未有的启蒙运动；B. 在社会上掀起了一股思想解放的潮流；C. 为马克思主义在中国的传播创造了有利条件",
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-e9cb2f3745",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "1925至1927年的大革命，规模宏伟，内涵丰富。与辛亥革命相比较，其不同点在于(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "它的主要斗争形式是武装斗争"
+      },
+      {
+        "key": "B",
+        "text": "它广泛而深刻地发动了工农群众"
+      },
+      {
+        "key": "C",
+        "text": "它的革命对象是帝国主义和封建军阀"
+      },
+      {
+        "key": "D",
+        "text": "它是在以国共合作为基础的统一战线的组织形式下进行的"
+      }
+    ],
+    "answerText": "B. 它广泛而深刻地发动了工农群众；C. 它的革命对象是帝国主义和封建军阀；D. 它是在以国共合作为基础的统一战线的组织形式下进行的",
+    "answerKeys": [
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-cbff3eb0f4",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "马克思主义的传播，并没有中断或取消五四运动以前开始的反封建的思想启蒙工作，具体表现在中国先进分子(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "继承了五四运动的科学和民主的精神，并在马克思主义的基础上加以改造，从而赋予它们以新的涵义"
+      },
+      {
+        "key": "B",
+        "text": "以唯物史观为武器，从反对封建思想入手，进而提出必须反对产生封建思想的社会制度"
+      },
+      {
+        "key": "C",
+        "text": "把反封建思想的斗争的立足点，从争取个人的个性解放，扩展到争取人民群众的社会解放的高度"
+      },
+      {
+        "key": "D",
+        "text": "把反封建的斗争方式，从少数人进行的思想批判，逐步地发展为人民群众的革命实践"
+      }
+    ],
+    "answerText": "A. 继承了五四运动的科学和民主的精神，并在马克思主义的基础上加以改造，从而赋予它们以新的涵义；B. 以唯物史观为武器，从反对封建思想入手，进而提出必须反对产生封建思想的社会制度；C. 把反封建思想的斗争的立足点，从争取个人的个性解放，扩展到争取人民群众的社会解放的高度；D. 把反封建的斗争方式，从少数人进行的思想批判，逐步地发展为人民群众的革命实践",
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-c8bb5e735e",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "大革命失败的原因包括(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "反革命力量的强大、资产阶级发生严重的动摇、统一战线出现剧烈的分化"
+      },
+      {
+        "key": "B",
+        "text": "共产国际及其代表的错误指导"
+      },
+      {
+        "key": "C",
+        "text": "蒋介石集团和汪精卫集团先后叛变革命"
+      },
+      {
+        "key": "D",
+        "text": "中国共产党犯了以陈独秀为代表的右倾机会主义错误"
+      }
+    ],
+    "answerText": "A. 反革命力量的强大、资产阶级发生严重的动摇、统一战线出现剧烈的分化；B. 共产国际及其代表的错误指导；C. 蒋介石集团和汪精卫集团先后叛变革命；D. 中国共产党犯了以陈独秀为代表的右倾机会主义错误",
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-181fc31e44",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "1927年10月，毛泽东率领湘赣边界秋收起义的工农革命军，开始创建以宁冈为中心的井冈山农村革命根据地，走农村包围城市、武装夺取政权的革命新道路。毛泽东确定在井冈山建立根据地，是因为这个地区(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "有较好的群众基础"
+      },
+      {
+        "key": "B",
+        "text": "地势险要且易守难攻"
+      },
+      {
+        "key": "C",
+        "text": "易于部队筹款筹粮"
+      },
+      {
+        "key": "D",
+        "text": "敌人的统治力量比较薄弱"
+      }
+    ],
+    "answerText": "A. 有较好的群众基础；B. 地势险要且易守难攻；C. 易于部队筹款筹粮；D. 敌人的统治力量比较薄弱",
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-296e0e02c3",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "1931年1月至1935年1月，以王明为代表的“左”倾错误给中国革命带来严重危害，其主要错误有(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "排斥和打击中间势力"
+      },
+      {
+        "key": "B",
+        "text": "将反帝反封建与反资产阶级并列"
+      },
+      {
+        "key": "C",
+        "text": "集中力量攻打大城市"
+      },
+      {
+        "key": "D",
+        "text": "主张“一切经过统一战线”"
+      }
+    ],
+    "answerText": "A. 排斥和打击中间势力；B. 将反帝反封建与反资产阶级并列；C. 集中力量攻打大城市",
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-18bbd9a775",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "标志着中国共产党进入创造红军的新时期的起义有(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "秋收起义"
+      },
+      {
+        "key": "B",
+        "text": "广州起义"
+      },
+      {
+        "key": "C",
+        "text": "百色起义"
+      },
+      {
+        "key": "D",
+        "text": "南昌起义"
+      }
+    ],
+    "answerText": "A. 秋收起义；B. 广州起义；D. 南昌起义",
+    "answerKeys": [
+      "A",
+      "B",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-3cfaae0113",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "毛泽东和邓子恢等一起制定了土地革命中的阶级路线和土地分配方法，包括(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "坚定地依靠贫农、雇农，联合中农，限制富农，保护中小工商业者，消灭地主阶级"
+      },
+      {
+        "key": "B",
+        "text": "以乡为单位，按人口平分土地"
+      },
+      {
+        "key": "C",
+        "text": "在原耕地的基础上，实行抽多补少、抽肥补瘦"
+      },
+      {
+        "key": "D",
+        "text": "减租减息"
+      }
+    ],
+    "answerText": "A. 坚定地依靠贫农、雇农，联合中农，限制富农，保护中小工商业者，消灭地主阶级；B. 以乡为单位，按人口平分土地；C. 在原耕地的基础上，实行抽多补少、抽肥补瘦",
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-d922a88965",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "以国共两党合作为基础的抗日民族统一战线正式形成的标志为(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "西安事变的和平解决"
+      },
+      {
+        "key": "B",
+        "text": "国民党中央通讯社正式发表《中共中央为公布国共合作宣言》"
+      },
+      {
+        "key": "C",
+        "text": "蒋介石在庐山发表谈话承认中国共产党的合法地位"
+      },
+      {
+        "key": "D",
+        "text": "国民党五届三中全会"
+      }
+    ],
+    "answerText": "B. 国民党中央通讯社正式发表《中共中央为公布国共合作宣言》；C. 蒋介石在庐山发表谈话承认中国共产党的合法地位",
+    "answerKeys": [
+      "B",
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-19c8f85082",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "1941年1月，震惊中外的皖南事变爆发后，《新华日报》刊出周恩来的题词手迹:“为江南死国难者志哀!”“千古奇冤，江南一叶;同室操戈，相煎何急?!”大敌当前，中国共产党以民族利益为重，坚持正确的方针和原则，避免了抗日民族统一战线的破裂。这些方针和原则包括(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "又联合又斗争"
+      },
+      {
+        "key": "B",
+        "text": "有理、有利、有节"
+      },
+      {
+        "key": "C",
+        "text": "针锋相对，寸土必争"
+      },
+      {
+        "key": "D",
+        "text": "发展进步势力，争取中间势力，孤立顽固势力"
+      }
+    ],
+    "answerText": "A. 又联合又斗争；B. 有理、有利、有节；D. 发展进步势力，争取中间势力，孤立顽固势力",
+    "answerKeys": [
+      "A",
+      "B",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-d998947e7d",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "抗日民主根据地是认真贯彻和实现中国共产党全面抗战路线、坚持抗战和争取胜利的坚强阵地。中国共产党高度重视抗日民主根据地的政权建设，其主要举措有(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "在少数民族聚居地区试行民族区域自治"
+      },
+      {
+        "key": "B",
+        "text": "各级抗日民主政权机构领导人通过人民选举产生"
+      },
+      {
+        "key": "C",
+        "text": "实行工农兵代表大会制度"
+      },
+      {
+        "key": "D",
+        "text": "抗日民主政府在工作人员分配上实行“三三制”原则"
+      }
+    ],
+    "answerText": "A. 在少数民族聚居地区试行民族区域自治；B. 各级抗日民主政权机构领导人通过人民选举产生；D. 抗日民主政府在工作人员分配上实行“三三制”原则",
+    "answerKeys": [
+      "A",
+      "B",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-859c8eba94",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "钓鱼岛及其附属岛屿是中国领土不可分割的一部分。中国最早发现、命名、利用和管辖钓鱼岛。1895年，清朝在甲午战争中战败，被迫与日本签署不平等的《马关条约》，割让“台湾全岛及所有附属各岛屿”。钓鱼岛等作为台湾“附属岛屿” 一并被割让给日本。1941年12月，中国政府正式对日宣战，宣布废除中日之间的一切条约。日本投降后，依据有关国际文件规定，钓鱼岛作为台湾的附属岛屿应与台湾一并归还中国。这些国际文件是(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "《波茨坦公告》"
+      },
+      {
+        "key": "B",
+        "text": "《开罗宣言》"
+      },
+      {
+        "key": "C",
+        "text": "《日本投降书》"
+      },
+      {
+        "key": "D",
+        "text": "《德黑兰宣言》"
+      }
+    ],
+    "answerText": "A. 《波茨坦公告》；B. 《开罗宣言》；C. 《日本投降书》",
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-d242ba81f7",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "抗日战争是近代以来中华民族反抗外敌入侵第一次取得完全胜利的民族解放战争。中国赢得抗日战争胜利的主要原因是(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "中国的国力空前强大"
+      },
+      {
+        "key": "B",
+        "text": "中国共产党发挥了中流砥柱的作用"
+      },
+      {
+        "key": "C",
+        "text": "得到国际反法西斯力量的同情和支持"
+      },
+      {
+        "key": "D",
+        "text": "中国实现了空前的民族觉醒和民族团结"
+      }
+    ],
+    "answerText": "B. 中国共产党发挥了中流砥柱的作用；C. 得到国际反法西斯力量的同情和支持；D. 中国实现了空前的民族觉醒和民族团结",
+    "answerKeys": [
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-924f2a5d88",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "淮海战役总前委成员中，除担任书记的邓小平外，还包括(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "刘伯承"
+      },
+      {
+        "key": "A",
+        "text": "陈毅"
+      },
+      {
+        "key": "B",
+        "text": "粟裕"
+      },
+      {
+        "key": "C",
+        "text": "谭震林"
+      }
+    ],
+    "answerText": "A. 陈毅；B. 粟裕；C. 谭震林",
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-7f5b5aed3b",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "中国新民主主义革命胜利的主要原因是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "中国共产党的正确领导"
+      },
+      {
+        "key": "B",
+        "text": "广大人民群众的广泛参加和大力支持"
+      },
+      {
+        "key": "C",
+        "text": "反革命势力的分化瓦解"
+      },
+      {
+        "key": "D",
+        "text": "国际无产阶级和人民群众的支持"
+      }
+    ],
+    "answerText": "A. 中国共产党的正确领导；B. 广大人民群众的广泛参加和大力支持；D. 国际无产阶级和人民群众的支持",
+    "answerKeys": [
+      "A",
+      "B",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-6f42634388",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "在1949年中华人民共和国中央人民政府成立时，担任副主席职务的民主人士是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "宋庆龄"
+      },
+      {
+        "key": "B",
+        "text": "李济深"
+      },
+      {
+        "key": "C",
+        "text": "张澜"
+      },
+      {
+        "key": "D",
+        "text": "黄炎培"
+      }
+    ],
+    "answerText": "A. 宋庆龄；B. 李济深；C. 张澜",
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-d415b79d88",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "中国新民主主义革命胜利的基本经验是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "统一战线"
+      },
+      {
+        "key": "B",
+        "text": "武装斗争"
+      },
+      {
+        "key": "C",
+        "text": "党的建设"
+      },
+      {
+        "key": "D",
+        "text": "土地革命"
+      }
+    ],
+    "answerText": "A. 统一战线；B. 武装斗争；C. 党的建设",
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-b2c50747c7",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "我国在1951年底到1952年，开展的“三反”运动的内容是:(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "反贪污"
+      },
+      {
+        "key": "B",
+        "text": "反浪费"
+      },
+      {
+        "key": "C",
+        "text": "反官僚主义"
+      },
+      {
+        "key": "D",
+        "text": "反冒险主义"
+      }
+    ],
+    "answerText": "A. 反贪污；B. 反浪费；C. 反官僚主义",
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-524ed14e4c",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "新中国成立初期，中国共产党提出的外交方针包括:(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "另起炉灶"
+      },
+      {
+        "key": "B",
+        "text": "打扫干净屋子再请客"
+      },
+      {
+        "key": "C",
+        "text": "一边倒"
+      },
+      {
+        "key": "D",
+        "text": "孤立主义"
+      }
+    ],
+    "answerText": "A. 另起炉灶；B. 打扫干净屋子再请客；C. 一边倒",
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-246e953bbe",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "有人形象地说南京既是中国近代史的起点，也是中国近代史的终点。下列能够反映这种说法的两个历史片断是:(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "1842年8月29日，英国侵略者强迫清政府在南京江面的英舰上签订中国近代史上第一个不平等条约《南京条约》"
+      },
+      {
+        "key": "B",
+        "text": "洪秀全在南京颁布《天朝田亩制度》"
+      },
+      {
+        "key": "C",
+        "text": "孙中山在南京主持中华民国临时政府第一次国务会议"
+      },
+      {
+        "key": "D",
+        "text": "1949年4月23日，人民解放军占领南京，宣告延续了22年之久的国民党反动统治的覆灭"
+      }
+    ],
+    "answerText": "A. 1842年8月29日，英国侵略者强迫清政府在南京江面的英舰上签订中国近代史上第一个不平等条约《南京条约》；D. 1949年4月23日，人民解放军占领南京，宣告延续了22年之久的国民党反动统治的覆灭",
+    "answerKeys": [
+      "A",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-397e84dc31",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "“大跃进”运动失败的原因包括:(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "盲目追求高速度，破坏了经济发展的综合平衡"
+      },
+      {
+        "key": "B",
+        "text": "不遵循客观经济规律，企图依靠群众运动的方法来快速发展生产力"
+      },
+      {
+        "key": "C",
+        "text": "对社会主义建设的长期性和艰巨性思想准备不足"
+      },
+      {
+        "key": "D",
+        "text": "人民群众的高涨热情"
+      }
+    ],
+    "answerText": "A. 盲目追求高速度，破坏了经济发展的综合平衡；B. 不遵循客观经济规律，企图依靠群众运动的方法来快速发展生产力；C. 对社会主义建设的长期性和艰巨性思想准备不足",
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-8377a930aa",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "“文化大革命”的性质应为:(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "革命和社会的进步"
+      },
+      {
+        "key": "B",
+        "text": "由领导者错误发动的"
+      },
+      {
+        "key": "C",
+        "text": "被反革命集团利用的"
+      },
+      {
+        "key": "D",
+        "text": "给党、国家和各族人民带来严重灾难的内乱"
+      }
+    ],
+    "answerText": "B. 由领导者错误发动的；C. 被反革命集团利用的；D. 给党、国家和各族人民带来严重灾难的内乱",
+    "answerKeys": [
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-a07aee65dd",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "20世纪六、七十年代，我国在核技术、人造卫星和运载火箭等尖端科学技术领域取得的重要成就有:(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "爆炸了第一颗原子弹"
+      },
+      {
+        "key": "B",
+        "text": "中远程导弹发射成功"
+      },
+      {
+        "key": "C",
+        "text": "爆炸了第一颗氢弹"
+      },
+      {
+        "key": "D",
+        "text": "第一颗人造地球卫星发射成功"
+      }
+    ],
+    "answerText": "A. 爆炸了第一颗原子弹；B. 中远程导弹发射成功；C. 爆炸了第一颗氢弹；D. 第一颗人造地球卫星发射成功",
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-d0a4a0e16d",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "党的十一届三中全会的历史性贡献包括(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "冲破了长期“左”的错误的严重束缚"
+      },
+      {
+        "key": "B",
+        "text": "彻底否定了“两个凡是”的错误方针"
+      },
+      {
+        "key": "C",
+        "text": "停止使用“以阶级斗争为纲”的口号"
+      },
+      {
+        "key": "D",
+        "text": "提出了改革开放的任务"
+      }
+    ],
+    "answerText": "A. 冲破了长期“左”的错误的严重束缚；B. 彻底否定了“两个凡是”的错误方针；C. 停止使用“以阶级斗争为纲”的口号；D. 提出了改革开放的任务",
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-f44a828ef9",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "1982年，党的十二大提出的战略目标是建设(        )的社会主义国家。",
+    "options": [
+      {
+        "key": "A",
+        "text": "高度文明"
+      },
+      {
+        "key": "B",
+        "text": "高度民主"
+      },
+      {
+        "key": "C",
+        "text": "高度发达"
+      },
+      {
+        "key": "D",
+        "text": "高度和谐"
+      }
+    ],
+    "answerText": "A. 高度文明；B. 高度民主",
+    "answerKeys": [
+      "A",
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-f6a33428c2",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "经济特区的主要特点包括(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "经济发展以利用外资为主"
+      },
+      {
+        "key": "B",
+        "text": "所有制结构以中外合资、合作经营和外商独资经营为主"
+      },
+      {
+        "key": "C",
+        "text": "产品以出口外销为主"
+      },
+      {
+        "key": "D",
+        "text": "在经济活动中实行特殊政策和灵活措施"
+      }
+    ],
+    "answerText": "A. 经济发展以利用外资为主；B. 所有制结构以中外合资、合作经营和外商独资经营为主；C. 产品以出口外销为主；D. 在经济活动中实行特殊政策和灵活措施",
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-b8e743a6d3",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "1984年党的十二届三中全会《关于经济体制改革的决定》提出的改革原则包括(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "增强企业活力是经济体制改革的中心环节"
+      },
+      {
+        "key": "B",
+        "text": "建立自觉运用价值规律的计划体制"
+      },
+      {
+        "key": "C",
+        "text": "发展社会主义商品经济"
+      },
+      {
+        "key": "D",
+        "text": "实行政企职责分开"
+      }
+    ],
+    "answerText": "A. 增强企业活力是经济体制改革的中心环节；B. 建立自觉运用价值规律的计划体制；C. 发展社会主义商品经济；D. 实行政企职责分开",
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-b16c35d782",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "进入新时代，党面临的主要任务是(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "实现第一个百年奋斗目标"
+      },
+      {
+        "key": "B",
+        "text": "开启实现第二个百年奋斗目标新征程"
+      },
+      {
+        "key": "C",
+        "text": "朝着实现中华民族伟大复兴的宏伟目标继续前进"
+      },
+      {
+        "key": "D",
+        "text": "完成社会主义改造"
+      }
+    ],
+    "answerText": "A. 实现第一个百年奋斗目标；B. 开启实现第二个百年奋斗目标新征程；C. 朝着实现中华民族伟大复兴的宏伟目标继续前进",
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-9e4629f885",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "下列属于“五位一体”总体布局的有(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "经济建设"
+      },
+      {
+        "key": "B",
+        "text": "政治建设"
+      },
+      {
+        "key": "C",
+        "text": "文化建设"
+      },
+      {
+        "key": "D",
+        "text": "社会建设"
+      },
+      {
+        "key": "E",
+        "text": "生态文明建设"
+      }
+    ],
+    "answerText": "A. 经济建设；B. 政治建设；C. 文化建设；D. 社会建设；E. 生态文明建设",
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-aa3e353a50",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "新时代十年的伟大变革，在(        )上具有里程碑意义。",
+    "options": [
+      {
+        "key": "A",
+        "text": "党史"
+      },
+      {
+        "key": "B",
+        "text": "新中国史"
+      },
+      {
+        "key": "C",
+        "text": "改革开放史"
+      },
+      {
+        "key": "D",
+        "text": "社会主义发展史"
+      },
+      {
+        "key": "E",
+        "text": "中华民族发展史"
+      }
+    ],
+    "answerText": "A. 党史；B. 新中国史；C. 改革开放史；D. 社会主义发展史；E. 中华民族发展史",
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-4aace5b41d",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "构建新发展格局，包括(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "以国内大循环为主体"
+      },
+      {
+        "key": "B",
+        "text": "国内国际双循环相互促进"
+      },
+      {
+        "key": "C",
+        "text": "以出口为导向"
+      },
+      {
+        "key": "D",
+        "text": "以投资拉动为主"
+      }
+    ],
+    "answerText": "A. 以国内大循环为主体；B. 国内国际双循环相互促进",
+    "answerKeys": [
+      "A",
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-ebfe197ea1",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "党的二十大报告指出，中国式现代化是(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "人口规模巨大的现代化"
+      },
+      {
+        "key": "B",
+        "text": "全体人民共同富裕的现代化"
+      },
+      {
+        "key": "C",
+        "text": "物质文明和精神文明相协调的现代化"
+      },
+      {
+        "key": "D",
+        "text": "人与自然和谐共生的现代化"
+      },
+      {
+        "key": "E",
+        "text": "走和平发展道路的现代化"
+      }
+    ],
+    "answerText": "A. 人口规模巨大的现代化；B. 全体人民共同富裕的现代化；C. 物质文明和精神文明相协调的现代化；D. 人与自然和谐共生的现代化；E. 走和平发展道路的现代化",
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-4575fd37fc",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "新文化运动是新民主主义的文化运动。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-a8dd6b70ba",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "京汉铁路工人罢工是中国工人运动史上持续时间最长的一次政治大罢工。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-00c4549058",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "1920年8月，陈望道翻译的《共产党宣言》中文全译本公开出版。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-79f3fb3ab3",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "李大钊《我的马克思主义观》一文发表，标志着马克思主义在中国进入比较系统的传播阶段。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-8d592f53dc",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "中国国情的特点就决定了中国共产党的任务是经过长期的合法斗争以进入起义和战争。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-e6e3a11a0e",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "中国共产党并不是一开始就坚持了马克思列宁主义的建党原则的。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-fc428062db",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "中国工农红军进行的二万五千里长征是在第五次反“围剿”失败的背景下进行的。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-9062a0eec6",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "“枪杆子里面出政权”是毛泽东在遵义会议上第一次提出的。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-f64d4c2956",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "日本全面侵华战争是从九一八事变开始的。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-abacec1956",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "毛泽东明确提出“马克思主义的中国化”命题是在中共七大。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-ec7e93cff0",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "豫湘桂大溃败成为大后方人心变动的重要转折点。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-66a54a63e0",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "中共七大上，将毛泽东思想正式命名并被确定为党的指导思想。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-26a58a6f73",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "毛泽东在中共七届二中全会上提出“两个务必”，即务必一切从实际出发，务必坚持群众路线。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-ff5a4a4206",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "土地制度改革是从根本上摧毁中国封建制度根基的社会大变革。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-4a7624513c",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "国民党当局虽然极度仇视中国共产党，但对民主党派、民主人士非常友好，承认他们的合法地位，并允许开展一切政治活动。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-dc54de1f28",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "抗日战争胜利后，美国支持国民党政府的反共方针，其在中国追求的长期的目标在于推动建立一个统一的亲美政府。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-9bca89fc7c",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "中国的新民主主义革命实质上就是无产阶级领导下的农民革命。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-1526d6cf5e",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "判断题 1、新中国成立初期，我国就建立起了独立的比较完整的工业体系和国民经济体系。(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-6262b9ae19",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "新中国成立后，我国社会的主要矛盾一直是人民日益增长的物质文化需要同落后的社会生产之间的矛盾。(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-c6d9fe170e",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "新民主主义社会是一个过渡性质的社会。(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-ab49b0690d",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "新中国成立后，我国立即开始了大规模的社会主义改造。(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-d42cedbd13",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "新民主主义社会存在着社会主义因素和资本主义因素。(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-6861ffddb1",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "党的十一届三中全会作出的改革开放决策，标志着中国共产党从根本上冲破了长期“左”的错误的严重束缚。(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-15f9ba9cf6",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "家庭联产承包责任制是对农业合作化以前的小私有经济的完全回归。(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-fc04973d38",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "1982年党的十二大明确提出，我国经济建设的战略目标是在20世纪末实现四个现代化。(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-eca45e2580",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "经济特区实行特殊的经济政策和经济管理体制，但在政治制度上与全国其他地区完全相同。(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-3fe5d200ef",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "中国特色社会主义进入新时代，我国仍处于并将长期处于社会主义初级阶段。(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-e382e77e10",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "全面建成小康社会是我国第一个百年奋斗目标。(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-32fc40c33d",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "党的十九届六中全会总结了党的百年奋斗重大成就和历史经验。(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-a828bee20d",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "党的二十大召开标志着中国特色社会主义进入新时代。(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-61dc66a6fb",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "高质量发展是全面建设社会主义现代化国家的首要任务。(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-36d55367ed",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "中国近代史上提出\"以中国之伦常名教为原本，辅以诸国富强之本\"之说的思想家是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "冯桂芬"
+      },
+      {
+        "key": "B",
+        "text": "张之洞"
+      },
+      {
+        "key": "C",
+        "text": "李鸿章"
+      },
+      {
+        "key": "D",
+        "text": "左宗棠"
+      }
+    ],
+    "answerText": "A. 冯桂芬",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-c7a05725b9",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "洋务运动破产的标志是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "鸦片战争失败"
+      },
+      {
+        "key": "B",
+        "text": "八国联军侵华战争失败"
+      },
+      {
+        "key": "C",
+        "text": "中法战争失败"
+      },
+      {
+        "key": "D",
+        "text": "甲午战争失败"
+      }
+    ],
+    "answerText": "D. 甲午战争失败",
+    "answerKeys": [
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-088c6b4e43",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "袁世凯为了复辟帝制，他竟然基本接受严重损害中国权益的(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "“善后大借款”"
+      },
+      {
+        "key": "B",
+        "text": "“二十一条”"
+      },
+      {
+        "key": "C",
+        "text": "《天津条约》"
+      },
+      {
+        "key": "D",
+        "text": "“西原借款”"
+      }
+    ],
+    "answerText": "B. “二十一条”",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-a45394fb04",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "中国历史上第一部具有资产阶级共和国宪法性质的法典是(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "《中华民国约法》"
+      },
+      {
+        "key": "B",
+        "text": "《中华民国临时约法》"
+      },
+      {
+        "key": "C",
+        "text": "《中华人民共和国宪法》"
+      },
+      {
+        "key": "D",
+        "text": "《共同纲领》"
+      }
+    ],
+    "answerText": "B. 《中华民国临时约法》",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-58a9e6b784",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "戊戌维新运动是一次爱国救亡运动，也是一次资产阶级性质的政治改良运动。维新派尽管不敢从根本上否定封建主义，但突破了洋务派“中体西用”思想的局限，主张(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "用总统共和制取代君主立宪制"
+      },
+      {
+        "key": "B",
+        "text": "用君主立宪制取代君主专制制度"
+      },
+      {
+        "key": "C",
+        "text": "用民主共和制度取代封建专制制度"
+      },
+      {
+        "key": "D",
+        "text": "用议会共和制取代君主立宪制"
+      }
+    ],
+    "answerText": "B. 用君主立宪制取代君主专制制度",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-7b23b32742",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "资产阶级革命派的阶级基础是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "工人阶级"
+      },
+      {
+        "key": "B",
+        "text": "大地主大资产阶级"
+      },
+      {
+        "key": "C",
+        "text": "民族资产阶级"
+      },
+      {
+        "key": "D",
+        "text": "农民阶级"
+      }
+    ],
+    "answerText": "C. 民族资产阶级",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-df464bd213",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "辛亥革命失败的原因，从根本上说是由于(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "中国封建势力的强大"
+      },
+      {
+        "key": "B",
+        "text": "中外反动势力的联合绞杀"
+      },
+      {
+        "key": "C",
+        "text": "在帝国主义时代，在半殖民地半封建的中国，资本主义的建国方案是行不通的"
+      },
+      {
+        "key": "D",
+        "text": "它的领导者资产阶级革命派本身存在着许多弱点和错误"
+      }
+    ],
+    "answerText": "C. 在帝国主义时代，在半殖民地半封建的中国，资本主义的建国方案是行不通的",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-077d3d8652",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "近代以来中国反侵略战争失败的最根本原因是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "帝国主义的强大"
+      },
+      {
+        "key": "B",
+        "text": "社会制度的腐败"
+      },
+      {
+        "key": "C",
+        "text": "中国军队军事素质低下"
+      },
+      {
+        "key": "D",
+        "text": "经济技术的落后"
+      }
+    ],
+    "answerText": "B. 社会制度的腐败",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-0ecd2bb828",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "在近代中国，实现国家富强和人民富裕的前提是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "进行西方式的工业革命"
+      },
+      {
+        "key": "B",
+        "text": "实行资本主义"
+      },
+      {
+        "key": "C",
+        "text": "进行实业救国"
+      },
+      {
+        "key": "D",
+        "text": "争取民族独立和人民解放"
+      }
+    ],
+    "answerText": "D. 争取民族独立和人民解放",
+    "answerKeys": [
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-af06423660",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "中国近代史的起点是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "鸦片战争"
+      },
+      {
+        "key": "B",
+        "text": "中华民国建立"
+      },
+      {
+        "key": "C",
+        "text": "虎门销烟"
+      },
+      {
+        "key": "D",
+        "text": "洋务运动"
+      }
+    ],
+    "answerText": "A. 鸦片战争",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-5d8135be9e",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "袁世凯和张勋复辟活动很快失败的根本原因是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "民主共和观念深入人心"
+      },
+      {
+        "key": "B",
+        "text": "军阀之间的矛盾"
+      },
+      {
+        "key": "C",
+        "text": "帝国主义国家不支持"
+      },
+      {
+        "key": "D",
+        "text": "资产阶级革命派力量的强大"
+      }
+    ],
+    "answerText": "A. 民主共和观念深入人心",
+    "answerKeys": [
+      "A"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-b14dd28fb1",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "毛泽东在谈到辛亥革命时指出，辛亥革命有它胜利的地方，也有它失败的地方。“辛亥革命把皇帝赶跑，这不是胜利了吗?说它失败，是说辛亥革命只把一个皇帝赶跑。”毛泽东这里所说的“只把一个皇帝赶跑”是指(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "没有推翻帝制"
+      },
+      {
+        "key": "B",
+        "text": "反帝反封建的革命任务没有完成"
+      },
+      {
+        "key": "C",
+        "text": "孙中山没有继续革命"
+      },
+      {
+        "key": "D",
+        "text": "袁世凯窃取了胜利果实"
+      }
+    ],
+    "answerText": "B. 反帝反封建的革命任务没有完成",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-71179a7f6d",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "下列太平天国的诸活动中，能与当时世界历史潮流同步的是(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "颁布《天朝田亩制度》"
+      },
+      {
+        "key": "B",
+        "text": "建立农民政权"
+      },
+      {
+        "key": "C",
+        "text": "洪仁玕《资政新篇》提出的主张"
+      },
+      {
+        "key": "D",
+        "text": "规定农、副业产品的生产与分配由农村政权的基层组织实行管理"
+      }
+    ],
+    "answerText": "C. 洪仁玕《资政新篇》提出的主张",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-3c71b23bef",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "规定外国军队有权在北京使馆区和北京至大沽、山海关一线\"留兵驻守\"\n的条约是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "《天津条约》"
+      },
+      {
+        "key": "B",
+        "text": "《马关条约》"
+      },
+      {
+        "key": "C",
+        "text": "《北京条约》"
+      },
+      {
+        "key": "D",
+        "text": "《辛丑条约》"
+      }
+    ],
+    "answerText": "D. 《辛丑条约》",
+    "answerKeys": [
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-20e24b5eb1",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "由于民族危机越来越严重，在维新派的推动和策划下，1898年6月11日，光绪皇帝颁布了“明定国是”谕旨，宣布开始变法，并在此后的103天中，接连发布了一系列推行新政的政令，史称“戊戌变法”，又称“百日维新”。戊戌维新是一场资产阶级性质的改良运动，这是因为变法的政令(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "采纳了维新派提出的开国会等政治主张"
+      },
+      {
+        "key": "B",
+        "text": "触及了封建制度的根本"
+      },
+      {
+        "key": "C",
+        "text": "带有彻底性和不妥协性"
+      },
+      {
+        "key": "D",
+        "text": "一定程度上反映了资产阶级的政治和经济诉求"
+      }
+    ],
+    "answerText": "D. 一定程度上反映了资产阶级的政治和经济诉求",
+    "answerKeys": [
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-8c37b8b636",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "20世纪中国的第一次历史性巨变是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "义和团运动"
+      },
+      {
+        "key": "B",
+        "text": "辛亥革命"
+      },
+      {
+        "key": "C",
+        "text": "太平天国农民战争"
+      },
+      {
+        "key": "D",
+        "text": "戊戌变法"
+      }
+    ],
+    "answerText": "B. 辛亥革命",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-b721128465",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "1839年，组织编写成《四洲志》，向中国人介绍西方情况的是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "郑观应"
+      },
+      {
+        "key": "B",
+        "text": "魏源"
+      },
+      {
+        "key": "C",
+        "text": "马建忠"
+      },
+      {
+        "key": "D",
+        "text": "林则徐"
+      }
+    ],
+    "answerText": "D. 林则徐",
+    "answerKeys": [
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-2e3e97a684",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "太平天国运动失败的根本原因是(        ).",
+    "options": [
+      {
+        "key": "A",
+        "text": "战略失误导致北伐失利"
+      },
+      {
+        "key": "B",
+        "text": "遭到中外反动势力的联合绞杀"
+      },
+      {
+        "key": "C",
+        "text": "领导集团的内部斗争"
+      },
+      {
+        "key": "D",
+        "text": "农民阶级的局限性"
+      }
+    ],
+    "answerText": "D. 农民阶级的局限性",
+    "answerKeys": [
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-83e8dc8e5a",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "近代中国诞生的新兴的被压迫阶级是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "地主阶级"
+      },
+      {
+        "key": "B",
+        "text": "农民阶级"
+      },
+      {
+        "key": "C",
+        "text": "工人阶级"
+      },
+      {
+        "key": "D",
+        "text": "资产阶级"
+      }
+    ],
+    "answerText": "C. 工人阶级",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-666c3b7a1d",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "提出了\"物竞天择\"\"适者生存\"的社会进化论思想的著作是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "《夷情备采》"
+      },
+      {
+        "key": "B",
+        "text": "《俄彼得变政记》"
+      },
+      {
+        "key": "C",
+        "text": "《变法通议》"
+      },
+      {
+        "key": "D",
+        "text": "《天演论》"
+      }
+    ],
+    "answerText": "D. 《天演论》",
+    "answerKeys": [
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-058018fca3",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "19世纪60年代到90年代，清朝统治阶级内部的洋务派兴办近代企业，建立新式海陆军，创办新式学堂，派遣留学生。洋务派兴办洋务新政的主要目的是(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "发展资本主义"
+      },
+      {
+        "key": "B",
+        "text": "对抗顽固派"
+      },
+      {
+        "key": "C",
+        "text": "迎合帝国主义"
+      },
+      {
+        "key": "D",
+        "text": "维护封建统治"
+      }
+    ],
+    "answerText": "D. 维护封建统治",
+    "answerKeys": [
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-da693d3d2a",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "中国近代史上中国人民第一次大规模的反侵略武装斗争是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "虎门销烟"
+      },
+      {
+        "key": "B",
+        "text": "三元里人民抗英斗争"
+      },
+      {
+        "key": "C",
+        "text": "台湾人民反抗日本割台斗争"
+      },
+      {
+        "key": "D",
+        "text": "香港工人大罢工"
+      }
+    ],
+    "answerText": "B. 三元里人民抗英斗争",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-842746f610",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "孙中山将同盟会的纲领概括为三民主义，即民族主义、民权主义、民生主义。其中下列属于民权主义内容的是(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "以革命手段推翻清朝政府，改变它一贯推行的民族歧视和民族压迫政策"
+      },
+      {
+        "key": "B",
+        "text": "追求民族独立，建立中华民族“独立的国家”"
+      },
+      {
+        "key": "C",
+        "text": "推翻封建君主专制制度，建立资产阶级民主共和国"
+      },
+      {
+        "key": "D",
+        "text": "核定全国土地的地价，其现有之地价，仍属原主;革命后的增价，则归国家，为国民共享"
+      }
+    ],
+    "answerText": "C. 推翻封建君主专制制度，建立资产阶级民主共和国",
+    "answerKeys": [
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-33f6fdcb9a",
+    "subject": "近代史",
+    "type": "single",
+    "typeLabel": "单选",
+    "prompt": "洋务运动举办的规模最大的兵工厂是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "福州船政局"
+      },
+      {
+        "key": "B",
+        "text": "江南制造总局"
+      },
+      {
+        "key": "C",
+        "text": "天津机器局"
+      },
+      {
+        "key": "D",
+        "text": "金陵机器局"
+      }
+    ],
+    "answerText": "B. 江南制造总局",
+    "answerKeys": [
+      "B"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-51adc5e2ab",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "1898年的“百日维新”如昙花一现，只经历103天就夭折了。谭嗣同在慷慨就义前仰天长叹:“有心杀贼，无力回天”。维新派“无力回天”的原因主要是(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "他们惧怕人民群众，把改革的全部希望寄托在一个没有实权的皇帝身上"
+      },
+      {
+        "key": "B",
+        "text": "他们不敢触动封建主义的经济基础"
+      },
+      {
+        "key": "C",
+        "text": "他们遭到了以慈禧太后为首的强大的守旧势力的反击和镇压"
+      },
+      {
+        "key": "D",
+        "text": "他们提倡全面学习“西学”，彻底否定“中学”"
+      }
+    ],
+    "answerText": "A. 他们惧怕人民群众，把改革的全部希望寄托在一个没有实权的皇帝身上；B. 他们不敢触动封建主义的经济基础；C. 他们遭到了以慈禧太后为首的强大的守旧势力的反击和镇压",
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-ca518ec951",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "中国半殖民地半封建社会的特点主要有(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "封建势力成为资本帝国主义压迫奴役中国人民的社会基础和统治支柱"
+      },
+      {
+        "key": "B",
+        "text": "封建地主土地所有制依然存在，成为中国走向现代化和民主化的严重障碍"
+      },
+      {
+        "key": "C",
+        "text": "中国新兴的民族资本主义经济发展缓慢，力量软弱"
+      },
+      {
+        "key": "D",
+        "text": "帝国主义日益成为支配中国的决定性力量"
+      }
+    ],
+    "answerText": "A. 封建势力成为资本帝国主义压迫奴役中国人民的社会基础和统治支柱；B. 封建地主土地所有制依然存在，成为中国走向现代化和民主化的严重障碍；C. 中国新兴的民族资本主义经济发展缓慢，力量软弱；D. 帝国主义日益成为支配中国的决定性力量",
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-3e9103c1a2",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "资产阶级革命派传播革命思想的代表著作有(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "《驳康有为论革命书》"
+      },
+      {
+        "key": "B",
+        "text": "《警世钟》"
+      },
+      {
+        "key": "C",
+        "text": "《猛回头》"
+      },
+      {
+        "key": "D",
+        "text": "《革命军》"
+      }
+    ],
+    "answerText": "A. 《驳康有为论革命书》；B. 《警世钟》；C. 《猛回头》；D. 《革命军》",
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-3a26abf10d",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "在三民主义的民族主义中，体现资产阶级局限性和弱点的内容有(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "没有正面触及封建土地所有制"
+      },
+      {
+        "key": "B",
+        "text": "强调了对满族封建势力的清除而没有反对整个封建统治阶级"
+      },
+      {
+        "key": "C",
+        "text": "幻想以承认不平等条约“继续有效”换取列强的支持"
+      },
+      {
+        "key": "D",
+        "text": "没有明确的反帝纲领"
+      }
+    ],
+    "answerText": "B. 强调了对满族封建势力的清除而没有反对整个封建统治阶级；C. 幻想以承认不平等条约“继续有效”换取列强的支持；D. 没有明确的反帝纲领",
+    "answerKeys": [
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-773286d949",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "第二次鸦片战争后，清朝统治集团内部一部分人震惊于列强的“船坚炮利”，主张学习西方以求“自强”，洋务运动由此兴起。洋务运动的一个重要内容就是创办新式学堂，主要有(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "翻译学堂"
+      },
+      {
+        "key": "B",
+        "text": "法政学堂"
+      },
+      {
+        "key": "C",
+        "text": "军事学堂"
+      },
+      {
+        "key": "D",
+        "text": "工艺学堂"
+      }
+    ],
+    "answerText": "A. 翻译学堂；C. 军事学堂；D. 工艺学堂",
+    "answerKeys": [
+      "A",
+      "C",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-51d0e0e6c6",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "甲午中日战争期间，日本向中国勒索的赔款有(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "\"赎辽费\"3000万两白银"
+      },
+      {
+        "key": "B",
+        "text": "日侨损失费150万两白银"
+      },
+      {
+        "key": "C",
+        "text": "战争赔款2亿两白银"
+      },
+      {
+        "key": "D",
+        "text": "威海卫日军\"守备费\"150万两白银"
+      }
+    ],
+    "answerText": "A. \"赎辽费\"3000万两白银；C. 战争赔款2亿两白银；D. 威海卫日军\"守备费\"150万两白银",
+    "answerKeys": [
+      "A",
+      "C",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-cd552cdd5b",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "孙中山为了防止袁世凯专制而提出的条件有(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "以南京为首都"
+      },
+      {
+        "key": "B",
+        "text": "总统在南京就职"
+      },
+      {
+        "key": "C",
+        "text": "清帝退位"
+      },
+      {
+        "key": "D",
+        "text": "遵守约法"
+      }
+    ],
+    "answerText": "A. 以南京为首都；B. 总统在南京就职；D. 遵守约法",
+    "answerKeys": [
+      "A",
+      "B",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-f8fe9ed67e",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "十九世纪下半叶，以“自强”“求富”为目标的洋务运动历时30年。其最终失败的主要原因是(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "洋务企业管理的腐朽性"
+      },
+      {
+        "key": "B",
+        "text": "指导思想的封建性"
+      },
+      {
+        "key": "C",
+        "text": "资金人才的匮乏性"
+      },
+      {
+        "key": "D",
+        "text": "对外国具有依赖性"
+      }
+    ],
+    "answerText": "A. 洋务企业管理的腐朽性；B. 指导思想的封建性；D. 对外国具有依赖性",
+    "answerKeys": [
+      "A",
+      "B",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-c4bc38467a",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "随着外国资本帝国主义的入侵，中国社会发生的根本性变化是(        )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "封建经济变成了资本主义经济"
+      },
+      {
+        "key": "B",
+        "text": "封建的中国变成了半封建的中国"
+      },
+      {
+        "key": "C",
+        "text": "独立的中国逐步变成半殖民地的中国"
+      },
+      {
+        "key": "D",
+        "text": "工人变成了农民"
+      }
+    ],
+    "answerText": "B. 封建的中国变成了半封建的中国；C. 独立的中国逐步变成半殖民地的中国",
+    "answerKeys": [
+      "B",
+      "C"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-0f4f8120aa",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "革命派与改良派论战的意义有(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "支持了贫苦农民“夺富人之田为己有”的主张"
+      },
+      {
+        "key": "B",
+        "text": "传播了民主革命思想"
+      },
+      {
+        "key": "C",
+        "text": "促进了革命形势的发展"
+      },
+      {
+        "key": "D",
+        "text": "划清了革命与改良的界限"
+      }
+    ],
+    "answerText": "B. 传播了民主革命思想；C. 促进了革命形势的发展；D. 划清了革命与改良的界限",
+    "answerKeys": [
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-7424da7c8d",
+    "subject": "近代史",
+    "type": "multiple",
+    "typeLabel": "多选",
+    "prompt": "在半殖民地半封建的中国，太平天国起义及其失败表明(  )。",
+    "options": [
+      {
+        "key": "A",
+        "text": "单纯的农民战争对反帝反封建斗争是没有意义的"
+      },
+      {
+        "key": "B",
+        "text": "农民具有伟大的革命潜力"
+      },
+      {
+        "key": "C",
+        "text": "单纯的农民战争不可能完成争取民族独立和人民解放的历史任务"
+      },
+      {
+        "key": "D",
+        "text": "农民自身不能担负起领导反帝反封建斗争取得胜利的重任"
+      }
+    ],
+    "answerText": "B. 农民具有伟大的革命潜力；C. 单纯的农民战争不可能完成争取民族独立和人民解放的历史任务；D. 农民自身不能担负起领导反帝反封建斗争取得胜利的重任",
+    "answerKeys": [
+      "B",
+      "C",
+      "D"
+    ],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-0f09340b58",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "辛亥革命的政治任务就是推翻清朝政府，结束君主专制制度，本身不具有反对帝国主义性质。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-4b1934a9f0",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "太平天国起义是中国农民战争的最高峰。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-cd29435813",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "孙中山领导的中国同盟会领导和指挥了1911年10月爆发的武昌起义。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-ddd6ceeba9",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "1895年，日本强迫清政府签订了《马关条约》，割去了中国台湾全岛及所有附属岛屿和澎湖列岛。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-fdd184198e",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "戊戌维新运动兴起的社会物质条件是中国民族资本主义的初步发展。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-190283f4ab",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "维新派与洋务派分歧的实质是要不要学习西方的政治制度与思想文化。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-24c1121d52",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "辛亥革命是完全失败的一次近代革命。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-8c3c35b276",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "中国近现代史上最早签订的不平等条约是《南京条约》。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-b2497399d0",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "1885年3月，在镇南关大捷中身先士卒，大败法军的老将是冯子材",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-8940646a67",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "中国近代史上提出\"师夷长技以制夷\"主张的人物是林则徐",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-2836e94c92",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "中国第一个有明确政治纲领和组织机构的资产阶级革命政党就是中国同盟会。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "对",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-f8d6e03a26",
+    "subject": "近代史",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "对洋务派兴办洋务事业的指导思想最先作出比较完整表述的是张之洞。",
+    "options": [
+      {
+        "key": "A",
+        "text": "对"
+      },
+      {
+        "key": "B",
+        "text": "错"
+      }
+    ],
+    "answerText": "错",
+    "answerKeys": [],
+    "explanation": ""
+  },
+  {
+    "id": "q-modern-history-f5d9d1b553",
+    "subject": "近代史",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "反侵略战争失败的根本原因和教训是什么？",
+    "options": [],
+    "answerText": "社会制度的腐败\\n经济技术的落后\\n列强发动的侵华战争以及中国反侵略战争的失败，从反面教育了中国人民，极大地促进了中国人的思考、探索和奋起。中国人民的民族意识开始普遍觉醒。",
+    "answerKeys": [],
+    "explanation": "得分点：①根本原因：社会制度腐败；②重要原因：经济技术落后；③教训：民族意识觉醒，必须探索救国道路。"
+  },
+  {
+    "id": "q-modern-history-0dafeab356",
+    "subject": "近代史",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "洋务运动的历史作用是什么？",
+    "options": [],
+    "answerText": "洋务派提出\"自强\"\"求富\"的主张，通过所掌握的国家权力集中力量优先发展军事工业，同时也试图\"稍分洋商之利\"，发展若干民用企业，在客观上对中国早期工业和民族资本主义的发展起了某些促进作用。\\n洋务运动时期，为了培养通晓洋务的人才，开办了一批新式学堂，派出了最早的官派留学生，这是中国近代教育的开始。\\n洋务运动时期，伴随着资本主义产生方式出现，传统的\"重本抑末\"等观念受到冲击，社会风气和价值观念开始变化，工商业者的地位上升。",
+    "answerKeys": [],
+    "explanation": "得分点：①促进近代工业和民族资本主义发展；②创办新式学堂、派遣留学生，开启近代教育；③冲击旧观念，推动社会风气变化。"
+  },
+  {
+    "id": "q-modern-history-201029b37e",
+    "subject": "近代史",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "戊戌维新运动失败的原因？",
+    "options": [],
+    "answerText": "首先，不敢否定封建主义。戊戌维新运动的失败，主要是由于维新派自身的局限以及以慈禧太后为首的强大的守旧势力的反对。\\n其次，对帝国主义抱有幻想。当时民族资本主义经济力量还十分微弱，民族资产阶级的社会基础相当狭窄。\\n最后，惧怕人民群众。民族资产阶级的政治代表维新派的势力更是非常弱小，很多人自身还保留着封建士大夫的痕迹。",
+    "answerKeys": [],
+    "explanation": "得分点：①不敢否定封建主义；②对帝国主义抱有幻想；③惧怕人民群众；④自身力量弱，守旧势力强。"
+  },
+  {
+    "id": "q-modern-history-5461246311",
+    "subject": "近代史",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "资产阶级维新派采取哪些行动宣传维新主张？",
+    "options": [],
+    "answerText": "向皇上上书\\n著书立说\\n介绍外国变法的经验教训\\n办学会\\n设学堂\\n办报纸",
+    "answerKeys": [],
+    "explanation": "得分点：①上书皇帝；②著书立说；③介绍外国变法经验；④办学会；⑤设学堂；⑥办报纸。"
+  },
+  {
+    "id": "q-modern-history-dd925fb6d5",
+    "subject": "近代史",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "辛亥革命使中国发生了历史性巨变，它有怎样的历史意义？",
+    "options": [],
+    "answerText": "辛亥革命推翻了封建势力的政治代表、帝国主义在中国的代理人清王朝的统治，沉重打击了中外反动势力，使中国反动统治者在政治上乱了阵脚。\\n辛亥革命结束了中国延续两千多年的封建君主专制制度，建立了中国历史上第一个资产阶级共和政府，使民主共和的观念开始深入人心，并在中国形成了\"敢为帝制自为者，天下共击之\"的民主主义观念。\\n辛亥革命推动了中国人民的思想解放。\\n辛亥革命推动了中国的社会变革，促使中国的社会经济、思想习惯和社会风俗等方面发生了新的积极变化。\\n辛亥革命不仅在一定程度上打击了帝国主义的侵略势力，而且推动了亚洲各国民族解放运动的高涨。",
+    "answerKeys": [],
+    "explanation": "得分点：①推翻清王朝，打击反动势力；②结束君主专制，建立共和国；③民主共和观念深入人心；④推动思想解放和社会变革；⑤打击帝国主义，推动亚洲民族解放。"
+  },
+  {
+    "id": "q-modern-history-2c8f774527",
+    "subject": "近代史",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "五四运动的爆发的时代历史条件有哪些？",
+    "options": [],
+    "answerText": "首先，是新的社会力量的成长、壮大。\\n其次，是新文化运动掀起的思想解放的潮流。\\n最后，是俄国十月革命对中国的影响。",
+    "answerKeys": [],
+    "explanation": "得分点：①新的社会力量成长壮大；②新文化运动推动思想解放；③俄国十月革命影响中国。"
+  },
+  {
+    "id": "q-modern-history-dfcbc92c53",
+    "subject": "近代史",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "1927年南京国民政府建立后是怎样实行一党专政的军事独裁统治的？",
+    "options": [],
+    "answerText": "首先，为了镇压人民和消灭异己力量，国民党建立了庞大的军队和全国性特务系统。\\n其次，为了控制人民，禁止革命活动，国民党大力推行保甲制度，规定十户为甲，十甲为保，分设甲长、保长。\\n最后，为了控制舆论，剥夺人民的言论和出版自由，国民党还厉行文化专制主义。",
+    "answerKeys": [],
+    "explanation": "得分点：①建立庞大军队和特务系统；②推行保甲制度控制人民；③厉行文化专制，压制言论出版自由。"
+  },
+  {
+    "id": "q-modern-history-9e5b00c83a",
+    "subject": "近代史",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "抗日战争胜利的原因有哪些？",
+    "options": [],
+    "answerText": "第一，以爱国主义为核心的民族精神是中国人民抗日战争胜利的决定因素。\\n第二，中国共产党的中流砥柱作用是中国人民抗日战争胜利的关键。\\n第三，全民族抗战是中国人民抗日战争胜利的重要法宝。\\n第四，中国人民抗日战争的胜利，同世界所有爱好和平和正义的国家和人民、国际组织以及各种反法西斯力量的同情和支持也是分不开的。",
+    "answerKeys": [],
+    "explanation": "得分点：①爱国主义民族精神是决定因素；②中国共产党中流砥柱作用是关键；③全民族抗战是重要法宝；④国际反法西斯力量支持。"
+  },
+  {
+    "id": "q-modern-history-b25764f2f5",
+    "subject": "近代史",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "中国新民主主义革命胜利的原因有哪些？",
+    "options": [],
+    "answerText": "中国革命的发生和胜利不是偶然的，而是有着深刻的社会根源和雄厚的群众基础。\\n由于帝国主义、封建主义、官僚资本主义的残酷压迫，中国人民走上了反帝反封建反官僚资本主义斗争的伟大道路。\\n工人、农民、城市小资产阶级群众是民主革命的主要力量。\\n中国革命之所以能够走上胜利发展的道路，从根本上说，是由于有了中国共产党的领导。",
+    "answerKeys": [],
+    "explanation": "得分点：①深刻社会根源和群众基础；②反帝反封建反官僚资本主义斗争；③工农和城市小资产阶级是主要力量；④中国共产党领导是根本保证。"
+  },
+  {
+    "id": "q-modern-history-c2516ea1e6",
+    "subject": "近代史",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "社会主义基本制度确立的伟大意义是什么？",
+    "options": [],
+    "answerText": "社会主义基本制度的确立极大地提高了工人阶级和广大劳动人民的积极性、创造性，为社会生产力的大力发展开辟了广阔道路。\\n社会主义基本制度的确立为当代中国的一切发展进步提供了根本政治保障。\\n社会主义基本制度的确立为社会主义先进文化的发展指明了前进方向。\\n社会主义基本制度的确立，标志着中国这个占世界1/4人口的东方大国进入了社会主义社会。",
+    "answerKeys": [],
+    "explanation": "得分点：①激发劳动人民积极性，发展生产力；②提供根本政治保障；③指明社会主义先进文化方向；④标志中国进入社会主义社会。"
+  },
+  {
+    "id": "q-modern-history-fba8c3c0a0",
+    "subject": "近代史",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "新中国成立初期，为巩固新政权，我们党采取了哪些积极稳健的政策措施？",
+    "options": [],
+    "answerText": "完成民主革命的遗留任务。\\n巩固民族独立，维护国家主权和安全。\\n抗美援朝，保家卫国。\\n恢复国民经济，为社会主义改造创造条件。\\n教育科学文化卫生事业除旧布新。\\n加强中国共产党的自身建设。",
+    "answerKeys": [],
+    "explanation": "得分点：①完成民主革命遗留任务；②维护国家主权安全；③抗美援朝、保家卫国；④恢复国民经济；⑤发展教科文卫事业；⑥加强党的建设。"
+  },
+  {
+    "id": "q-modern-history-fffce5eec9",
+    "subject": "近代史",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "我国改革开放的起步表现在哪些方面？",
+    "options": [],
+    "answerText": "国民经济的调整。\\n农村改革率先取得突破。\\n逐步转向城市经济体制改革。\\n对外开放和兴办经济特区。\\n政治体制改革的启动。",
+    "answerKeys": [],
+    "explanation": "得分点：①调整国民经济；②农村改革率先突破；③城市经济体制改革推进；④对外开放、兴办经济特区；⑤启动政治体制改革。"
+  },
+  {
+    "id": "q-modern-history-02eb481b52",
+    "subject": "近代史",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "1992年邓小平南方谈话的主要内容有哪些？",
+    "options": [],
+    "answerText": "邓小平强调，革命是解放生产力，改革也是解放生产力。\\n邓小平指出，计划多一点还是市场多一点，不是社会主义与资本主义的本质区别。\\n邓小平强调，发展才是硬道理。\\n邓小平指出，中国要出问题，还是出在共产党内部。\\n邓小平指出，我坚信，世界上赞成马克思主义的人会多起来，因为马克思主义是科学。",
+    "answerKeys": [],
+    "explanation": "得分点：①改革也是解放生产力；②计划和市场不是社资本质区别；③发展才是硬道理；④问题关键在党内；⑤马克思主义是科学。"
+  },
+  {
+    "id": "q-modern-history-c1112839ae",
+    "subject": "近代史",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "党的二十大高度评价了新时代十年的伟大变革，指出我们经历了对党和人民事业具有重大现实意义和深远历史意义的三件大事是什么？",
+    "options": [],
+    "answerText": "一是迎来中国共产党成立一百周年。\\n二是中国特色社会主义进入新时代。\\n三是完成脱贫攻坚、全面建成小康社会的历史任务，实现第一个百年奋斗目标。",
+    "answerKeys": [],
+    "explanation": "得分点：①迎来中国共产党成立一百周年；②中国特色社会主义进入新时代；③完成脱贫攻坚、全面建成小康社会，实现第一个百年奋斗目标。"
+  },
+  {
+    "id": "q-modern-history-f7d1ee3337",
+    "subject": "近代史",
+    "type": "comprehensive",
+    "typeLabel": "论述题",
+    "prompt": "请结合史实，分析洋务运动失败的原因，并谈一谈作为职业技术院校大学生从中得到的启示。（不少于300字）",
+    "options": [],
+    "answerText": "???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????",
+    "answerKeys": [],
+    "explanation": "洋务运动失败原因：1.封建性：中学为体西学为用，不触动封建制度。2.依赖性：对西方列强过度依赖。3.腐朽性：企业管理落后腐败。启示：1.技术引进要与制度改革结合。2.增强自主创新。3.注重科学管理和人才培养。",
+    "rewritten": true
+  },
+  {
+    "id": "q-modern-history-1fc49a7cf5",
+    "subject": "近代史",
+    "type": "comprehensive",
+    "typeLabel": "论述题",
+    "prompt": "结合史实分析辛亥革命失败的原因并总结历史教训，谈谈对当代中国的启示（不少于300字）",
+    "options": [],
+    "answerText": "?????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????",
+    "answerKeys": [],
+    "explanation": "失败原因：1.资本主义方案行不通。2.纲领不彻底，未反帝。3.未发动群众，未解决土地问题。4.政党松散。启示：1.坚持党的领导。2.走中国特色道路。3.依靠人民群众。4.加强党的建设。",
+    "rewritten": true
+  },
+  {
+    "id": "q-modern-history-d4de7ed8c7",
+    "subject": "近代史",
+    "type": "comprehensive",
+    "typeLabel": "论述题",
+    "prompt": "结合中国共产党自身发展，谈谈你对大革命失败的教训的理解。（不少于300字）",
+    "options": [],
+    "answerText": "???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????",
+    "answerKeys": [],
+    "explanation": "失败原因：1.客观：反革命力量强大。2.主观：党幼年时期，右倾机会主义错误。教训：1.坚持统一战线领导权。2.掌握革命武装。3.解决农民土地问题。4.加强党的建设。",
+    "rewritten": true
+  },
+  {
+    "id": "q-modern-history-214fc95a43",
+    "subject": "近代史",
+    "type": "comprehensive",
+    "typeLabel": "论述题",
+    "prompt": "当学生遇到压力和挫折时，结合\"长征精神\"谈谈自身如何克服压力和挫折？（不少于300字）",
+    "options": [],
+    "answerText": "?????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????",
+    "answerKeys": [],
+    "explanation": "长征精神内涵：1.坚定理想信念。2.不怕牺牲艰苦奋斗。3.团结协作。4.实事求是勇于创新。克服挫折：1.树立目标信念。2.勇于迎难而上。3.团结协作。4.保持乐观心态。",
+    "rewritten": true
+  },
+  {
+    "id": "q-modern-history-4030aaab43",
+    "subject": "近代史",
+    "type": "comprehensive",
+    "typeLabel": "论述题",
+    "prompt": "科教兴国战略是我国上世纪90年代制定和实施的系列跨世纪发展战略之一。请你列举科教兴国战略的主要内容，并请谈谈对实施科教兴国战略的认识。（不少于300字）",
+    "options": [],
+    "answerText": "????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????",
+    "answerKeys": [],
+    "explanation": "主要内容：1.科技和教育摆在重要位置。2.提高全民族科技文化素质。3.建设创新型国家。认识：1.科技是第一生产力。2.教育是科技基础。3.实现民族复兴的关键。",
+    "rewritten": true
+  },
+  {
+    "id": "q-modern-history-07c586974f",
+    "subject": "近代史",
+    "type": "comprehensive",
+    "typeLabel": "论述题",
+    "prompt": "联系历史和现实，谈谈全面建成小康社会的历史意义。（不少于300字）",
+    "options": [],
+    "answerText": "?????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????",
+    "answerKeys": [],
+    "explanation": "历史意义：1.实现千年梦想。2.创造减贫奇迹。3.彰显制度优势。4.奠定现代化基础。5.增强民族自信。",
+    "rewritten": true
+  }
+]

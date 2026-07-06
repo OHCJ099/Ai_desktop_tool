@@ -14,6 +14,9 @@ namespace AI_desktop_tool
 {
     public partial class MainWindow : Window
     {
+        private const double NormalWindowWidth = 260;
+        private const double SettingsWindowWidth = 360;
+
         private AppConfig _config = new AppConfig();
         private bool _isRequesting = false;
         private bool _isSettingsMode = false;
@@ -46,6 +49,7 @@ namespace AI_desktop_tool
             ApplyDisplayAffinity();
 
             // Set initial position (top-right area of primary screen)
+            this.Width = NormalWindowWidth;
             double screenWidth = SystemParameters.PrimaryScreenWidth;
             this.Left = screenWidth - this.Width - 50;
             this.Top = 80;
@@ -121,6 +125,7 @@ namespace AI_desktop_tool
             // Apply style to elements
             QueryTextBox.FontWeight = weight;
             SendButton.FontWeight = weight;
+            LocalSearchButton.FontWeight = weight;
             CefCaptureButton.FontWeight = weight;
             AutoToggleButton.FontWeight = weight;
             SettingsButton.FontWeight = weight;
@@ -220,6 +225,69 @@ namespace AI_desktop_tool
             if (e.Key == Key.Enter)
             {
                 await TriggerSendAsync();
+            }
+        }
+
+        private async void LocalSearchButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton != MouseButton.Left) return;
+            e.Handled = true;
+            await TriggerLocalSearchAsync();
+        }
+
+        private async Task TriggerLocalSearchAsync()
+        {
+            if (_isRequesting) return;
+            _isRequesting = true;
+            LocalSearchButton.Text = "...";
+            AnswerTextBlock.Text = "\u6b63\u5728\u8bfb\u53d6\u5f53\u524d\u9898\u76ee\u5e76\u68c0\u7d22\u8fd1\u4ee3\u53f2\u9898\u5e93...";
+
+            try
+            {
+                string query;
+                string questionType = "";
+
+                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(8));
+                try
+                {
+                    var snapshot = await CefDomExtractor.GetAutomationSnapshotAsync(9222, cts.Token);
+                    query = snapshot.QuestionText?.Trim() ?? "";
+                    questionType = snapshot.QuestionType?.Trim() ?? "";
+                }
+                catch
+                {
+                    query = await CefDomExtractor.ExtractBestTextAsync(9222, cts.Token);
+                }
+
+                QueryTextBox.Text = query;
+                QueryTextBox.CaretIndex = QueryTextBox.Text.Length;
+
+                if (string.IsNullOrWhiteSpace(query)
+                    || query.StartsWith("\u672a\u53d1\u73b0\u53ef\u8bfb\u53d6", StringComparison.Ordinal)
+                    || query.StartsWith("\u5df2\u8fde\u63a5 CEF", StringComparison.Ordinal))
+                {
+                    AnswerTextBlock.Text = "\u672a\u80fd\u8bfb\u53d6\u5f53\u524d\u9898\u9762\uff0c\u65e0\u6cd5\u68c0\u7d22\u672c\u5730\u9898\u5e93\u3002";
+                    return;
+                }
+
+                var match = await LocalQuestionBank.SearchModernHistoryAsync(query, questionType);
+                if (match == null)
+                {
+                    AnswerTextBlock.Text = "\u8fd1\u4ee3\u53f2\u9898\u5e93\u672a\u547d\u4e2d\u3002";
+                    return;
+                }
+
+                AnswerTextBlock.Text = match.Answer;
+                LogDebug($"Local bank hit: id={match.Id}; type={match.Type}; score={match.Similarity:0.000}; prompt={match.Prompt}");
+            }
+            catch (Exception ex)
+            {
+                AnswerTextBlock.Text = $"\u672c\u5730\u9898\u5e93\u68c0\u7d22\u5931\u8d25: {ex.Message}";
+            }
+            finally
+            {
+                LocalSearchButton.Text = "s";
+                _isRequesting = false;
             }
         }
 
@@ -769,6 +837,7 @@ namespace AI_desktop_tool
                 AnswerScrollViewer.Visibility = Visibility.Collapsed;
                 SettingsScrollViewer.Visibility = Visibility.Visible;
                 
+                SetWindowWidthKeepingRightEdge(SettingsWindowWidth);
                 this.Height = 380;
             }
             else
@@ -786,6 +855,7 @@ namespace AI_desktop_tool
                 SettingsScrollViewer.Visibility = Visibility.Collapsed;
                 AnswerScrollViewer.Visibility = Visibility.Visible;
                 
+                SetWindowWidthKeepingRightEdge(NormalWindowWidth);
                 this.Height = 170;
             }
         }
@@ -804,7 +874,15 @@ namespace AI_desktop_tool
             SettingsScrollViewer.Visibility = Visibility.Collapsed;
             AnswerScrollViewer.Visibility = Visibility.Visible;
             
+            SetWindowWidthKeepingRightEdge(NormalWindowWidth);
             this.Height = 170;
+        }
+
+        private void SetWindowWidthKeepingRightEdge(double width)
+        {
+            double right = this.Left + this.Width;
+            this.Width = width;
+            this.Left = right - this.Width;
         }
 
         private void LoadConfigToInlineUI()

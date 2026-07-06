@@ -332,38 +332,9 @@ namespace AI_desktop_tool
 
         private static async Task EnsureCdpAvailableAsync(int port, CancellationToken ct)
         {
-            if (await IsCdpAliveAsync(port, ct)) return;
-
-            string[] candidates =
-            {
-                ExamShortcutHelper.ExamExePath,
-                ExamShortcutHelper.DesktopExamExePath
-            };
-
-            string? exe = candidates.FirstOrDefault(File.Exists);
-            if (exe == null) return;
-
-            try
-            {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = exe,
-                    WorkingDirectory = Path.GetDirectoryName(exe) ?? "",
-                    Arguments = $"--remote-debugging-port={port} --remote-allow-origins=* --enable-logging --v=1",
-                    UseShellExecute = true
-                });
-            }
-            catch
-            {
-                return;
-            }
-
-            for (int i = 0; i < 30; i++)
-            {
-                ct.ThrowIfCancellationRequested();
-                await Task.Delay(300, ct);
-                if (await IsCdpAliveAsync(port, ct)) return;
-            }
+            // Only probe the CDP endpoint. Do not auto-start CXExam from this helper;
+            // the CDP desktop shortcut is created separately and the user opens it manually.
+            await IsCdpAliveAsync(port, ct);
         }
 
         private static async Task<bool> IsCdpAliveAsync(int port, CancellationToken ct)
