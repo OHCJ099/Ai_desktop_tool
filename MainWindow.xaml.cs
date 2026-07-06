@@ -246,6 +246,7 @@ namespace AI_desktop_tool
             {
                 string query;
                 string questionType = "";
+                List<LocalSearchOption> currentOptions = new();
 
                 using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(8));
                 try
@@ -253,6 +254,10 @@ namespace AI_desktop_tool
                     var snapshot = await CefDomExtractor.GetAutomationSnapshotAsync(9222, cts.Token);
                     query = snapshot.QuestionText?.Trim() ?? "";
                     questionType = snapshot.QuestionType?.Trim() ?? "";
+                    currentOptions = snapshot.Options
+                        .Where(o => !string.IsNullOrWhiteSpace(o.Key) && !string.IsNullOrWhiteSpace(o.Text))
+                        .Select(o => new LocalSearchOption(o.Key, o.Text))
+                        .ToList();
                 }
                 catch
                 {
@@ -270,7 +275,7 @@ namespace AI_desktop_tool
                     return;
                 }
 
-                var match = await LocalQuestionBank.SearchModernHistoryAsync(query, questionType);
+                var match = await LocalQuestionBank.SearchModernHistoryAsync(query, questionType, currentOptions);
                 if (match == null)
                 {
                     AnswerTextBlock.Text = "\u8fd1\u4ee3\u53f2\u9898\u5e93\u672a\u547d\u4e2d\u3002";

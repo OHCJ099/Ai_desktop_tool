@@ -15,7 +15,7 @@ namespace AI_desktop_tool
         private static readonly object LoadLock = new();
         private static List<QuestionEntry>? _questions;
 
-        public static async Task<LocalQuestionMatch?> SearchModernHistoryAsync(string queryText, string? questionType = null)
+        public static async Task<LocalQuestionMatch?> SearchModernHistoryAsync(string queryText, string? questionType = null, IReadOnlyList<LocalSearchOption>? currentOptions = null)
         {
             if (string.IsNullOrWhiteSpace(queryText)) return null;
 
@@ -47,7 +47,7 @@ namespace AI_desktop_tool
 
             if (best == null || bestScore < MatchThreshold) return null;
 
-            string output = best.GetPreferredOutput();
+            string output = best.GetPreferredOutput(currentOptions);
             if (string.IsNullOrWhiteSpace(output)) return null;
 
             return new LocalQuestionMatch(
@@ -171,6 +171,29 @@ namespace AI_desktop_tool
             return type;
         }
 
+        private static string CleanOptionText(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return "";
+            string s = text;
+            s = Regex.Replace(s, @"^[A-Ha-h]\s*[\.??)?]\s*", "");
+            s = Regex.Replace(s, @"\s+", "");
+            s = Regex.Replace(s, @"[\p{P}\p{S}]", "");
+            return s.Trim();
+        }
+
+        private static double OptionSimilarity(string a, string b)
+        {
+            if (string.IsNullOrWhiteSpace(a) || string.IsNullOrWhiteSpace(b)) return 0;
+            if (a == b) return 1;
+            if (a.Contains(b, StringComparison.Ordinal) || b.Contains(a, StringComparison.Ordinal))
+            {
+                double min = Math.Min(a.Length, b.Length);
+                double max = Math.Max(a.Length, b.Length);
+                return Math.Max(0.75, min / max);
+            }
+            return Similarity(a, b);
+        }
+
         private sealed class QuestionEntry
         {
             public string Id { get; set; } = "";
@@ -183,33 +206,72 @@ namespace AI_desktop_tool
             public string Explanation { get; set; } = "";
             public string CleanPrompt { get; set; } = "";
 
-            public string GetPreferredOutput()
+            public string GetPreferredOutput(IReadOnlyList<LocalSearchOption>? currentOptions)
             {
-                bool isShort = Type.Equals("short", StringComparison.OrdinalIgnoreCase)
-                               || TypeLabel.Contains("??", StringComparison.Ordinal);
+                bool isShort = Type.Equals("short", StringComparison.OrdinalIgnoreCase);
 
                 if (isShort && !string.IsNullOrWhiteSpace(Explanation))
                 {
                     return Explanation.Trim();
                 }
 
-                bool isComprehensive = Type.Equals("comprehensive", StringComparison.OrdinalIgnoreCase)
-                                       || TypeLabel.Contains("??", StringComparison.Ordinal)
-                                       || TypeLabel.Contains("??", StringComparison.Ordinal);
+                bool isComprehensive = Type.Equals("comprehensive", StringComparison.OrdinalIgnoreCase);
 
                 if (isComprehensive)
                 {
                     return !string.IsNullOrWhiteSpace(AnswerText) ? AnswerText.Trim() : (Explanation ?? "").Trim();
                 }
 
-                if (AnswerKeys.Count > 0 && (Type.Equals("single", StringComparison.OrdinalIgnoreCase)
-                    || Type.Equals("multiple", StringComparison.OrdinalIgnoreCase)
-                    || Type.Equals("judge", StringComparison.OrdinalIgnoreCase)))
+                if (Type.Equals("judge", StringComparison.OrdinalIgnoreCase))
                 {
+                    if (!string.IsNullOrWhiteSpace(AnswerText)) return AnswerText.Trim();
+                    return string.Join("", AnswerKeys).Trim();
+                }
+
+                if ((Type.Equals("single", StringComparison.OrdinalIgnoreCase) || Type.Equals("multiple", StringComparison.OrdinalIgnoreCase))
+                    && AnswerKeys.Count > 0)
+                {
+                    string remapped = RemapChoiceAnswerToCurrentOptions(currentOptions);
+                    if (!string.IsNullOrWhiteSpace(remapped)) return remapped;
                     return string.Join("", AnswerKeys).Trim();
                 }
 
                 return (AnswerText ?? "").Trim();
+            }
+
+            private string RemapChoiceAnswerToCurrentOptions(IReadOnlyList<LocalSearchOption>? currentOptions)
+            {
+                if (currentOptions == null || currentOptions.Count == 0 || Options.Count == 0 || AnswerKeys.Count == 0)
+                {
+                    return "";
+                }
+
+                var mapped = new List<string>();
+                foreach (string answerKey in AnswerKeys)
+                {
+                    var bankOption = Options.FirstOrDefault(o => o.Key.Equals(answerKey, StringComparison.OrdinalIgnoreCase));
+                    if (bankOption == null || string.IsNullOrWhiteSpace(bankOption.Text)) return "";
+
+                    LocalSearchOption? best = null;
+                    double bestScore = 0;
+                    string bankText = CleanOptionText(bankOption.Text);
+
+                    foreach (var current in currentOptions)
+                    {
+                        if (string.IsNullOrWhiteSpace(current.Key) || string.IsNullOrWhiteSpace(current.Text)) continue;
+                        double score = OptionSimilarity(bankText, CleanOptionText(current.Text));
+                        if (score > bestScore)
+                        {
+                            bestScore = score;
+                            best = current;
+                        }
+                    }
+
+                    if (best == null || bestScore < 0.55) return "";
+                    mapped.Add(best.Key.Trim().ToUpperInvariant());
+                }
+
+                return string.Concat(mapped.Distinct().OrderBy(x => x, StringComparer.Ordinal));
             }
         }
 
@@ -226,4 +288,6 @@ namespace AI_desktop_tool
         string Type,
         string Answer,
         double Similarity);
+
+    internal sealed record LocalSearchOption(string Key, string Text);
 }
