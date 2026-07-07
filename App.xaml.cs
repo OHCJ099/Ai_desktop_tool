@@ -1,6 +1,6 @@
 using System.Windows;
 
-namespace AI_desktop_tool
+namespace WindowsClient
 {
     /// <summary>
     /// Interaction logic for App.xaml

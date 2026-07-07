@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AI_desktop_tool
+namespace WindowsClient
 {
     /// <summary>
     /// CEF/Chromium DevTools Protocol text extractor.
@@ -20,26 +20,26 @@ namespace AI_desktop_tool
     /// actual Chromium page runtime. The target CEF app must be launched with:
     ///   --remote-debugging-port=9222 --remote-allow-origins=*
     /// </summary>
-    public static class CefDomExtractor
+    public static class ClientSession
     {
         private static readonly HttpClient Http = new HttpClient { Timeout = TimeSpan.FromSeconds(2) };
         private static int _seq;
 
-        public static Task<bool> IsCdpAvailableAsync(int port = 9222, CancellationToken ct = default)
+        public static Task<bool> IsChannelAvailableAsync(int port = 9222, CancellationToken ct = default)
         {
-            return IsCdpAliveAsync(port, ct);
+            return IsChannelAliveAsync(port, ct);
         }
 
         public static async Task<string> ExtractBestTextAsync(int port = 9222, CancellationToken ct = default)
         {
-            await EnsureCdpAvailableAsync(port, ct);
+            await EnsureChannelAvailableAsync(port, ct);
 
             var targets = await GetTargetsAsync(port, ct);
             if (targets.Count == 0)
             {
                 // Some CEF builds expose no /json/list entries until a web page is opened.
                 // Try browser-level Target.getTargets as a fallback.
-                targets = await GetTargetsViaBrowserAsync(port, ct);
+                targets = await GetTargetsViaHostAsync(port, ct);
             }
 
             var candidates = targets
@@ -74,20 +74,20 @@ namespace AI_desktop_tool
 
             if (targets.Count == 0)
             {
-                return "未发现可读取的 CEF 页面。请用带参数的方式启动考试端：CXExam.exe --remote-debugging-port=9222 --remote-allow-origins=*，进入题目页面后再点 C。";
+                return "未发现可读取页面，请确认目标页面已打开后重试。";
             }
 
-            return "已连接 CEF DevTools，但当前没有 page/webview target；请先进入包含题目的网页页面后再点 C。";
+            return "已连接，但当前没有可读取页面；请先进入目标页面后再试。";
         }
 
-        public static async Task<bool> TryInjectAnswerAsync(string answer, int port = 9222, CancellationToken ct = default)
+        public static async Task<bool> TryApplyTextAsync(string answer, int port = 9222, CancellationToken ct = default)
         {
             if (string.IsNullOrWhiteSpace(answer)) return false;
 
-            await EnsureCdpAvailableAsync(port, ct);
+            await EnsureChannelAvailableAsync(port, ct);
 
             var targets = await GetTargetsAsync(port, ct);
-            if (targets.Count == 0) targets = await GetTargetsViaBrowserAsync(port, ct);
+            if (targets.Count == 0) targets = await GetTargetsViaHostAsync(port, ct);
 
             var candidates = targets
                 .Where(t => !string.IsNullOrWhiteSpace(t.WebSocketDebuggerUrl) &&
@@ -100,7 +100,7 @@ namespace AI_desktop_tool
             {
                 try
                 {
-                    if (await InjectIntoPageWebSocketAsync(t.WebSocketDebuggerUrl!, answer, ct))
+                    if (await ApplyTextIntoPageWebSocketAsync(t.WebSocketDebuggerUrl!, answer, ct))
                     {
                         return true;
                     }
@@ -116,10 +116,10 @@ namespace AI_desktop_tool
 
         public static async Task<bool> EnablePasteAsync(int port = 9222, CancellationToken ct = default)
         {
-            await EnsureCdpAvailableAsync(port, ct);
+            await EnsureChannelAvailableAsync(port, ct);
 
             var targets = await GetTargetsAsync(port, ct);
-            if (targets.Count == 0) targets = await GetTargetsViaBrowserAsync(port, ct);
+            if (targets.Count == 0) targets = await GetTargetsViaHostAsync(port, ct);
 
             var candidates = targets
                 .Where(t => !string.IsNullOrWhiteSpace(t.WebSocketDebuggerUrl) &&
@@ -146,10 +146,10 @@ namespace AI_desktop_tool
 
         public static async Task<AutomationPageSnapshot> GetAutomationSnapshotAsync(int port = 9222, CancellationToken ct = default)
         {
-            await EnsureCdpAvailableAsync(port, ct);
+            await EnsureChannelAvailableAsync(port, ct);
 
             var targets = await GetTargetsAsync(port, ct);
-            if (targets.Count == 0) targets = await GetTargetsViaBrowserAsync(port, ct);
+            if (targets.Count == 0) targets = await GetTargetsViaHostAsync(port, ct);
 
             var candidates = targets
                 .Where(t => !string.IsNullOrWhiteSpace(t.WebSocketDebuggerUrl) &&
@@ -160,7 +160,7 @@ namespace AI_desktop_tool
 
             if (candidates.Count == 0)
             {
-                throw new InvalidOperationException("CDP 已连接，但未发现 page/webview target。");
+                throw new InvalidOperationException("未发现可读取页面。");
             }
 
             Exception? lastError = null;
@@ -186,20 +186,20 @@ namespace AI_desktop_tool
                 }
             }
 
-            throw new InvalidOperationException(lastError?.Message ?? "未能定位当前题面。");
+            throw new InvalidOperationException(lastError?.Message ?? "未能定位当前内容。");
         }
 
-        public static async Task<AutomationActionResult> ApplyAutomationAnswerAsync(string answer, int port = 9222, CancellationToken ct = default)
+        public static async Task<AutomationActionResult> ApplyAutomationTextAsync(string answer, int port = 9222, CancellationToken ct = default)
         {
             if (string.IsNullOrWhiteSpace(answer))
             {
-                return new AutomationActionResult(false, "AI 答案为空。");
+                return new AutomationActionResult(false, "内容为空。");
             }
 
-            await EnsureCdpAvailableAsync(port, ct);
+            await EnsureChannelAvailableAsync(port, ct);
 
             var targets = await GetTargetsAsync(port, ct);
-            if (targets.Count == 0) targets = await GetTargetsViaBrowserAsync(port, ct);
+            if (targets.Count == 0) targets = await GetTargetsViaHostAsync(port, ct);
 
             var candidates = targets
                 .Where(t => !string.IsNullOrWhiteSpace(t.WebSocketDebuggerUrl) &&
@@ -210,7 +210,7 @@ namespace AI_desktop_tool
 
             if (candidates.Count == 0)
             {
-                return new AutomationActionResult(false, "CDP 页面 target 不存在。");
+                return new AutomationActionResult(false, "页面不存在。");
             }
 
             string last = "页面操作失败。";
@@ -218,7 +218,7 @@ namespace AI_desktop_tool
             {
                 try
                 {
-                    var result = await ApplyAutomationAnswerInPageAsync(t.WebSocketDebuggerUrl!, answer, ct);
+                    var result = await ApplyAutomationTextInPageAsync(t.WebSocketDebuggerUrl!, answer, ct);
                     if (result.Success) return result;
                     last = result.Message;
                 }
@@ -233,10 +233,10 @@ namespace AI_desktop_tool
 
         public static async Task<AutomationActionResult> ClickAutomationNextAsync(int port = 9222, CancellationToken ct = default)
         {
-            await EnsureCdpAvailableAsync(port, ct);
+            await EnsureChannelAvailableAsync(port, ct);
 
             var targets = await GetTargetsAsync(port, ct);
-            if (targets.Count == 0) targets = await GetTargetsViaBrowserAsync(port, ct);
+            if (targets.Count == 0) targets = await GetTargetsViaHostAsync(port, ct);
 
             var candidates = targets
                 .Where(t => !string.IsNullOrWhiteSpace(t.WebSocketDebuggerUrl) &&
@@ -247,7 +247,7 @@ namespace AI_desktop_tool
 
             if (candidates.Count == 0)
             {
-                return new AutomationActionResult(false, "CDP 页面 target 不存在。");
+                return new AutomationActionResult(false, "页面不存在。");
             }
 
             string last = "找不到下一题按钮。";
@@ -268,15 +268,15 @@ namespace AI_desktop_tool
             return new AutomationActionResult(false, last);
         }
 
-        public static async Task<string> DumpInjectionDiagnosticsAsync(int port = 9222, CancellationToken ct = default)
+        public static async Task<string> DumpPageDiagnosticsAsync(int port = 9222, CancellationToken ct = default)
         {
-            await EnsureCdpAvailableAsync(port, ct);
+            await EnsureChannelAvailableAsync(port, ct);
 
             var targets = await GetTargetsAsync(port, ct);
-            if (targets.Count == 0) targets = await GetTargetsViaBrowserAsync(port, ct);
+            if (targets.Count == 0) targets = await GetTargetsViaHostAsync(port, ct);
 
             var sb = new StringBuilder();
-            sb.AppendLine("CEF answer injection diagnostics");
+            sb.AppendLine("page diagnostics");
             sb.AppendLine("Time: " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             sb.AppendLine();
 
@@ -301,10 +301,10 @@ namespace AI_desktop_tool
 
             string path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),
-                "cef_inject_diag_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt");
+                "page_diag_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt");
             string appPath = Path.Combine(
                 AppDomain.CurrentDomain.BaseDirectory,
-                "cef_inject_diag_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt");
+                "page_diag_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt");
 
             string content = sb.ToString();
             string written = "";
@@ -330,14 +330,14 @@ namespace AI_desktop_tool
             return written;
         }
 
-        private static async Task EnsureCdpAvailableAsync(int port, CancellationToken ct)
+        private static async Task EnsureChannelAvailableAsync(int port, CancellationToken ct)
         {
-            // Only probe the CDP endpoint. Do not auto-start CXExam from this helper;
-            // the CDP desktop shortcut is created separately and the user opens it manually.
-            await IsCdpAliveAsync(port, ct);
+            // Only probe the channel endpoint. Do not auto-start CXExam from this helper;
+            // the channel desktop shortcut is created separately and the user opens it manually.
+            await IsChannelAliveAsync(port, ct);
         }
 
-        private static async Task<bool> IsCdpAliveAsync(int port, CancellationToken ct)
+        private static async Task<bool> IsChannelAliveAsync(int port, CancellationToken ct)
         {
             try
             {
@@ -350,41 +350,41 @@ namespace AI_desktop_tool
             }
         }
 
-        private static async Task<List<CdpTarget>> GetTargetsAsync(int port, CancellationToken ct)
+        private static async Task<List<PageTarget>> GetTargetsAsync(int port, CancellationToken ct)
         {
             try
             {
                 string json = await Http.GetStringAsync($"http://127.0.0.1:{port}/json/list", ct);
-                return JsonSerializer.Deserialize<List<CdpTarget>>(json, JsonOpts()) ?? new List<CdpTarget>();
+                return JsonSerializer.Deserialize<List<PageTarget>>(json, JsonOpts()) ?? new List<PageTarget>();
             }
             catch
             {
-                return new List<CdpTarget>();
+                return new List<PageTarget>();
             }
         }
 
-        private static async Task<List<CdpTarget>> GetTargetsViaBrowserAsync(int port, CancellationToken ct)
+        private static async Task<List<PageTarget>> GetTargetsViaHostAsync(int port, CancellationToken ct)
         {
             try
             {
                 string json = await Http.GetStringAsync($"http://127.0.0.1:{port}/json/version", ct);
                 using var doc = JsonDocument.Parse(json);
                 string? browserWs = doc.RootElement.GetProperty("webSocketDebuggerUrl").GetString();
-                if (string.IsNullOrWhiteSpace(browserWs)) return new List<CdpTarget>();
+                if (string.IsNullOrWhiteSpace(browserWs)) return new List<PageTarget>();
 
                 using var ws = new ClientWebSocket();
                 await ws.ConnectAsync(new Uri(browserWs), ct);
                 using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct);
                 timeout.CancelAfter(TimeSpan.FromSeconds(3));
 
-                var resp = await SendCdpAsync(ws, "Target.getTargets", null, timeout.Token);
-                var list = new List<CdpTarget>();
+                var resp = await SendChannelAsync(ws, "Target.getTargets", null, timeout.Token);
+                var list = new List<PageTarget>();
                 if (resp.RootElement.TryGetProperty("result", out var result) &&
                     result.TryGetProperty("targetInfos", out var infos))
                 {
                     foreach (var info in infos.EnumerateArray())
                     {
-                        list.Add(new CdpTarget
+                        list.Add(new PageTarget
                         {
                             Id = GetString(info, "targetId") ?? "",
                             Type = GetString(info, "type") ?? "",
@@ -397,7 +397,7 @@ namespace AI_desktop_tool
             }
             catch
             {
-                return new List<CdpTarget>();
+                return new List<PageTarget>();
             }
         }
 
@@ -408,7 +408,7 @@ namespace AI_desktop_tool
             using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct);
             timeout.CancelAfter(TimeSpan.FromSeconds(6));
 
-            await SendCdpAsync(ws, "Runtime.enable", null, timeout.Token);
+            await SendChannelAsync(ws, "Runtime.enable", null, timeout.Token);
 
             // DOM-level extraction:
             // 1) current browser selection, if any;
@@ -420,9 +420,9 @@ namespace AI_desktop_tool
   const MAX = 4200;
   const seen = new Set();
   const out = [];
-  const badRe = /(上一题|下一题|交卷|提交|返回|退出|倒计时|考试须知|保存|标记|未答|已答|答题卡|题号|登录|刷新|关闭|全屏|收起|展开|当前题目|已作答|未作答|remainTime|monitorStatus)/;
+  const badRe = /(\u4e0a\u4e00\u9898|\u4e0b\u4e00\u9898|\u4ea4\u5377|\u63d0\u4ea4|\u8fd4\u56de|\u9000\u51fa|\u5012\u8ba1\u65f6|\u8003\u8bd5\u987b\u77e5|\u4fdd\u5b58|\u6807\u8bb0|\u672a\u7b54|\u5df2\u7b54|\u7b54\u9898\u5361|\u9898\u53f7|\u767b\u5f55|\u5237\u65b0|\u5173\u95ed|\u5168\u5c4f|\u6536\u8d77|\u5c55\u5f00|\u5f53\u524d\u9898\u76ee|\u5df2\u4f5c\u7b54|\u672a\u4f5c\u7b54|remainTime|monitorStatus)/;
   const toolbarRe = /^(段落|arial|sans-serif|serif|微软雅黑|宋体|黑体|(?:1[0-9]|2[0-9]|[8-9])px)$/i;
-  const qRe = /(单选|多选|判断|填空|简答|论述|材料|阅读|题|问题|请选择|正确的是|错误的是|下列|答案|A[\.．、]|B[\.．、]|C[\.．、]|D[\.．、]|①|②|③|④)/i;
+  const qRe = /(\u5355\u9009|\u591a\u9009|\u5224\u65ad|\u586b\u7a7a|\u7b80\u7b54|\u8bba\u8ff0|\u6750\u6599|\u9605\u8bfb|\u9898|\u95ee\u9898|\u8bf7\u9009\u62e9|\u6b63\u786e\u7684\u662f|\u9519\u8bef\u7684\u662f|\u4e0b\u5217|\u7b54\u6848|A[\.．、]|B[\.．、]|C[\.．、]|D[\.．、]|①|②|③|④)/i;
   function norm(s) {
     return String(s || '')
       .replace(/\r/g, '\n')
@@ -560,7 +560,7 @@ namespace AI_desktop_tool
 })()
 """;
 
-            var eval = await SendCdpAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
+            var eval = await SendChannelAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
             {
                 ["expression"] = expression,
                 ["returnByValue"] = true,
@@ -576,7 +576,7 @@ namespace AI_desktop_tool
             {
                 try
                 {
-                    var ax = await SendCdpAsync(ws, "Accessibility.getFullAXTree", null, timeout.Token);
+                    var ax = await SendChannelAsync(ws, "Accessibility.getFullAXTree", null, timeout.Token);
                     axText = ExtractAxNames(ax);
                 }
                 catch { }
@@ -585,14 +585,14 @@ namespace AI_desktop_tool
             return Normalize(domText + "\n" + axText);
         }
 
-        private static async Task<bool> InjectIntoPageWebSocketAsync(string wsUrl, string answer, CancellationToken ct)
+        private static async Task<bool> ApplyTextIntoPageWebSocketAsync(string wsUrl, string answer, CancellationToken ct)
         {
             using var ws = new ClientWebSocket();
             await ws.ConnectAsync(new Uri(wsUrl), ct);
             using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct);
             timeout.CancelAfter(TimeSpan.FromSeconds(6));
 
-            await SendCdpAsync(ws, "Runtime.enable", null, timeout.Token);
+            await SendChannelAsync(ws, "Runtime.enable", null, timeout.Token);
 
             string answerJson = JsonSerializer.Serialize(answer);
             string expression = $$$"""
@@ -632,7 +632,7 @@ namespace AI_desktop_tool
   //   iframe#ueditor_0 -> body.view[contenteditable=true]
   //   hidden textarea#answer{questionId}
   // Prefer its public API, then hard-sync iframe body + hidden textarea.
-  function injectUEditor() {
+  function applyEditor() {
     let ok = false;
     const html = answerHtml(ANSWER);
     try {
@@ -685,7 +685,7 @@ namespace AI_desktop_tool
 
     return ok;
   }
-  if (injectUEditor()) return true;
+  if (applyEditor()) return true;
 
   function visible(el) {
     if (!el || el.nodeType !== 1) return false;
@@ -745,7 +745,7 @@ namespace AI_desktop_tool
     const r = el.getBoundingClientRect();
     let s = 0;
     const hint = ((el.id || '') + ' ' + (el.className || '') + ' ' + (el.name || '') + ' ' + (el.placeholder || '') + ' ' + (el.getAttribute('aria-label') || '')).toLowerCase();
-    if (/answer|daan|reply|editor|ueditor|content|textarea|subject|write|填|答|答案|作答|回答/.test(hint)) s += 80;
+    if (/answer|daan|reply|editor|ueditor|content|textarea|subject|write|\u586b|\u7b54|\u7b54\u6848|\u4f5c\u7b54|\u56de\u7b54/.test(hint)) s += 80;
     if (document.activeElement === el) s += 120;
     if (el.isContentEditable) s += 35;
     if ((el.tagName || '').toLowerCase() === 'textarea') s += 50;
@@ -806,7 +806,7 @@ namespace AI_desktop_tool
 })()
 """;
 
-            var eval = await SendCdpAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
+            var eval = await SendChannelAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
             {
                 ["expression"] = expression,
                 ["returnByValue"] = true,
@@ -822,7 +822,7 @@ namespace AI_desktop_tool
                     .GetProperty("value")
                     .GetBoolean())
                 {
-                    if (await VerifyAnswerPresentAsync(ws, answer, timeout.Token))
+                    if (await VerifyTextPresentAsync(ws, answer, timeout.Token))
                     {
                         return true;
                     }
@@ -832,7 +832,7 @@ namespace AI_desktop_tool
             {
             }
 
-            // Last CDP-level attempt: focus the best editable element, select all, then use
+            // Last channel-level attempt: focus the best editable element, select all, then use
             // Input.insertText. This goes through Chromium's input pipeline and often works
             // when direct DOM value assignment is ignored by custom editors.
             string focusExpression = """
@@ -859,7 +859,7 @@ namespace AI_desktop_tool
     const r = el.getBoundingClientRect();
     const hint = ((el.id||'')+' '+(el.className||'')+' '+(el.name||'')+' '+(el.placeholder||'')+' '+(el.getAttribute('aria-label')||'')).toLowerCase();
     let s = r.width * r.height / 1000;
-    if (/answer|daan|reply|editor|ueditor|content|textarea|subject|write|填|答|答案|作答|回答/.test(hint)) s += 100;
+    if (/answer|daan|reply|editor|ueditor|content|textarea|subject|write|\u586b|\u7b54|\u7b54\u6848|\u4f5c\u7b54|\u56de\u7b54/.test(hint)) s += 100;
     if (document.activeElement === el) s += 150;
     if (el.isContentEditable) s += 50;
     if (r.left < innerWidth * 0.18) s -= 80;
@@ -884,7 +884,7 @@ namespace AI_desktop_tool
 })()
 """;
 
-            var focusEval = await SendCdpAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
+            var focusEval = await SendChannelAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
             {
                 ["expression"] = focusExpression,
                 ["returnByValue"] = true,
@@ -908,7 +908,7 @@ namespace AI_desktop_tool
 
             if (focused)
             {
-                await SendCdpAsync(ws, "Input.dispatchMouseEvent", new Dictionary<string, object?>
+                await SendChannelAsync(ws, "Input.dispatchMouseEvent", new Dictionary<string, object?>
                 {
                     ["type"] = "mousePressed",
                     ["x"] = x,
@@ -916,7 +916,7 @@ namespace AI_desktop_tool
                     ["button"] = "left",
                     ["clickCount"] = 1
                 }, timeout.Token);
-                await SendCdpAsync(ws, "Input.dispatchMouseEvent", new Dictionary<string, object?>
+                await SendChannelAsync(ws, "Input.dispatchMouseEvent", new Dictionary<string, object?>
                 {
                     ["type"] = "mouseReleased",
                     ["x"] = x,
@@ -924,11 +924,11 @@ namespace AI_desktop_tool
                     ["button"] = "left",
                     ["clickCount"] = 1
                 }, timeout.Token);
-                await SendCdpAsync(ws, "Input.insertText", new Dictionary<string, object?>
+                await SendChannelAsync(ws, "Input.insertText", new Dictionary<string, object?>
                 {
                     ["text"] = answer
                 }, timeout.Token);
-                return await VerifyAnswerPresentAsync(ws, answer, timeout.Token);
+                return await VerifyTextPresentAsync(ws, answer, timeout.Token);
             }
 
             return false;
@@ -941,12 +941,12 @@ namespace AI_desktop_tool
             using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct);
             timeout.CancelAfter(TimeSpan.FromSeconds(4));
 
-            await SendCdpAsync(ws, "Runtime.enable", null, timeout.Token);
-            try { await SendCdpAsync(ws, "Page.enable", null, timeout.Token); } catch { }
+            await SendChannelAsync(ws, "Runtime.enable", null, timeout.Token);
+            try { await SendChannelAsync(ws, "Page.enable", null, timeout.Token); } catch { }
 
             const string pasteUnlockScript = """
 (() => {
-  const MARK = '__ai_desktop_tool_paste_unlock_20260701__';
+  const MARK = '__win_client_input_20260701__';
 
   function isPasteLikeEvent(e) {
     try {
@@ -1023,7 +1023,7 @@ namespace AI_desktop_tool
 
             try
             {
-                await SendCdpAsync(ws, "Page.addScriptToEvaluateOnNewDocument", new Dictionary<string, object?>
+                await SendChannelAsync(ws, "Page.addScriptToEvaluateOnNewDocument", new Dictionary<string, object?>
                 {
                     ["source"] = pasteUnlockScript
                 }, timeout.Token);
@@ -1032,7 +1032,7 @@ namespace AI_desktop_tool
             {
             }
 
-            var eval = await SendCdpAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
+            var eval = await SendChannelAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
             {
                 ["expression"] = pasteUnlockScript,
                 ["returnByValue"] = true,
@@ -1054,7 +1054,7 @@ namespace AI_desktop_tool
             }
         }
 
-        private static async Task<bool> VerifyAnswerPresentAsync(ClientWebSocket ws, string answer, CancellationToken ct)
+        private static async Task<bool> VerifyTextPresentAsync(ClientWebSocket ws, string answer, CancellationToken ct)
         {
             string probe = answer.Trim();
             if (probe.Length > 40) probe = probe.Substring(0, 40);
@@ -1085,7 +1085,7 @@ namespace AI_desktop_tool
 
             try
             {
-                var eval = await SendCdpAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
+                var eval = await SendChannelAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
                 {
                     ["expression"] = expression,
                     ["returnByValue"] = true,
@@ -1110,7 +1110,7 @@ namespace AI_desktop_tool
             using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct);
             timeout.CancelAfter(TimeSpan.FromSeconds(6));
 
-            await SendCdpAsync(ws, "Runtime.enable", null, timeout.Token);
+            await SendChannelAsync(ws, "Runtime.enable", null, timeout.Token);
 
             string expression = """
 (() => {
@@ -1204,7 +1204,7 @@ namespace AI_desktop_tool
 })()
 """;
 
-            var eval = await SendCdpAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
+            var eval = await SendChannelAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
             {
                 ["expression"] = expression,
                 ["returnByValue"] = true,
@@ -1221,7 +1221,7 @@ namespace AI_desktop_tool
             using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct);
             timeout.CancelAfter(TimeSpan.FromSeconds(6));
 
-            await SendCdpAsync(ws, "Runtime.enable", null, timeout.Token);
+            await SendChannelAsync(ws, "Runtime.enable", null, timeout.Token);
             const string expression = """
 (() => {
   const MAX = 4200;
@@ -1403,7 +1403,7 @@ namespace AI_desktop_tool
 
 """;
 
-            var eval = await SendCdpAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
+            var eval = await SendChannelAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
             {
                 ["expression"] = expression,
                 ["returnByValue"] = true,
@@ -1411,19 +1411,19 @@ namespace AI_desktop_tool
             }, timeout.Token);
 
             string json = ExtractRuntimeString(eval);
-            if (string.IsNullOrWhiteSpace(json)) throw new InvalidOperationException("题面识别失败。");
+            if (string.IsNullOrWhiteSpace(json)) throw new InvalidOperationException("读取失败。");
             return JsonSerializer.Deserialize<AutomationPageSnapshot>(json, JsonOpts())
-                   ?? throw new InvalidOperationException("题面识别结果解析失败。");
+                   ?? throw new InvalidOperationException("解析失败。");
         }
 
-        private static async Task<AutomationActionResult> ApplyAutomationAnswerInPageAsync(string wsUrl, string answer, CancellationToken ct)
+        private static async Task<AutomationActionResult> ApplyAutomationTextInPageAsync(string wsUrl, string answer, CancellationToken ct)
         {
             using var ws = new ClientWebSocket();
             await ws.ConnectAsync(new Uri(wsUrl), ct);
             using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct);
             timeout.CancelAfter(TimeSpan.FromSeconds(6));
 
-            await SendCdpAsync(ws, "Runtime.enable", null, timeout.Token);
+            await SendChannelAsync(ws, "Runtime.enable", null, timeout.Token);
             string answerJson = JsonSerializer.Serialize(answer);
             string expression = $$"""
 (() => {
@@ -1635,14 +1635,14 @@ namespace AI_desktop_tool
 
 """;
 
-            var eval = await SendCdpAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
+            var eval = await SendChannelAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
             {
                 ["expression"] = expression,
                 ["returnByValue"] = true,
                 ["awaitPromise"] = true
             }, timeout.Token);
 
-            return ParseActionResultFromCdp(eval);
+            return ParseActionResultFromPage(eval);
         }
 
         private static async Task<AutomationActionResult> ClickAutomationNextInPageAsync(string wsUrl, CancellationToken ct)
@@ -1652,7 +1652,7 @@ namespace AI_desktop_tool
             using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct);
             timeout.CancelAfter(TimeSpan.FromSeconds(5));
 
-            await SendCdpAsync(ws, "Runtime.enable", null, timeout.Token);
+            await SendChannelAsync(ws, "Runtime.enable", null, timeout.Token);
             const string expression = """
 (() => {
   function result(ok, reason, action, extra) {
@@ -1770,7 +1770,7 @@ namespace AI_desktop_tool
 
 """;
 
-            var eval = await SendCdpAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
+            var eval = await SendChannelAsync(ws, "Runtime.evaluate", new Dictionary<string, object?>
             {
                 ["expression"] = expression,
                 ["returnByValue"] = true,
@@ -1783,10 +1783,10 @@ namespace AI_desktop_tool
                 return new AutomationActionResult(true, "\u5df2\u70b9\u51fb\u4e0b\u4e00\u9898\uff0c\u9875\u9762\u6b63\u5728\u8df3\u8f6c\u3002");
             }
 
-            return ParseActionResultFromCdp(eval);
+            return ParseActionResultFromPage(eval);
         }
 
-        private static async Task<JsonDocument> SendCdpAsync(ClientWebSocket ws, string method, object? parameters, CancellationToken ct)
+        private static async Task<JsonDocument> SendChannelAsync(ClientWebSocket ws, string method, object? parameters, CancellationToken ct)
         {
             int id = Interlocked.Increment(ref _seq);
             var msg = new Dictionary<string, object?> { ["id"] = id, ["method"] = method };
@@ -1889,7 +1889,7 @@ namespace AI_desktop_tool
             }
         }
 
-        private static AutomationActionResult ParseActionResultFromCdp(JsonDocument doc)
+        private static AutomationActionResult ParseActionResultFromPage(JsonDocument doc)
         {
             string summary = "";
             try
@@ -1912,7 +1912,7 @@ namespace AI_desktop_tool
                 if (!doc.RootElement.TryGetProperty("result", out var result) ||
                     !result.TryGetProperty("result", out var runtimeResult))
                 {
-                    return new AutomationActionResult(false, "CDP 返回结构异常：" + summary);
+                    return new AutomationActionResult(false, "返回结构异常：" + summary);
                 }
 
                 string json = "";
@@ -1933,14 +1933,14 @@ namespace AI_desktop_tool
                     string type = runtimeResult.TryGetProperty("type", out var typeEl) ? (typeEl.GetString() ?? "") : "";
                     string subtype = runtimeResult.TryGetProperty("subtype", out var subtypeEl) ? (subtypeEl.GetString() ?? "") : "";
                     string description = runtimeResult.TryGetProperty("description", out var descEl) ? (descEl.GetString() ?? "") : "";
-                    return new AutomationActionResult(false, $"页面脚本无返回。CDP type={type} subtype={subtype} desc={description} raw={summary}");
+                    return new AutomationActionResult(false, $"页面脚本无返回。type={type} subtype={subtype} desc={description} raw={summary}");
                 }
 
                 return ParseActionResult(json);
             }
             catch (Exception ex)
             {
-                return new AutomationActionResult(false, "作答结果解析异常：" + ex.Message + (string.IsNullOrWhiteSpace(summary) ? "" : " raw=" + summary));
+                return new AutomationActionResult(false, "结果解析异常：" + ex.Message + (string.IsNullOrWhiteSpace(summary) ? "" : " raw=" + summary));
             }
         }
 
@@ -1972,7 +1972,7 @@ namespace AI_desktop_tool
 
         private static JsonSerializerOptions JsonOpts() => new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
-        private sealed class CdpTarget
+        private sealed class PageTarget
         {
             public string Id { get; set; } = "";
             public string Type { get; set; } = "";

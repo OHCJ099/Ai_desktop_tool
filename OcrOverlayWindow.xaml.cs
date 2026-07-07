@@ -13,9 +13,9 @@ using Windows.Graphics.Imaging;
 using Windows.Media.Ocr;
 using Windows.Storage.Streams;
 
-namespace AI_desktop_tool
+namespace WindowsClient
 {
-    public partial class OcrOverlayWindow : Window
+    public partial class StatusWindow : Window
     {
         private Point _startPoint;
         private bool _isDragging;
@@ -27,7 +27,7 @@ namespace AI_desktop_tool
         public string UiaExtractedText { get; private set; }
         public Rect SelectedRect { get; private set; }
 
-        public OcrOverlayWindow()
+        public StatusWindow()
         {
             InitializeComponent();
             UiaExtractedText = "";

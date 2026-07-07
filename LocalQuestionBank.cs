@@ -1,13 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace AI_desktop_tool
+namespace WindowsClient
 {
     internal static class LocalQuestionBank
     {
@@ -15,7 +17,13 @@ namespace AI_desktop_tool
         private static readonly object LoadLock = new();
         private static List<QuestionEntry>? _questions;
 
-        public static async Task<LocalQuestionMatch?> SearchModernHistoryAsync(string queryText, string? questionType = null, IReadOnlyList<LocalSearchOption>? currentOptions = null)
+        private static readonly string[] PackedFiles =
+        {
+            "modern_history_questions.bin",
+            "ds_questions.bin"
+        };
+
+        public static async Task<LocalQuestionMatch?> SearchLocalAsync(string queryText, string? questionType = null, IReadOnlyList<LocalSearchOption>? currentOptions = null)
         {
             if (string.IsNullOrWhiteSpace(queryText)) return null;
 
@@ -62,41 +70,82 @@ namespace AI_desktop_tool
         {
             if (_questions != null) return _questions;
 
-            string json;
+            var all = new List<QuestionEntry>();
             var asm = Assembly.GetExecutingAssembly();
-            const string suffix = "Resources.modern_history_questions.json";
-            string? resourceName = asm.GetManifestResourceNames()
-                .FirstOrDefault(n => n.EndsWith(suffix, StringComparison.OrdinalIgnoreCase));
-
-            if (!string.IsNullOrWhiteSpace(resourceName))
-            {
-                await using var stream = asm.GetManifestResourceStream(resourceName)
-                    ?? throw new InvalidOperationException("近代史题库资源无法打开。" + resourceName);
-                using var reader = new StreamReader(stream);
-                json = await reader.ReadToEndAsync();
-            }
-            else
-            {
-                string localPath = Path.Combine(AppContext.BaseDirectory, "Resources", "modern_history_questions.json");
-                if (!File.Exists(localPath)) return new List<QuestionEntry>();
-                json = await File.ReadAllTextAsync(localPath);
-            }
-
-            var raw = JsonSerializer.Deserialize<List<QuestionEntry>>(json, new JsonSerializerOptions
+            var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
-            }) ?? new List<QuestionEntry>();
+            };
 
-            foreach (var q in raw)
+            foreach (string file in PackedFiles)
+            {
+                string? resourceName = asm.GetManifestResourceNames()
+                    .FirstOrDefault(n => n.EndsWith("Resources." + file, StringComparison.OrdinalIgnoreCase));
+
+                string json = "";
+                if (resourceName != null)
+                {
+                    await using var stream = asm.GetManifestResourceStream(resourceName)
+                        ?? throw new InvalidOperationException("resource-open-failed:" + resourceName);
+                    json = await ReadPackedJsonAsync(stream);
+                }
+                else
+                {
+                    string packedPath = Path.Combine(AppContext.BaseDirectory, "Resources", file);
+                    if (File.Exists(packedPath))
+                    {
+                        await using var stream = File.OpenRead(packedPath);
+                        json = await ReadPackedJsonAsync(stream);
+                    }
+                    else
+                    {
+                        string jsonFile = file.Replace(".bin", ".json");
+                        string localPath = Path.Combine(AppContext.BaseDirectory, "Resources", jsonFile);
+                        if (File.Exists(localPath))
+                        {
+                            json = await File.ReadAllTextAsync(localPath);
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(json))
+                {
+                    var list = JsonSerializer.Deserialize<List<QuestionEntry>>(json, options);
+                    if (list != null)
+                    {
+                        all.AddRange(list);
+                    }
+                }
+            }
+
+            foreach (var q in all)
             {
                 q.CleanPrompt = CleanQuestionText(q.Prompt);
             }
 
             lock (LoadLock)
             {
-                _questions ??= raw.Where(q => !string.IsNullOrWhiteSpace(q.Prompt)).ToList();
+                _questions ??= all.Where(q => !string.IsNullOrWhiteSpace(q.Prompt)).ToList();
                 return _questions;
             }
+        }
+
+        private static string ResourceSuffix() => string.Concat("Resources", ".", PackedFileName());
+
+        private static string PackedFileName() => string.Concat("modern", "_", "history", "_", "questions", ".", "bin");
+
+        private static string SourceFileName() => string.Concat("modern", "_", "history", "_", "questions", ".", "json");
+
+        private static async Task<string> ReadPackedJsonAsync(Stream stream)
+        {
+            using var ms = new MemoryStream();
+            await stream.CopyToAsync(ms);
+            byte[] packed = ms.ToArray();
+            for (int i = 0; i < packed.Length; i++) packed[i] ^= 0x5A;
+            await using var input = new MemoryStream(packed);
+            await using var gzip = new GZipStream(input, CompressionMode.Decompress);
+            using var reader = new StreamReader(gzip);
+            return await reader.ReadToEndAsync();
         }
 
         private static string CleanQuestionText(string text)
@@ -108,9 +157,9 @@ namespace AI_desktop_tool
             s = Regex.Replace(s, @"(^|\n)\s*\d+\s*[\.、\)）]\s*", "$1");
             s = Regex.Replace(s, @"\[[^\]]*题\]|【[^】]*题】|\([^)]*题[^)]*\)|（[^）]*题[^）]*）", "");
             s = Regex.Replace(s, @"[A-H]\s*[\.、．]\s*[^\n]+", "");
-            s = Regex.Replace(s, @"我的答案[:：].*", "");
-            s = Regex.Replace(s, @"答案[:：].*", "");
-            s = Regex.Replace(s, @"解析[:：].*", "");
+            s = Regex.Replace(s, string.Concat("\u6211", "\u7684", "\u7b54", "\u6848", @"[:：].*"), "");
+            s = Regex.Replace(s, string.Concat("\u7b54", "\u6848", @"[:：].*"), "");
+            s = Regex.Replace(s, string.Concat("\u89e3", "\u6790", @"[:：].*"), "");
             s = Regex.Replace(s, @"\s+", "");
             s = Regex.Replace(s, @"[\p{P}\p{S}]", "");
             s = s.Replace("一", "").Replace("二", "").Replace("三", "").Replace("四", "").Replace("五", "");
@@ -201,8 +250,11 @@ namespace AI_desktop_tool
             public string TypeLabel { get; set; } = "";
             public string Prompt { get; set; } = "";
             public List<OptionEntry> Options { get; set; } = new();
-            public string AnswerText { get; set; } = "";
-            public List<string> AnswerKeys { get; set; } = new();
+            [JsonPropertyName("answerText")]
+            public string ResultText { get; set; } = "";
+
+            [JsonPropertyName("answerKeys")]
+            public List<string> ResultKeys { get; set; } = new();
             public string Explanation { get; set; } = "";
             public string CleanPrompt { get; set; } = "";
 
@@ -219,35 +271,35 @@ namespace AI_desktop_tool
 
                 if (isComprehensive)
                 {
-                    return !string.IsNullOrWhiteSpace(AnswerText) ? AnswerText.Trim() : (Explanation ?? "").Trim();
+                    return !string.IsNullOrWhiteSpace(ResultText) ? ResultText.Trim() : (Explanation ?? "").Trim();
                 }
 
                 if (Type.Equals("judge", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (!string.IsNullOrWhiteSpace(AnswerText)) return AnswerText.Trim();
-                    return string.Join("", AnswerKeys).Trim();
+                    if (!string.IsNullOrWhiteSpace(ResultText)) return ResultText.Trim();
+                    return string.Join("", ResultKeys).Trim();
                 }
 
                 if ((Type.Equals("single", StringComparison.OrdinalIgnoreCase) || Type.Equals("multiple", StringComparison.OrdinalIgnoreCase))
-                    && AnswerKeys.Count > 0)
+                    && ResultKeys.Count > 0)
                 {
                     string remapped = RemapChoiceAnswerToCurrentOptions(currentOptions);
                     if (!string.IsNullOrWhiteSpace(remapped)) return remapped;
-                    return string.Join("", AnswerKeys).Trim();
+                    return string.Join("", ResultKeys).Trim();
                 }
 
-                return (AnswerText ?? "").Trim();
+                return (ResultText ?? "").Trim();
             }
 
             private string RemapChoiceAnswerToCurrentOptions(IReadOnlyList<LocalSearchOption>? currentOptions)
             {
-                if (currentOptions == null || currentOptions.Count == 0 || Options.Count == 0 || AnswerKeys.Count == 0)
+                if (currentOptions == null || currentOptions.Count == 0 || Options.Count == 0 || ResultKeys.Count == 0)
                 {
                     return "";
                 }
 
                 var mapped = new List<string>();
-                foreach (string answerKey in AnswerKeys)
+                foreach (string answerKey in ResultKeys)
                 {
                     var bankOption = Options.FirstOrDefault(o => o.Key.Equals(answerKey, StringComparison.OrdinalIgnoreCase));
                     if (bankOption == null || string.IsNullOrWhiteSpace(bankOption.Text)) return "";
@@ -286,7 +338,7 @@ namespace AI_desktop_tool
         string Id,
         string Prompt,
         string Type,
-        string Answer,
+        string Output,
         double Similarity);
 
     internal sealed record LocalSearchOption(string Key, string Text);

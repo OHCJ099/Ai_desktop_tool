@@ -1,9 +1,9 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace AI_desktop_tool
+namespace WindowsClient
 {
-    public static class Win32Helper
+    public static class NativeMethods
     {
         // Window display affinity flags
         public const uint WDA_NONE = 0x00000000;

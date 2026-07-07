@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Text.Json;
 
-namespace AI_desktop_tool
+namespace WindowsClient
 {
     public static class ConfigHelper
     {

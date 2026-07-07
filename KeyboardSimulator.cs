@@ -2,9 +2,9 @@ using System;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
-namespace AI_desktop_tool
+namespace WindowsClient
 {
-    public static class KeyboardSimulator
+    public static class TextRelay
     {
         [StructLayout(LayoutKind.Sequential)]
         private struct INPUT

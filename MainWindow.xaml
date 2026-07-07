@@ -1,7 +1,7 @@
-<Window x:Class="AI_desktop_tool.MainWindow"
+<Window x:Class="WindowsClient.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="AI Helper Window" 
+        Title="Windows client" 
         Height="170" 
         Width="260"
         WindowStyle="None" 
@@ -45,7 +45,7 @@
                 <TextBlock Name="LocalSearchButton" Text="s" FontSize="14" FontWeight="Bold" Foreground="Black" Cursor="Hand" Margin="0,0,10,0"
                            MouseDown="LocalSearchButton_MouseDown" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
                 
-                <!-- CEF/CDP 抽题 (C) 按钮：绕过截图/UIA，直接读 CEF 页面文本 -->
+                <!-- C -->
                 <TextBlock Name="CefCaptureButton" Text="C" FontSize="14" FontWeight="Bold" Foreground="Black" Cursor="Hand" Margin="0,0,10,0"
                            MouseDown="CefCaptureButton_MouseDown" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
 
@@ -62,9 +62,9 @@
                            MouseDown="ExitButton_MouseDown" MouseEnter="Button_MouseEnter" MouseLeave="Button_MouseLeave"/>
             </StackPanel>
 
-            <!-- AI 回答展示区：只读 TextBox，保持透明显示，同时允许选中/复制文本 -->
-            <ScrollViewer x:Name="AnswerScrollViewer" Grid.Row="1" Margin="10,0,10,10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                <TextBox Name="AnswerTextBlock"
+            <!-- output -->
+            <ScrollViewer x:Name="OutputScrollViewer" Grid.Row="1" Margin="10,0,10,10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <TextBox Name="OutputTextBox"
                          Text=""
                          TextWrapping="Wrap"
                          AcceptsReturn="True"

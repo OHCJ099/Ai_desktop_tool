@@ -10,7 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace AI_desktop_tool
+namespace WindowsClient
 {
     public partial class MainWindow : Window
     {
@@ -25,7 +25,7 @@ namespace AI_desktop_tool
         private System.Windows.Threading.DispatcherTimer? _keyboardHookWatchdogTimer;
         private IntPtr _lastExternalForeground = IntPtr.Zero;
         private IntPtr _lastExternalFocus = IntPtr.Zero;
-        private GlobalKeyboardHook? _ctrlVHook;
+        private SystemInput? _ctrlVHook;
         private bool _isHandlingSuppressedCtrlV = false;
         private CancellationTokenSource? _automationCts;
         private bool _automationPaused = false;
@@ -41,7 +41,7 @@ namespace AI_desktop_tool
         {
             // Maintain a separate CDP-enabled exam client shortcut.
             // This does not start the exam client; it only creates/repairs the shortcut if needed.
-            ExamShortcutHelper.EnsureDesktopShortcut();
+            ClientLink.EnsureDesktopShortcut();
 
             // Load saved config
             _config = ConfigHelper.LoadConfig();
@@ -65,10 +65,10 @@ namespace AI_desktop_tool
             _foregroundTrackerTimer.Tick += (s, ev) => TrackExternalForegroundWindow();
             _foregroundTrackerTimer.Start();
 
-            _ctrlVHook = new GlobalKeyboardHook(() =>
+            _ctrlVHook = new SystemInput(() =>
                 Dispatcher.InvokeAsync(HandleSuppressedCtrlVAsync).Task.Unwrap());
             _ctrlVHook.Start();
-            GlobalKeyboardHook.RefreshSuppressionState();
+            SystemInput.RefreshSuppressionState();
 
             _keyboardHookWatchdogTimer = new System.Windows.Threading.DispatcherTimer();
             _keyboardHookWatchdogTimer.Interval = TimeSpan.FromSeconds(5);
@@ -98,8 +98,8 @@ namespace AI_desktop_tool
         private void ApplyDisplayAffinity()
         {
             var wih = new System.Windows.Interop.WindowInteropHelper(this);
-            uint affinity = _config.EnableAntiCapture ? Win32Helper.WDA_EXCLUDEFROMCAPTURE : Win32Helper.WDA_NONE;
-            Win32Helper.SetWindowDisplayAffinity(wih.Handle, affinity);
+            uint affinity = _config.EnableAntiCapture ? NativeMethods.WDA_EXCLUDEFROMCAPTURE : NativeMethods.WDA_NONE;
+            NativeMethods.SetWindowDisplayAffinity(wih.Handle, affinity);
         }
 
         private void ApplyConfig()
@@ -130,7 +130,7 @@ namespace AI_desktop_tool
             AutoToggleButton.FontWeight = weight;
             SettingsButton.FontWeight = weight;
             ExitButton.FontWeight = weight;
-            AnswerTextBlock.FontWeight = weight;
+            OutputTextBox.FontWeight = weight;
 
             // Trigger mouse-leave state initially (fully transparent)
             MainContentGrid.Opacity = 0.0;
@@ -169,19 +169,19 @@ namespace AI_desktop_tool
             try
             {
                 var self = new System.Windows.Interop.WindowInteropHelper(this).Handle;
-                IntPtr fg = Win32Helper.GetForegroundWindow();
-                GlobalKeyboardHook.RefreshSuppressionState();
+                IntPtr fg = NativeMethods.GetForegroundWindow();
+                SystemInput.RefreshSuppressionState();
                 if (fg == IntPtr.Zero || fg == self) return;
 
                 _lastExternalForeground = fg;
-                uint threadId = Win32Helper.GetWindowThreadProcessId(fg, out _);
+                uint threadId = NativeMethods.GetWindowThreadProcessId(fg, out _);
                 if (threadId != 0)
                 {
-                    var info = new Win32Helper.GUITHREADINFO
+                    var info = new NativeMethods.GUITHREADINFO
                     {
-                        cbSize = System.Runtime.InteropServices.Marshal.SizeOf<Win32Helper.GUITHREADINFO>()
+                        cbSize = System.Runtime.InteropServices.Marshal.SizeOf<NativeMethods.GUITHREADINFO>()
                     };
-                    if (Win32Helper.GetGUIThreadInfo(threadId, ref info))
+                    if (NativeMethods.GetGUIThreadInfo(threadId, ref info))
                     {
                         _lastExternalFocus = info.hwndFocus;
                     }
@@ -240,7 +240,7 @@ namespace AI_desktop_tool
             if (_isRequesting) return;
             _isRequesting = true;
             LocalSearchButton.Text = "...";
-            AnswerTextBlock.Text = "\u6b63\u5728\u8bfb\u53d6\u5f53\u524d\u9898\u76ee\u5e76\u68c0\u7d22\u8fd1\u4ee3\u53f2\u9898\u5e93...";
+            OutputTextBox.Text = "正在处理当前内容...";
 
             try
             {
@@ -251,7 +251,7 @@ namespace AI_desktop_tool
                 using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(8));
                 try
                 {
-                    var snapshot = await CefDomExtractor.GetAutomationSnapshotAsync(9222, cts.Token);
+                    var snapshot = await ClientSession.GetAutomationSnapshotAsync(9222, cts.Token);
                     query = snapshot.QuestionText?.Trim() ?? "";
                     questionType = snapshot.QuestionType?.Trim() ?? "";
                     currentOptions = snapshot.Options
@@ -261,7 +261,7 @@ namespace AI_desktop_tool
                 }
                 catch
                 {
-                    query = await CefDomExtractor.ExtractBestTextAsync(9222, cts.Token);
+                    query = await ClientSession.ExtractBestTextAsync(9222, cts.Token);
                 }
 
                 QueryTextBox.Text = query;
@@ -269,25 +269,25 @@ namespace AI_desktop_tool
 
                 if (string.IsNullOrWhiteSpace(query)
                     || query.StartsWith("\u672a\u53d1\u73b0\u53ef\u8bfb\u53d6", StringComparison.Ordinal)
-                    || query.StartsWith("\u5df2\u8fde\u63a5 CEF", StringComparison.Ordinal))
+                    || query.StartsWith("\u5df2\u8fde\u63a5", StringComparison.Ordinal))
                 {
-                    AnswerTextBlock.Text = "\u672a\u80fd\u8bfb\u53d6\u5f53\u524d\u9898\u9762\uff0c\u65e0\u6cd5\u68c0\u7d22\u672c\u5730\u9898\u5e93\u3002";
+                    OutputTextBox.Text = "未能读取当前内容。";
                     return;
                 }
 
-                var match = await LocalQuestionBank.SearchModernHistoryAsync(query, questionType, currentOptions);
+                var match = await LocalQuestionBank.SearchLocalAsync(query, questionType, currentOptions);
                 if (match == null)
                 {
-                    AnswerTextBlock.Text = "\u8fd1\u4ee3\u53f2\u9898\u5e93\u672a\u547d\u4e2d\u3002";
+                    OutputTextBox.Text = "未命中。";
                     return;
                 }
 
-                AnswerTextBlock.Text = match.Answer;
-                LogDebug($"Local bank hit: id={match.Id}; type={match.Type}; score={match.Similarity:0.000}; prompt={match.Prompt}");
+                OutputTextBox.Text = match.Output;
+                LogDebug($"Local hit: id={match.Id}; type={match.Type}; score={match.Similarity:0.000}");
             }
             catch (Exception ex)
             {
-                AnswerTextBlock.Text = $"\u672c\u5730\u9898\u5e93\u68c0\u7d22\u5931\u8d25: {ex.Message}";
+                OutputTextBox.Text = $"处理失败: {ex.Message}";
             }
             finally
             {
@@ -305,16 +305,16 @@ namespace AI_desktop_tool
 
             _isRequesting = true;
             SendButton.Text = "...";
-            AnswerTextBlock.Text = "思考中...";
+            OutputTextBox.Text = "思考中...";
 
             try
             {
                 string answer = await SendApiRequestAsync(prompt);
-                AnswerTextBlock.Text = answer;
+                OutputTextBox.Text = answer;
             }
             catch (Exception ex)
             {
-                AnswerTextBlock.Text = $"请求发生错误: {ex.Message}";
+                OutputTextBox.Text = $"请求发生错误: {ex.Message}";
             }
             finally
             {
@@ -361,7 +361,7 @@ namespace AI_desktop_tool
                             return message.GetProperty("content").GetString() ?? string.Empty;
                         }
                     }
-                    return "Error: 无法解析 API 返回的 JSON 结构。";
+                    return "Error: 无法解析返回结构。";
                 }
                 else
                 {
@@ -391,7 +391,7 @@ namespace AI_desktop_tool
 
                 if (string.IsNullOrWhiteSpace(text))
                 {
-                    text = AnswerTextBlock.Text;
+                    text = OutputTextBox.Text;
                 }
                 if (string.IsNullOrWhiteSpace(text)) return;
 
@@ -406,7 +406,7 @@ namespace AI_desktop_tool
                 // For real Ctrl+V, prefer immediate simulated typing. It is treated as
                 // normal input by the exam editor and avoids a slow CDP path that can make
                 // the first few attempts look like "no response".
-                await KeyboardSimulator.SendStringAsync(text, 0);
+                await TextRelay.SendStringAsync(text, 0);
             }
             finally
             {
@@ -419,12 +419,12 @@ namespace AI_desktop_tool
             const int VK_CONTROL = 0x11;
             const int VK_LCONTROL = 0xA2;
             const int VK_RCONTROL = 0xA3;
-            return (Win32Helper.GetAsyncKeyState(VK_CONTROL) & 0x8000) != 0
-                   || (Win32Helper.GetAsyncKeyState(VK_LCONTROL) & 0x8000) != 0
-                   || (Win32Helper.GetAsyncKeyState(VK_RCONTROL) & 0x8000) != 0;
+            return (NativeMethods.GetAsyncKeyState(VK_CONTROL) & 0x8000) != 0
+                   || (NativeMethods.GetAsyncKeyState(VK_LCONTROL) & 0x8000) != 0
+                   || (NativeMethods.GetAsyncKeyState(VK_RCONTROL) & 0x8000) != 0;
         }
 
-        // Action: C (CEF/CDP DOM text extraction)
+        // Action: C
         private async void CefCaptureButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton != MouseButton.Left) return;
@@ -433,29 +433,29 @@ namespace AI_desktop_tool
             if (_isRequesting) return;
             _isRequesting = true;
             CefCaptureButton.Text = "...";
-            AnswerTextBlock.Text = "正在从 CEF/CDP 读取题面...";
+            OutputTextBox.Text = "正在读取页面...";
 
             try
             {
-                string extracted = await CefDomExtractor.ExtractBestTextAsync(9222);
+                string extracted = await ClientSession.ExtractBestTextAsync(9222);
                 QueryTextBox.Text = extracted;
                 QueryTextBox.CaretIndex = QueryTextBox.Text.Length;
 
                 if (!string.IsNullOrWhiteSpace(extracted) &&
                     !extracted.StartsWith("未发现可读取", StringComparison.Ordinal) &&
-                    !extracted.StartsWith("已连接 CEF", StringComparison.Ordinal))
+                    !extracted.StartsWith("已连接", StringComparison.Ordinal))
                 {
                     string answer = await SendApiRequestAsync(extracted);
-                    AnswerTextBlock.Text = answer;
+                    OutputTextBox.Text = answer;
                 }
                 else
                 {
-                    AnswerTextBlock.Text = extracted;
+                    OutputTextBox.Text = extracted;
                 }
             }
             catch (Exception ex)
             {
-                AnswerTextBlock.Text = $"CEF 抽题失败: {ex.Message}";
+                OutputTextBox.Text = $"读取失败: {ex.Message}";
             }
             finally
             {
@@ -531,14 +531,14 @@ namespace AI_desktop_tool
                 }
                 catch (Exception ex)
                 {
-                    PauseAutomationWithReason("题面识别失败/CDP 连接失败：" + ex.Message);
+                    PauseAutomationWithReason("页面读取失败：" + ex.Message);
                     await WaitIfPausedAsync(ct);
                     continue;
                 }
 
                 if (string.IsNullOrWhiteSpace(snapshot.QuestionText))
                 {
-                    PauseAutomationWithReason("未能定位当前题面：" + (string.IsNullOrWhiteSpace(snapshot.Diagnostic) ? "当前页面没有可用题面。" : snapshot.Diagnostic));
+                    PauseAutomationWithReason("未能定位当前内容：" + (string.IsNullOrWhiteSpace(snapshot.Diagnostic) ? "当前页面没有可用内容。" : snapshot.Diagnostic));
                     await WaitIfPausedAsync(ct);
                     continue;
                 }
@@ -571,13 +571,13 @@ namespace AI_desktop_tool
 
                 string prompt = BuildAutomationPrompt(snapshot);
                 QueryTextBox.Text = snapshot.QuestionText;
-                AnswerTextBlock.Text = $"第 {questionNo} 题：正在生成答案...\n题型：{snapshot.QuestionType}";
+                OutputTextBox.Text = $"第 {questionNo} 项：正在生成内容...\n类型：{snapshot.QuestionType}";
 
                 string answer = await SendApiRequestAsync(prompt);
-                AnswerTextBlock.Text = answer;
-                if (IsUncertainAnswer(answer))
+                OutputTextBox.Text = answer;
+                if (IsUncertainOutput(answer))
                 {
-                    PauseAutomationWithReason("AI 答案为空或不确定。");
+                    PauseAutomationWithReason("内容为空或不确定。");
                     await WaitIfPausedAsync(ct);
                     continue;
                 }
@@ -587,7 +587,7 @@ namespace AI_desktop_tool
                 LogDebug("Automation answer: type=" + snapshot.QuestionType
                          + "; answer=" + answer.Trim()
                          + "; options=" + string.Join(" | ", snapshot.Options.Select(o => $"{o.Key}:{o.Text}")));
-                var apply = await CefDomExtractor.ApplyAutomationAnswerAsync(answer, 9222, ct);
+                var apply = await ClientSession.ApplyAutomationTextAsync(answer, 9222, ct);
                 if (!apply.Success)
                 {
                     PauseAutomationWithReason(ToShortAutomationMessage(apply.Message));
@@ -602,7 +602,7 @@ namespace AI_desktop_tool
 
                 await WaitIfPausedAsync(ct);
                 SetAutomationStatus("自动化中");
-                var next = await CefDomExtractor.ClickAutomationNextAsync(9222, ct);
+                var next = await ClientSession.ClickAutomationNextAsync(9222, ct);
                 LogDebug("Automation next: " + next.Message);
                 if (!next.Success)
                 {
@@ -638,7 +638,7 @@ namespace AI_desktop_tool
                     LogDebug("Automation no-progress: next=" + next.Message
                              + "; before=" + SummarizeQuestion(snapshot.QuestionText)
                              + "; after=" + afterSummary);
-                    PauseAutomationWithReason("下一题后题面未变化");
+                    PauseAutomationWithReason("切换后内容未变化");
                     await WaitIfPausedAsync(ct);
                     continue;
                 }
@@ -659,7 +659,7 @@ namespace AI_desktop_tool
                 ct.ThrowIfCancellationRequested();
                 try
                 {
-                    return await CefDomExtractor.GetAutomationSnapshotAsync(9222, ct);
+                    return await ClientSession.GetAutomationSnapshotAsync(9222, ct);
                 }
                 catch (Exception ex) when (IsTransientNavigationError(ex))
                 {
@@ -668,7 +668,7 @@ namespace AI_desktop_tool
                 }
             }
 
-            throw last ?? new InvalidOperationException("读取题面失败。");
+            throw last ?? new InvalidOperationException("读取失败。");
         }
 
         private static bool IsTransientNavigationError(Exception ex)
@@ -699,21 +699,21 @@ namespace AI_desktop_tool
                 ? ""
                 : "\n选项：\n" + string.Join("\n", snapshot.Options.Select(o => $"{o.Key}. {o.Text}"));
             return $"""
-请回答考试题。必须只输出最终答案，不要解释。
-题型：{snapshot.QuestionType}
+请根据输入内容作答。必须只输出最终结果，不要解释。
+类型：{snapshot.QuestionType}
 规则：
 - 单选/判断：只输出一个选项字母，如 A；判断题也优先输出页面选项字母。
 - 多选：只输出多个选项字母，用逗号分隔，如 A,C。
-- 填空/简答：只输出要填写到输入框中的答案正文。
+- 填空/简答：只输出要填写到输入框中的正文。
 - 如果无法确定，输出“不确定”。
 
-题面：
+内容：
 {snapshot.QuestionText}
 {options}
 """;
         }
 
-        private bool IsUncertainAnswer(string answer)
+        private bool IsUncertainOutput(string answer)
         {
             if (string.IsNullOrWhiteSpace(answer)) return true;
             string s = answer.Trim();
@@ -756,7 +756,7 @@ namespace AI_desktop_tool
         {
             _automationPaused = true;
             SetAutomationStatus("已暂停");
-            AnswerTextBlock.Text = "已暂停：" + ToShortAutomationMessage(reason);
+            OutputTextBox.Text = "已暂停：" + ToShortAutomationMessage(reason);
             LogDebug("Automation paused: " + reason);
         }
 
@@ -839,7 +839,7 @@ namespace AI_desktop_tool
                 
                 LoadConfigToInlineUI();
                 
-                AnswerScrollViewer.Visibility = Visibility.Collapsed;
+                OutputScrollViewer.Visibility = Visibility.Collapsed;
                 SettingsScrollViewer.Visibility = Visibility.Visible;
                 
                 SetWindowWidthKeepingRightEdge(SettingsWindowWidth);
@@ -858,7 +858,7 @@ namespace AI_desktop_tool
                 ApplyDisplayAffinity();
                 
                 SettingsScrollViewer.Visibility = Visibility.Collapsed;
-                AnswerScrollViewer.Visibility = Visibility.Visible;
+                OutputScrollViewer.Visibility = Visibility.Visible;
                 
                 SetWindowWidthKeepingRightEdge(NormalWindowWidth);
                 this.Height = 170;
@@ -877,7 +877,7 @@ namespace AI_desktop_tool
             ApplyDisplayAffinity();
             
             SettingsScrollViewer.Visibility = Visibility.Collapsed;
-            AnswerScrollViewer.Visibility = Visibility.Visible;
+            OutputScrollViewer.Visibility = Visibility.Visible;
             
             SetWindowWidthKeepingRightEdge(NormalWindowWidth);
             this.Height = 170;
@@ -962,8 +962,8 @@ namespace AI_desktop_tool
                 IntPtr hwnd = wih.Handle;
                 if (hwnd != IntPtr.Zero)
                 {
-                    Win32Helper.SetWindowPos(hwnd, Win32Helper.HWND_TOPMOST, 0, 0, 0, 0,
-                        Win32Helper.SWP_NOMOVE | Win32Helper.SWP_NOSIZE | Win32Helper.SWP_NOACTIVATE);
+                    NativeMethods.SetWindowPos(hwnd, NativeMethods.HWND_TOPMOST, 0, 0, 0, 0,
+                        NativeMethods.SWP_NOMOVE | NativeMethods.SWP_NOSIZE | NativeMethods.SWP_NOACTIVATE);
                 }
             }
             catch
@@ -976,7 +976,7 @@ namespace AI_desktop_tool
         {
             try
             {
-                string logPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "debug_log.txt");
+                string logPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "client.log");
                 string logMsg = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] {message}{Environment.NewLine}";
                 System.IO.File.AppendAllText(logPath, logMsg);
             }

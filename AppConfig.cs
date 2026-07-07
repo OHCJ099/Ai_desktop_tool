@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace AI_desktop_tool
+namespace WindowsClient
 {
     [DataContract]
     public class AppConfig
@@ -44,14 +44,14 @@ namespace AI_desktop_tool
             ApiUrl = "https://api.siliconflow.cn/v1";
             ApiKey = "sk-qekjfdkiwgbiukcabcqethyukeoukdbieugozkbniuefjmzd";
             ModelName = "deepseek-ai/DeepSeek-V4-Flash";
-            SystemPrompt = "你是一个实用的 AI 助手，请用最简短的语言给出答案。";
+            SystemPrompt = "请用最简短的语言输出结果。";
             TextOpacity = 100.0;
             FontWeight = "Normal";
             TypeDelayMs = 10;
             AutoDelaySeconds = 2.0;
             EnableAntiCapture = false; // Disabled by default
             UseOnlineOcr = false;
-            OnlineOcrModel = "PaddlePaddle/PaddleOCR-VL-1.5";
+            OnlineOcrModel = "";
         }
     }
 }

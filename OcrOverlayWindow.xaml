@@ -1,4 +1,4 @@
-<Window x:Class="AI_desktop_tool.OcrOverlayWindow"
+<Window x:Class="WindowsClient.StatusWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="OCR 截图" 

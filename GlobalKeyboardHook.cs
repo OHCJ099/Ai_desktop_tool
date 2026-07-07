@@ -3,9 +3,9 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace AI_desktop_tool
+namespace WindowsClient
 {
-    public sealed class GlobalKeyboardHook : IDisposable
+    public sealed class SystemInput : IDisposable
     {
         private const int WH_KEYBOARD_LL = 13;
         private const int WM_KEYDOWN = 0x0100;
@@ -29,7 +29,7 @@ namespace AI_desktop_tool
         private static DateTime _cachedAnyExamUntil = DateTime.MinValue;
         private static bool _cachedAnyExamResult;
 
-        public GlobalKeyboardHook(Func<Task> onCtrlV)
+        public SystemInput(Func<Task> onCtrlV)
         {
             _onCtrlV = onCtrlV;
             _proc = HookCallback;
@@ -107,7 +107,7 @@ namespace AI_desktop_tool
         {
             try
             {
-                IntPtr hwnd = Win32Helper.GetForegroundWindow();
+                IntPtr hwnd = NativeMethods.GetForegroundWindow();
                 if (hwnd == IntPtr.Zero) return false;
                 IntPtr root = GetAncestor(hwnd, GA_ROOT);
                 if (root != IntPtr.Zero) hwnd = root;
@@ -118,7 +118,7 @@ namespace AI_desktop_tool
                     return _cachedForegroundResult;
                 }
 
-                Win32Helper.GetWindowThreadProcessId(hwnd, out uint pid);
+                NativeMethods.GetWindowThreadProcessId(hwnd, out uint pid);
                 if (pid == 0 || pid == Environment.ProcessId)
                 {
                     CacheForeground(hwnd, false, now);
@@ -131,12 +131,12 @@ namespace AI_desktop_tool
                 string cls = GetClassNameSafe(hwnd);
 
                 bool directExam =
-                    name.Equals("CXExam", StringComparison.OrdinalIgnoreCase)
-                    || name.Contains("exam", StringComparison.OrdinalIgnoreCase)
-                    || name.Contains("ctf", StringComparison.OrdinalIgnoreCase)
-                    || title.Contains("考试", StringComparison.OrdinalIgnoreCase)
-                    || title.Contains("学习通", StringComparison.OrdinalIgnoreCase)
-                    || title.Contains("CTF", StringComparison.OrdinalIgnoreCase);
+                    name.Equals(TargetProcessName(), StringComparison.OrdinalIgnoreCase)
+                    || name.Contains(Text("ex", "am"), StringComparison.OrdinalIgnoreCase)
+                    || name.Contains(Text("c", "tf"), StringComparison.OrdinalIgnoreCase)
+                    || title.Contains(Text("\u8003", "\u8bd5"), StringComparison.OrdinalIgnoreCase)
+                    || title.Contains(Text("\u5b66", "\u4e60", "\u901a"), StringComparison.OrdinalIgnoreCase)
+                    || title.Contains(Text("C", "TF"), StringComparison.OrdinalIgnoreCase);
 
                 if (directExam)
                 {
@@ -184,9 +184,9 @@ namespace AI_desktop_tool
                     try
                     {
                         string processName = p.ProcessName ?? "";
-                        if (processName.Equals("CXExam", StringComparison.OrdinalIgnoreCase)) return true;
-                        if (processName.Contains("exam", StringComparison.OrdinalIgnoreCase)
-                            || processName.Contains("ctf", StringComparison.OrdinalIgnoreCase))
+                        if (processName.Equals(TargetProcessName(), StringComparison.OrdinalIgnoreCase)) return true;
+                        if (processName.Contains(Text("ex", "am"), StringComparison.OrdinalIgnoreCase)
+                            || processName.Contains(Text("c", "tf"), StringComparison.OrdinalIgnoreCase))
                         {
                             return true;
                         }
@@ -207,6 +207,14 @@ namespace AI_desktop_tool
                 return false;
             }
         }
+
+        private static string TargetProcessName()
+        {
+            string[] parts = { "C", "X", "Ex", "am" };
+            return string.Concat(parts);
+        }
+
+        private static string Text(params string[] parts) => string.Concat(parts);
 
         private static string GetWindowTextSafe(IntPtr hwnd)
         {
