@@ -19,8 +19,7 @@ namespace WindowsClient
 
         private static readonly string[] PackedFiles =
         {
-            "modern_history_questions.bin",
-            "ds_questions.bin"
+            "question_bank.bin"
         };
 
         public static async Task<LocalQuestionMatch?> SearchLocalAsync(string queryText, string? questionType = null, IReadOnlyList<LocalSearchOption>? currentOptions = null)
@@ -129,12 +128,6 @@ namespace WindowsClient
                 return _questions;
             }
         }
-
-        private static string ResourceSuffix() => string.Concat("Resources", ".", PackedFileName());
-
-        private static string PackedFileName() => string.Concat("modern", "_", "history", "_", "questions", ".", "bin");
-
-        private static string SourceFileName() => string.Concat("modern", "_", "history", "_", "questions", ".", "json");
 
         private static async Task<string> ReadPackedJsonAsync(Stream stream)
         {

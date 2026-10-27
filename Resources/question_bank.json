@@ -1,0 +1,6344 @@
+[
+  {
+    "id": "q-architecture-17c32b3c91f686b2",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在AOP术语中，____是指将切面应用到目标对象生成代理对象的过程。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "织入",
+    "explanation": "",
+    "answer": "织入",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-3dc448b1f10e1d14",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "Spring AOP中，通过____注解可以启用自动代理功能。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "@EnableAspectJAutoProxy; EnableAspectJAutoProxy",
+    "explanation": "",
+    "answer": "@EnableAspectJAutoProxy; EnableAspectJAutoProxy",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-03db7ffb498b78fb",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在MyBatis中，通过____获取SqlSession实例。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "SqlSessionFactory",
+    "explanation": "",
+    "answer": "SqlSessionFactory",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-5bfe8287b5443855",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "为了开启驼峰命名自动映射，需要在settings中设置____为true。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "mapUnderscoreToCamelCase",
+    "explanation": "",
+    "answer": "mapUnderscoreToCamelCase",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-0dc777c06ecde17c",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis中，Mapper接口的实例是从____中获得的。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "SqlSession",
+    "explanation": "",
+    "answer": "SqlSession",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-bb284a15f4772bdf",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在核心配置文件中，用于指定映射器的元素是____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "mappers",
+    "explanation": "",
+    "answer": "mappers",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-11ed1d2df0d5cdce",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "要启用自动生成主键，应设置 useGeneratedKeys=\"true\"，并通过 ____属性指定主键名。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "keyProperty",
+    "explanation": "",
+    "answer": "keyProperty",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-82b1776cbd5cea81",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis 的 where 元素会自动去除条件片段开头多余的 ____ 关键字。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "AND 或 OR",
+    "explanation": "",
+    "answer": "AND 或 OR",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-4f9001675d67f803",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis 中，用于处理数据库字段名与 Java 对象属性名不一致的映射配置是____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "<resultMap>; resultMap",
+    "explanation": "",
+    "answer": "<resultMap>; resultMap",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-312cc69b9bc77854",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis 的____接口是 MyBatis 的核心接口，用于执行 SQL 命令、获取映射器和管理事务。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "SqlSession",
+    "explanation": "",
+    "answer": "SqlSession",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-183ef8213bd8fd25",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在 MyBatis 映射文件中，<select>标签的____属性用于指定查询结果对应的 Java 类型。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "resultType",
+    "explanation": "",
+    "answer": "resultType",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-be4e7bed6b713c8f",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis 中，默认启用且作用域为同一个 SqlSession 的是 ____ 缓存。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "一级",
+    "explanation": "",
+    "answer": "一级",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-1eb06f0e67b43d71",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis 中，需要显式配置且作用域为 Mapper 命名空间的是 ____ 缓存。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "二级",
+    "explanation": "",
+    "answer": "二级",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-a624f94cbcf185d1",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis 动态 SQL 中，用于遍历集合并生成重复 SQL 片段的元素是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "foreach",
+    "explanation": "",
+    "answer": "foreach",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-0aaa36ddcee833fe",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在 MyBatis 的 foreach 元素中，用于指定待遍历集合名称的属性是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "collection",
+    "explanation": "",
+    "answer": "collection",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-2f96825458b2cc80",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis 动态 SQL 中，用于生成 WHERE 子句并处理开头多余 AND/OR 的元素是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "where",
+    "explanation": "",
+    "answer": "where",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-d0f29dcd932081fc",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis 动态 SQL 中，用于生成 SET 子句并去除末尾多余逗号的元素是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "set",
+    "explanation": "",
+    "answer": "set",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-be22a065ec39f2f8",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis 的 resultMap 中，用于映射一对一关联对象的元素是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "association",
+    "explanation": "",
+    "answer": "association",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-2d78732c9eee7ed5",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis 的 resultMap 中，用于映射一对多关联集合的元素是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "collection",
+    "explanation": "",
+    "answer": "collection",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-0f7ccc908f30fb7b",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis二级缓存默认的清除策略是____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "LRU; 最近最少使用",
+    "explanation": "",
+    "answer": "LRU; 最近最少使用",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-59126265f6dbfcd9",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "Spring 框架中，构成应用程序核心并由 IoC 容器管理的对象称为____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "Bean",
+    "explanation": "",
+    "answer": "Bean",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-840afc5f50549254",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "Spring 的配置元数据除 XML 方式外，还可以通过 ____ 方式定义。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "注解",
+    "explanation": "",
+    "answer": "注解",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-ebd0e449fb1892c1",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "Java EE 规范移交 Eclipse 基金会后，改名为____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "Jakarta EE",
+    "explanation": "",
+    "answer": "Jakarta EE",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-ca59d7bf44148a39",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "Spring IoC 容器通过读取____来获取如何实例化、配置和组装 Bean 的指令。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "配置元数据",
+    "explanation": "",
+    "answer": "配置元数据",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-d7a8a27b14614f20",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在使用注解配置时，必须使用____注解来启用组件扫描。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "@ComponentScan; ComponentScan",
+    "explanation": "",
+    "answer": "@ComponentScan; ComponentScan",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-ad53cc7f8df187e6",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "Bean 完成依赖注入后，需要自动执行初始化回调方法时，可以使用 ____ 注解。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "@PostConstruct",
+    "explanation": "",
+    "answer": "@PostConstruct",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-5236b15629570e72",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "Bean 销毁前需要自动执行资源清理方法时，可以使用 ____ 注解。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "@PreDestroy",
+    "explanation": "",
+    "answer": "@PreDestroy",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-699a5fc32e2895ae",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis 二级缓存的 readOnly 属性设置为 false 时，返回的是缓存对象的 ____，而不是同一实例。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "拷贝;复制对象",
+    "explanation": "",
+    "answer": "拷贝;复制对象",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-49195b845077820d",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis 二级缓存为生成缓存对象的拷贝，会使用 ____ 机制，因此相关实体对象需要支持序列化。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "序列化和反序列化",
+    "explanation": "",
+    "answer": "序列化和反序列化",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-80e0aaa9d50114b3",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在Spring中，如果希望组件扫描不仅仅局限于当前类所在包，可以通过在@ComponentScan注解中 配置特定属性来指定要扫描的基础包，例如@ComponentScan(____= \"com.example.service\")。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "basePackages",
+    "explanation": "",
+    "answer": "basePackages",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-60184b2a756d0232",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis 的 collection 元素中，用于指定集合元素 Java 类型的属性是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "ofType",
+    "explanation": "",
+    "answer": "ofType",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-7b0b339ee52292f5",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis 的 association 元素中，用于指定关联对象 Java 类型的属性是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "javaType",
+    "explanation": "",
+    "answer": "javaType",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-3c1650a5b6d9328d",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "Spring MVC 的核心前端控制器是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "DispatcherServlet",
+    "explanation": "",
+    "answer": "DispatcherServlet",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-464b3b78487a7598",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在 MVC 模式中，负责封装业务数据和业务逻辑的组成部分是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "Model",
+    "explanation": "",
+    "answer": "Model",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-9adc2ba8c1374f61",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在 doDispatch 方法中，实际调用处理器方法的组件是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "HandlerAdapter; 处理器适配器",
+    "explanation": "",
+    "answer": "HandlerAdapter; 处理器适配器",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-9a158067142ebcb9",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在Spring MVC框架中，DispatcherServlet继承自____，并间接继承了HttpServlet。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "FrameworkServlet",
+    "explanation": "",
+    "answer": "FrameworkServlet",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-878e528faecb155b",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在Spring MVC中，负责将处理器返回的逻辑视图名(如”simple”)解析为具体视图对象(如 ”/WEB-INF/jsp/simple.jsp”)的组件是____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "ViewResolver;视图解析器",
+    "explanation": "",
+    "answer": "ViewResolver;视图解析器",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-533e3255846ca4d4",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis 通过 <properties> 加载外部属性文件后，在 XML 中应使用 ____ 形式引用其中的属性。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "${属性名}",
+    "explanation": "",
+    "answer": "${属性名}",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-9b99baab80498ed3",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis 加载映射文件时，会把 Mapper 的 namespace 与语句的 ____ 组合成映射语句的唯一标识。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "id",
+    "explanation": "",
+    "answer": "id",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-0f4bb3d04e12a217",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在一个应用运行期间，适合创建一次并长期复用、用于生产数据库会话的对象是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "SqlSessionFactory",
+    "explanation": "",
+    "answer": "SqlSessionFactory",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-004c559ac739ad1c",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "为了在业务代码结束后自动释放数据库会话，可将 SqlSession 声明在 Java 的 ____ 语句中。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "try-with-resources",
+    "explanation": "",
+    "answer": "try-with-resources",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-be032cec6893d6c7",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "Mapper 方法返回 List<User> 时，映射语句的 resultType 应填写集合中的 ____ 类型，而不是 List 类型。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "User",
+    "explanation": "",
+    "answer": "User",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-c162446782cb8528",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "通过默认方式创建的 SqlSession 不会自动提交事务，新增或修改数据成功后应调用 ____ 方法提交。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "commit()",
+    "explanation": "",
+    "answer": "commit()",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-c468bed44ab7a740",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "statementType 采用默认值 PREPARED 时，MyBatis 会使用 JDBC 的 ____ 执行预编译 SQL。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "PreparedStatement",
+    "explanation": "",
+    "answer": "PreparedStatement",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-e194f518d65c8a31",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在映射文件中用 <sql id=\"columns\"> 定义列清单后，应使用 ____ 元素把该片段引入具体语句。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "include",
+    "explanation": "",
+    "answer": "include",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-4262c3c6e8060351",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在 Mapper SQL 中绑定用户输入的查询条件时，为使用预编译参数并降低 SQL 注入风险，通常应写 成 ____ 占位形式。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "#{参数名}",
+    "explanation": "",
+    "answer": "#{参数名}",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-b107b5be321e5506",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在映射语句中，用于声明传入 SQL 的 Java 参数类型的属性是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "parameterType",
+    "explanation": "",
+    "answer": "parameterType",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-8b58666409d903cc",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在 resultMap 中，把某个简单属性标记为对象标识、帮助缓存和嵌套结果映射识别对象的元素是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "id",
+    "explanation": "",
+    "answer": "id",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-cad0915605d0217d",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在 <association> 的嵌套 Select 配置中，用于指定从主查询结果取哪一列作为子查询参数的属性是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "column",
+    "explanation": "",
+    "answer": "column",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-15c0dd74f21ab568",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "联表查询时，如果只需要两张表中连接条件能够匹配的记录，应使用 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "INNER JOIN",
+    "explanation": "",
+    "answer": "INNER JOIN",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-c5e53d549d07028b",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "联表查询时，要保留左表全部人员，即使右表没有对应身份证记录，也应采用 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "LEFT JOIN",
+    "explanation": "",
+    "answer": "LEFT JOIN",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-c1f8d7be32a03183",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在关系数据库中，学生与课程这类多对多关系通常需要增加一张 ____ 保存双方的主键。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "中间表（关联表）",
+    "explanation": "",
+    "answer": "中间表（关联表）",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-5cc2de45f280bc55",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在 MyBatis 的 <choose> 中，当所有 <when> 条件都不成立时，执行的默认分支元素是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "otherwise",
+    "explanation": "",
+    "answer": "otherwise",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-b50f9d8f75ad6cfc",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "当 name 参数不为空时才拼接姓名查询条件，最适合使用 MyBatis 动态 SQL 的 ____ 元素。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "if",
+    "explanation": "",
+    "answer": "if",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-f016e2a667b08a95",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "多个查询条件只允许选择其中一个分支执行时，应使用 ____ 元素包裹各个 <when> 分支。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "choose",
+    "explanation": "",
+    "answer": "choose",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-8ba2d9290588abca",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在 <foreach> 中，用于定义各次循环生成片段之间连接文本的属性是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "separator",
+    "explanation": "",
+    "answer": "separator",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-845338166a84ed13",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "MyBatis 动态 SQL 的 <if test=\"...\"> 条件通常使用 ____ 表达式进行求值。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "OGNL",
+    "explanation": "",
+    "answer": "OGNL",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-870274c5fb382292",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "同一 SqlSession 执行新增、修改或删除操作后，原有一级缓存会被 ____，以避免继续读取旧数据。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "清空",
+    "explanation": "",
+    "answer": "清空",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-ae2d9a79777a0fff",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在同一 Mapper 命名空间内，要让不同 SqlSession 有机会共享查询结果，应使用 MyBatis 的 ____ 缓存。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "二级",
+    "explanation": "",
+    "answer": "二级",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-8e7b2ee85aa31411",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "数据库数据已经更新时，及时清理旧缓存的主要目的是保证缓存数据与数据库的 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "一致性",
+    "explanation": "",
+    "answer": "一致性",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-2a340b006624a39c",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在带 @Configuration 的配置类中，要把某个方法返回的对象注册为 Spring Bean，应在方法上添 加 ____ 注解。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "@Bean",
+    "explanation": "",
+    "answer": "@Bean",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-18eea17c0d5dde6b",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "要让构造器一次接收容器中所有 Weapon 类型的 Bean，可把参数声明为 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "List<Weapon>",
+    "explanation": "",
+    "answer": "List<Weapon>",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-86eb1a5784028474",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "对于占用资源较多且不一定立即使用的 Bean，可添加 ____ 注解使其在首次使用时初始化。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "@Lazy",
+    "explanation": "",
+    "answer": "@Lazy",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-2ef12c833899c067",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "若日志代码需要在目标方法执行之前运行，应在通知方法上使用 ____ 注解。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "@Before",
+    "explanation": "",
+    "answer": "@Before",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-3537f340e77f1189",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在基于注解的 Spring AOP 中，用于表明某个类是切面类的注解是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "@Aspect",
+    "explanation": "",
+    "answer": "@Aspect",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-0738245cc850e938",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "DispatcherServlet 接收到请求后，负责根据请求信息查找对应处理器的组件是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "HandlerMapping",
+    "explanation": "",
+    "answer": "HandlerMapping",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-794e5e04337a8e3b",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "填空题",
+    "prompt": "在 Spring MVC 的 Java 配置类上，用于启用 MVC 注解驱动功能的注解是 ____。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "@EnableWebMvc",
+    "explanation": "",
+    "answer": "@EnableWebMvc",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-08c86afd7f5f2740",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "编程填空",
+    "prompt": "图书借阅系统使用 Spring 管理目录服务。请补全配置类声明、组件扫描和注解容器创建代码。\n package org.example.library;\n\n ____1____\n ____2____(basePackages = \"org.example.library.service\")\n public class LibraryConfig {\n     public static void main(String[] args) {\n         ApplicationContext context =\n                 new ____3____(LibraryConfig.class);\n         CatalogService service = context.getBean(CatalogService.class);\n         service.refresh();\n     }\n }",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "空1：@Configuration；空2：@ComponentScan；空3：AnnotationConfigApplicationContext\n\n说明：配置类由 @Configuration 标识，@ComponentScan 指定扫描范围，AnnotationConfigApplicationContext 用于创建\n注解配置容器。",
+    "explanation": "",
+    "answer": "空1：@Configuration；空2：@ComponentScan；空3：AnnotationConfigApplicationContext\n\n说明：配置类由 @Configuration 标识，@ComponentScan 指定扫描范围，AnnotationConfigApplicationContext 用于创建\n注解配置容器。",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-d37551bc864fa70a",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "编程填空",
+    "prompt": "消息中心需要把提示组件交给 Spring 管理，从配置中注入标题，并在依赖注入完成后执行初始化。请补\n全三个注解。\n package org.example.notice;\n\n ____1____\n public class MessageBanner {\n     ____2____(\"${notice.title:课程通知}\")\n     private String title;\n\n     ____3____\n     public void prepare() {\n         System.out.println(title + \"已准备\");\n     }\n }",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "空1：@Component；空2：@Value；空3：@PostConstruct\n\n说明：@Component 注册组件，@Value 注入配置值，@PostConstruct 在依赖注入完成后执行初始化方法。",
+    "explanation": "",
+    "answer": "空1：@Component；空2：@Value；空3：@PostConstruct\n\n说明：@Component 注册组件，@Value 注入配置值，@PostConstruct 在依赖注入完成后执行初始化方法。",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-9b2e95333f086c94",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "编程填空",
+    "prompt": "报表模块采用纯注解配置。请补全配置类标识、容器实现类和按类型获取 Bean 的方法名。\n ____1____\n @ComponentScan(\"org.example.report\")\n class ReportConfig {\n }\n\n public class ReportLauncher {\n     public static void main(String[] args) {\n         ApplicationContext app =\n                 new ____2____(ReportConfig.class);\n         ReportService report = app.____3____(ReportService.class);\n         report.generate();\n     }\n }",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "空1：@Configuration；空2：AnnotationConfigApplicationContext；空3：getBean\n\n说明：配置类驱动 AnnotationConfigApplicationContext，随后使用 getBean(Class) 按类型取得容器中的服务。",
+    "explanation": "",
+    "answer": "空1：@Configuration；空2：AnnotationConfigApplicationContext；空3：getBean\n\n说明：配置类驱动 AnnotationConfigApplicationContext，随后使用 getBean(Class) 按类型取得容器中的服务。",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-be32d33f8d1ab928",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "编程填空",
+    "prompt": "文件备份服务依赖存储组件，并需要在容器关闭前释放资源。请补全组件注册、依赖注入和销毁回调注\n解。\n package org.example.backup;\n\n ____1____\n public class BackupService {\n     ____2____\n     private FileStore fileStore;\n\n     ____3____\n     public void release() {\n         fileStore.close();\n     }\n }",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "空1：@Service；空2：@Autowired；空3：@PreDestroy\n\n说明：@Service 将业务服务注册为 Bean，@Autowired 注入依赖，@PreDestroy 标记销毁前的清理方法。",
+    "explanation": "",
+    "answer": "空1：@Service；空2：@Autowired；空3：@PreDestroy\n\n说明：@Service 将业务服务注册为 Bean，@Autowired 注入依赖，@PreDestroy 标记销毁前的清理方法。",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-3e88a05f6e9a10e5",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "编程填空",
+    "prompt": "校园门禁模块需要由 Spring 管理状态记录器，注入系统名称，并在 Bean 初始化后输出启动信息。请补\n全三个注解。\n package org.example.access;\n\n ____1____\n public class AccessRecorder {\n     ____2____(\"校园门禁\")\n     private String systemName;\n\n     ____3____\n     public void ready() {\n         System.out.println(systemName + \"记录器已启动\");\n     }\n }",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "空1：@Component；空2：@Value；空3：@PostConstruct\n\n说明：三个空依次完成组件注册、字面量注入和初始化回调声明。",
+    "explanation": "",
+    "answer": "空1：@Component；空2：@Value；空3：@PostConstruct\n\n说明：三个空依次完成组件注册、字面量注入和初始化回调声明。",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-86a1439fe34c9340",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "编程填空",
+    "prompt": "客服系统采用 Java 配置，要求扫描 org.example.support 包。请补全配置类注解、扫描注解和用于指\n定基础包的属性名。\n ____1____\n ____2____(____3____ = \"org.example.support\")\n public class SupportConfig {\n }",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "空1：@Configuration；空2：@ComponentScan；空3：basePackages\n\n说明：@Configuration 声明配置类，@ComponentScan 启动扫描，basePackages 明确扫描的基础包。",
+    "explanation": "",
+    "answer": "空1：@Configuration；空2：@ComponentScan；空3：basePackages\n\n说明：@Configuration 声明配置类，@ComponentScan 启动扫描，basePackages 明确扫描的基础包。",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-e50e2e512d302e70",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "编程填空",
+    "prompt": "CourseMapper.xml 需要按可选名称筛选课程，并根据课程编号集合执行 IN 查询。请补全三个动态\nSQL 要素。\n <select id=\"findCourses\" resultType=\"course\">\n   SELECT * FROM course\n   <____1____>\n     <____2____ test=\"name != null and name != ''\">\n       name LIKE CONCAT('%', #{name}, '%')\n\n     </____2____>\n   </____1____>\n </select>\n\n <select id=\"findByIds\" resultType=\"course\">\n   SELECT * FROM course WHERE id IN\n   <foreach collection=\"____3____\" item=\"courseId\"\n            open=\"(\" separator=\",\" close=\")\">\n     #{courseId}\n   </foreach>\n </select>",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "空1：where；空2：if；空3：list\n\n说明：where 负责条件边界，if 决定是否拼接名称条件，list 是单个 List 参数的常用默认集合名。",
+    "explanation": "",
+    "answer": "空1：where；空2：if；空3：list\n\n说明：where 负责条件边界，if 决定是否拼接名称条件，list 是单个 List 参数的常用默认集合名。",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-4fb58620a0cb9203",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "编程填空",
+    "prompt": "EmployeeMapper.xml 使用联表结果映射装配员工及其所属部门。请补全结果映射根元素、单对象关联\n元素和关联对象类型属性。\n <____1____ id=\"EmployeeMap\" type=\"employee\">\n   <id property=\"id\" column=\"emp_id\"/>\n   <result property=\"name\" column=\"emp_name\"/>\n   <____2____ property=\"department\" ____3____=\"department\">\n     <id property=\"id\" column=\"dept_id\"/>\n     <result property=\"name\" column=\"dept_name\"/>\n   </____2____>\n </____1____>",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "空1：resultMap；空2：association；空3：javaType\n\n说明：resultMap 定义整体映射，association 处理单个部门对象，javaType 指定其 Java 类型。",
+    "explanation": "",
+    "answer": "空1：resultMap；空2：association；空3：javaType\n\n说明：resultMap 定义整体映射，association 处理单个部门对象，javaType 指定其 Java 类型。",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-ce0e911824d3b132",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "编程填空",
+    "prompt": "BookMapper.xml 插入图书后需要把数据库生成的编号写回 Book.id。请补全参数类型、自增主键开关\n和回填属性。\n <insert id=\"addBook\"\n         ____1____=\"book\"\n         ____2____=\"true\"\n         ____3____=\"id\">\n   INSERT INTO book(title, price)\n   VALUES(#{title}, #{price})\n </insert>",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "空1：parameterType；空2：useGeneratedKeys；空3：keyProperty\n\n说明：parameterType 描述输入对象，useGeneratedKeys 启用 JDBC 主键获取，keyProperty 指定回填到 id。",
+    "explanation": "",
+    "answer": "空1：parameterType；空2：useGeneratedKeys；空3：keyProperty\n\n说明：parameterType 描述输入对象，useGeneratedKeys 启用 JDBC 主键获取，keyProperty 指定回填到 id。",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-c4978814a5813581",
+    "subject": "软件体系结构",
+    "type": "blank",
+    "typeLabel": "编程填空",
+    "prompt": "AuthorMapper.xml 通过嵌套查询加载作者的文章列表。请补全集合映射元素、集合元素类型属性和引\n用子查询的属性。\n <resultMap id=\"AuthorMap\" type=\"author\">\n   <id property=\"id\" column=\"author_id\"/>\n   <result property=\"name\" column=\"author_name\"/>\n   <____1____ property=\"articles\" column=\"author_id\"\n                ____2____=\"article\"\n                ____3____=\"org.example.ArticleMapper.findByAuthorId\"/>\n </resultMap>",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "空1：collection；空2：ofType；空3：select\n\n说明：collection 映射集合属性，ofType 指定单个文章类型，select 指向加载文章的映射语句。",
+    "explanation": "",
+    "answer": "空1：collection；空2：ofType；空3：select\n\n说明：collection 映射集合属性，ofType 指定单个文章类型，select 指向加载文章的映射语句。",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-307d38b0f6eb3f06",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在Spring AOP中，织入(Weaving)通常发生在哪个阶段?( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "编译期"
+      },
+      {
+        "key": "B",
+        "text": "类加载期"
+      },
+      {
+        "key": "C",
+        "text": "运行期"
+      },
+      {
+        "key": "D",
+        "text": "编码期"
+      }
+    ],
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "",
+    "answer": "C",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-b674737af9cc15f6",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "以下哪种通知类型在目标方法被调用之前执行?( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "前置通知(Before)"
+      },
+      {
+        "key": "B",
+        "text": "后置通知(After)"
+      },
+      {
+        "key": "C",
+        "text": "返回通知(After-returning)"
+      },
+      {
+        "key": "D",
+        "text": "环绕通知(Around)"
+      }
+    ],
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "A",
+    "explanation": "",
+    "answer": "A",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-48b0ebb6aa96a722",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在基于注解的AOP实现中，使用哪个注解来定义切面?( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "@Component"
+      },
+      {
+        "key": "B",
+        "text": "@Aspect"
+      },
+      {
+        "key": "C",
+        "text": "@Pointcut"
+      },
+      {
+        "key": "D",
+        "text": "@EnableAspectJAutoProxy"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-19bd29fe6ed8c106",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在Spring AOP中，如果要启用自动代理功能，需要在配置类上使用哪个注解?( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "@Configuration"
+      },
+      {
+        "key": "B",
+        "text": "@ComponentScan"
+      },
+      {
+        "key": "C",
+        "text": "@EnableAspectJAutoProxy"
+      },
+      {
+        "key": "D",
+        "text": "@Aspect"
+      }
+    ],
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "",
+    "answer": "C",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-e10b4032fd70b44d",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在JDK动态代理示例中，代理处理器需要实现哪个接口?( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "InvocationHandler"
+      },
+      {
+        "key": "B",
+        "text": "Proxy"
+      },
+      {
+        "key": "C",
+        "text": "MethodInterceptor"
+      },
+      {
+        "key": "D",
+        "text": "Aspect"
+      }
+    ],
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "A",
+    "explanation": "",
+    "answer": "A",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-a8ebfa3d6e155eb6",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "数据持久化的主要目的是( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "提高程序运行速度"
+      },
+      {
+        "key": "B",
+        "text": "将数据保存到磁盘以避免丢失"
+      },
+      {
+        "key": "C",
+        "text": "减少内存使用"
+      },
+      {
+        "key": "D",
+        "text": "简化代码编写"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-4e6b1b5f638e877c",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在MyBatis中，ORM的全称是( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "Object-Record Mapping"
+      },
+      {
+        "key": "B",
+        "text": "Object-Relational Mapping"
+      },
+      {
+        "key": "C",
+        "text": "Object-Resource Mapping"
+      },
+      {
+        "key": "D",
+        "text": "Object-Reference Mapping"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-f31edf01aa1ad834",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在MyBatis配置中，用于读取外部配置文件的元素是( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "settings"
+      },
+      {
+        "key": "B",
+        "text": "properties"
+      },
+      {
+        "key": "C",
+        "text": "typeAliases"
+      },
+      {
+        "key": "D",
+        "text": "environments"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-38a58142ce315acb",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "以下哪个设置可以开启驼峰命名自动映射( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "useCamelCaseMapping"
+      },
+      {
+        "key": "B",
+        "text": "mapUnderscoreToCamelCase"
+      },
+      {
+        "key": "C",
+        "text": "autoMapping"
+      },
+      {
+        "key": "D",
+        "text": "camelCaseEnabled"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-81ca0aea4e73378a",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "关于MyBatis工作原理，说法错误的是( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "Mapper接口的实现类由MyBatis动态生成"
+      },
+      {
+        "key": "B",
+        "text": "SqlSession是线程安全的"
+      },
+      {
+        "key": "C",
+        "text": "MyBatis通过命名空间和方法名绑定SQL"
+      },
+      {
+        "key": "D",
+        "text": "结果集映射到Java对象是自动的"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-d7639260958acc87",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在 MyBatis 映射文件中，描述如何从数据库结果集中加载对象的元素是( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "cache"
+      },
+      {
+        "key": "B",
+        "text": "resultMap"
+      },
+      {
+        "key": "C",
+        "text": "sql"
+      },
+      {
+        "key": "D",
+        "text": "select"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-e991b72bb7d0cc4f",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "MyBatis 默认不会自动提交 SQL 操作，必须调用哪一方法才能永久生效( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "session.save()"
+      },
+      {
+        "key": "B",
+        "text": "session.commit()"
+      },
+      {
+        "key": "C",
+        "text": "mapper.commit()"
+      },
+      {
+        "key": "D",
+        "text": "sqlSessionFactory.commit()"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-68d6f825e54f1576",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在 insert 语句中启用自动生成主键的配置是( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "autoKey=\"true\""
+      },
+      {
+        "key": "B",
+        "text": "useGeneratedKeys=\"true\""
+      },
+      {
+        "key": "C",
+        "text": "idAuto=\"true\""
+      },
+      {
+        "key": "D",
+        "text": "key=\"auto\""
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-fb0a5f14733c92a7",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "关于 resultMap 的作用，下列哪项描述正确( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "定义 SQL 语句"
+      },
+      {
+        "key": "B",
+        "text": "定义列与对象属性的映射规则"
+      },
+      {
+        "key": "C",
+        "text": "定义事务边界"
+      },
+      {
+        "key": "D",
+        "text": "定义缓存策略"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-e998f6d471f02110",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "动态 SQL 中，用于在不同条件中选择其一执行的元素是( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "if"
+      },
+      {
+        "key": "B",
+        "text": "choose"
+      },
+      {
+        "key": "C",
+        "text": "where"
+      },
+      {
+        "key": "D",
+        "text": "foreach"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-558e50e004c0f1dc",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在 foreach 元素中，用于指定循环开始符号的属性是( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "prefix"
+      },
+      {
+        "key": "B",
+        "text": "open"
+      },
+      {
+        "key": "C",
+        "text": "begin"
+      },
+      {
+        "key": "D",
+        "text": "start"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-f992978edc142348",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "MyBatis 中，用于指定 SQL 语句返回结果映射规则的元素是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "<parameterType>"
+      },
+      {
+        "key": "B",
+        "text": "<resultType>"
+      },
+      {
+        "key": "C",
+        "text": "<resultMap>"
+      },
+      {
+        "key": "D",
+        "text": "<parameterMap>"
+      }
+    ],
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "",
+    "answer": "C",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-9becfe5301864312",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "MyBatis 中，若要实现批量更新操作，推荐结合下列哪个标签?",
+    "options": [
+      {
+        "key": "A",
+        "text": "<if>"
+      },
+      {
+        "key": "B",
+        "text": "<foreach>"
+      },
+      {
+        "key": "C",
+        "text": "<choose>"
+      },
+      {
+        "key": "D",
+        "text": "<set>"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-421b378882157e7c",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "MyBatis 中，配置数据库连接信息的核心配置文件节点是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "<mappers>"
+      },
+      {
+        "key": "B",
+        "text": "<typeAliases>"
+      },
+      {
+        "key": "C",
+        "text": "<environments>"
+      },
+      {
+        "key": "D",
+        "text": "<settings>"
+      }
+    ],
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "",
+    "answer": "C",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-3689ed95f7cedef3",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "MyBatis 中，用于动态生成 UPDATE 语句中 SET 子句的元素是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "<where>"
+      },
+      {
+        "key": "B",
+        "text": "<set>"
+      },
+      {
+        "key": "C",
+        "text": "<trim>"
+      },
+      {
+        "key": "D",
+        "text": "<if>"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-e8a118b5d1667e77",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "MyBatis 中，配置类型别名的核心配置文件节点是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "<environments>"
+      },
+      {
+        "key": "B",
+        "text": "<typeAliases>"
+      },
+      {
+        "key": "C",
+        "text": "<mappers>"
+      },
+      {
+        "key": "D",
+        "text": "<settings>"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-d4169248196b9038",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "关于MyBatis一级缓存，说法错误的是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "一级缓存是会话级缓存"
+      },
+      {
+        "key": "B",
+        "text": "默认情况下启用"
+      },
+      {
+        "key": "C",
+        "text": "在同一个SqlSession中有效"
+      },
+      {
+        "key": "D",
+        "text": "跨多个SqlSession共享"
+      }
+    ],
+    "answerKeys": [
+      "D"
+    ],
+    "answerText": "D",
+    "explanation": "",
+    "answer": "D",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-fda45cc1ff8f5515",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在MySQL中，默认的JOIN类型是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "CROSS JOIN"
+      },
+      {
+        "key": "B",
+        "text": "INNER JOIN"
+      },
+      {
+        "key": "C",
+        "text": "LEFT JOIN"
+      },
+      {
+        "key": "D",
+        "text": "RIGHT JOIN"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-ab04ebcf7c50f538",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "关于MyBatis的<association>元素，说法正确的是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "用于处理一对多关系"
+      },
+      {
+        "key": "B",
+        "text": "只能使用嵌套Select查询"
+      },
+      {
+        "key": "C",
+        "text": "属性javaType指定关联的Java类型"
+      },
+      {
+        "key": "D",
+        "text": "属性ofType指定集合中元素的类型"
+      }
+    ],
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "",
+    "answer": "C",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-05f34b2956e1046f",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "关于 Java EE 的说法，正确的是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Java EE 是 Java 的基础平台"
+      },
+      {
+        "key": "B",
+        "text": "Java EE 现在正式名称为 Jakarta EE"
+      },
+      {
+        "key": "C",
+        "text": "Java EE 只包含 Servlet 规范"
+      },
+      {
+        "key": "D",
+        "text": "Java EE 不需要应用服务器即可运行"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-924e2301ca8f1a97",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "Spring Framework 的设计理念不包括以下哪一项?",
+    "options": [
+      {
+        "key": "A",
+        "text": "提供多种选择"
+      },
+      {
+        "key": "B",
+        "text": "强制唯一开发方式"
+      },
+      {
+        "key": "C",
+        "text": "保持向后兼容"
+      },
+      {
+        "key": "D",
+        "text": "注重 API 设计"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-d58407059de93b2d",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "依赖注入(DI)的实现方式不包括?",
+    "options": [
+      {
+        "key": "A",
+        "text": "构造函数参数"
+      },
+      {
+        "key": "B",
+        "text": "工厂方法参数"
+      },
+      {
+        "key": "C",
+        "text": "setter 方法"
+      },
+      {
+        "key": "D",
+        "text": "直接 new 对象"
+      }
+    ],
+    "answerKeys": [
+      "D"
+    ],
+    "answerText": "D",
+    "explanation": "",
+    "answer": "D",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-dfcbda83abdbe6e5",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "Spring 中由 IoC 容器管理的对象称为?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Component"
+      },
+      {
+        "key": "B",
+        "text": "Bean"
+      },
+      {
+        "key": "C",
+        "text": "Object"
+      },
+      {
+        "key": "D",
+        "text": "Entity"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-838bca9a520d67be",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "以下哪项不是使用 IoC 容器带来的好处?",
+    "options": [
+      {
+        "key": "A",
+        "text": "降低代码耦合度"
+      },
+      {
+        "key": "B",
+        "text": "便于单元测试"
+      },
+      {
+        "key": "C",
+        "text": "代码更干净易读"
+      },
+      {
+        "key": "D",
+        "text": "提高编译速度"
+      }
+    ],
+    "answerKeys": [
+      "D"
+    ],
+    "answerText": "D",
+    "explanation": "",
+    "answer": "D",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-9ebc275ac1e40fc0",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在 Spring 配置文件中，用于定义 Bean 属性值的元素是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "<constructor-arg>"
+      },
+      {
+        "key": "B",
+        "text": "<property>"
+      },
+      {
+        "key": "C",
+        "text": "<value>"
+      },
+      {
+        "key": "D",
+        "text": "<bean>"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-ba0bcc13446fc208",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "关于 Spring IoC 容器，下列说法正确的是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "容器通过读取数据库配置来管理 Bean"
+      },
+      {
+        "key": "B",
+        "text": "ApplicationContext 是 Spring IoC 容器的核心接口"
+      },
+      {
+        "key": "C",
+        "text": "配置元数据只能通过 XML 方式定义"
+      },
+      {
+        "key": "D",
+        "text": "基于注解的配置方式已被淘汰"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-9c861f05b9a76272",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在使用注解配置时，要使 @Component 生效，必须同时使用哪个注解?",
+    "options": [
+      {
+        "key": "A",
+        "text": "@Autowired"
+      },
+      {
+        "key": "B",
+        "text": "@Configuration"
+      },
+      {
+        "key": "C",
+        "text": "@ComponentScan"
+      },
+      {
+        "key": "D",
+        "text": "@Value"
+      }
+    ],
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "",
+    "answer": "C",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-b0767f414c5afcfd",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "Spring Bean 的默认作用域是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "prototype"
+      },
+      {
+        "key": "B",
+        "text": "singleton"
+      },
+      {
+        "key": "C",
+        "text": "request"
+      },
+      {
+        "key": "D",
+        "text": "session"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-97a36e267a302a3b",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "关于 @Lazy 注解，下列说法正确的是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "用于延迟 Bean 的初始化"
+      },
+      {
+        "key": "B",
+        "text": "只能用于单例 Bean"
+      },
+      {
+        "key": "C",
+        "text": "会阻止 Bean 的创建"
+      },
+      {
+        "key": "D",
+        "text": "用于加速应用启动"
+      }
+    ],
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "A",
+    "explanation": "",
+    "answer": "A",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-51fcfdfa4111e45d",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "关于 Servlet API 及其来源，下列说法中正确的是哪一项?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Servlet API 是 Spring 框架的一部分，用于处理 HTTP 请求。"
+      },
+      {
+        "key": "B",
+        "text": "Servlet API 属于 Java SE 标准库，由 JVM 直接提供。"
+      },
+      {
+        "key": "C",
+        "text": "Servlet API 是 Java EE(现 Jakarta EE)规范的一部分，由 Tomcat、Jetty 等 Web 容器负责实现。"
+      },
+      {
+        "key": "D",
+        "text": "Servlet API 是一种前端框架，用于生成动态网页内容。"
+      }
+    ],
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "",
+    "answer": "C",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-72b2f03a989f6528",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "采用 MVC 模式进行软件开发的主要优势之一是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "自动提升应用程序的运行性能和响应速度"
+      },
+      {
+        "key": "B",
+        "text": "实现职责分离，使代码结构清晰，易于维护"
+      },
+      {
+        "key": "C",
+        "text": "减少代码行数，使程序更加简洁和轻量"
+      },
+      {
+        "key": "D",
+        "text": "消除所有类型的技术债务和长期维护成本"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-3bb452e3cc8114a5",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在普通 Servlet 工作流程中，如果用户发起一个 POST 请求，最终会调用哪个方法?",
+    "options": [
+      {
+        "key": "A",
+        "text": "service"
+      },
+      {
+        "key": "B",
+        "text": "doGet"
+      },
+      {
+        "key": "C",
+        "text": "doPost"
+      },
+      {
+        "key": "D",
+        "text": "processRequest"
+      }
+    ],
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "",
+    "answer": "C",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-dab8c3837fdad31d",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在 DispatcherServlet 工作流程中，如果用户发起一个 GET 请求，最终会调用哪个方法?",
+    "options": [
+      {
+        "key": "A",
+        "text": "service"
+      },
+      {
+        "key": "B",
+        "text": "doGet"
+      },
+      {
+        "key": "C",
+        "text": "doDispatch"
+      },
+      {
+        "key": "D",
+        "text": "processRequest"
+      }
+    ],
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "",
+    "answer": "C",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-5434e75c3f6ae789",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "关于 Spring MVC 完整的请求处理流程，以下哪项描述最准确?",
+    "options": [
+      {
+        "key": "A",
+        "text": "请求→DispatcherServlet→HandlerMapping→HandlerAdapter→Controller→视图渲染→响应"
+      },
+      {
+        "key": "B",
+        "text": "请求→HandlerMapping→DispatcherServlet→Controller→HandlerAdapter→视图渲染→响应"
+      },
+      {
+        "key": "C",
+        "text": "请求→DispatcherServlet→HandlerAdapter→HandlerMapping→Controller→视图渲染→响应"
+      },
+      {
+        "key": "D",
+        "text": "请求→Controller→DispatcherServlet→HandlerMapping→HandlerAdapter→视图渲染→响应"
+      }
+    ],
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "A",
+    "explanation": "",
+    "answer": "A",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-fa688f9c0d63c8a2",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在传统 Servlet 开发中，如何注册和映射 Servlet?",
+    "options": [
+      {
+        "key": "A",
+        "text": "使用 @Controller 注解"
+      },
+      {
+        "key": "B",
+        "text": "在 web.xml 中配置 servlet 和 servlet-mapping"
+      },
+      {
+        "key": "C",
+        "text": "在代码中直接调用 Servlet API"
+      },
+      {
+        "key": "D",
+        "text": "使用 Spring 配置类"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-cf05c0f20b8007d8",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "Spring MVC 中，@Controller 注解的作用是什么?",
+    "options": [
+      {
+        "key": "A",
+        "text": "定义 Servlet 类"
+      },
+      {
+        "key": "B",
+        "text": "标记该类为控制器，由 Spring 管理"
+      },
+      {
+        "key": "C",
+        "text": "配置视图解析规则"
+      },
+      {
+        "key": "D",
+        "text": "处理 HTTP 请求的具体业务逻辑"
+      }
+    ],
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "",
+    "answer": "B",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-b5caf2ca8472e9d9",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在 MVC 模式中，Controller 的主要职责是什么?",
+    "options": [
+      {
+        "key": "A",
+        "text": "封装业务数据和业务逻辑"
+      },
+      {
+        "key": "B",
+        "text": "负责用户界面的渲染和展示"
+      },
+      {
+        "key": "C",
+        "text": "接收用户请求，调用 Model 处理业务，选择 View 返回响应"
+      },
+      {
+        "key": "D",
+        "text": "管理数据库连接和事务"
+      }
+    ],
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "",
+    "answer": "C",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-093a91d9ba356c03",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在Spring MVC框架中，负责统一接收并分发所有HTTP请求的核心前端控制器是",
+    "options": [
+      {
+        "key": "A",
+        "text": "SimpleServlet"
+      },
+      {
+        "key": "B",
+        "text": "HttpServlet"
+      },
+      {
+        "key": "C",
+        "text": "DispatcherServlet"
+      },
+      {
+        "key": "D",
+        "text": "HandlerAdapter"
+      }
+    ],
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "",
+    "answer": "C",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-ce1ccb14bc3fb78f",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在Spring MVC中，用于标识一个类是Web控制器的注解是",
+    "options": [
+      {
+        "key": "A",
+        "text": "@Service"
+      },
+      {
+        "key": "B",
+        "text": "@Repository"
+      },
+      {
+        "key": "C",
+        "text": "@Component"
+      },
+      {
+        "key": "D",
+        "text": "@Controller"
+      }
+    ],
+    "answerKeys": [
+      "D"
+    ],
+    "answerText": "D",
+    "explanation": "",
+    "answer": "D",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-b352c96abcc162f0",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "HandlerMapping在为请求寻找匹配的处理器时，通常不会依据以下哪一项进行匹配",
+    "options": [
+      {
+        "key": "A",
+        "text": "请求URL路径"
+      },
+      {
+        "key": "B",
+        "text": "请求参数(Params)"
+      },
+      {
+        "key": "C",
+        "text": "请求头的Accept内容"
+      },
+      {
+        "key": "D",
+        "text": "服务器主机的IP地址"
+      }
+    ],
+    "answerKeys": [
+      "D"
+    ],
+    "answerText": "D",
+    "explanation": "",
+    "answer": "D",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-7dc51de430fc78c1",
+    "subject": "软件体系结构",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "相比于传统的Servlet开发，Spring MVC框架的一个主要优势是",
+    "options": [
+      {
+        "key": "A",
+        "text": "完全无需任何配置即可运行"
+      },
+      {
+        "key": "B",
+        "text": "不再基于Servlet API，性能更高"
+      },
+      {
+        "key": "C",
+        "text": "提供了更完善的请求分发、处理器映射、数据绑定和视图解析等机制，简化开发"
+      },
+      {
+        "key": "D",
+        "text": "强制使用JSP作为唯一视图技术"
+      }
+    ],
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "",
+    "answer": "C",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-c5273acc617c4942",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "关于Spring AOP的通知类型，以下说法正确的有?( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "@Before通知在目标方法执行前执行"
+      },
+      {
+        "key": "B",
+        "text": "@After通知在目标方法正常返回后执行"
+      },
+      {
+        "key": "C",
+        "text": "@Around通知可以控制目标方法的执行"
+      },
+      {
+        "key": "D",
+        "text": "@AfterThrowing通知在目标方法抛出异常时执行"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "C",
+      "D"
+    ],
+    "answerText": "ACD",
+    "explanation": "",
+    "answer": "ACD",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-3194a9d0f792e965",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "关于AOP中的基本概念，以下正确的有?( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "连接点是程序执行过程中的特定节点"
+      },
+      {
+        "key": "B",
+        "text": "切入点是实际织入通知的连接点"
+      },
+      {
+        "key": "C",
+        "text": "通知定义了切面的具体行为和执行时机"
+      },
+      {
+        "key": "D",
+        "text": "切面由通知和连接点组成"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "",
+    "answer": "ABC",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-d860f40af85d43d7",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "在基于注解的AOP配置中，以下哪些注解是必需的?( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "@Aspect"
+      },
+      {
+        "key": "B",
+        "text": "@Pointcut"
+      },
+      {
+        "key": "C",
+        "text": "@EnableAspectJAutoProxy"
+      },
+      {
+        "key": "D",
+        "text": "@Component"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "C",
+      "D"
+    ],
+    "answerText": "ACD",
+    "explanation": "",
+    "answer": "ACD",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-3b60314457d1bca4",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "在MyBatis中，以下哪些元素可以在核心配置文件中配置?",
+    "options": [
+      {
+        "key": "A",
+        "text": "properties"
+      },
+      {
+        "key": "B",
+        "text": "settings"
+      },
+      {
+        "key": "C",
+        "text": "typeAliases"
+      },
+      {
+        "key": "D",
+        "text": "mappers"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "answerText": "ABCD",
+    "explanation": "",
+    "answer": "ABCD",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-bb8e82c74d67ebdc",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "关于 where 元素的特性，以下描述正确的是( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "仅当子元素有内容时才生成 WHERE 子句"
+      },
+      {
+        "key": "B",
+        "text": "会自动去除首个 AND 或 OR"
+      },
+      {
+        "key": "C",
+        "text": "与 trim(prefix=\"WHERE\") 等价"
+      },
+      {
+        "key": "D",
+        "text": "必须和 if 联合使用"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "",
+    "answer": "ABC",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-3281f9e49bb6f134",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "关于动态 SQL 的 foreach 元素，以下说法正确的是( )",
+    "options": [
+      {
+        "key": "A",
+        "text": "常用于构建 IN 语句"
+      },
+      {
+        "key": "B",
+        "text": "可遍历 List 或数组"
+      },
+      {
+        "key": "C",
+        "text": "使用 close 属性定义结束符"
+      },
+      {
+        "key": "D",
+        "text": "只能用于 insert 语句"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "",
+    "answer": "ABC",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-c0032817b11b92ac",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "关于 MyBatis 一级缓存，下列说法正确的有?",
+    "options": [
+      {
+        "key": "A",
+        "text": "同一个 SqlSession 中多次执行相同 SQL 会使用缓存"
+      },
+      {
+        "key": "B",
+        "text": "执行插入操作会清空一级缓存"
+      },
+      {
+        "key": "C",
+        "text": "一级缓存是线程安全的"
+      },
+      {
+        "key": "D",
+        "text": "一级缓存可跨多个 SqlSession 共享"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B"
+    ],
+    "answerText": "AB",
+    "explanation": "",
+    "answer": "AB",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-9dcb5ecf4116cdb4",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "关于 MyBatis 的动态 SQL 标签，下列属于常用标签的有?",
+    "options": [
+      {
+        "key": "A",
+        "text": "<if>"
+      },
+      {
+        "key": "B",
+        "text": "<foreach>"
+      },
+      {
+        "key": "C",
+        "text": "<set>"
+      },
+      {
+        "key": "D",
+        "text": "<association>"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "",
+    "answer": "ABC",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-aea390debbe16849",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "关于 MyBatis 的 SqlSession，下列说法正确的有?",
+    "options": [
+      {
+        "key": "A",
+        "text": "SqlSession 由 SqlSessionFactory 创建"
+      },
+      {
+        "key": "B",
+        "text": "SqlSession 是 MyBatis 与数据库交互的核心"
+      },
+      {
+        "key": "C",
+        "text": "SqlSession 使用完毕后必须关闭"
+      },
+      {
+        "key": "D",
+        "text": "多个线程可共享同一个 SqlSession"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "",
+    "answer": "ABC",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-b65f18e09dcae552",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "关于MyBatis二级缓存的配置属性，以下哪些是可用的?",
+    "options": [
+      {
+        "key": "A",
+        "text": "eviction"
+      },
+      {
+        "key": "B",
+        "text": "flushInterval"
+      },
+      {
+        "key": "C",
+        "text": "size"
+      },
+      {
+        "key": "D",
+        "text": "readOnly"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "answerText": "ABCD",
+    "explanation": "",
+    "answer": "ABCD",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-ccc55a48c7015e90",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "关于 Spring Framework 的核心技术，以下哪些说法正确?",
+    "options": [
+      {
+        "key": "A",
+        "text": "IoC 容器是 Spring 的核心"
+      },
+      {
+        "key": "B",
+        "text": "AOP 是 Spring 的核心技术之一"
+      },
+      {
+        "key": "C",
+        "text": "Spring 强制使用 XML 配置"
+      },
+      {
+        "key": "D",
+        "text": "Spring 只支持 Java EE 应用"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B"
+    ],
+    "answerText": "AB",
+    "explanation": "",
+    "answer": "AB",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-3ea7819864ebfe04",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "以下哪些是依赖注入的常见方式?",
+    "options": [
+      {
+        "key": "A",
+        "text": "构造函数注入"
+      },
+      {
+        "key": "B",
+        "text": "setter 方法注入"
+      },
+      {
+        "key": "C",
+        "text": "工厂方法注入"
+      },
+      {
+        "key": "D",
+        "text": "直接赋值注入"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "",
+    "answer": "ABC",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-1e5722017328dde6",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "以下哪些是 Spring 支持的依赖注入方式?",
+    "options": [
+      {
+        "key": "A",
+        "text": "构造方法注入"
+      },
+      {
+        "key": "B",
+        "text": "字段注入"
+      },
+      {
+        "key": "C",
+        "text": "方法注入"
+      },
+      {
+        "key": "D",
+        "text": "接口注入"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "",
+    "answer": "ABC",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-b0e1b95280a0d930",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "关于 Bean 的作用域，以下哪些说法正确?",
+    "options": [
+      {
+        "key": "A",
+        "text": "singleton 是默认作用域"
+      },
+      {
+        "key": "B",
+        "text": "prototype 每次获取都会创建新实例"
+      },
+      {
+        "key": "C",
+        "text": "request 作用域适用于 Web 应用"
+      },
+      {
+        "key": "D",
+        "text": "session 作用域的 Bean 在会话间共享"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "",
+    "answer": "ABC",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-0be1f20c18fc13d9",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "在MyBatis处理多对多关系时，以下哪些设计能提升性能?",
+    "options": [
+      {
+        "key": "A",
+        "text": "使用嵌套结果映射替代嵌套Select查询"
+      },
+      {
+        "key": "B",
+        "text": "在中间表的关联字段上创建索引"
+      },
+      {
+        "key": "C",
+        "text": "为所有关联查询开启二级缓存"
+      },
+      {
+        "key": "D",
+        "text": "使用<discriminator>根据类型映射不同结果"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "",
+    "answer": "ABC",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-7015a6d199ec2c88",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "关于 MVC 模式，以下哪些说法正确?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Model 负责封装业务数据和业务逻辑"
+      },
+      {
+        "key": "B",
+        "text": "View 只负责展示数据，不处理业务逻辑"
+      },
+      {
+        "key": "C",
+        "text": "Controller 作为 Model 和 View 的桥梁，协调请求处理"
+      },
+      {
+        "key": "D",
+        "text": "Model 和 View 应该直接交互以提高效率"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "",
+    "answer": "ABC",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-4e2d676ffa15bd65",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "采用 MVC 模式的好处包括哪些?",
+    "options": [
+      {
+        "key": "A",
+        "text": "职责分离，代码清晰"
+      },
+      {
+        "key": "B",
+        "text": "提高代码复用性"
+      },
+      {
+        "key": "C",
+        "text": "便于单元测试"
+      },
+      {
+        "key": "D",
+        "text": "自动提升应用程序性能"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "",
+    "answer": "ABC",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-d4e73de6fca6f81a",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "关于 Spring MVC 配置，以下哪些是常见的必要步骤?",
+    "options": [
+      {
+        "key": "A",
+        "text": "引入 DispatcherServlet 并配置映射"
+      },
+      {
+        "key": "B",
+        "text": "配置 Spring 配置文件，包括组件扫描和注解驱动"
+      },
+      {
+        "key": "C",
+        "text": "配置视图解析器 ViewResolver"
+      },
+      {
+        "key": "D",
+        "text": "直接编写 Servlet 代码处理所有请求"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "",
+    "answer": "ABC",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-d42df8331f270d18",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "在Spring MVC的请求处理流程中，FrameworkServlet的processRequest方法最终可能会将请求导 向哪些路径?",
+    "options": [
+      {
+        "key": "A",
+        "text": "调用父类HttpServlet的service方法"
+      },
+      {
+        "key": "B",
+        "text": "直接调用HandlerMapping"
+      },
+      {
+        "key": "C",
+        "text": "调用DispatcherServlet的doService方法"
+      },
+      {
+        "key": "D",
+        "text": "直接生成响应并返回"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "C"
+    ],
+    "answerText": "AC",
+    "explanation": "",
+    "answer": "AC",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-44b8663f67d764c7",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "在MVC模式中，以下哪些职责通常属于Model层的范畴?",
+    "options": [
+      {
+        "key": "A",
+        "text": "封装核心业务数据"
+      },
+      {
+        "key": "B",
+        "text": "实现核心业务逻辑"
+      },
+      {
+        "key": "C",
+        "text": "决定使用哪个视图进行展示"
+      },
+      {
+        "key": "D",
+        "text": "负责生成最终的HTML页面"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B"
+    ],
+    "answerText": "AB",
+    "explanation": "",
+    "answer": "AB",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-0b0b64bd51ae44a2",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "开发者把数据库连接信息移入 db.properties，并准备按包注册实体别名和 Mapper。对这组配置的 判断正确的有（ ）。",
+    "options": [
+      {
+        "key": "A",
+        "text": "<properties resource=\"db.properties\"/> 可加载类路径中的属性文件"
+      },
+      {
+        "key": "B",
+        "text": "加载后的属性可通过 ${属性名} 形式引用"
+      },
+      {
+        "key": "C",
+        "text": "使用 <mappers><package .../></mappers> 扫描时，Mapper 接口与 XML 需要满足对应的包路径和命名约 定"
+      },
+      {
+        "key": "D",
+        "text": "配置类型别名后，Java 类型原有的全限定类名将失效"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "",
+    "answer": "ABC",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-134f7d865b17b274",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "查询结果列名与 Java 属性名不完全一致时，下列处理方式正确的有（ ）。",
+    "options": [
+      {
+        "key": "A",
+        "text": "可在 SQL 中使用列别名使列名与属性名一致"
+      },
+      {
+        "key": "B",
+        "text": "可使用 resultMap 显式定义 column 到 property 的映射"
+      },
+      {
+        "key": "C",
+        "text": "<id> 标记对象标识，有助于缓存和嵌套结果映射"
+      },
+      {
+        "key": "D",
+        "text": "使用 resultMap 后，每个同名属性也必须显式写出 <result> 才能赋值"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "",
+    "answer": "ABC",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-4a81b7da84481a45",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "一个 <choose> 中依次配置了多个 <when> 和一个 <otherwise>。下列说法正确的有（ ）。",
+    "options": [
+      {
+        "key": "A",
+        "text": "按书写顺序判断 <when> 条件"
+      },
+      {
+        "key": "B",
+        "text": "第一个满足条件的 <when> 被采用后，不再采用后续分支"
+      },
+      {
+        "key": "C",
+        "text": "所有条件为真的 <when> 都会同时拼接到 SQL"
+      },
+      {
+        "key": "D",
+        "text": "<otherwise> 与多个相互独立的 <if> 具有完全相同的行为"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B"
+    ],
+    "answerText": "AB",
+    "explanation": "",
+    "answer": "AB",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-f4a19da410c2828c",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "对 ids=[2,5] 执行下列片段时，相关判断正确的有（ ）。",
+    "options": [
+      {
+        "key": "A",
+        "text": "循环体会生成两段 id = ?"
+      },
+      {
+        "key": "B",
+        "text": "两段条件之间使用 OR 连接"
+      },
+      {
+        "key": "C",
+        "text": "整体结果两侧会添加圆括号"
+      },
+      {
+        "key": "D",
+        "text": "item 必须与数据库表的主键列名相同"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "",
+    "answer": "ABC",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-84c0de311e8c55bb",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "关于 Spring 注解方式的依赖注入，下列说法正确的有（ ）。",
+    "options": [
+      {
+        "key": "A",
+        "text": "类只有一个构造器时，Spring 可使用该构造器完成注入"
+      },
+      {
+        "key": "B",
+        "text": "List<Weapon> 参数可接收容器中所有匹配 Weapon 类型的 Bean"
+      },
+      {
+        "key": "C",
+        "text": "带 @Autowired 的 setter 方法可用于方法注入"
+      },
+      {
+        "key": "D",
+        "text": "对象在方法内部自行 new 出依赖对象属于容器依赖注入"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "",
+    "answer": "ABC",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-4c87b161c9b8a0a1",
+    "subject": "软件体系结构",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "关于注解方式配置切点，下列说法正确的有（ ）。",
+    "options": [
+      {
+        "key": "A",
+        "text": "@Pointcut 可为切点表达式定义可复用的名称"
+      },
+      {
+        "key": "B",
+        "text": "execution(...) 可按类、方法和参数模式匹配目标方法"
+      },
+      {
+        "key": "C",
+        "text": "@annotation(demo.ssm.CalTime) 可匹配标有指定注解的方法"
+      },
+      {
+        "key": "D",
+        "text": "切点方法必须在方法体内编写实际业务逻辑"
+      }
+    ],
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "",
+    "answer": "ABC",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-174c949e671db219",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "AOP可以完全替代OOP成为主要的编程范式。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "错误",
+    "explanation": "",
+    "answer": "错误",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-c5fe1fe373a48ef7",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "在Spring AOP中，一个切面可以包含多个通知方法。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-18188d620fd1b964",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "CGLib动态代理可以代理没有实现接口的类。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-3ae367e67c439d08",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "@After通知无论目标方法是否抛出异常都会执行。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-c5c92a6408104bf0",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "在MyBatis中，类型别名只能通过逐个定义的方式配置。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "错误",
+    "explanation": "",
+    "answer": "错误",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-600c3c09bec7aaa8",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "MyBatis 默认会自动提交事务。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "错误",
+    "explanation": "",
+    "answer": "错误",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-fa33b73fc0f7ad0c",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "resultMap 可解决列名与属性名不一致的问题。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-76fbc633e2e3ff85",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "where 元素在没有子条件时也会生成 WHERE 子句。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "错误",
+    "explanation": "",
+    "answer": "错误",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-e838be42012eed5c",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "foreach 元素只能用于构建 insert 语句。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "错误",
+    "explanation": "",
+    "answer": "错误",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-aa6102a9c12f87aa",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "一级缓存会在执行查询操作后自动清空。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "错误",
+    "explanation": "",
+    "answer": "错误",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-e2722171057117d6",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "MyBatis 二级缓存需配置<cache/>标签才能启用。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-3c484169055a3d39",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "MySQL 中，未指定 JOIN 类型时，默认使用 LEFT JOIN。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "错误",
+    "explanation": "",
+    "answer": "错误",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-dcb9804c319cdd25",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "MyBatis 的<foreach>标签仅用于批量插入操作。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "错误",
+    "explanation": "",
+    "answer": "错误",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-cba9bcf5203fa29e",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "MyBatis二级缓存默认要求实体类实现Serializable接口。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-d694867201f56c67",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "LEFT JOIN会返回左表的所有记录，即使右表没有匹配。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-b99ee784e6ab9c34",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "Spring 框架可以强制开发者使用唯一的开发方式。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "错误",
+    "explanation": "",
+    "answer": "错误",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-d27d43546601b698",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "依赖注入是控制反转的一种具体实现形式。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-3adcda66a3a201ee",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "Spring 的 IoC 容器可以降低代码的耦合度。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-157003ed6d6a6f82",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "使用 Spring IoC 容器后，单元测试会变得更困难。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "错误",
+    "explanation": "",
+    "answer": "错误",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-ba40a130d559b210",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "@Component 的衍生注解包括 @Controller、@Service 和 @Repository。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-aa7b22c6763c16ed",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "@Lazy 注解可以用于延迟 Bean 的初始化，加快应用启动时间。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-360d1e976b3608f3",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "Spring 支持通过构造方法自动注入所有匹配类型的 Bean 到 List 中。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-9506e82560bdec20",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "DispatcherServlet 是 Spring MVC 的唯一入口。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-cb6a0c42e80cb527",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "在 Spring MVC 中，@GetMapping 注解用于处理 GET 请求。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-eca044fb9fda1694",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "Spring MVC框架的实现完全独立于Servlet API，不依赖于任何Servlet容器。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "错误",
+    "explanation": "",
+    "answer": "错误",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-1ec4d9bed77267e1",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "@RequestMapping注解既可以标注在类上，也可以标注在方法上，用于定义请求映射。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-0cb9dc08ff74a503",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "Spring MVC中的HandlerAdapter存在的意义是为了让DispatcherServlet能够以统一的方式调用结 构各异的处理器(Handler)。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-762280fc518841c7",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "采用MVC模式能够自动提升应用程序的运行性能和响应速度。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "错误",
+    "explanation": "",
+    "answer": "错误",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-65e423c54819386f",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "两个不同 Mapper 命名空间可以各自声明一个 id=\"findById\" 的映射语句，因为完整标识由 namespace 和 id 共同构成。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-9164f9359acfbe65",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "Mapper 方法返回 List<User> 时，把 resultType 配置为 User 是合理的，MyBatis 会负责把多行 结果组织成集合。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-876cb1571438c55b",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "使用 resultMap 后，未显式配置但列名与属性名一致的简单属性仍可能由自动映射完成赋值。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-fd0758f774eac129",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "对 N 条主记录逐条执行嵌套 Select 加载关联对象时，通常只会执行一条 SQL，因为 MyBatis 会自 动把所有子查询合并。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "错误",
+    "explanation": "",
+    "answer": "错误",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-c7756a252ed9a842",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "在同一个 <choose> 中，即使多个 <when> 条件同时成立，也只采用按顺序遇到的第一个匹配分 支。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-2b60ecde3bf43f23",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "在同一个 SqlSession 中执行更新语句后，即使暂未调用 commit()，此前查询产生的一级缓存也会 被清理。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-11fa416320d8533d",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "二级缓存设置 readOnly=\"true\" 后，不同调用者可能获得同一个对象实例，因此调用者不应修改该 对象。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "正确",
+    "explanation": "",
+    "answer": "正确",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-daf4854b5de74e15",
+    "subject": "软件体系结构",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "构造器参数为 List<Weapon> 时，只要容器中存在多个 Weapon Bean，Spring 就会因候选对象不 唯一而无法注入。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "错误",
+    "explanation": "",
+    "answer": "错误",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-d9d19b5c04e572a6",
+    "subject": "软件体系结构",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "请简要说明AOP中\"横切关注点\"的含义，并举例说明。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "1. 说明横切关注点的含义\n\n  2. 举日志、事务或权限等例子\n\n  3. 说明 AOP 集中处理可减少重复和耦合",
+    "explanation": "",
+    "answer": "1. 说明横切关注点的含义\n\n  2. 举日志、事务或权限等例子\n\n  3. 说明 AOP 集中处理可减少重复和耦合",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-0b9567a857d99617",
+    "subject": "软件体系结构",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "简述Spring AOP中JDK动态代理和CGLib动态代理的主要区别及适用场景。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "1. JDK 动态代理基于接口\n\n  2. CGLIB 通过生成子类实现代理\n\n  3. 比较使用前提、final 限制和适用场景",
+    "explanation": "",
+    "answer": "1. JDK 动态代理基于接口\n\n  2. CGLIB 通过生成子类实现代理\n\n  3. 比较使用前提、final 限制和适用场景",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-aa39df262007c38a",
+    "subject": "软件体系结构",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "简述MyBatis的工作原理。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "1. 加载配置并创建 SqlSessionFactory\n\n  2. 打开 SqlSession 并取得 Mapper\n\n  3. 定位、执行 SQL 并映射结果\n\n  4. 提交或回滚并关闭会话",
+    "explanation": "",
+    "answer": "1. 加载配置并创建 SqlSessionFactory\n\n  2. 打开 SqlSession 并取得 Mapper\n\n  3. 定位、执行 SQL 并映射结果\n\n  4. 提交或回滚并关闭会话",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-635bd475ea574cca",
+    "subject": "软件体系结构",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "SqlSession是不是线程安全的?应该如何正确使用?",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "1. SqlSession 不是线程安全的\n\n  2. 一次请求或业务方法使用独立会话\n\n  3. 按事务提交或回滚\n\n  4. 使用后及时关闭",
+    "explanation": "",
+    "answer": "1. SqlSession 不是线程安全的\n\n  2. 一次请求或业务方法使用独立会话\n\n  3. 按事务提交或回滚\n\n  4. 使用后及时关闭",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-eaddffdad4f79735",
+    "subject": "软件体系结构",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "简述 MyBatis 中事务的作用及自动提交模式的弊端。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "1. 事务保证一组操作整体成功或失败\n\n  2. 正常时 commit，异常时 rollback\n\n  3. 自动提交会破坏整体回滚并增加频繁提交开销",
+    "explanation": "",
+    "answer": "1. 事务保证一组操作整体成功或失败\n\n  2. 正常时 commit，异常时 rollback\n\n  3. 自动提交会破坏整体回滚并增加频繁提交开销",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-090a43d76adecb89",
+    "subject": "软件体系结构",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "说明动态 SQL 中 if、choose、where、foreach 各自的作用。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "1. if：按条件拼接 SQL\n\n  2. choose：从多个分支中选择一个\n\n  3. where：自动处理 WHERE 和开头的 AND/OR\n\n  4. foreach：遍历集合，常用于 IN",
+    "explanation": "",
+    "answer": "1. if：按条件拼接 SQL\n\n  2. choose：从多个分支中选择一个\n\n  3. where：自动处理 WHERE 和开头的 AND/OR\n\n  4. foreach：遍历集合，常用于 IN",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-662e089ebc38af7d",
+    "subject": "软件体系结构",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "请简述 MyBatis 动态 SQL 的作用，并列举 3 种常用动态 SQL 标签及其功能。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "1. 说明动态 SQL 可按参数生成不同语句\n\n  2. 任选至少三个常用标签\n\n  3. 分别写出标签作用和典型使用场景",
+    "explanation": "",
+    "answer": "1. 说明动态 SQL 可按参数生成不同语句\n\n  2. 任选至少三个常用标签\n\n  3. 分别写出标签作用和典型使用场景",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-52b5115d79a2a66a",
+    "subject": "软件体系结构",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "请简述MyBatis中一级缓存和二级缓存的区别。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "1. 一级缓存属于 SqlSession，通常默认开启\n\n  2. 二级缓存属于 Mapper 命名空间，需要配置\n\n  3. 比较作用域、生命周期、失效条件和序列化要求",
+    "explanation": "",
+    "answer": "1. 一级缓存属于 SqlSession，通常默认开启\n\n  2. 二级缓存属于 Mapper 命名空间，需要配置\n\n  3. 比较作用域、生命周期、失效条件和序列化要求",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-1f8be755759d7ca4",
+    "subject": "软件体系结构",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "请简述 Spring IoC 容器的作用及其带来的主要好处。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "1. 容器负责创建和配置 Bean\n\n  2. 容器完成依赖注入并管理生命周期\n\n  3. 说明它能降低耦合、便于测试和维护",
+    "explanation": "",
+    "answer": "1. 容器负责创建和配置 Bean\n\n  2. 容器完成依赖注入并管理生命周期\n\n  3. 说明它能降低耦合、便于测试和维护",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-f7eb544099d74257",
+    "subject": "软件体系结构",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "请简述 Spring IoC 容器中 Bean 的生命周期，包括主要阶段和对应的注解。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "1. 实例化 Bean\n\n  2. 完成依赖注入\n\n  3. 执行 @PostConstruct 后投入使用\n\n  4. 销毁前执行 @PreDestroy，并说明 prototype 例外",
+    "explanation": "",
+    "answer": "1. 实例化 Bean\n\n  2. 完成依赖注入\n\n  3. 执行 @PostConstruct 后投入使用\n\n  4. 销毁前执行 @PreDestroy，并说明 prototype 例外",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-c54eacafc9b9c4cb",
+    "subject": "软件体系结构",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "请分别说明MyBatis中嵌套Select查询和嵌套结果映射的实现方式及各自的适用场景。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "1. 说明嵌套 Select 的执行过程及 N+1 问题\n\n  2. 说明 JOIN 配合嵌套结果映射的过程\n\n  3. 比较查询次数、配置复杂度和适用场景",
+    "explanation": "",
+    "answer": "1. 说明嵌套 Select 的执行过程及 N+1 问题\n\n  2. 说明 JOIN 配合嵌套结果映射的过程\n\n  3. 比较查询次数、配置复杂度和适用场景",
+    "answerKnown": true
+  },
+  {
+    "id": "q-architecture-de51bdb864ec67ca",
+    "subject": "软件体系结构",
+    "type": "short",
+    "typeLabel": "简答题",
+    "prompt": "简述 Spring MVC 的工作流程，从请求到响应的主要步骤。",
+    "options": [],
+    "answerKeys": [],
+    "answerText": "1. DispatcherServlet 接收请求\n\n  2. HandlerMapping 查找处理器\n\n  3. HandlerAdapter 调用 Controller\n\n  4. 处理 ModelAndView、ViewResolver 和结果渲染",
+    "explanation": "",
+    "answer": "1. DispatcherServlet 接收请求\n\n  2. HandlerMapping 查找处理器\n\n  3. HandlerAdapter 调用 Controller\n\n  4. 处理 ModelAndView、ViewResolver 和结果渲染",
+    "answerKnown": true
+  },
+  {
+    "id": "q-opengauss-cbf41a8c306f3be6",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "以下哪些不属于分区表的优势?",
+    "options": [
+      {
+        "key": "A",
+        "text": "增强数据传输安全性"
+      },
+      {
+        "key": "B",
+        "text": "改善查询性能"
+      },
+      {
+        "key": "C",
+        "text": "增强可用性"
+      },
+      {
+        "key": "D",
+        "text": "均衡I/O"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-703e1c83330e1eb3",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "若想要查询表student班级为1班\"且成绩排名前五名的学生信息，以下语句能实现的是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "select * from student where class_id=1 order by score desc limit 5;"
+      },
+      {
+        "key": "B",
+        "text": "select * from student where class_id=1 order by score desc offset 5;"
+      },
+      {
+        "key": "C",
+        "text": "select * from student where class_id=1 order by score limit 5"
+      },
+      {
+        "key": "D",
+        "text": "select * from student where class_id=1 group by score limit 5"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-41027f6e4c5b38ac",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "只有技术开发者才可以参与opengauss开源生态?",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-186995de616e0c69",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在默认配置下，openGauss集群最大能扩容到多少个节点?",
+    "options": [
+      {
+        "key": "A",
+        "text": "30"
+      },
+      {
+        "key": "B",
+        "text": "32"
+      },
+      {
+        "key": "C",
+        "text": "34"
+      },
+      {
+        "key": "D",
+        "text": "36"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-aef0ffe1741a061c",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "管理员需要修改openGauss配置文件(\"postgresql.conf\"、\"pg_hba.conf\")中的参数，使用以下哪个命令可以进行参数的修改设置?",
+    "options": [
+      {
+        "key": "A",
+        "text": "gs_ssh"
+      },
+      {
+        "key": "B",
+        "text": "gs_guc"
+      },
+      {
+        "key": "C",
+        "text": "gs_dup"
+      },
+      {
+        "key": "D",
+        "text": "gs_om"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-a42f920863f9f24f",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "以下关于openGauss数据库透明加密的特点，错误的是?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "支持行存表数据加密，不支持列存表加密"
+      },
+      {
+        "key": "B",
+        "text": "支持集群级别配置"
+      },
+      {
+        "key": "C",
+        "text": "使用KMS服务加密openGauss数据库"
+      },
+      {
+        "key": "D",
+        "text": "加密密钥层次结构有三层"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-d55947fbdee50122",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "缺省情况下，客户端连接数据库后处于空闲状态时间超过参数session_timeout的默认值(        )min时会自动断开连接?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "5"
+      },
+      {
+        "key": "B",
+        "text": "10"
+      },
+      {
+        "key": "C",
+        "text": "15"
+      },
+      {
+        "key": "D",
+        "text": "30"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-7a75012d6bb6b371",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "openGauss集群搭建完成后，会有默认创建一个超级管理员，但在开启三权分立后，超级管理员的权限会分给三个不同的管理员，以下哪个不是三权分立中管理员的角色?",
+    "options": [
+      {
+        "key": "A",
+        "text": "系统管理员"
+      },
+      {
+        "key": "B",
+        "text": "安全管理员"
+      },
+      {
+        "key": "C",
+        "text": "审计管理员"
+      },
+      {
+        "key": "D",
+        "text": "数据管理员"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-871b3ac66b6f2e56",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "clob用于存储text类型的文本大对象。",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-bf08ab0c9b5aa673",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "性能测试和商业部署时，openGauss单实例部署建议在多少以上?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "16GB"
+      },
+      {
+        "key": "B",
+        "text": "32GB"
+      },
+      {
+        "key": "C",
+        "text": "64GB"
+      },
+      {
+        "key": "D",
+        "text": "128GB"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-00e1f4ccd6e1d548",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "删除角色是否将角色下的用户也删除?",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-c0b6fea74a30e858",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "以下哪个功能是openGauss的参数调优工具?",
+    "options": [
+      {
+        "key": "A",
+        "text": "X-Tuner"
+      },
+      {
+        "key": "B",
+        "text": "SQLdiag"
+      },
+      {
+        "key": "C",
+        "text": "Index-advisor"
+      },
+      {
+        "key": "D",
+        "text": "DeepSQL"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-5d97827dac57fcaa",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "openGauss中游标使用步骤正确的是(        )?",
+    "options": [
+      {
+        "key": "A",
+        "text": "声明游标，使用游标，打开游标，关闭游标"
+      },
+      {
+        "key": "B",
+        "text": "打开游标，声明游标，使用游标，关闭游标"
+      },
+      {
+        "key": "C",
+        "text": "声明游标，打开游标，选择游标，关闭游标"
+      },
+      {
+        "key": "D",
+        "text": "声明游标，打开游标，使用游标，关闭游标"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-61c65f5f11ab40ad",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "openGauss查询命令中WHERE子句用于指定(        )?",
+    "options": [
+      {
+        "key": "A",
+        "text": "查询结果的分组条件"
+      },
+      {
+        "key": "B",
+        "text": "查询结果的统计方式"
+      },
+      {
+        "key": "C",
+        "text": "查询结果的排序条件"
+      },
+      {
+        "key": "D",
+        "text": "查询结果的搜索条件"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-bd44232987dd3769",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "openGauss支持行存、列存、内存引擎，在研DFV存储和原位更新。",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-fb9cd36187d0df9e",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在CREATE TABLE语句中，用来指定外键的关键字是?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "CONSTRAINT"
+      },
+      {
+        "key": "B",
+        "text": "PRIMARY KEY"
+      },
+      {
+        "key": "C",
+        "text": "FOREIGN KEY"
+      },
+      {
+        "key": "D",
+        "text": "CHECK"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-ea54ae448e24b960",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "openGauss是关系型数据库，采用客户端/服务器、单进行多线程架构，支持单机和一主多备部署方式，备机可读，支持双机高可用和读扩展。",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-c4136ebe048dc7b5",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "下面哪个子句专用于GROUP BY操作中的条件过滤功能?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "WHERE子句"
+      },
+      {
+        "key": "B",
+        "text": "HAVING子句"
+      },
+      {
+        "key": "C",
+        "text": "LIMIT子句"
+      },
+      {
+        "key": "D",
+        "text": "ORDER BY子句"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-3a7207edb8f93125",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "在任何gsql客户端登录数据库成功后，可以使用copy命令进行数据的导入/导出，该命令读取/写入的文件是数据库服务器端文件。",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-ae5fa49075ba37ac",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "删除openGauss数据库的命令是什么?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "CREATE DATABASE"
+      },
+      {
+        "key": "B",
+        "text": "DELETE DATABASE"
+      },
+      {
+        "key": "C",
+        "text": "ALTER DATABASE"
+      },
+      {
+        "key": "D",
+        "text": "DROP DATABASE"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-59e828abb2066699",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "开源数据库opengauss内核使用了全密态技术。",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-2ad695635c79b195",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "当数据库testChange的owner是Jack时，同样可以直接删除用户Jack?",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-beed674882e1eaf4",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "ALTER DATABASE database_name SET TABLESPACE new_tablespace; 以上SQL语句的作用是什么?",
+    "options": [
+      {
+        "key": "A",
+        "text": "修改数据库默认表空间"
+      },
+      {
+        "key": "B",
+        "text": "修改数据库所有者"
+      },
+      {
+        "key": "C",
+        "text": "修改数据库名称"
+      },
+      {
+        "key": "D",
+        "text": "修改表空间名称"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-ee54ed3b0c9febbd",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在创建索引时，唯一索引的关键字是?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "FULLTEXT INDEX"
+      },
+      {
+        "key": "B",
+        "text": "ONLY INDEX"
+      },
+      {
+        "key": "C",
+        "text": "UNIQUE INDEX"
+      },
+      {
+        "key": "D",
+        "text": "INDEX"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-ec5213126fd6233b",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "实际场合中，因为硬件资源不可能无限多，所以任何系统迟早都会因为应用的增长而面临性能瓶颈问题。",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-c8e5f9cf948838df",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "对于RBAC模型中角色、用户和权限三者的相互关系，以下描述错误的是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "一个用户只能拥有一个角色"
+      },
+      {
+        "key": "B",
+        "text": "一个用户可对应多个角色"
+      },
+      {
+        "key": "C",
+        "text": "一个角色可以被赋予多个权限"
+      },
+      {
+        "key": "D",
+        "text": "一个权限能赋给多个角色"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-8fb667772075d4b1",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "系统表goperator存放openGauss支持的所有操作符，可以在其中选取合适的操作符。",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-04c702201dc85678",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "需求分析阶段进行信息调研工作的原因是什么?",
+    "options": [
+      {
+        "key": "A",
+        "text": "降低后续进行数据建模的风险"
+      },
+      {
+        "key": "B",
+        "text": "为了明确信息来源、方式、数据格式和内容"
+      },
+      {
+        "key": "C",
+        "text": "了解行业背景知识"
+      },
+      {
+        "key": "D",
+        "text": "能够尽快把物理设计的工作给开展起来"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-b1b11d6317f53d6a",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "OpenGauss只全量checkpoint,不支持增量checkpoint.",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-d49c935eb60944f4",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "下列关于表和视图的叙述中错误的是?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "视图可以和表一起使用"
+      },
+      {
+        "key": "B",
+        "text": "表和视图上都可以创建索引"
+      },
+      {
+        "key": "C",
+        "text": "表和视图的数据都可以进行更新操作，但视图的更新受限"
+      },
+      {
+        "key": "D",
+        "text": "表和视图都可以使用SQL语句进行查询"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-eea4486713be252c",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "下列哪个不是openGauss的常用数据类型?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "数值类型"
+      },
+      {
+        "key": "B",
+        "text": "数组类型"
+      },
+      {
+        "key": "C",
+        "text": "字符类型"
+      },
+      {
+        "key": "D",
+        "text": "日期类型"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-fe7e66bb9263f326",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "SSL技术可以防止中间人攻击和网络监听。",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-edecff8405122a32",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "某学习爱好者计划使用开源ETL工具将Oracle源库数据向openGauss数据仓库进行迁移，那么他可以选择以下哪个工具(        )?",
+    "options": [
+      {
+        "key": "A",
+        "text": "GDS"
+      },
+      {
+        "key": "B",
+        "text": "COPY"
+      },
+      {
+        "key": "C",
+        "text": "Kettle"
+      },
+      {
+        "key": "D",
+        "text": "DSC"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-7c0edb47208617b1",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "创建一个多表关联的视图，以下说法正确的是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "通过视图可以提升查询性能"
+      },
+      {
+        "key": "B",
+        "text": "这个视图会把发生关联的数据给存储下来形成子表"
+      },
+      {
+        "key": "C",
+        "text": "通过简单的视图查询就可以实现复杂的关联操作"
+      },
+      {
+        "key": "D",
+        "text": "可以通过这个视图进行删除和更新操作"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-056b7b0845b91867",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "获取各种openGauss中修改表中数据的命令是(        )?",
+    "options": [
+      {
+        "key": "A",
+        "text": "ALTER TABLE"
+      },
+      {
+        "key": "B",
+        "text": "UPDATE"
+      },
+      {
+        "key": "C",
+        "text": "REPAIR TABLE"
+      },
+      {
+        "key": "D",
+        "text": "CHECK TABLE"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-318c1cdc02928876",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "主机群备份时主要备份行存与列存文件,日志文件可以不备份",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-a66d7c3d0650b78f",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "下列哪种类型的日志记录事务最终状态的日志?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "系统日志"
+      },
+      {
+        "key": "B",
+        "text": "性能日志"
+      },
+      {
+        "key": "C",
+        "text": "pg_xlog"
+      },
+      {
+        "key": "D",
+        "text": "pg_clog"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-e6a5b6a8f271ee66",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "数据库设计追求的目标就是数据库系统有关的一切都要达到最好。",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-f1823a2574441194",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "SYS用户不允许被创建。",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-347d225f7b48baff",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "以下选项中，不是openGauss的整体部署方案的是哪一项?",
+    "options": [
+      {
+        "key": "A",
+        "text": "双主部署"
+      },
+      {
+        "key": "B",
+        "text": "一主一备部署"
+      },
+      {
+        "key": "C",
+        "text": "单机部署"
+      },
+      {
+        "key": "D",
+        "text": "一主多备部署"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-7a70cd8fc5068672",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "openGauss支持自定义函数，但不支持存储过程。",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-a264e77e51874a98",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "openGauss支持标准SQL2003，支持数据库事务ACID特性。",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-a4c3dd833fa2983a",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "以下能够删除一列的是?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "alter table emp drop column addcolumn"
+      },
+      {
+        "key": "B",
+        "text": "alter table emp remove addcolumn"
+      },
+      {
+        "key": "C",
+        "text": "alter table emp delete column addcolumn"
+      },
+      {
+        "key": "D",
+        "text": "alter table emp delete addcolumn"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-0e8e7f7d95c97c55",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "pg_chameleon工具是从什么数据库到openGauss的迁移工具?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "MySQL"
+      },
+      {
+        "key": "B",
+        "text": "SQL Server"
+      },
+      {
+        "key": "C",
+        "text": "Oracle"
+      },
+      {
+        "key": "D",
+        "text": "MongoDB"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-01fa15cd5fa45a11",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "openGauss提供了检查工具来帮助对openGauss级别、节点级别、会话/进程级别进行定期检查，让用户了解openGauss的负载情况，采取对应的改进措施。以下哪个工具可以实现上述功能?",
+    "options": [
+      {
+        "key": "A",
+        "text": "gs_checkperf"
+      },
+      {
+        "key": "B",
+        "text": "gs_om"
+      },
+      {
+        "key": "C",
+        "text": "gs_check"
+      },
+      {
+        "key": "D",
+        "text": "gs_checkos"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-eb6160c7b7d3769b",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "openGauss数据库支持gsql客户端登录后使用元命令\\copy进行数据导入导出，如果需要使用二进制格式存储和读取，需要在执行时指定以下哪一项类型?",
+    "options": [
+      {
+        "key": "A",
+        "text": "CSV"
+      },
+      {
+        "key": "B",
+        "text": "BINARY"
+      },
+      {
+        "key": "C",
+        "text": "FIXED"
+      },
+      {
+        "key": "D",
+        "text": "TEXT"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-b09bbe4dcfd484a1",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "以下不属于openGauss服务端工具的哪一项?",
+    "options": [
+      {
+        "key": "A",
+        "text": "gs_guc"
+      },
+      {
+        "key": "B",
+        "text": "gs_collector"
+      },
+      {
+        "key": "C",
+        "text": "gs_check"
+      },
+      {
+        "key": "D",
+        "text": "gsql"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-fccc2d4713fc967b",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "openGauss审计文件占用的磁盘空间大小默认值为?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "512MB"
+      },
+      {
+        "key": "B",
+        "text": "1024MB"
+      },
+      {
+        "key": "C",
+        "text": "2048MB"
+      },
+      {
+        "key": "D",
+        "text": "4GB"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-6d5157592c046953",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "CREATE TABLE AS创建表，后面需要添加查询语句类型(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "INSERT"
+      },
+      {
+        "key": "B",
+        "text": "UPDATE"
+      },
+      {
+        "key": "C",
+        "text": "SELECT"
+      },
+      {
+        "key": "D",
+        "text": "DELETE"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-7ca718100d2e3442",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "大批量的数据导入openGauss时，选择哪种数据导入工具?",
+    "options": [
+      {
+        "key": "A",
+        "text": "DSC"
+      },
+      {
+        "key": "B",
+        "text": "GDS"
+      },
+      {
+        "key": "C",
+        "text": "COPY"
+      },
+      {
+        "key": "D",
+        "text": "ETL"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-9e2ac83d16ff36f7",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "被授予DBA角色的用户拥有以下哪些权限?",
+    "options": [
+      {
+        "key": "A",
+        "text": "CREATEUSER"
+      },
+      {
+        "key": "B",
+        "text": "CREATEROLE"
+      },
+      {
+        "key": "C",
+        "text": "CREATESESSION"
+      },
+      {
+        "key": "D",
+        "text": "以上全部正确"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-282074fa274cc7a1",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "openGauss触发器创建在那个对象上?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "表"
+      },
+      {
+        "key": "B",
+        "text": "视图"
+      },
+      {
+        "key": "C",
+        "text": "数据库"
+      },
+      {
+        "key": "D",
+        "text": "查询"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-d590628d90c4cd66",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "下面哪个不是二进制类型?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "BLOB"
+      },
+      {
+        "key": "B",
+        "text": "RAW"
+      },
+      {
+        "key": "C",
+        "text": "BYTEA"
+      },
+      {
+        "key": "D",
+        "text": "TEXT"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-dfa9b85f04c2f2b1",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "关于E-R图，以下描述中正确的是?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "实体可以包含多个属性，但联系不能包含自己的属性"
+      },
+      {
+        "key": "B",
+        "text": "联系仅存在于两个实体之间，即只有二元联系"
+      },
+      {
+        "key": "C",
+        "text": "两个实体之间的联系可分为1:1，1:N，M:N三种"
+      },
+      {
+        "key": "D",
+        "text": "通常使用E-R图建立数据库的物理模型"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-243ed32dab941e63",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "获取各种openGauss的SQL命令的帮助语法命令是?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "openGauss=# \\copyright"
+      },
+      {
+        "key": "B",
+        "text": "openGauss=# \\h"
+      },
+      {
+        "key": "C",
+        "text": "openGauss=# \\l"
+      },
+      {
+        "key": "D",
+        "text": "openGauss=# \\q"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-5ab41cbbf5801911",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "用户与角色在opengauss数据库中语法一致，因此他们将完全等同。",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-41af4121b315fd9a",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "将E-R图转换为关系模式时，实体和联系都可以表示为?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "属性"
+      },
+      {
+        "key": "B",
+        "text": "键"
+      },
+      {
+        "key": "C",
+        "text": "关系"
+      },
+      {
+        "key": "D",
+        "text": "域"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-837b124cf73dd510",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "对于时间类型数据，秒后面小数位数的精度默认为几位?",
+    "options": [
+      {
+        "key": "A",
+        "text": "5"
+      },
+      {
+        "key": "B",
+        "text": "6"
+      },
+      {
+        "key": "C",
+        "text": "3"
+      },
+      {
+        "key": "D",
+        "text": "4"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-60c75b335898aef3",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "在Share——Disk架构中，容易导致系统瓶颈的硬件资源是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "内存"
+      },
+      {
+        "key": "B",
+        "text": "CPU"
+      },
+      {
+        "key": "C",
+        "text": "带宽"
+      },
+      {
+        "key": "D",
+        "text": "磁盘IO"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-bc961066c6a754df",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "以下哪个工具可以帮助用户在openGauss各节点上执行相同的命令?",
+    "options": [
+      {
+        "key": "A",
+        "text": "gs_check"
+      },
+      {
+        "key": "B",
+        "text": "gs_dump"
+      },
+      {
+        "key": "C",
+        "text": "gs_guc"
+      },
+      {
+        "key": "D",
+        "text": "gs_ssh"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-5ef4b52be068b0e4",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "某业务需要经常进行海量数据查询分析，为了保证分析效率更高效，那么数据以行存方式存储效果更好。",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-e20025b0e3d27d7e",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "以下扫描算子中用于对列存表进行扫描的算子是?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "SeqScan"
+      },
+      {
+        "key": "B",
+        "text": "CstoreScan"
+      },
+      {
+        "key": "C",
+        "text": "SubqueryScan"
+      },
+      {
+        "key": "D",
+        "text": "ValuesScan"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-afe13db9769b4fa8",
+    "subject": "openGauss",
+    "type": "judge",
+    "typeLabel": "判断题",
+    "prompt": "把表进行分区带来很多好处，所以在建表的时候。分区应该大量创造而且粒度要最细化。",
+    "options": [
+      {
+        "key": "A",
+        "text": "正确"
+      },
+      {
+        "key": "B",
+        "text": "错误"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-6f0c1e39bbe6f2e8",
+    "subject": "openGauss",
+    "type": "single",
+    "typeLabel": "单选题",
+    "prompt": "以下哪个不是数据库储存的逻辑划分?",
+    "options": [
+      {
+        "key": "A",
+        "text": "page"
+      },
+      {
+        "key": "B",
+        "text": "extent"
+      },
+      {
+        "key": "C",
+        "text": "segment"
+      },
+      {
+        "key": "D",
+        "text": "redolog"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-6f6d2793da588789",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "以下哪些选项是透明加密的特点?",
+    "options": [
+      {
+        "key": "A",
+        "text": "自动透明加密"
+      },
+      {
+        "key": "B",
+        "text": "使用方便简捷"
+      },
+      {
+        "key": "C",
+        "text": "更改用户操作习惯"
+      },
+      {
+        "key": "D",
+        "text": "特定环境读取"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-46ccb5fc7274e3ed",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "openGauss中故障定位有哪些内容?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "操作系统故障定位"
+      },
+      {
+        "key": "B",
+        "text": "网络故障定位"
+      },
+      {
+        "key": "C",
+        "text": "磁盘故障定位"
+      },
+      {
+        "key": "D",
+        "text": "数据库故障定位"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-6b8a42a5dc53881b",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "数据库审计可以识别哪些安全风险?",
+    "options": [
+      {
+        "key": "A",
+        "text": "SQL注入"
+      },
+      {
+        "key": "B",
+        "text": "刷库"
+      },
+      {
+        "key": "C",
+        "text": "撞库"
+      },
+      {
+        "key": "D",
+        "text": "以上都是错"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-48b51e4ae782c6a6",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "对视图的操作有",
+    "options": [
+      {
+        "key": "A",
+        "text": "CREATE"
+      },
+      {
+        "key": "B",
+        "text": "DROP"
+      },
+      {
+        "key": "C",
+        "text": "ALTER"
+      },
+      {
+        "key": "D",
+        "text": "TRUNCATE"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-98edb34aa2a818c2",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "进行需求调查的过程中，可以使用的方法包括以下哪些选项?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "问卷调查"
+      },
+      {
+        "key": "B",
+        "text": "和业务人员座谈调研"
+      },
+      {
+        "key": "C",
+        "text": "采集样本数据，进行数据分析"
+      },
+      {
+        "key": "D",
+        "text": "评审《用户需求规格说明书》"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-8a9e5a7d7b3a076f",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "以下关于行存表和列存表说法正确的是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "INSERT、UPDATE操作多的场景应选用行存表"
+      },
+      {
+        "key": "B",
+        "text": "行存表适用于点查询，即返回记录少、基于索引的简单查询"
+      },
+      {
+        "key": "C",
+        "text": "列存表的压缩、投影效率更高"
+      },
+      {
+        "key": "D",
+        "text": "统计分析类查询较多的场景应选用行存表"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-1e119915bd84df59",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "openGauss中数据安全涵盖了哪些方面内容?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "认证机制"
+      },
+      {
+        "key": "B",
+        "text": "用户角色管理"
+      },
+      {
+        "key": "C",
+        "text": "对象访问控制"
+      },
+      {
+        "key": "D",
+        "text": "审计机制"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-ec82d4eab70641ad",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "openGauss中支持哪些数据导入导出工具?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "DataChecker"
+      },
+      {
+        "key": "B",
+        "text": "Ora2Pg"
+      },
+      {
+        "key": "C",
+        "text": "pg_chameleon"
+      },
+      {
+        "key": "D",
+        "text": "Cloud Monitor"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-ab783c20c09c9b93",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "除了审计功能，数据库安全技术还有哪些?",
+    "options": [
+      {
+        "key": "A",
+        "text": "漏洞扫描"
+      },
+      {
+        "key": "B",
+        "text": "数据库加密"
+      },
+      {
+        "key": "C",
+        "text": "数据脱敏"
+      },
+      {
+        "key": "D",
+        "text": "数据备份"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-3bb3714c73ea2765",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "openGauss数据库审计包括哪些内容?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "数据库的启/停操作审计"
+      },
+      {
+        "key": "B",
+        "text": "连接操作审计"
+      },
+      {
+        "key": "C",
+        "text": "数据库DDL操作审计"
+      },
+      {
+        "key": "D",
+        "text": "数据库DML操作审计"
+      },
+      {
+        "key": "E",
+        "text": "数据库DCL操作审计"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-b9470d15bfadd468",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "下列关于一主多备部署方案的描述，正确的是哪几个选项?",
+    "options": [
+      {
+        "key": "A",
+        "text": "主备间Quorum复制，至少同步到一台备机，保证最大性能."
+      },
+      {
+        "key": "B",
+        "text": "主备任意一个节点故障，都影响业务的进行."
+      },
+      {
+        "key": "C",
+        "text": "任何一个备份都可以升主."
+      },
+      {
+        "key": "D",
+        "text": "主备实例之间不可部署在同一台物理机上."
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-edc2ba664eed0f44",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "openGauss支持哪些分区方式?",
+    "options": [
+      {
+        "key": "A",
+        "text": "范围分区"
+      },
+      {
+        "key": "B",
+        "text": "列表分区"
+      },
+      {
+        "key": "C",
+        "text": "哈希分区"
+      },
+      {
+        "key": "D",
+        "text": "复合分区"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-9fedd4d6d3c992e6",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "openGauss服务端工具gs_checkperf主要功能包括?(        )",
+    "options": [
+      {
+        "key": "A",
+        "text": "定期对openGauss级别检查"
+      },
+      {
+        "key": "B",
+        "text": "节点级别检查"
+      },
+      {
+        "key": "C",
+        "text": "会话/进程级别检查"
+      },
+      {
+        "key": "D",
+        "text": "SSD性能检查"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-60f54ca6ad01b716",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "关于索引的描述，下列选项正确的是?",
+    "options": [
+      {
+        "key": "A",
+        "text": "索引也需要定期清理"
+      },
+      {
+        "key": "B",
+        "text": "索引只能对等值查询带来帮助，对于范围查询效果不好"
+      },
+      {
+        "key": "C",
+        "text": "一个表可以创建多个索引"
+      },
+      {
+        "key": "D",
+        "text": "索引创建以后，数据库系统就一定会采用"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-1a9cf140ee8a4aa7",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "以下哪些为角色的特性?",
+    "options": [
+      {
+        "key": "A",
+        "text": "角色不能执行SQL语句操作"
+      },
+      {
+        "key": "B",
+        "text": "角色不能登录数据库"
+      },
+      {
+        "key": "C",
+        "text": "角色不属于任何用户"
+      },
+      {
+        "key": "D",
+        "text": "角色在系统中必须是唯一的"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-85e86e967d9bd41c",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "openGauss数据库在存储过程的开发过程中，支持以下哪些功能?",
+    "options": [
+      {
+        "key": "A",
+        "text": "6种异常信息级别"
+      },
+      {
+        "key": "B",
+        "text": "单步调试"
+      },
+      {
+        "key": "C",
+        "text": "8种异常信息级别"
+      },
+      {
+        "key": "D",
+        "text": "设置断点"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-6020e99ef32ffad7",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "全密态数据库中业务数据流在数据处理过程中都是以密文形态存在，以下关于全密态数据库等值查询的描述，正确的有哪些项?",
+    "options": [
+      {
+        "key": "A",
+        "text": "全密态数据库有效保护数据在云上全生命周期的隐私安全,无论数据处于何种状态,攻击者都无法从数据库服务端获取有效信息."
+      },
+      {
+        "key": "B",
+        "text": "全密态数据库帮助云服务提供商获取第三方信任,用户通过将密钥掌握在自己手上,使得高权限用户无法获取数据有效信息."
+      },
+      {
+        "key": "C",
+        "text": "全密态数据库让云数据库借助全密态能力更好的遵守个人隐私保护方面的法律法规."
+      },
+      {
+        "key": "D",
+        "text": "由于数据是由密文形态存在,因此可以不需要防火墙进行保护."
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-c3b4b08782de726c",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "哪些说法正确?",
+    "options": [
+      {
+        "key": "A",
+        "text": "Insert, update更新，适合行存;"
+      },
+      {
+        "key": "B",
+        "text": "Insert, update更新，适合列存;"
+      },
+      {
+        "key": "C",
+        "text": "行存，有更高的压缩比;"
+      },
+      {
+        "key": "D",
+        "text": "列存适合分析，加载"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-c53421f3e5dd3093",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "创建openGauss的索引时，应注意以下哪些事项",
+    "options": [
+      {
+        "key": "A",
+        "text": "索引的设计与业务强相关，与数据无关."
+      },
+      {
+        "key": "B",
+        "text": "一般在经常排序的字段上添加索引."
+      },
+      {
+        "key": "C",
+        "text": "索引的设计与数据强度相关，与业务无关"
+      },
+      {
+        "key": "D",
+        "text": "一般在热点数据上添加索引"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  },
+  {
+    "id": "q-opengauss-c08026de4807f59e",
+    "subject": "openGauss",
+    "type": "multiple",
+    "typeLabel": "多选题",
+    "prompt": "以下哪些属于使用视图的优点?",
+    "options": [
+      {
+        "key": "A",
+        "text": "视图能够简化用户的操作"
+      },
+      {
+        "key": "B",
+        "text": "视图对重构数据库提供了一定程度的物理独立性"
+      },
+      {
+        "key": "C",
+        "text": "视图使用户能以多种角度看待数据"
+      },
+      {
+        "key": "D",
+        "text": "视图能够对机密数据提供安全保护"
+      }
+    ],
+    "answerKeys": [],
+    "answerText": "题库未提供参考答案",
+    "explanation": "",
+    "answer": "题库未提供参考答案",
+    "answerKnown": false
+  }
+]
