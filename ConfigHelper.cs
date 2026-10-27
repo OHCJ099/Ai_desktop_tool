@@ -18,6 +18,10 @@ namespace WindowsClient
                     AppConfig? config = JsonSerializer.Deserialize<AppConfig>(json);
                     if (config != null)
                     {
+                        if (!json.Contains("\"DotOpacity\"", StringComparison.OrdinalIgnoreCase))
+                        {
+                            config.DotOpacity = 100.0;
+                        }
                         return config;
                     }
                 }

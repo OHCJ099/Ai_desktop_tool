@@ -179,25 +179,29 @@ namespace WindowsClient
                 DateTime now = DateTime.Now;
                 if (now < _cachedAnyExamUntil) return _cachedAnyExamResult;
 
-                bool result = Process.GetProcesses().Any(p =>
+                bool result = false;
+                string targetProcessName = TargetProcessName();
+                foreach (Process process in Process.GetProcesses())
                 {
-                    try
+                    using (process)
                     {
-                        string processName = p.ProcessName ?? "";
-                        if (processName.Equals(TargetProcessName(), StringComparison.OrdinalIgnoreCase)) return true;
-                        if (processName.Contains(Text("ex", "am"), StringComparison.OrdinalIgnoreCase)
-                            || processName.Contains(Text("c", "tf"), StringComparison.OrdinalIgnoreCase))
+                        try
                         {
-                            return true;
+                            string processName = process.ProcessName ?? "";
+                            if (processName.Equals(targetProcessName, StringComparison.OrdinalIgnoreCase)
+                                || processName.Contains(Text("ex", "am"), StringComparison.OrdinalIgnoreCase)
+                                || processName.Contains(Text("c", "tf"), StringComparison.OrdinalIgnoreCase))
+                            {
+                                result = true;
+                                break;
+                            }
                         }
-
-                        return false;
+                        catch
+                        {
+                            // A process can exit while it is being inspected; continue scanning.
+                        }
                     }
-                    catch
-                    {
-                        return false;
-                    }
-                });
+                }
                 _cachedAnyExamUntil = now.AddSeconds(5);
                 _cachedAnyExamResult = result;
                 return result;

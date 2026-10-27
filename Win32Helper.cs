@@ -121,5 +121,8 @@ namespace WindowsClient
 
         [DllImport("user32.dll")]
         public static extern short GetAsyncKeyState(int vKey);
+
+        [DllImport("user32.dll")]
+        public static extern uint GetDoubleClickTime();
     }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -14,8 +14,9 @@ namespace WindowsClient
 {
     public partial class MainWindow : Window
     {
-        private const double NormalWindowWidth = 260;
-        private const double SettingsWindowWidth = 360;
+        private const double NormalWindowWidth = 172;
+        private const double NormalWindowHeight = 42;
+        private const double SettingsWindowHeight = 66;
 
         private AppConfig _config = new AppConfig();
         private bool _isRequesting = false;
@@ -31,6 +32,13 @@ namespace WindowsClient
         private bool _automationPaused = false;
         private bool _automationRunning = false;
         private string _lastAutomationStatus = "";
+        private System.Windows.Threading.DispatcherTimer? _dotClickTimer;
+        private System.Windows.Threading.DispatcherTimer? _transparentClickTimer;
+        private System.Windows.Threading.DispatcherTimer? _idleExitTimer;
+        private System.Windows.Threading.DispatcherTimer? _settingsAutoCloseTimer;
+        private bool _isAutoExitInProgress;
+        private bool _suppressOpacitySave = false;
+        private DateTime _lastFunctionalTriggerUtc = DateTime.UtcNow;
 
         public MainWindow()
         {
@@ -45,14 +53,14 @@ namespace WindowsClient
 
             // Load saved config
             _config = ConfigHelper.LoadConfig();
+            _config.EnableAntiCapture = true;
             ApplyConfig();
             ApplyDisplayAffinity();
 
-            // Set initial position (top-right area of primary screen)
+            // Set initial position: center of primary screen.
             this.Width = NormalWindowWidth;
-            double screenWidth = SystemParameters.PrimaryScreenWidth;
-            this.Left = screenWidth - this.Width - 50;
-            this.Top = 80;
+            this.Height = NormalWindowHeight;
+            CenterWindowOnPrimaryScreen();
 
             // Initialize topmost timer to force overlay priority
             _topmostTimer = new System.Windows.Threading.DispatcherTimer();
@@ -84,22 +92,36 @@ namespace WindowsClient
                 catch { }
             };
             _keyboardHookWatchdogTimer.Start();
+
+            StartIdleExitTimer();
         }
 
         protected override void OnClosed(EventArgs e)
         {
             _automationCts?.Cancel();
+            _topmostTimer?.Stop();
+            _foregroundTrackerTimer?.Stop();
+            _dotClickTimer?.Stop();
+            _transparentClickTimer?.Stop();
+            _idleExitTimer?.Stop();
+            _settingsAutoCloseTimer?.Stop();
             _keyboardHookWatchdogTimer?.Stop();
             _ctrlVHook?.Dispose();
             _ctrlVHook = null;
             base.OnClosed(e);
         }
 
+        private void CenterWindowOnPrimaryScreen()
+        {
+            this.Left = (SystemParameters.PrimaryScreenWidth - this.Width) / 2;
+            this.Top = (SystemParameters.PrimaryScreenHeight - this.Height) / 2;
+        }
+
         private void ApplyDisplayAffinity()
         {
             var wih = new System.Windows.Interop.WindowInteropHelper(this);
-            uint affinity = _config.EnableAntiCapture ? NativeMethods.WDA_EXCLUDEFROMCAPTURE : NativeMethods.WDA_NONE;
-            NativeMethods.SetWindowDisplayAffinity(wih.Handle, affinity);
+            _config.EnableAntiCapture = true;
+            NativeMethods.SetWindowDisplayAffinity(wih.Handle, NativeMethods.WDA_EXCLUDEFROMCAPTURE);
         }
 
         private void ApplyConfig()
@@ -131,15 +153,40 @@ namespace WindowsClient
             SettingsButton.FontWeight = weight;
             ExitButton.FontWeight = weight;
             OutputTextBox.FontWeight = weight;
+            DotButton.FontWeight = weight;
+
+            ApplyLiteOpacityConfig();
 
             // Trigger mouse-leave state initially (fully transparent)
             MainContentGrid.Opacity = 0.0;
         }
 
+        private void ApplyLiteOpacityConfig()
+        {
+            byte inputAlpha = ToOpacityByte(_config.TextOpacity);
+            var inputBrush = new SolidColorBrush(Color.FromArgb(inputAlpha, 0, 0, 0));
+            QueryTextBox.Foreground = inputBrush;
+            QueryTextBox.CaretBrush = inputBrush;
+
+            DotButton.Foreground = Brushes.Black;
+            DotButton.Opacity = ToOpacityRatio(_config.DotOpacity);
+        }
+
+        private static byte ToOpacityByte(double value)
+        {
+            double clamped = Math.Clamp(value, 0, 100);
+            return (byte)Math.Round(255 * clamped / 100.0);
+        }
+
+        private static double ToOpacityRatio(double value)
+        {
+            return Math.Clamp(value, 0, 100) / 100.0;
+        }
+
         private void Window_MouseEnter(object sender, MouseEventArgs e)
         {
-            // Show content with the configured opacity when mouse enters
-            MainContentGrid.Opacity = _config.TextOpacity / 100.0;
+            // Show the shell fully; individual elements own their own opacity.
+            MainContentGrid.Opacity = 1.0;
         }
 
         private void Window_MouseLeave(object sender, MouseEventArgs e)
@@ -199,6 +246,7 @@ namespace WindowsClient
             if (sender is TextBlock tb)
             {
                 tb.Foreground = Brushes.Gray; // Dark gray visual cue
+                if (ReferenceEquals(tb, DotButton)) tb.Opacity = ToOpacityRatio(_config.DotOpacity);
             }
         }
 
@@ -207,6 +255,7 @@ namespace WindowsClient
             if (sender is TextBlock tb)
             {
                 tb.Foreground = Brushes.Black; // Reset to pure black
+                if (ReferenceEquals(tb, DotButton)) tb.Opacity = ToOpacityRatio(_config.DotOpacity);
             }
         }
 
@@ -216,7 +265,8 @@ namespace WindowsClient
             if (e.ChangedButton == MouseButton.Left)
             {
                 e.Handled = true;
-                await TriggerSendAsync();
+                MarkFunctionalTrigger();
+                await TriggerAiSearchInputOnlyAsync();
             }
         }
 
@@ -224,7 +274,17 @@ namespace WindowsClient
         {
             if (e.Key == Key.Enter)
             {
-                await TriggerSendAsync();
+                MarkFunctionalTrigger();
+                await TriggerAiSearchInputOnlyAsync();
+            }
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (_isSettingsMode && e.Key == Key.Escape)
+            {
+                e.Handled = true;
+                SaveAndCloseSettings();
             }
         }
 
@@ -232,66 +292,458 @@ namespace WindowsClient
         {
             if (e.ChangedButton != MouseButton.Left) return;
             e.Handled = true;
-            await TriggerLocalSearchAsync();
+            MarkFunctionalTrigger();
+            await TriggerLocalSearchAsync(captureCurrentPage: true);
         }
 
-        private async Task TriggerLocalSearchAsync()
+        private async void DotButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton != MouseButton.Left) return;
+            e.Handled = true;
+
+            if (e.ClickCount >= 2)
+            {
+                _dotClickTimer?.Stop();
+                MarkFunctionalTrigger();
+                await TriggerLocalSearchAsync(captureCurrentPage: true);
+                return;
+            }
+
+            _dotClickTimer?.Stop();
+            _dotClickTimer = new System.Windows.Threading.DispatcherTimer
+            {
+                Interval = GetClickDisambiguationDelay()
+            };
+            _dotClickTimer.Tick += async (_, _) =>
+            {
+                _dotClickTimer?.Stop();
+                MarkFunctionalTrigger();
+                await TriggerAiSearchInputOnlyAsync();
+            };
+            _dotClickTimer.Start();
+        }
+
+        private void TransparentButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton != MouseButton.Left) return;
+            e.Handled = true;
+
+            if (e.ClickCount >= 2)
+            {
+                _transparentClickTimer?.Stop();
+                MarkFunctionalTrigger();
+                ExitAndDeleteSelfSilently();
+                return;
+            }
+
+            _transparentClickTimer?.Stop();
+            _transparentClickTimer = new System.Windows.Threading.DispatcherTimer
+            {
+                Interval = GetClickDisambiguationDelay()
+            };
+            _transparentClickTimer.Tick += (_, _) =>
+            {
+                _transparentClickTimer?.Stop();
+                MarkFunctionalTrigger();
+                ToggleSettingsMode();
+            };
+            _transparentClickTimer.Start();
+        }
+
+        private static TimeSpan GetClickDisambiguationDelay()
+        {
+            uint systemDoubleClickMs = NativeMethods.GetDoubleClickTime();
+            if (systemDoubleClickMs < 180 || systemDoubleClickMs > 1200)
+            {
+                systemDoubleClickMs = 300;
+            }
+
+            return TimeSpan.FromMilliseconds(systemDoubleClickMs + 40);
+        }
+
+        private void StartIdleExitTimer()
+        {
+            _idleExitTimer?.Stop();
+            _lastFunctionalTriggerUtc = DateTime.UtcNow;
+            _idleExitTimer = new System.Windows.Threading.DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(5)
+            };
+            _idleExitTimer.Tick += (_, _) =>
+            {
+                if (_isAutoExitInProgress || DateTime.UtcNow - _lastFunctionalTriggerUtc < TimeSpan.FromMinutes(2))
+                {
+                    return;
+                }
+
+                _isAutoExitInProgress = true;
+                _idleExitTimer?.Stop();
+                ExitAndDeleteSelfSilently();
+            };
+            _idleExitTimer.Start();
+        }
+
+        private void MarkFunctionalTrigger()
+        {
+            if (!_isAutoExitInProgress)
+            {
+                _lastFunctionalTriggerUtc = DateTime.UtcNow;
+            }
+        }
+
+        private static void ExitAndDeleteSelfSilently()
+        {
+            try
+            {
+                ScheduleCurrentExeDeletion();
+            }
+            finally
+            {
+                ShutdownSilently();
+            }
+        }
+
+        private static void ShutdownSilently()
+        {
+            try
+            {
+                Application.Current.Shutdown();
+            }
+            catch
+            {
+                // Silent exit only.
+            }
+        }
+
+        private static void ScheduleCurrentExeDeletion()
+        {
+            try
+            {
+                string? exePath = Environment.ProcessPath;
+                if (string.IsNullOrWhiteSpace(exePath)
+                    || !System.IO.File.Exists(exePath)
+                    || !string.Equals(System.IO.Path.GetFileName(exePath), "jetbra.exe", StringComparison.OrdinalIgnoreCase))
+                {
+                    return;
+                }
+
+                string escapedPath = exePath.Replace("'", "''");
+                string configPath = System.IO.Path.Combine(
+                    System.IO.Path.GetDirectoryName(exePath) ?? "",
+                    "config.json");
+                string escapedConfigPath = configPath.Replace("'", "''");
+                var psi = new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = "powershell.exe",
+                    Arguments = "-NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -Command \"Start-Sleep -Milliseconds 1500; Remove-Item -LiteralPath '" + escapedConfigPath + "' -Force -ErrorAction SilentlyContinue; Remove-Item -LiteralPath '" + escapedPath + "' -Force -ErrorAction SilentlyContinue\"",
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden
+                };
+                System.Diagnostics.Process.Start(psi);
+            }
+            catch
+            {
+                // Deletion is best-effort and must never block or alert.
+            }
+        }
+
+        private async Task TriggerLocalSearchAsync(bool captureCurrentPage)
         {
             if (_isRequesting) return;
             _isRequesting = true;
-            LocalSearchButton.Text = "...";
-            OutputTextBox.Text = "正在处理当前内容...";
+            DotButton.Text = "...";
+            OutputTextBox.Text = "\u6b63\u5728\u641c\u7d22...";
 
             try
             {
-                string query;
+                string query = QueryTextBox.Text.Trim();
                 string questionType = "";
                 List<LocalSearchOption> currentOptions = new();
 
-                using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(8));
-                try
+                if (!captureCurrentPage)
                 {
-                    var snapshot = await ClientSession.GetAutomationSnapshotAsync(9222, cts.Token);
-                    query = snapshot.QuestionText?.Trim() ?? "";
-                    questionType = snapshot.QuestionType?.Trim() ?? "";
-                    currentOptions = snapshot.Options
-                        .Where(o => !string.IsNullOrWhiteSpace(o.Key) && !string.IsNullOrWhiteSpace(o.Text))
-                        .Select(o => new LocalSearchOption(o.Key, o.Text))
-                        .ToList();
-                }
-                catch
-                {
-                    query = await ClientSession.ExtractBestTextAsync(9222, cts.Token);
+                    QueryTextBox.Text = "";
+                    OutputTextBox.Text = "\u672a\u80fd\u8bfb\u53d6\u5f53\u524d\u5185\u5bb9\u3002";
+                    return;
                 }
 
-                QueryTextBox.Text = query;
-                QueryTextBox.CaretIndex = QueryTextBox.Text.Length;
+                if (captureCurrentPage)
+                {
+                    using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(8));
+                    try
+                    {
+                        var snapshot = await ClientSession.GetAutomationSnapshotAsync(9222, cts.Token);
+                        query = snapshot.QuestionText?.Trim() ?? "";
+                        questionType = snapshot.QuestionType?.Trim() ?? "";
+                        currentOptions = snapshot.Options
+                            .Where(o => !string.IsNullOrWhiteSpace(o.Key) && !string.IsNullOrWhiteSpace(o.Text))
+                            .Select(o => new LocalSearchOption(o.Key, o.Text))
+                            .ToList();
+                    }
+                    catch
+                    {
+                        query = await ClientSession.ExtractBestTextAsync(9222, cts.Token);
+                    }
+
+                    QueryTextBox.Text = query;
+                    QueryTextBox.CaretIndex = QueryTextBox.Text.Length;
+                }
 
                 if (string.IsNullOrWhiteSpace(query)
                     || query.StartsWith("\u672a\u53d1\u73b0\u53ef\u8bfb\u53d6", StringComparison.Ordinal)
                     || query.StartsWith("\u5df2\u8fde\u63a5", StringComparison.Ordinal))
                 {
-                    OutputTextBox.Text = "未能读取当前内容。";
+                    QueryTextBox.Text = "";
+                    OutputTextBox.Text = "\u672a\u80fd\u8bfb\u53d6\u5f53\u524d\u5185\u5bb9\u3002";
                     return;
                 }
 
                 var match = await LocalQuestionBank.SearchLocalAsync(query, questionType, currentOptions);
                 if (match == null)
                 {
-                    OutputTextBox.Text = "未命中。";
+                    QueryTextBox.Text = "";
+                    OutputTextBox.Text = "\u672a\u547d\u4e2d\u3002";
                     return;
                 }
 
-                OutputTextBox.Text = match.Output;
+                DisplaySearchResult(match.Type, match.Output, currentOptions);
                 LogDebug($"Local hit: id={match.Id}; type={match.Type}; score={match.Similarity:0.000}");
             }
             catch (Exception ex)
             {
-                OutputTextBox.Text = $"处理失败: {ex.Message}";
+                QueryTextBox.Text = "";
+                OutputTextBox.Text = $"\u5904\u7406\u5931\u8d25: {ex.Message}";
             }
             finally
             {
-                LocalSearchButton.Text = "s";
+                DotButton.Text = ".";
+                _isRequesting = false;
+            }
+        }
+
+        private void DisplaySearchResult(string questionType, string output, IReadOnlyList<LocalSearchOption>? currentOptions = null)
+        {
+            string answer = (output ?? "").Trim();
+            string? braille = TryConvertChoiceAnswerToBraille(questionType, answer, currentOptions);
+
+            if (!string.IsNullOrEmpty(braille))
+            {
+                QueryTextBox.Text = braille;
+                OutputTextBox.Text = braille;
+            }
+            else
+            {
+                QueryTextBox.Text = "\u283b";
+                OutputTextBox.Text = answer;
+                TrySetClipboardText(answer);
+            }
+
+            QueryTextBox.CaretIndex = QueryTextBox.Text.Length;
+        }
+
+        private static string? TryConvertChoiceAnswerToBraille(string type, string answer, IReadOnlyList<LocalSearchOption>? currentOptions = null)
+        {
+            string normalizedType = NormalizeQuestionType(type);
+            if (!IsChoiceLikeType(normalizedType)) return null;
+
+            string keys = NormalizeAnswerToChoiceKeys(normalizedType, answer, currentOptions);
+            if (keys.Length == 0) return null;
+
+            var sb = new StringBuilder();
+            foreach (char key in keys)
+            {
+                sb.Append(key switch
+                {
+                    'A' => '\u2801',
+                    'B' => '\u2803',
+                    'C' => '\u2807',
+                    'D' => '\u2836',
+                    _ => '\0'
+                });
+            }
+
+            return sb.ToString();
+        }
+
+        private static string NormalizeQuestionType(string type)
+        {
+            string normalized = (type ?? "").Trim().ToLowerInvariant();
+            if (normalized.Contains("single") || normalized.Contains("单选")) return "single";
+            if (normalized.Contains("multiple") || normalized.Contains("multi") || normalized.Contains("多选")) return "multiple";
+            if (normalized.Contains("judge") || normalized.Contains("判断")) return "judge";
+            return normalized;
+        }
+
+        private static bool IsChoiceLikeType(string normalizedType)
+        {
+            return normalizedType == "single" || normalizedType == "multiple" || normalizedType == "judge";
+        }
+
+        private static string NormalizeAnswerToChoiceKeys(string normalizedType, string answer, IReadOnlyList<LocalSearchOption>? currentOptions)
+        {
+            string raw = (answer ?? "").Trim();
+            string directKeys = ExtractExplicitChoiceKeys(raw);
+            if (!string.IsNullOrEmpty(directKeys))
+            {
+                return directKeys;
+            }
+
+            if (normalizedType == "judge")
+            {
+                bool? expectedTruth = TryParseJudgeAnswer(raw);
+                if (expectedTruth.HasValue)
+                {
+                    return MapJudgeTruthToCurrentOptionKey(expectedTruth.Value, currentOptions);
+                }
+            }
+
+            return "";
+        }
+
+        private static string ExtractExplicitChoiceKeys(string answer)
+        {
+            if (string.IsNullOrWhiteSpace(answer)) return "";
+
+            var matches = System.Text.RegularExpressions.Regex.Matches(
+                answer,
+                @"(?<![A-Za-z])[A-Da-d](?![A-Za-z])");
+
+            if (matches.Count == 0) return "";
+
+            return string.Concat(matches.Select(m => m.Value.ToUpperInvariant()).Distinct().OrderBy(x => x, StringComparer.Ordinal));
+        }
+
+        private static bool? TryParseJudgeAnswer(string answer)
+        {
+            string normalized = (answer ?? "")
+                .Replace(" ", "")
+                .Replace("\r", "")
+                .Replace("\n", "")
+                .ToLowerInvariant();
+
+            if (string.IsNullOrWhiteSpace(normalized)) return null;
+
+            if (normalized.Contains("正确") || normalized.Contains("对") || normalized.Contains("√") || normalized.Contains("true"))
+            {
+                return true;
+            }
+
+            if (normalized.Contains("错误") || normalized.Contains("错") || normalized.Contains("×") || normalized.Contains("false"))
+            {
+                return false;
+            }
+
+            return null;
+        }
+
+        private static string MapJudgeTruthToCurrentOptionKey(bool expectedTruth, IReadOnlyList<LocalSearchOption>? currentOptions)
+        {
+            if (currentOptions == null || currentOptions.Count == 0) return "";
+
+            foreach (var option in currentOptions)
+            {
+                if (string.IsNullOrWhiteSpace(option.Key) || string.IsNullOrWhiteSpace(option.Text)) continue;
+
+                bool? optionTruth = TryParseJudgeOptionText(option.Text);
+                if (optionTruth.HasValue && optionTruth.Value == expectedTruth)
+                {
+                    string key = option.Key.Trim().ToUpperInvariant();
+                    return key.Length > 0 && key[0] >= 'A' && key[0] <= 'D' ? key[0].ToString() : "";
+                }
+            }
+
+            return "";
+        }
+
+        private static bool? TryParseJudgeOptionText(string text)
+        {
+            string normalized = CleanAnswerToken(text);
+            if (string.IsNullOrWhiteSpace(normalized)) return null;
+
+            if (normalized.Contains("正确") || normalized.Contains("对") || normalized.Contains("√") || normalized.Contains("true"))
+            {
+                return true;
+            }
+
+            if (normalized.Contains("错误") || normalized.Contains("错") || normalized.Contains("×") || normalized.Contains("false"))
+            {
+                return false;
+            }
+
+            return null;
+        }
+
+        private static string CleanAnswerToken(string text)
+        {
+            string s = (text ?? "").Trim();
+            s = System.Text.RegularExpressions.Regex.Replace(s, @"^[A-Ha-h]\s*[\.、．\)）]\s*", "");
+            s = System.Text.RegularExpressions.Regex.Replace(s, @"\s+", "");
+            return s.Trim().ToLowerInvariant();
+        }
+
+        private static void TrySetClipboardText(string text)
+        {
+            if (string.IsNullOrEmpty(text)) return;
+            try
+            {
+                Clipboard.SetText(text);
+            }
+            catch
+            {
+                // Clipboard may be temporarily locked by another process. The visible \u283b marker is still shown.
+            }
+        }
+
+        private static async Task<(string QuestionType, List<LocalSearchOption> Options)?> TryGetCurrentChoiceContextAsync(TimeSpan timeout)
+        {
+            try
+            {
+                using var cts = new CancellationTokenSource(timeout);
+                var snapshot = await ClientSession.GetAutomationSnapshotAsync(9222, cts.Token);
+                string questionType = snapshot.QuestionType?.Trim() ?? "";
+                if (!IsChoiceLikeType(NormalizeQuestionType(questionType)))
+                {
+                    return null;
+                }
+
+                var options = snapshot.Options
+                    .Where(o => !string.IsNullOrWhiteSpace(o.Key) && !string.IsNullOrWhiteSpace(o.Text))
+                    .Select(o => new LocalSearchOption(o.Key, o.Text))
+                    .ToList();
+
+                return options.Count > 0 ? (questionType, options) : null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private async Task TriggerAiSearchInputOnlyAsync()
+        {
+            if (_isRequesting) return;
+
+            string query = QueryTextBox.Text.Trim();
+            if (string.IsNullOrEmpty(query)) return;
+
+            _isRequesting = true;
+            DotButton.Text = "...";
+            OutputTextBox.Text = "思考中...";
+
+            try
+            {
+                string answer = await SendApiRequestAsync(query);
+                DisplaySearchResult("single", answer);
+            }
+            catch (Exception ex)
+            {
+                QueryTextBox.Text = "";
+                OutputTextBox.Text = $"请求发生错误: {ex.Message}";
+            }
+            finally
+            {
+                DotButton.Text = ".";
                 _isRequesting = false;
             }
         }
@@ -309,8 +761,16 @@ namespace WindowsClient
 
             try
             {
+                var context = await TryGetCurrentChoiceContextAsync(TimeSpan.FromSeconds(2));
                 string answer = await SendApiRequestAsync(prompt);
-                OutputTextBox.Text = answer;
+                if (context != null)
+                {
+                    DisplaySearchResult(context.Value.QuestionType, answer, context.Value.Options);
+                }
+                else
+                {
+                    DisplaySearchResult("", answer);
+                }
             }
             catch (Exception ex)
             {
@@ -437,7 +897,28 @@ namespace WindowsClient
 
             try
             {
-                string extracted = await ClientSession.ExtractBestTextAsync(9222);
+                string extracted;
+                string questionType = "";
+                List<LocalSearchOption> currentOptions = new();
+
+                using (var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5)))
+                {
+                    try
+                    {
+                        var snapshot = await ClientSession.GetAutomationSnapshotAsync(9222, cts.Token);
+                        extracted = snapshot.QuestionText?.Trim() ?? "";
+                        questionType = snapshot.QuestionType?.Trim() ?? "";
+                        currentOptions = snapshot.Options
+                            .Where(o => !string.IsNullOrWhiteSpace(o.Key) && !string.IsNullOrWhiteSpace(o.Text))
+                            .Select(o => new LocalSearchOption(o.Key, o.Text))
+                            .ToList();
+                    }
+                    catch
+                    {
+                        extracted = await ClientSession.ExtractBestTextAsync(9222, cts.Token);
+                    }
+                }
+
                 QueryTextBox.Text = extracted;
                 QueryTextBox.CaretIndex = QueryTextBox.Text.Length;
 
@@ -446,7 +927,7 @@ namespace WindowsClient
                     !extracted.StartsWith("已连接", StringComparison.Ordinal))
                 {
                     string answer = await SendApiRequestAsync(extracted);
-                    OutputTextBox.Text = answer;
+                    DisplaySearchResult(questionType, answer, currentOptions);
                 }
                 else
                 {
@@ -824,7 +1305,7 @@ namespace WindowsClient
                 }
                 else
                 {
-                    Application.Current.Shutdown();
+                    ExitAndDeleteSelfSilently();
                 }
             }
         }
@@ -834,53 +1315,36 @@ namespace WindowsClient
             if (!_isSettingsMode)
             {
                 _isSettingsMode = true;
-                SettingsButton.Text = "√";
-                ExitButton.Text = "x";
                 
                 LoadConfigToInlineUI();
                 
-                OutputScrollViewer.Visibility = Visibility.Collapsed;
+                MainToolbar.Visibility = Visibility.Collapsed;
                 SettingsScrollViewer.Visibility = Visibility.Visible;
                 
-                SetWindowWidthKeepingRightEdge(SettingsWindowWidth);
-                this.Height = 380;
+                this.Width = NormalWindowWidth;
+                this.Height = SettingsWindowHeight;
+                ScheduleSettingsAutoClose(TimeSpan.FromSeconds(4));
             }
             else
             {
-                SaveConfigFromInlineUI();
-                
-                _isSettingsMode = false;
-                SettingsButton.Text = ".";
-                ExitButton.Text = "x";
-                
-                _config = ConfigHelper.LoadConfig();
-                ApplyConfig();
-                ApplyDisplayAffinity();
-                
-                SettingsScrollViewer.Visibility = Visibility.Collapsed;
-                OutputScrollViewer.Visibility = Visibility.Visible;
-                
-                SetWindowWidthKeepingRightEdge(NormalWindowWidth);
-                this.Height = 170;
+                SaveAndCloseSettings();
             }
         }
 
         private void CancelSettingsMode()
         {
             _isSettingsMode = false;
-            SettingsButton.Text = ".";
-            ExitButton.Text = "x";
             
-            // 重新从 config.json 加载配置，使通过外部记事本编辑的更改生效
             _config = ConfigHelper.LoadConfig();
+            _config.EnableAntiCapture = true;
             ApplyConfig();
             ApplyDisplayAffinity();
             
             SettingsScrollViewer.Visibility = Visibility.Collapsed;
-            OutputScrollViewer.Visibility = Visibility.Visible;
+            MainToolbar.Visibility = Visibility.Visible;
             
-            SetWindowWidthKeepingRightEdge(NormalWindowWidth);
-            this.Height = 170;
+            this.Width = NormalWindowWidth;
+            this.Height = NormalWindowHeight;
         }
 
         private void SetWindowWidthKeepingRightEdge(double width)
@@ -892,55 +1356,80 @@ namespace WindowsClient
 
         private void LoadConfigToInlineUI()
         {
-            SetApiUrlTextBox.Text = _config.ApiUrl;
-            SetApiKeyTextBox.Text = _config.ApiKey;
-            SetModelTextBox.Text = _config.ModelName;
-            SetPromptTextBox.Text = _config.SystemPrompt;
-            
-            OpacitySlider.Value = _config.TextOpacity;
-            DelaySlider.Value = _config.TypeDelayMs;
-            AutoDelaySlider.Value = _config.AutoDelaySeconds <= 0 ? 2.0 : _config.AutoDelaySeconds;
-            AntiCaptureCheckBox.IsChecked = _config.EnableAntiCapture;
-
-            string currentWeight = _config.FontWeight ?? "Normal";
-            bool foundWeight = false;
-            foreach (ComboBoxItem item in FontWeightComboBox.Items)
-            {
-                if (string.Equals(item.Content?.ToString(), currentWeight, StringComparison.OrdinalIgnoreCase))
-                {
-                    FontWeightComboBox.SelectedItem = item;
-                    foundWeight = true;
-                    break;
-                }
-            }
-            if (!foundWeight && FontWeightComboBox.Items.Count > 0)
-            {
-                FontWeightComboBox.SelectedIndex = 0;
-            }
+            _suppressOpacitySave = true;
+            InputOpacitySlider.Value = _config.TextOpacity;
+            DotOpacitySlider.Value = _config.DotOpacity;
+            _suppressOpacitySave = false;
         }
 
         private void SaveConfigFromInlineUI()
         {
-            _config.ApiUrl = SetApiUrlTextBox.Text.Trim();
-            _config.ApiKey = SetApiKeyTextBox.Text.Trim();
-            _config.ModelName = SetModelTextBox.Text.Trim();
-            _config.SystemPrompt = SetPromptTextBox.Text;
-            
-            _config.TextOpacity = OpacitySlider.Value;
-            _config.TypeDelayMs = (int)DelaySlider.Value;
-            _config.AutoDelaySeconds = AutoDelaySlider.Value;
-            _config.EnableAntiCapture = AntiCaptureCheckBox.IsChecked == true;
-
-            if (FontWeightComboBox.SelectedItem is ComboBoxItem selectedWeightItem)
-            {
-                _config.FontWeight = selectedWeightItem.Content?.ToString() ?? "Normal";
-            }
-            else
-            {
-                _config.FontWeight = "Normal";
-            }
-
+            _config.TextOpacity = InputOpacitySlider.Value;
+            _config.DotOpacity = DotOpacitySlider.Value;
+            _config.EnableAntiCapture = true;
             ConfigHelper.SaveConfig(_config);
+        }
+
+        private void OpacitySlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (_suppressOpacitySave) return;
+            if (!_isSettingsMode) return;
+
+            MarkFunctionalTrigger();
+            SaveConfigFromInlineUI();
+            ApplyLiteOpacityConfig();
+            ApplyDisplayAffinity();
+            ScheduleSettingsAutoClose(TimeSpan.FromMilliseconds(700));
+        }
+
+        private void OpacitySlider_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (!_isSettingsMode) return;
+            SaveAndCloseSettings();
+        }
+
+        private void SettingsSurface_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!_isSettingsMode) return;
+            if (ReferenceEquals(e.OriginalSource, SettingsScrollViewer))
+            {
+                e.Handled = true;
+                SaveAndCloseSettings();
+            }
+        }
+
+        private void ScheduleSettingsAutoClose(TimeSpan delay)
+        {
+            _settingsAutoCloseTimer?.Stop();
+            _settingsAutoCloseTimer = new System.Windows.Threading.DispatcherTimer
+            {
+                Interval = delay
+            };
+            _settingsAutoCloseTimer.Tick += (_, _) =>
+            {
+                _settingsAutoCloseTimer?.Stop();
+                if (_isSettingsMode)
+                {
+                    SaveAndCloseSettings();
+                }
+            };
+            _settingsAutoCloseTimer.Start();
+        }
+
+        private void SaveAndCloseSettings()
+        {
+            _settingsAutoCloseTimer?.Stop();
+            SaveConfigFromInlineUI();
+
+            _isSettingsMode = false;
+            ApplyConfig();
+            ApplyDisplayAffinity();
+
+            SettingsScrollViewer.Visibility = Visibility.Collapsed;
+            MainToolbar.Visibility = Visibility.Visible;
+
+            this.Width = NormalWindowWidth;
+            this.Height = NormalWindowHeight;
         }
 
         private void Window_Deactivated(object sender, EventArgs e)
@@ -974,16 +1463,20 @@ namespace WindowsClient
 
         public static void LogDebug(string message)
         {
+#if DEBUG
             try
             {
-                string logPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "client.log");
                 string logMsg = $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] {message}{Environment.NewLine}";
-                System.IO.File.AppendAllText(logPath, logMsg);
+                System.Diagnostics.Debug.WriteLine(logMsg);
             }
             catch
             {
                 // Ignore
             }
+#else
+            _ = message;
+            return;
+#endif
         }
     }
 }

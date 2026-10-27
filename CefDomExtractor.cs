@@ -384,12 +384,17 @@ namespace WindowsClient
                 {
                     foreach (var info in infos.EnumerateArray())
                     {
+                        string targetId = GetString(info, "targetId") ?? "";
                         list.Add(new PageTarget
                         {
-                            Id = GetString(info, "targetId") ?? "",
+                            Id = targetId,
                             Type = GetString(info, "type") ?? "",
                             Title = GetString(info, "title") ?? "",
-                            Url = GetString(info, "url") ?? ""
+                            Url = GetString(info, "url") ?? "",
+                            // Target.getTargets does not include webSocketDebuggerUrl. Chromium's
+                            // page endpoint is nevertheless deterministic from the browser endpoint
+                            // and target id, so expose a connectable target to the normal pipeline.
+                            WebSocketDebuggerUrl = BuildPageWebSocketUrl(browserWs, targetId)
                         });
                     }
                 }
@@ -398,6 +403,22 @@ namespace WindowsClient
             catch
             {
                 return new List<PageTarget>();
+            }
+        }
+
+        private static string? BuildPageWebSocketUrl(string browserWs, string targetId)
+        {
+            if (string.IsNullOrWhiteSpace(browserWs) || string.IsNullOrWhiteSpace(targetId)) return null;
+            try
+            {
+                var browserUri = new Uri(browserWs);
+                return browserUri.GetLeftPart(UriPartial.Authority)
+                       + "/devtools/page/"
+                       + Uri.EscapeDataString(targetId);
+            }
+            catch
+            {
+                return null;
             }
         }
 

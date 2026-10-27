@@ -298,32 +298,54 @@ namespace WindowsClient
                     return "";
                 }
 
-                var mapped = new List<string>();
-                foreach (string answerKey in ResultKeys)
+                const double minimumScore = 0.55;
+                var candidateSets = new List<List<(string Key, double Score)>>();
+                foreach (string answerKey in ResultKeys.Distinct(StringComparer.OrdinalIgnoreCase))
                 {
                     var bankOption = Options.FirstOrDefault(o => o.Key.Equals(answerKey, StringComparison.OrdinalIgnoreCase));
                     if (bankOption == null || string.IsNullOrWhiteSpace(bankOption.Text)) return "";
 
-                    LocalSearchOption? best = null;
-                    double bestScore = 0;
                     string bankText = CleanOptionText(bankOption.Text);
-
-                    foreach (var current in currentOptions)
-                    {
-                        if (string.IsNullOrWhiteSpace(current.Key) || string.IsNullOrWhiteSpace(current.Text)) continue;
-                        double score = OptionSimilarity(bankText, CleanOptionText(current.Text));
-                        if (score > bestScore)
-                        {
-                            bestScore = score;
-                            best = current;
-                        }
-                    }
-
-                    if (best == null || bestScore < 0.55) return "";
-                    mapped.Add(best.Key.Trim().ToUpperInvariant());
+                    var candidates = currentOptions
+                        .Where(current => !string.IsNullOrWhiteSpace(current.Key) && !string.IsNullOrWhiteSpace(current.Text))
+                        .Select(current => (Key: current.Key.Trim().ToUpperInvariant(), Score: OptionSimilarity(bankText, CleanOptionText(current.Text))))
+                        .Where(candidate => candidate.Score >= minimumScore)
+                        .OrderByDescending(candidate => candidate.Score)
+                        .ThenBy(candidate => candidate.Key, StringComparer.Ordinal)
+                        .ToList();
+                    if (candidates.Count == 0) return "";
+                    candidateSets.Add(candidates);
                 }
 
-                return string.Concat(mapped.Distinct().OrderBy(x => x, StringComparer.Ordinal));
+                List<string>? bestAssignment = null;
+                double bestScore = double.NegativeInfinity;
+
+                void FindBestAssignment(int answerIndex, HashSet<string> usedKeys, List<string> assignedKeys, double totalScore)
+                {
+                    if (answerIndex == candidateSets.Count)
+                    {
+                        if (totalScore > bestScore)
+                        {
+                            bestScore = totalScore;
+                            bestAssignment = assignedKeys.ToList();
+                        }
+                        return;
+                    }
+
+                    foreach (var candidate in candidateSets[answerIndex])
+                    {
+                        if (!usedKeys.Add(candidate.Key)) continue;
+                        assignedKeys.Add(candidate.Key);
+                        FindBestAssignment(answerIndex + 1, usedKeys, assignedKeys, totalScore + candidate.Score);
+                        assignedKeys.RemoveAt(assignedKeys.Count - 1);
+                        usedKeys.Remove(candidate.Key);
+                    }
+                }
+
+                FindBestAssignment(0, new HashSet<string>(StringComparer.OrdinalIgnoreCase), new List<string>(), 0);
+                return bestAssignment == null
+                    ? ""
+                    : string.Concat(bestAssignment.OrderBy(key => key, StringComparer.Ordinal));
             }
         }
 
