@@ -44,29 +44,23 @@
                         MouseDown="TransparentButton_MouseDown"/>
             </StackPanel>
 
-            <!-- 极简设置区：只保留透明度滑块。 -->
-            <Grid x:Name="SettingsScrollViewer" Grid.Row="0" Grid.RowSpan="2" Margin="0" Background="#01000000" Visibility="Collapsed"
+            <!-- Settings: API credentials and independent opacity controls. -->
+            <Grid x:Name="SettingsScrollViewer" Grid.Row="0" Grid.RowSpan="2" Margin="0" Background="#EFFFFFFF" Visibility="Collapsed"
                   MouseDown="SettingsSurface_MouseDown">
-                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                    <Slider Name="InputOpacitySlider"
-                            Width="150"
-                            Minimum="0"
-                            Maximum="100"
-                            Value="100"
-                            IsSnapToTickEnabled="True"
-                            TickFrequency="1"
-                            Margin="0,0,0,4"
-                            ValueChanged="OpacitySlider_ValueChanged"
-                            PreviewMouseLeftButtonUp="OpacitySlider_PreviewMouseLeftButtonUp"/>
-                    <Slider Name="DotOpacitySlider"
-                            Width="150"
-                            Minimum="0"
-                            Maximum="100"
-                            Value="100"
-                            IsSnapToTickEnabled="True"
-                            TickFrequency="1"
-                            ValueChanged="OpacitySlider_ValueChanged"
-                            PreviewMouseLeftButtonUp="OpacitySlider_PreviewMouseLeftButtonUp"/>
+                <StackPanel Orientation="Vertical" Margin="8">
+                    <TextBlock Text="API URL" FontSize="11" Foreground="Black"/>
+                    <TextBox Name="SettingsApiUrl" Height="23" Margin="0,2,0,5" TextChanged="SettingsTextChanged"/>
+                    <TextBlock Text="API Key" FontSize="11" Foreground="Black"/>
+                    <PasswordBox Name="SettingsApiKey" Height="23" Margin="0,2,0,5" PasswordChanged="SettingsPasswordChanged"/>
+                    <TextBlock Text="Model" FontSize="11" Foreground="Black"/>
+                    <TextBox Name="SettingsModelName" Height="23" Margin="0,2,0,5" TextChanged="SettingsTextChanged"/>
+                    <TextBlock Text="&#x8F93;&#x5165;&#x6846;&#x5B57;&#x4F53;&#x900F;&#x660E;&#x5EA6;" FontSize="11" Foreground="Black"/>
+                    <Slider Name="InputOpacitySlider" Minimum="0" Maximum="100" Value="100" TickFrequency="1"
+                            ValueChanged="OpacitySlider_ValueChanged" PreviewMouseLeftButtonUp="OpacitySlider_PreviewMouseLeftButtonUp"/>
+                    <TextBlock Text="&#x5C0F;&#x6570;&#x70B9;&#x900F;&#x660E;&#x5EA6;" FontSize="11" Foreground="Black"/>
+                    <Slider Name="DotOpacitySlider" Minimum="0" Maximum="100" Value="100" TickFrequency="1"
+                            ValueChanged="OpacitySlider_ValueChanged" PreviewMouseLeftButtonUp="OpacitySlider_PreviewMouseLeftButtonUp"/>
+                    <Button Content="&#x4FDD;&#x5B58;" Height="25" Margin="0,5,0,0" Click="SettingsSave_Click"/>
                 </StackPanel>
             </Grid>
         </Grid>

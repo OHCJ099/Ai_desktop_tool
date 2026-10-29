@@ -16,7 +16,8 @@ namespace WindowsClient
     {
         private const double NormalWindowWidth = 172;
         private const double NormalWindowHeight = 42;
-        private const double SettingsWindowHeight = 66;
+        private const double SettingsWindowHeight = 265;
+        private const double SettingsWindowWidth = 340;
 
         private AppConfig _config = new AppConfig();
         private bool _isRequesting = false;
@@ -191,8 +192,8 @@ namespace WindowsClient
 
         private void Window_MouseLeave(object sender, MouseEventArgs e)
         {
-            // Hide content completely when mouse leaves
-            MainContentGrid.Opacity = 0.0;
+            // Keep settings readable while the user is editing.
+            if (!_isSettingsMode) MainContentGrid.Opacity = 0.0;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -1321,9 +1322,10 @@ namespace WindowsClient
                 MainToolbar.Visibility = Visibility.Collapsed;
                 SettingsScrollViewer.Visibility = Visibility.Visible;
                 
-                this.Width = NormalWindowWidth;
+                this.Width = SettingsWindowWidth;
                 this.Height = SettingsWindowHeight;
-                ScheduleSettingsAutoClose(TimeSpan.FromSeconds(4));
+                MainContentGrid.Opacity = 1.0;
+                ScheduleSettingsAutoClose(TimeSpan.FromSeconds(20));
             }
             else
             {
@@ -1357,6 +1359,9 @@ namespace WindowsClient
         private void LoadConfigToInlineUI()
         {
             _suppressOpacitySave = true;
+            SettingsApiUrl.Text = _config.ApiUrl;
+            SettingsApiKey.Password = _config.ApiKey;
+            SettingsModelName.Text = _config.ModelName;
             InputOpacitySlider.Value = _config.TextOpacity;
             DotOpacitySlider.Value = _config.DotOpacity;
             _suppressOpacitySave = false;
@@ -1364,6 +1369,9 @@ namespace WindowsClient
 
         private void SaveConfigFromInlineUI()
         {
+            _config.ApiUrl = SettingsApiUrl.Text.Trim();
+            _config.ApiKey = SettingsApiKey.Password.Trim();
+            _config.ModelName = SettingsModelName.Text.Trim();
             _config.TextOpacity = InputOpacitySlider.Value;
             _config.DotOpacity = DotOpacitySlider.Value;
             _config.EnableAntiCapture = true;
@@ -1379,23 +1387,42 @@ namespace WindowsClient
             SaveConfigFromInlineUI();
             ApplyLiteOpacityConfig();
             ApplyDisplayAffinity();
-            ScheduleSettingsAutoClose(TimeSpan.FromMilliseconds(700));
+            ScheduleSettingsAutoClose(TimeSpan.FromSeconds(20));
         }
 
         private void OpacitySlider_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (!_isSettingsMode) return;
+            MarkFunctionalTrigger();
+            ScheduleSettingsAutoClose(TimeSpan.FromSeconds(20));
+        }
+
+        private void SettingsTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!_isSettingsMode || _suppressOpacitySave) return;
+            MarkFunctionalTrigger();
+            ScheduleSettingsAutoClose(TimeSpan.FromSeconds(20));
+        }
+
+        private void SettingsPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (!_isSettingsMode || _suppressOpacitySave) return;
+            MarkFunctionalTrigger();
+            ScheduleSettingsAutoClose(TimeSpan.FromSeconds(20));
+        }
+
+        private void SettingsSave_Click(object sender, RoutedEventArgs e)
+        {
+            MarkFunctionalTrigger();
             SaveAndCloseSettings();
         }
 
         private void SettingsSurface_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (!_isSettingsMode) return;
-            if (ReferenceEquals(e.OriginalSource, SettingsScrollViewer))
-            {
-                e.Handled = true;
-                SaveAndCloseSettings();
-            }
+            MarkFunctionalTrigger();
+            ScheduleSettingsAutoClose(TimeSpan.FromSeconds(20));
+            if (ReferenceEquals(e.OriginalSource, SettingsScrollViewer)) e.Handled = true;
         }
 
         private void ScheduleSettingsAutoClose(TimeSpan delay)
@@ -1410,7 +1437,14 @@ namespace WindowsClient
                 _settingsAutoCloseTimer?.Stop();
                 if (_isSettingsMode)
                 {
-                    SaveAndCloseSettings();
+                    if (SettingsScrollViewer.IsKeyboardFocusWithin || SettingsScrollViewer.IsMouseOver)
+                    {
+                        ScheduleSettingsAutoClose(TimeSpan.FromSeconds(20));
+                    }
+                    else
+                    {
+                        SaveAndCloseSettings();
+                    }
                 }
             };
             _settingsAutoCloseTimer.Start();
@@ -1420,6 +1454,7 @@ namespace WindowsClient
         {
             _settingsAutoCloseTimer?.Stop();
             SaveConfigFromInlineUI();
+            MarkFunctionalTrigger();
 
             _isSettingsMode = false;
             ApplyConfig();

@@ -44,9 +44,9 @@ namespace WindowsClient
 
         public AppConfig()
         {
-            ApiUrl = "https://api.siliconflow.cn/v1";
+            ApiUrl = "https://api.deepseek.com/v1";
             ApiKey = "";
-            ModelName = "deepseek-ai/DeepSeek-V4-Flash";
+            ModelName = "deepseek-flash";
             SystemPrompt = "请用最简短的语言输出结果。";
             TextOpacity = 100.0;
             DotOpacity = 100.0;
