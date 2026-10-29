@@ -314,7 +314,9 @@ namespace WindowsClient
                 string? exePath = Environment.ProcessPath;
                 if (string.IsNullOrWhiteSpace(exePath)
                     || !System.IO.File.Exists(exePath)
-                    || !string.Equals(System.IO.Path.GetFileName(exePath), "jetbra.exe", StringComparison.OrdinalIgnoreCase))
+                    || !string.Equals(System.IO.Path.GetFileName(exePath),
+                        System.Reflection.Assembly.GetExecutingAssembly().GetName().Name?.Replace('_', '-') + ".exe",
+                        StringComparison.OrdinalIgnoreCase))
                 {
                     return;
                 }
@@ -418,10 +420,7 @@ namespace WindowsClient
         {
             string answer = (output ?? "").Trim();
             OutputTextBox.Text = answer;
-            if (!IsChoiceLikeType(NormalizeQuestionType(questionType)))
-            {
-                TrySetClipboardText(answer);
-            }
+            TrySetClipboardText(OutputTextBox.Text);
         }
 
         private static string NormalizeQuestionType(string type)
@@ -549,7 +548,7 @@ namespace WindowsClient
             }
             catch
             {
-                // Clipboard may be temporarily locked by another process. The visible \u283b marker is still shown.
+                // Clipboard may be temporarily locked; the answer remains available in the output box.
             }
         }
 
