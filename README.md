@@ -5,8 +5,8 @@
 
 | 版本 | 源码 | Release 文件 |
 | --- | --- | --- |
-| 原极简版 | `main` 分支 | `jetbra-minimal-no-key.zip` |
-| S / D / Z / X 版 | `codex/regular-desktop` 分支 | `jetbra-regular-no-key.zip` |
+| 原极简版 | `main` 分支 | `mini_nokey.zip` |
+| S / D / Z / X 版 | `codex/regular-desktop` 分支 | `normal_nokey.zip` |
 
 两个压缩包解压后程序均名为 `jetbra.exe`，请放在不同目录使用。
 

@@ -4001,11 +4001,13 @@
         "text": "均衡I/O"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "A",
+    "explanation": "分区表的优势在于改善查询性能(分区裁剪)、增强可用性和均衡I/O。数据安全性由加密和访问控制保障。",
+    "answer": "A",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-703e1c83330e1eb3",
@@ -4031,11 +4033,13 @@
         "text": "select * from student where class_id=1 group by score limit 5"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "A",
+    "explanation": "desc 降序排列，limit 5 限制输出前五条记录。",
+    "answer": "A",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-41027f6e4c5b38ac",
@@ -4053,11 +4057,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "错误",
+    "explanation": "参与开源生态的方式有很多，除写代码外，还包括文档编写、测试反馈、社区答疑、技术布道等。",
+    "answer": "错误",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-186995de616e0c69",
@@ -4083,11 +4089,13 @@
         "text": "36"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "在默认集群配置下，其节点规模通常最大支持扩展到 32 个节点。",
+    "answer": "B",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-aef0ffe1741a061c",
@@ -4113,11 +4121,13 @@
         "text": "gs_om"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "gs_guc 是 openGauss 专门用于修改配置文件参数的工具。",
+    "answer": "B",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-a42f920863f9f24f",
@@ -4143,11 +4153,13 @@
         "text": "加密密钥层次结构有三层"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "A",
+    "explanation": "GaussDB(DWS) 的透明加密同时支持行存表和列存表加密。",
+    "answer": "A",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-d55947fbdee50122",
@@ -4173,11 +4185,13 @@
         "text": "30"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "session_timeout 参数的默认值为 10min，空闲超过 10 分钟会自动断开连接。",
+    "answer": "B",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-7a75012d6bb6b371",
@@ -4203,11 +4217,13 @@
         "text": "数据管理员"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "D"
+    ],
+    "answerText": "D",
+    "explanation": "三权分立机制将权限分离给系统管理员、安全管理员、审计管理员。“数据管理员”不属于标准角色。",
+    "answer": "D",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-871b3ac66b6f2e56",
@@ -4225,11 +4241,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "正确",
+    "explanation": "CLOB(字符大对象)专门用于存储大文本数据，常用于存储超过常规 VARCHAR 限制的超长字符串。",
+    "answer": "正确",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-bf08ab0c9b5aa673",
@@ -4255,11 +4273,13 @@
         "text": "128GB"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "D"
+    ],
+    "answerText": "D",
+    "explanation": "openGauss 官方硬件环境要求指出，性能测试和商业部署的单实例场景中，建议内存达到 128GB 以上。",
+    "answer": "D",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-00e1f4ccd6e1d548",
@@ -4277,11 +4297,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "错误",
+    "explanation": "删除角色仅仅是删除了这个权限集合，原本属于该角色的用户仍然保留在系统中。不过删除角色后，属于该角色的所有权限会自动从被授予该角色的用户身上收回。",
+    "answer": "错误",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-c0b6fea74a30e858",
@@ -4307,11 +4329,13 @@
         "text": "DeepSQL"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "A",
+    "explanation": "X-Tuner 是数据库参数调优工具;SQLdiag 是SQL诊断工具;Index-advisor 是索引推荐工具。",
+    "answer": "A",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-5d97827dac57fcaa",
@@ -4337,11 +4361,13 @@
         "text": "声明游标，打开游标，使用游标，关闭游标"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "D"
+    ],
+    "answerText": "D",
+    "explanation": "游标生命周期:声明(DECLARE) -> 打开(OPEN) -> 使用(FETCH) -> 关闭(CLOSE)。",
+    "answer": "D",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-61c65f5f11ab40ad",
@@ -4367,11 +4393,13 @@
         "text": "查询结果的搜索条件"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "D"
+    ],
+    "answerText": "D",
+    "explanation": "WHERE 子句用于过滤记录，指定查询的搜索/筛选条件。",
+    "answer": "D",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-bd44232987dd3769",
@@ -4389,11 +4417,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "正确",
+    "explanation": "准确描述了 openGauss 存储引擎现状，包括面向 OLTP 的行存、面向 OLAP 的列存、MOT 内存引擎，以及 DFV 和原位更新等研发方向。",
+    "answer": "正确",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-fb9cd36187d0df9e",
@@ -4419,11 +4449,13 @@
         "text": "CHECK"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "FOREIGN KEY 用于定义外键约束。",
+    "answer": "C",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-ea54ae448e24b960",
@@ -4441,11 +4473,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "正确",
+    "explanation": "准确描述了 openGauss 的架构特性，包括 C/S 架构、多线程、支持多种部署方式、备机可读及高可用。",
+    "answer": "正确",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-c4136ebe048dc7b5",
@@ -4471,11 +4505,13 @@
         "text": "ORDER BY子句"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "HAVING 子句专用于对 GROUP BY 分组后的结果进行条件过滤。",
+    "answer": "B",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-3a7207edb8f93125",
@@ -4493,11 +4529,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "正确",
+    "explanation": "SQL 层面的 COPY 命令是服务器端命令，读写的是数据库服务器上的文件。",
+    "answer": "正确",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-ae5fa49075ba37ac",
@@ -4523,11 +4561,13 @@
         "text": "DROP DATABASE"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "D"
+    ],
+    "answerText": "D",
+    "explanation": "删除数据库使用 DROP DATABASE 命令。",
+    "answer": "D",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-59e828abb2066699",
@@ -4545,11 +4585,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "正确",
+    "explanation": "openGauss 在内核层面引入了全密态计算技术，数据在传输、存储、计算全生命周期以密文存在。",
+    "answer": "正确",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-2ad695635c79b195",
@@ -4567,11 +4609,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "错误",
+    "explanation": "知识点：\n1.0分\nAI讲解",
+    "answer": "错误",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-beed674882e1eaf4",
@@ -4597,11 +4641,13 @@
         "text": "修改表空间名称"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "A",
+    "explanation": "该语句用于将指定数据库的默认表空间更改为 new_tablespace。",
+    "answer": "A",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-ee54ed3b0c9febbd",
@@ -4627,11 +4673,13 @@
         "text": "INDEX"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "创建唯一索引的语法为 CREATE UNIQUE INDEX ...。",
+    "answer": "C",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-ec5213126fd6233b",
@@ -4649,11 +4697,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "正确",
+    "explanation": "物理硬件资源有限，随着业务增长，系统最终都会触及资源天花板，架构设计的核心是推迟瓶颈并平滑扩容。",
+    "answer": "正确",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-c8e5f9cf948838df",
@@ -4679,11 +4729,13 @@
         "text": "一个权限能赋给多个角色"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "A",
+    "explanation": "RBAC模型中，用户与角色是多对多的关系，一个用户可以拥有多个角色。",
+    "answer": "A",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-8fb667772075d4b1",
@@ -4701,11 +4753,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "正确",
+    "explanation": "openGauss 底层元数据中，存放所有操作符信息的系统表(类似 pg_operator)，记录了操作符的定义及底层实现。",
+    "answer": "正确",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-04c702201dc85678",
@@ -4731,11 +4785,13 @@
         "text": "能够尽快把物理设计的工作给开展起来"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "信息调研的核心目的是弄清楚数据的来源、获取方式、格式和具体内容。",
+    "answer": "B",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-b1b11d6317f53d6a",
@@ -4753,11 +4809,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "错误",
+    "explanation": "openGauss 既支持全量检查点，也支持增量检查点。增量检查点可降低 I/O 尖峰，提升性能。",
+    "answer": "错误",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-d49c935eb60944f4",
@@ -4783,11 +4841,13 @@
         "text": "表和视图都可以使用SQL语句进行查询"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "索引只能创建在表上，普通视图是虚拟表，不能直接创建索引。",
+    "answer": "B",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-eea4486713be252c",
@@ -4813,11 +4873,13 @@
         "text": "日期类型"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "数值、字符、日期是 openGauss 常用的内置数据类型，数组并非直接选用的常用内置类型。",
+    "answer": "B",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-fe7e66bb9263f326",
@@ -4835,11 +4897,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "正确",
+    "explanation": "SSL通过证书验证服务器身份，防止中间人伪装;同时加密传输数据，防止网络监听窃取明文。",
+    "answer": "正确",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-edecff8405122a32",
@@ -4865,11 +4929,13 @@
         "text": "DSC"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "Kettle 是一款开源的 ETL 工具，适合不同数据库间的数据抽取、转换和加载。",
+    "answer": "C",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-7c0edb47208617b1",
@@ -4895,11 +4961,13 @@
         "text": "可以通过这个视图进行删除和更新操作"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "普通视图不存储数据，不能直接提升性能;多表关联视图通常不可更新;其主要目的是简化复杂的关联查询。",
+    "answer": "C",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-056b7b0845b91867",
@@ -4925,11 +4993,13 @@
         "text": "CHECK TABLE"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "UPDATE 是 DML 命令，用于修改表中已有记录的数据。",
+    "answer": "B",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-318c1cdc02928876",
@@ -4947,11 +5017,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "错误",
+    "explanation": "日志文件(WAL/Xlog)记录了所有物理更改，是系统崩溃恢复和数据一致性保障的核心，必须备份。",
+    "answer": "错误",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-a66d7c3d0650b78f",
@@ -4977,11 +5049,13 @@
         "text": "pg_clog"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "D"
+    ],
+    "answerText": "D",
+    "explanation": "pg_clog(现称 pg_xact)记录事务的最终状态(提交/回滚);pg_xlog 是WAL日志。",
+    "answer": "D",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-e6a5b6a8f271ee66",
@@ -4999,11 +5073,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "错误",
+    "explanation": "数据库设计是一个权衡过程，需在性能、成本、可用性、安全性等多个相互冲突的指标中寻找最佳平衡点。",
+    "answer": "错误",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-f1823a2574441194",
@@ -5021,11 +5097,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "正确",
+    "explanation": "SYS 属于系统保留字/内置用户，为了保证系统安全和避免冲突，不允许用户手动创建名为 SYS 的普通用户。",
+    "answer": "正确",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-347d225f7b48baff",
@@ -5051,11 +5129,13 @@
         "text": "一主多备部署"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "A",
+    "explanation": "openGauss 官方支持的整体部署方案主要包括单机部署、一主一备部署(主备双机)以及一主多备部署。openGauss 原生架构主要采用主备(Primary-Standby)模式，不支持“双主部署”(即两个节点同时可读写)，因此 A 项不是其部署方案。",
+    "answer": "A",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-7a70cd8fc5068672",
@@ -5073,11 +5153,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "错误",
+    "explanation": "openGauss 同时支持自定义函数(CREATE FUNCTION)和存储过程(CREATE PROCEDURE)。",
+    "answer": "错误",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-a264e77e51874a98",
@@ -5095,11 +5177,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "正确",
+    "explanation": "openGauss作为企业级关系型数据库，高度兼容 SQL2003 标准，并完全遵循 ACID 特性。",
+    "answer": "正确",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-a4c3dd833fa2983a",
@@ -5125,11 +5209,13 @@
         "text": "alter table emp delete addcolumn"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "A",
+    "explanation": "删除列的标准语法为 ALTER TABLE 表名 DROP COLUMN 列名;。",
+    "answer": "A",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-0e8e7f7d95c97c55",
@@ -5155,11 +5241,13 @@
         "text": "MongoDB"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "A",
+    "explanation": "pg_chameleon 用于将 MySQL 数据迁移至 openGauss。",
+    "answer": "A",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-01fa15cd5fa45a11",
@@ -5185,11 +5273,13 @@
         "text": "gs_checkos"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "A",
+    "explanation": "gs_checkperf 是性能检查工具，支持对 openGauss 级别、节点级别、会话/进程级别(以及 SSD 读写性能)进行定期检查，帮助了解负载情况。其他选项:gs_om 为集群管理工具，gs_check 为健康检查工具，gs_checkos 为操作系统检查工具。",
+    "answer": "A",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-eb6160c7b7d3769b",
@@ -5215,11 +5305,13 @@
         "text": "TEXT"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "指定 BINARY 类型即可使用二进制格式进行数据的导入导出。",
+    "answer": "B",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-b09bbe4dcfd484a1",
@@ -5245,11 +5337,13 @@
         "text": "gsql"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "D"
+    ],
+    "answerText": "D",
+    "explanation": "知识点：\n0.0分\nAI讲解",
+    "answer": "D",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-fccc2d4713fc967b",
@@ -5275,11 +5369,13 @@
         "text": "4GB"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "审计文件占用的磁盘空间大小默认值为 1024MB，由 audit_space_limit 控制。",
+    "answer": "B",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-6d5157592c046953",
@@ -5305,11 +5401,13 @@
         "text": "DELETE"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "CTAS 语法结构为 CREATE TABLE 表名 AS SELECT ...。",
+    "answer": "C",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-7ca718100d2e3442",
@@ -5335,11 +5433,13 @@
         "text": "ETL"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "GDS 是专为大批量数据的高性能并行导入设计的工具。",
+    "answer": "B",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-9e2ac83d16ff36f7",
@@ -5365,11 +5465,13 @@
         "text": "以上全部正确"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "D"
+    ],
+    "answerText": "D",
+    "explanation": "DBA 角色拥有最高系统权限，包含创建用户、创建角色和创建会话等所有操作权限。",
+    "answer": "D",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-282074fa274cc7a1",
@@ -5395,11 +5497,13 @@
         "text": "查询"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A"
+    ],
+    "answerText": "A",
+    "explanation": "触发器是依附于表的数据库对象。",
+    "answer": "A",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-d590628d90c4cd66",
@@ -5425,11 +5529,13 @@
         "text": "TEXT"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "D"
+    ],
+    "answerText": "D",
+    "explanation": "BLOB、RAW 和 BYTEA 都是存储二进制数据的类型;TEXT 属于字符(文本)类型。",
+    "answer": "D",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-dfa9b85f04c2f2b1",
@@ -5455,11 +5561,13 @@
         "text": "通常使用E-R图建立数据库的物理模型"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "联系可以有自己的属性;存在一元联系和多元联系;E-R图用于建立概念模型。两个实体间的联系分为1:1、1:N、M:N三种。",
+    "answer": "C",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-243ed32dab941e63",
@@ -5485,11 +5593,13 @@
         "text": "openGauss=# \\q"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "\\h 用于查看 SQL 命令的语法帮助信息;\\copyright 显示版权信息;\\l 列出数据库;\\q 退出客户端。",
+    "answer": "B",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-5ab41cbbf5801911",
@@ -5507,11 +5617,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "错误",
+    "explanation": "底层创建语法一致，但概念不同。用户默认有 LOGIN 属性可连接数据库;角色默认 NOLOGIN，主要用于权限集合和批量授权。",
+    "answer": "错误",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-41af4121b315fd9a",
@@ -5537,11 +5649,13 @@
         "text": "域"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "C"
+    ],
+    "answerText": "C",
+    "explanation": "在 E-R 模型向关系模型转换时，一个实体型转换为一个关系模式，一个联系也转换为一个关系模式。",
+    "answer": "C",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-837b124cf73dd510",
@@ -5567,11 +5681,13 @@
         "text": "4"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "时间类型(如 TIMESTAMP)的默认精度为 6，即精确到微秒。",
+    "answer": "B",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-60c75b335898aef3",
@@ -5597,11 +5713,13 @@
         "text": "磁盘IO"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "D"
+    ],
+    "answerText": "D",
+    "explanation": "共享磁盘架构中，所有节点的 I/O 压力汇聚到共享存储，极易导致磁盘 I/O 成为瓶颈。",
+    "answer": "D",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-bc961066c6a754df",
@@ -5627,11 +5745,13 @@
         "text": "gs_ssh"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "D"
+    ],
+    "answerText": "D",
+    "explanation": "gs_ssh 用于在集群各节点并行执行相同的 Shell 命令。",
+    "answer": "D",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-5ef4b52be068b0e4",
@@ -5649,11 +5769,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "错误",
+    "explanation": "海量数据查询分析(OLAP)场景，列存效果更好。列存按列存储，具有高压缩比和列裁剪优势，能大幅减少 I/O 开销。",
+    "answer": "错误",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-e20025b0e3d27d7e",
@@ -5679,11 +5801,13 @@
         "text": "ValuesScan"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "B",
+    "explanation": "CstoreScan 专门用于对列存表(Column Store)进行扫描。",
+    "answer": "B",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-afe13db9769b4fa8",
@@ -5701,11 +5825,13 @@
         "text": "错误"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "B"
+    ],
+    "answerText": "错误",
+    "explanation": "分区不是越多越好。过多的分区会带来巨大的元数据开销、增加优化器负担和内存消耗，应合理设计分区数量。",
+    "answer": "错误",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-6f0c1e39bbe6f2e8",
@@ -5731,11 +5857,13 @@
         "text": "redolog"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "D"
+    ],
+    "answerText": "D",
+    "explanation": "逻辑存储结构包含页(Page)、区(Extent)、段(Segment);redolog 是物理重做日志。",
+    "answer": "D",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-6f6d2793da588789",
@@ -5761,11 +5889,15 @@
         "text": "特定环境读取"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "B",
+      "D"
+    ],
+    "answerText": "ABD",
+    "explanation": "透明加密对应用层透明，无需修改代码，不改变用户操作习惯，加密数据脱离特定数据库环境无法直接读取。",
+    "answer": "ABD",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-46ccb5fc7274e3ed",
@@ -5791,11 +5923,16 @@
         "text": "数据库故障定位"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "answerText": "ABCD",
+    "explanation": "故障定位覆盖操作系统、网络、磁盘和数据库等多个层面。",
+    "answer": "ABCD",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-6b8a42a5dc53881b",
@@ -5821,11 +5958,15 @@
         "text": "以上都是错"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "审计日志可以记录异常 SQL 语句、批量盗取/篡改行为以及高频异常登录行为，从而识别这些风险。",
+    "answer": "ABC",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-48b51e4ae782c6a6",
@@ -5851,11 +5992,15 @@
         "text": "TRUNCATE"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "可以创建(CREATE)、删除(DROP)和修改(ALTER)视图。TRUNCATE 用于清空表数据，不能对视图执行。",
+    "answer": "ABC",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-98edb34aa2a818c2",
@@ -5881,11 +6026,15 @@
         "text": "评审《用户需求规格说明书》"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "A、B、C 属于需求调查/收集阶段的方法。评审《用户需求规格说明书》属于需求分析完成后的验证阶段。",
+    "answer": "ABC",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-8a9e5a7d7b3a076f",
@@ -5911,11 +6060,15 @@
         "text": "统计分析类查询较多的场景应选用行存表"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "统计分析类查询(OLAP)应选用列存表，以利用列投影和高效压缩特性。",
+    "answer": "ABC",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-1e119915bd84df59",
@@ -5941,11 +6094,16 @@
         "text": "审计机制"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "answerText": "ABCD",
+    "explanation": "认证、角色管理、访问控制、审计均属于 openGauss 数据安全体系的组成部分。",
+    "answer": "ABCD",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-ec82d4eab70641ad",
@@ -5971,11 +6129,15 @@
         "text": "Cloud Monitor"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "DataChecker、Ora2Pg、pg_chameleon 均为导入导出/迁移工具，Cloud Monitor 为监控服务。",
+    "answer": "ABC",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-ab783c20c09c9b93",
@@ -6001,11 +6163,15 @@
         "text": "数据备份"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "漏洞扫描、加密、脱敏均为安全防护技术。数据备份主要解决数据可用性和灾难恢复问题，不属于直接的防攻击安全技术。",
+    "answer": "ABC",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-3bb3714c73ea2765",
@@ -6035,11 +6201,17 @@
         "text": "数据库DCL操作审计"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "answerText": "ABCDE",
+    "explanation": "openGauss 审计日志记录用户对数据库的启停、连接、DDL、DML、DCL 等操作。",
+    "answer": "ABCDE",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-b9470d15bfadd468",
@@ -6065,11 +6237,14 @@
         "text": "主备实例之间不可部署在同一台物理机上."
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "C"
+    ],
+    "answerText": "AC",
+    "explanation": "一主多备支持 Quorum 复制保证性能;备机故障不影响业务，且技术上允许主备部署在同一台物理机(测试环境常用)。",
+    "answer": "AC",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-edc2ba664eed0f44",
@@ -6095,11 +6270,16 @@
         "text": "复合分区"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "answerText": "ABCD",
+    "explanation": "openGauss 全面支持范围、列表、哈希以及由它们组合而成的复合分区。",
+    "answer": "ABCD",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-9fedd4d6d3c992e6",
@@ -6125,11 +6305,16 @@
         "text": "SSD性能检查"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "answerText": "ABCD",
+    "explanation": "四项均为 gs_checkperf 工具的检查维度。",
+    "answer": "ABCD",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-60f54ca6ad01b716",
@@ -6155,11 +6340,14 @@
         "text": "索引创建以后，数据库系统就一定会采用"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "C"
+    ],
+    "answerText": "AC",
+    "explanation": "索引需定期清理碎片;一个表可建多个索引。索引对范围查询也有帮助，且优化器会根据成本选择是否使用索引。",
+    "answer": "AC",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-1a9cf140ee8a4aa7",
@@ -6185,11 +6373,15 @@
         "text": "角色在系统中必须是唯一的"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "B",
+      "D"
+    ],
+    "answerText": "ABD",
+    "explanation": "纯角色主要用于权限集合，不能直接执行 SQL 或登录数据库，且名称在系统中必须唯一。角色可以分配给多个用户，因此 C 错误。",
+    "answer": "ABD",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-85e86e967d9bd41c",
@@ -6215,11 +6407,15 @@
         "text": "设置断点"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "B",
+      "D"
+    ],
+    "answerText": "ABD",
+    "explanation": "openGauss 支持断点设置和单步调试功能，且 PL/pgSQL 的 RAISE 语句支持 6 种异常信息级别(DEBUG, LOG, INFO, NOTICE, WARNING, EXCEPTION)。",
+    "answer": "ABD",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-6020e99ef32ffad7",
@@ -6245,11 +6441,15 @@
         "text": "由于数据是由密文形态存在,因此可以不需要防火墙进行保护."
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "B",
+      "C"
+    ],
+    "answerText": "ABC",
+    "explanation": "全密态数据库保护的是数据机密性，不能替代防火墙等网络边界防护手段。",
+    "answer": "ABC",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-c3b4b08782de726c",
@@ -6275,11 +6475,14 @@
         "text": "列存适合分析，加载"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "D"
+    ],
+    "answerText": "AD",
+    "explanation": "行存适合频繁增删改的 OLTP 场景;列存因为同列数据类型一致，压缩比更高，适合批量分析(OLAP)场景。",
+    "answer": "AD",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-c53421f3e5dd3093",
@@ -6305,11 +6508,15 @@
         "text": "一般在热点数据上添加索引"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "B",
+      "D"
+    ],
+    "answerText": "ABD",
+    "explanation": "索引设计必须紧密结合业务查询场景;经常用于排序、过滤的热点字段适合建立索引。",
+    "answer": "ABD",
+    "answerKnown": true
   },
   {
     "id": "q-opengauss-c08026de4807f59e",
@@ -6335,10 +6542,15 @@
         "text": "视图能够对机密数据提供安全保护"
       }
     ],
-    "answerKeys": [],
-    "answerText": "题库未提供参考答案",
-    "explanation": "",
-    "answer": "题库未提供参考答案",
-    "answerKnown": false
+    "answerKeys": [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    "answerText": "ABCD",
+    "explanation": "视图可以简化复杂查询、提供数据独立性、支持多视角展示数据，并能通过隐藏敏感列/行来保障安全。",
+    "answer": "ABCD",
+    "answerKnown": true
   }
 ]

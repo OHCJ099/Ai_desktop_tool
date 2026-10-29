@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -233,7 +233,8 @@ namespace WindowsClient
                 double max = Math.Max(a.Length, b.Length);
                 return Math.Max(0.75, min / max);
             }
-            return Similarity(a, b);
+            // A fuzzy phrase-order match must not tie an exact option text match.
+            return Math.Min(0.99, Similarity(a, b));
         }
 
         private sealed class QuestionEntry
