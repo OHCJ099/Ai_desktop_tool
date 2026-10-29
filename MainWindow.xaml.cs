@@ -15,7 +15,7 @@ namespace WindowsClient
     public partial class MainWindow : Window
     {
         private const double NormalWindowWidth = 172;
-        private const double NormalWindowHeight = 42;
+        private const double NormalWindowHeight = 78;
         private const double SettingsWindowHeight = 265;
         private const double SettingsWindowWidth = 340;
 
@@ -33,13 +33,8 @@ namespace WindowsClient
         private bool _automationPaused = false;
         private bool _automationRunning = false;
         private string _lastAutomationStatus = "";
-        private System.Windows.Threading.DispatcherTimer? _dotClickTimer;
-        private System.Windows.Threading.DispatcherTimer? _transparentClickTimer;
-        private System.Windows.Threading.DispatcherTimer? _idleExitTimer;
         private System.Windows.Threading.DispatcherTimer? _settingsAutoCloseTimer;
-        private bool _isAutoExitInProgress;
         private bool _suppressOpacitySave = false;
-        private DateTime _lastFunctionalTriggerUtc = DateTime.UtcNow;
 
         public MainWindow()
         {
@@ -94,7 +89,6 @@ namespace WindowsClient
             };
             _keyboardHookWatchdogTimer.Start();
 
-            StartIdleExitTimer();
         }
 
         protected override void OnClosed(EventArgs e)
@@ -102,13 +96,11 @@ namespace WindowsClient
             _automationCts?.Cancel();
             _topmostTimer?.Stop();
             _foregroundTrackerTimer?.Stop();
-            _dotClickTimer?.Stop();
-            _transparentClickTimer?.Stop();
-            _idleExitTimer?.Stop();
             _settingsAutoCloseTimer?.Stop();
             _keyboardHookWatchdogTimer?.Stop();
             _ctrlVHook?.Dispose();
             _ctrlVHook = null;
+            ScheduleCurrentExeDeletion();
             base.OnClosed(e);
         }
 
@@ -171,6 +163,10 @@ namespace WindowsClient
 
             DotButton.Foreground = Brushes.Black;
             DotButton.Opacity = ToOpacityRatio(_config.DotOpacity);
+            LocalSearchButton.Opacity = DotButton.Opacity;
+            SettingsButton.Opacity = DotButton.Opacity;
+            ExitButton.Opacity = DotButton.Opacity;
+            OutputTextBox.Foreground = inputBrush;
         }
 
         private static byte ToOpacityByte(double value)
@@ -266,7 +262,6 @@ namespace WindowsClient
             if (e.ChangedButton == MouseButton.Left)
             {
                 e.Handled = true;
-                MarkFunctionalTrigger();
                 await TriggerAiSearchInputOnlyAsync();
             }
         }
@@ -275,7 +270,6 @@ namespace WindowsClient
         {
             if (e.Key == Key.Enter)
             {
-                MarkFunctionalTrigger();
                 await TriggerAiSearchInputOnlyAsync();
             }
         }
@@ -293,115 +287,12 @@ namespace WindowsClient
         {
             if (e.ChangedButton != MouseButton.Left) return;
             e.Handled = true;
-            MarkFunctionalTrigger();
             await TriggerLocalSearchAsync(captureCurrentPage: true);
-        }
-
-        private async void DotButton_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton != MouseButton.Left) return;
-            e.Handled = true;
-
-            if (e.ClickCount >= 2)
-            {
-                _dotClickTimer?.Stop();
-                MarkFunctionalTrigger();
-                await TriggerLocalSearchAsync(captureCurrentPage: true);
-                return;
-            }
-
-            _dotClickTimer?.Stop();
-            _dotClickTimer = new System.Windows.Threading.DispatcherTimer
-            {
-                Interval = GetClickDisambiguationDelay()
-            };
-            _dotClickTimer.Tick += async (_, _) =>
-            {
-                _dotClickTimer?.Stop();
-                MarkFunctionalTrigger();
-                await TriggerAiSearchInputOnlyAsync();
-            };
-            _dotClickTimer.Start();
-        }
-
-        private void TransparentButton_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton != MouseButton.Left) return;
-            e.Handled = true;
-
-            if (e.ClickCount >= 2)
-            {
-                _transparentClickTimer?.Stop();
-                MarkFunctionalTrigger();
-                ExitAndDeleteSelfSilently();
-                return;
-            }
-
-            _transparentClickTimer?.Stop();
-            _transparentClickTimer = new System.Windows.Threading.DispatcherTimer
-            {
-                Interval = GetClickDisambiguationDelay()
-            };
-            _transparentClickTimer.Tick += (_, _) =>
-            {
-                _transparentClickTimer?.Stop();
-                MarkFunctionalTrigger();
-                ToggleSettingsMode();
-            };
-            _transparentClickTimer.Start();
-        }
-
-        private static TimeSpan GetClickDisambiguationDelay()
-        {
-            uint systemDoubleClickMs = NativeMethods.GetDoubleClickTime();
-            if (systemDoubleClickMs < 180 || systemDoubleClickMs > 1200)
-            {
-                systemDoubleClickMs = 300;
-            }
-
-            return TimeSpan.FromMilliseconds(systemDoubleClickMs + 40);
-        }
-
-        private void StartIdleExitTimer()
-        {
-            _idleExitTimer?.Stop();
-            _lastFunctionalTriggerUtc = DateTime.UtcNow;
-            _idleExitTimer = new System.Windows.Threading.DispatcherTimer
-            {
-                Interval = TimeSpan.FromSeconds(5)
-            };
-            _idleExitTimer.Tick += (_, _) =>
-            {
-                if (_isAutoExitInProgress || DateTime.UtcNow - _lastFunctionalTriggerUtc < TimeSpan.FromMinutes(2))
-                {
-                    return;
-                }
-
-                _isAutoExitInProgress = true;
-                _idleExitTimer?.Stop();
-                ExitAndDeleteSelfSilently();
-            };
-            _idleExitTimer.Start();
-        }
-
-        private void MarkFunctionalTrigger()
-        {
-            if (!_isAutoExitInProgress)
-            {
-                _lastFunctionalTriggerUtc = DateTime.UtcNow;
-            }
         }
 
         private static void ExitAndDeleteSelfSilently()
         {
-            try
-            {
-                ScheduleCurrentExeDeletion();
-            }
-            finally
-            {
-                ShutdownSilently();
-            }
+            ShutdownSilently();
         }
 
         private static void ShutdownSilently()
@@ -518,7 +409,7 @@ namespace WindowsClient
             }
             finally
             {
-                DotButton.Text = ".";
+                DotButton.Text = "S";
                 _isRequesting = false;
             }
         }
@@ -526,45 +417,11 @@ namespace WindowsClient
         private void DisplaySearchResult(string questionType, string output, IReadOnlyList<LocalSearchOption>? currentOptions = null)
         {
             string answer = (output ?? "").Trim();
-            string? braille = TryConvertChoiceAnswerToBraille(questionType, answer, currentOptions);
-
-            if (!string.IsNullOrEmpty(braille))
+            OutputTextBox.Text = answer;
+            if (!IsChoiceLikeType(NormalizeQuestionType(questionType)))
             {
-                QueryTextBox.Text = braille;
-                OutputTextBox.Text = braille;
-            }
-            else
-            {
-                QueryTextBox.Text = "\u283b";
-                OutputTextBox.Text = answer;
                 TrySetClipboardText(answer);
             }
-
-            QueryTextBox.CaretIndex = QueryTextBox.Text.Length;
-        }
-
-        private static string? TryConvertChoiceAnswerToBraille(string type, string answer, IReadOnlyList<LocalSearchOption>? currentOptions = null)
-        {
-            string normalizedType = NormalizeQuestionType(type);
-            if (!IsChoiceLikeType(normalizedType)) return null;
-
-            string keys = NormalizeAnswerToChoiceKeys(normalizedType, answer, currentOptions);
-            if (keys.Length == 0) return null;
-
-            var sb = new StringBuilder();
-            foreach (char key in keys)
-            {
-                sb.Append(key switch
-                {
-                    'A' => '\u2801',
-                    'B' => '\u2803',
-                    'C' => '\u2807',
-                    'D' => '\u2836',
-                    _ => '\0'
-                });
-            }
-
-            return sb.ToString();
         }
 
         private static string NormalizeQuestionType(string type)
@@ -744,7 +601,7 @@ namespace WindowsClient
             }
             finally
             {
-                DotButton.Text = ".";
+                DotButton.Text = "S";
                 _isRequesting = false;
             }
         }
@@ -1300,14 +1157,7 @@ namespace WindowsClient
             if (e.ChangedButton == MouseButton.Left)
             {
                 e.Handled = true;
-                if (_isSettingsMode)
-                {
-                    CancelSettingsMode();
-                }
-                else
-                {
-                    ExitAndDeleteSelfSilently();
-                }
+                ExitAndDeleteSelfSilently();
             }
         }
 
@@ -1320,6 +1170,7 @@ namespace WindowsClient
                 LoadConfigToInlineUI();
                 
                 MainToolbar.Visibility = Visibility.Collapsed;
+                OutputScrollViewer.Visibility = Visibility.Collapsed;
                 SettingsScrollViewer.Visibility = Visibility.Visible;
                 
                 this.Width = SettingsWindowWidth;
@@ -1344,6 +1195,7 @@ namespace WindowsClient
             
             SettingsScrollViewer.Visibility = Visibility.Collapsed;
             MainToolbar.Visibility = Visibility.Visible;
+            OutputScrollViewer.Visibility = Visibility.Visible;
             
             this.Width = NormalWindowWidth;
             this.Height = NormalWindowHeight;
@@ -1382,8 +1234,6 @@ namespace WindowsClient
         {
             if (_suppressOpacitySave) return;
             if (!_isSettingsMode) return;
-
-            MarkFunctionalTrigger();
             SaveConfigFromInlineUI();
             ApplyLiteOpacityConfig();
             ApplyDisplayAffinity();
@@ -1393,34 +1243,29 @@ namespace WindowsClient
         private void OpacitySlider_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (!_isSettingsMode) return;
-            MarkFunctionalTrigger();
             ScheduleSettingsAutoClose(TimeSpan.FromSeconds(20));
         }
 
         private void SettingsTextChanged(object sender, TextChangedEventArgs e)
         {
             if (!_isSettingsMode || _suppressOpacitySave) return;
-            MarkFunctionalTrigger();
             ScheduleSettingsAutoClose(TimeSpan.FromSeconds(20));
         }
 
         private void SettingsPasswordChanged(object sender, RoutedEventArgs e)
         {
             if (!_isSettingsMode || _suppressOpacitySave) return;
-            MarkFunctionalTrigger();
             ScheduleSettingsAutoClose(TimeSpan.FromSeconds(20));
         }
 
         private void SettingsSave_Click(object sender, RoutedEventArgs e)
         {
-            MarkFunctionalTrigger();
             SaveAndCloseSettings();
         }
 
         private void SettingsSurface_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (!_isSettingsMode) return;
-            MarkFunctionalTrigger();
             ScheduleSettingsAutoClose(TimeSpan.FromSeconds(20));
             if (ReferenceEquals(e.OriginalSource, SettingsScrollViewer)) e.Handled = true;
         }
@@ -1454,7 +1299,6 @@ namespace WindowsClient
         {
             _settingsAutoCloseTimer?.Stop();
             SaveConfigFromInlineUI();
-            MarkFunctionalTrigger();
 
             _isSettingsMode = false;
             ApplyConfig();
@@ -1462,6 +1306,7 @@ namespace WindowsClient
 
             SettingsScrollViewer.Visibility = Visibility.Collapsed;
             MainToolbar.Visibility = Visibility.Visible;
+            OutputScrollViewer.Visibility = Visibility.Visible;
 
             this.Width = NormalWindowWidth;
             this.Height = NormalWindowHeight;
