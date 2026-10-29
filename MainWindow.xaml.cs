@@ -1362,7 +1362,7 @@ namespace WindowsClient
         {
             _suppressOpacitySave = true;
             SettingsApiUrl.Text = _config.ApiUrl;
-            SettingsApiKey.Password = _config.ApiKey;
+            SettingsApiKey.Text = _config.ApiKey;
             SettingsModelName.Text = _config.ModelName;
             InputOpacitySlider.Value = _config.TextOpacity;
             DotOpacitySlider.Value = _config.DotOpacity;
@@ -1372,7 +1372,7 @@ namespace WindowsClient
         private void SaveConfigFromInlineUI()
         {
             _config.ApiUrl = SettingsApiUrl.Text.Trim();
-            _config.ApiKey = SettingsApiKey.Password.Trim();
+            _config.ApiKey = SettingsApiKey.Text.Trim();
             _config.ModelName = SettingsModelName.Text.Trim();
             _config.TextOpacity = InputOpacitySlider.Value;
             _config.DotOpacity = DotOpacitySlider.Value;
@@ -1400,13 +1400,6 @@ namespace WindowsClient
         }
 
         private void SettingsTextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!_isSettingsMode || _suppressOpacitySave) return;
-            MarkFunctionalTrigger();
-            ScheduleSettingsAutoClose(TimeSpan.FromSeconds(20));
-        }
-
-        private void SettingsPasswordChanged(object sender, RoutedEventArgs e)
         {
             if (!_isSettingsMode || _suppressOpacitySave) return;
             MarkFunctionalTrigger();
