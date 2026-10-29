@@ -1,82 +1,162 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace WindowsClient
 {
     public static class ClientLink
     {
-        private static string S(params int[] codes) => new string(codes.Select(c => (char)c).ToArray());
+        private static readonly string[] SourceShortcutNames =
+        {
+            "考试客户端.lnk",
+            "CXExame.exe.lnk",
+            "CXExam.exe.lnk"
+        };
 
-        public static string ExamExePath => S(67,58,92,23398,20064,36890,32771,35797,23458,25143,25143,31471,19981,25903,25345,31532,19977,26041,36755,20837,27861,95,86,52,46,49,46,52,46,50,53,53,49,50,40,50,48,50,51,46,49,50,46,50,55,41,92,67,88,69,120,97,109,46,101,120,101);
-        public static string DesktopExamExePath => S(67,58,92,85,115,101,114,115,92,76,105,110,120,105,97,111,110,105,110,103,92,68,101,115,107,116,111,112,92,25105,33258,24049,23450,21046,30340,67,84,70,32771,35797,31471,27979,35797,92,67,88,69,120,97,109,46,101,120,101);
-        public static string StartupArguments => S(45,45,114,101,109,111,116,101,45,100,101,98,117,103,103,105,110,103,45,112,111,114,116,61,57,50,50,50,32,45,45,114,101,109,111,116,101,45,97,108,108,111,119,45,111,114,105,103,105,110,115,61,42);
-        public static string ShortcutName => S(23398,20064,36890,32771,35797,23458,25143,25143,31471,46,108,110,107);
-
-        public static string ShortcutPath =>
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), ShortcutName);
-
-        public static string? ExistingExamExePath =>
-            File.Exists(ExamExePath) ? ExamExePath :
-            File.Exists(DesktopExamExePath) ? DesktopExamExePath :
-            null;
-
+        // Keep the existing startup entry point; shortcuts now live beside the current tool executable.
         public static void EnsureDesktopShortcut()
         {
             try
             {
-                if (ExistingExamExePath == null) return;
-                if (ShortcutIsValid()) return;
-                CreateOrUpdateShortcut();
+                string directory = Path.GetDirectoryName(Environment.ProcessPath)
+                    ?? AppContext.BaseDirectory;
+                EnsureShortcutsInDirectory(directory);
             }
             catch
             {
+                // A missing/unwritable shortcut must not prevent the tool from opening.
             }
         }
 
-        private static bool ShortcutIsValid()
+        internal static void EnsureShortcutsInDirectory(string directory)
         {
+            string parent = Path.TrimEndingDirectorySeparator(Path.GetFullPath(directory));
+            Type? shellType = Type.GetTypeFromProgID("WScript.Shell");
+            if (shellType == null) return;
+
+            object? shellObject = null;
             try
             {
-                if (!File.Exists(ShortcutPath)) return false;
+                shellObject = Activator.CreateInstance(shellType);
+                if (shellObject == null) return;
+                dynamic shell = shellObject;
+                foreach (string name in SourceShortcutNames)
+                {
+                    string source = Path.Combine(parent, name);
+                    if (!File.Exists(source)) continue;
 
-                Type? shellType = Type.GetTypeFromProgID(S(87,83,99,114,105,112,116,46,83,104,101,108,108));
-                if (shellType == null) return false;
+                    object? sourceObject = null;
+                    object? outputObject = null;
+                    try
+                    {
+                        sourceObject = shell.CreateShortcut(source);
+                        dynamic original = sourceObject;
+                        string target = Convert.ToString(original.TargetPath) ?? "";
+                        if (string.IsNullOrWhiteSpace(target)
+                            || !File.Exists(Environment.ExpandEnvironmentVariables(target))) continue;
 
-                dynamic shell = Activator.CreateInstance(shellType)!;
-                dynamic link = shell.CreateShortcut(ShortcutPath);
+                        string arguments = AddRequiredArguments(Convert.ToString(original.Arguments) ?? "");
+                        string output = Path.Combine(parent,
+                            Path.GetFileNameWithoutExtension(name) + "（带启动项）.lnk");
+                        if (!string.Equals(Path.GetDirectoryName(Path.GetFullPath(output)), parent,
+                            StringComparison.OrdinalIgnoreCase)) continue;
 
-                string target = Convert.ToString(link.TargetPath) ?? "";
-                string args = Convert.ToString(link.Arguments) ?? "";
-                string? exe = ExistingExamExePath;
-                string[] expectedArgs = StartupArguments.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
-                return exe != null
-                       && string.Equals(Path.GetFullPath(target), Path.GetFullPath(exe), StringComparison.OrdinalIgnoreCase)
-                       && expectedArgs.All(a => args.Contains(a, StringComparison.OrdinalIgnoreCase));
+                        // Copy the link itself so its target, working directory, icon,
+                        // description, window style, hotkey and other metadata are retained.
+                        File.Copy(source, output, overwrite: true);
+                        outputObject = shell.CreateShortcut(output);
+                        dynamic generated = outputObject;
+                        generated.Arguments = arguments;
+                        generated.Save();
+                    }
+                    catch
+                    {
+                        // Continue to the other named shortcuts if this one is invalid.
+                    }
+                    finally
+                    {
+                        ReleaseCom(outputObject);
+                        ReleaseCom(sourceObject);
+                    }
+                }
             }
-            catch
+            finally
             {
-                return false;
+                ReleaseCom(shellObject);
             }
         }
 
-        private static void CreateOrUpdateShortcut()
+        internal static string AddRequiredArguments(string arguments)
         {
-            Type? shellType = Type.GetTypeFromProgID(S(87,83,99,114,105,112,116,46,83,104,101,108,108));
-            if (shellType == null) return;
-            string? exe = ExistingExamExePath;
-            if (exe == null) return;
-
-            dynamic shell = Activator.CreateInstance(shellType)!;
-            dynamic link = shell.CreateShortcut(ShortcutPath);
-            link.TargetPath = exe;
-            link.Arguments = StartupArguments;
-            link.WorkingDirectory = Path.GetDirectoryName(exe);
-            link.WindowStyle = 1;
-            link.Description = S(87,105,110,100,111,119,115,32,99,108,105,101,110,116);
-            link.IconLocation = exe + ",0";
-            link.Save();
+            List<string> tokens = SplitArguments(arguments);
+            string result = arguments;
+            if (!string.Equals(GetLastSwitchValue(tokens, "--remote-debugging-port"), "9222",
+                StringComparison.OrdinalIgnoreCase))
+            {
+                result = AppendArgument(result, "--remote-debugging-port=9222");
+            }
+            if (!string.Equals(GetLastSwitchValue(tokens, "--remote-allow-origins"), "*",
+                StringComparison.OrdinalIgnoreCase))
+            {
+                result = AppendArgument(result, "--remote-allow-origins=*");
+            }
+            return result;
         }
+
+        private static string AppendArgument(string arguments, string extra)
+        {
+            if (arguments.Length == 0) return extra;
+            return arguments + (char.IsWhiteSpace(arguments[^1]) ? "" : " ") + extra;
+        }
+
+        private static string? GetLastSwitchValue(List<string> tokens, string name)
+        {
+            string? value = null;
+            for (int i = 0; i < tokens.Count; i++)
+            {
+                string token = tokens[i];
+                if (token.StartsWith(name + "=", StringComparison.OrdinalIgnoreCase))
+                {
+                    value = token[(name.Length + 1)..];
+                }
+                else if (token.Equals(name, StringComparison.OrdinalIgnoreCase))
+                {
+                    value = i + 1 < tokens.Count && !tokens[i + 1].StartsWith("--", StringComparison.Ordinal)
+                        ? tokens[++i] : "";
+                }
+            }
+            return value;
+        }
+
+        private static List<string> SplitArguments(string arguments)
+        {
+            IntPtr argv = CommandLineToArgvW("shortcut.exe " + arguments, out int count);
+            if (argv == IntPtr.Zero) throw new InvalidOperationException("Unable to parse shortcut arguments.");
+            try
+            {
+                var tokens = new List<string>();
+                for (int i = 1; i < count; i++)
+                {
+                    tokens.Add(Marshal.PtrToStringUni(Marshal.ReadIntPtr(argv, i * IntPtr.Size)) ?? "");
+                }
+                return tokens;
+            }
+            finally
+            {
+                LocalFree(argv);
+            }
+        }
+
+        private static void ReleaseCom(object? value)
+        {
+            if (value != null && Marshal.IsComObject(value)) Marshal.FinalReleaseComObject(value);
+        }
+
+        [DllImport("shell32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern IntPtr CommandLineToArgvW(string commandLine, out int count);
+
+        [DllImport("kernel32.dll")]
+        private static extern IntPtr LocalFree(IntPtr handle);
     }
 }

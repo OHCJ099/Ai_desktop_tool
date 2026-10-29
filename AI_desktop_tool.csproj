@@ -1,7 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <AssemblyName>jetbra</AssemblyName>
+    <AssemblyName>mini_nokey</AssemblyName>
+    <PublishedExecutableName>mini-nokey</PublishedExecutableName>
     <RootNamespace>WindowsClient</RootNamespace>
     <AssemblyTitle>Windows client</AssemblyTitle>
     <Product>Windows client</Product>
@@ -25,4 +26,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\question_bank.bin" />
   </ItemGroup>
+  <Target Name="RenamePublishedExecutable" AfterTargets="Publish">
+    <Move SourceFiles="$(PublishDir)$(AssemblyName).exe"
+          DestinationFiles="$(PublishDir)$(PublishedExecutableName).exe"
+          Condition="Exists('$(PublishDir)$(AssemblyName).exe') And '$(AssemblyName)' != '$(PublishedExecutableName)'" />
+  </Target>
 </Project>

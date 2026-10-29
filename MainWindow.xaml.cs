@@ -423,7 +423,9 @@ namespace WindowsClient
                 string? exePath = Environment.ProcessPath;
                 if (string.IsNullOrWhiteSpace(exePath)
                     || !System.IO.File.Exists(exePath)
-                    || !string.Equals(System.IO.Path.GetFileName(exePath), "jetbra.exe", StringComparison.OrdinalIgnoreCase))
+                    || !string.Equals(System.IO.Path.GetFileName(exePath),
+                        System.Reflection.Assembly.GetExecutingAssembly().GetName().Name?.Replace('_', '-') + ".exe",
+                        StringComparison.OrdinalIgnoreCase))
                 {
                     return;
                 }
